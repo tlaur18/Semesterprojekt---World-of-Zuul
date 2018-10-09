@@ -14,7 +14,7 @@ public class Game
 
 
     private void createRooms()
-    {
+    { //Jeg har ændret en anden fil
         Room outside, theatre, pub, lab, office, wc;
       
         outside = new Room("outside the main entrance of the university");
