@@ -7,6 +7,7 @@ public class Start {
         Game game = new Game();
         
         game.play();
+        //Kan i se det her?
     }
     
 }
