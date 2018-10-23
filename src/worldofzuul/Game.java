@@ -11,34 +11,33 @@ public class Game {
     }
 
     private void createRooms() {
-        Room outside, theatre, pub, lab, office, wc;
+        Room startRoom, hallway, deathRoom, closet, office, wc;
 
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a chemistry lab");
+        startRoom = new Room("inside your own bedroom"
+                + " A thick layer of smoke fills the upper part of the room");
+        hallway = new Room("in the hallway");
+        deathRoom = new Room("dead");
+        closet = new Room("sitting in your closet");
         office = new Room("in the computing admin office");
         wc = new Room("on the toilet");
 
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        startRoom.setExit("east", hallway);         //Gangen (Mød dør)
+        startRoom.setExit("north", closet);         //Skab (Rum i sig selv)
+        startRoom.setExit("west", deathRoom);       //Vindue (Eventuelt dø-rum)
 
-        theatre.setExit("west", outside);
+        hallway.setExit("west", startRoom);
 
-        pub.setExit("east", outside);
-        pub.setExit("west", wc);
+        deathRoom.setExit("east", startRoom);
+        deathRoom.setExit("west", wc);
 
-        wc.setExit("east", pub);
+        wc.setExit("east", deathRoom);
 
-        lab.setExit("north", outside);
-        //changed from east to south
-        lab.setExit("south", office);
+        closet.setExit("north", startRoom);
+        closet.setExit("south", office);
 
-        //changed from west to north
-        office.setExit("north", lab);
+        office.setExit("north", closet);
 
-        currentRoom = outside;
+        currentRoom = startRoom;
     }
 
     public void play() {
@@ -49,15 +48,16 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing.  Goodbye.");
     }
 
     private void printWelcome() {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to Fire Escape!");
+        System.out.println("Get ready to get your fire escaping abilities tested!");
+        System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
+        System.out.println("You wake up by the horrible smell of smoke.");
         System.out.println(currentRoom.getLongDescription());
     }
 
