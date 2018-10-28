@@ -10,5 +10,38 @@ package worldofzuul;
  * @author Morten K. Jensen
  */
 public class Player {
+
+    int stepCount = 0;
+    int health = 100;
     
+
+    public Player() {
+    }
+
+    public int getStepCount() {
+        return stepCount;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setStepCount(int stepCount) {
+        this.stepCount = stepCount;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    
+    public int addStep() {
+    stepCount = stepCount + 1;
+    return stepCount;
+    }
+    public void looseHealth() {
+        health = health - 50;
+    }
+    
+
 }

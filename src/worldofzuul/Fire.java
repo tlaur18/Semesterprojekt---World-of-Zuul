@@ -10,5 +10,10 @@ package worldofzuul;
  * @author Morten K. Jensen
  */
 public class Fire {
-    
+
+
+    public Fire() {
+    }
+   
+
 }

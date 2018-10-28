@@ -15,34 +15,37 @@ public class Game
 
     private void createRooms()
     { //Jeg har ændret en anden fil
-        Room outside, theatre, pub, lab, office, wc;
+        Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
       
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a chemistry lab");
-        office = new Room("in the computing admin office");
-        wc = new Room("on the toilet");
+        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking");
+        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
+        sistersRoom = new Room("in your sisters room");
+        livingRoom = new Room("in the living room");
+        lobby = new Room("in the lobby facing the front door");
+        wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
+        outside = new Room("Outside");
+        window = new Room("you jumped out the window! \n Did you forget you lived on 8th floor?! \n Anyway, you are dead! Restart the game?");
         
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        
+        bedroom.setExit("door", hallway);
+        bedroom.setExit("window", window);
 
-        theatre.setExit("west", outside);
+        hallway.setExit("door", sistersRoom);
+        hallway.setExit("stairs", livingRoom);
+        hallway.setExit("toilet", wc);
         
-        pub.setExit("east", outside);
-        pub.setExit("west", wc);
+        sistersRoom.setExit("door", hallway);   
         
-        wc.setExit("east", pub);
+        wc.setExit("door", hallway);
 
-        lab.setExit("north", outside);
-        //changed from east to south
-        lab.setExit("south", office);
+        livingRoom.setExit("stairs", hallway);
+        livingRoom.setExit("lobby", lobby);
         
-        //changed from west to north
-        office.setExit("north", lab);
+ 
+        lobby.setExit("livingroom", livingRoom);
+        lobby.setExit("outside", outside);
 
-        currentRoom = outside;
+        currentRoom = bedroom;
     }
 
     public void play() 
