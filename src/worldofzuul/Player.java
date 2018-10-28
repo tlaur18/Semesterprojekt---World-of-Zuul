@@ -11,8 +11,8 @@ package worldofzuul;
  */
 public class Player {
 
-    int stepCount = 0;
-    int health = 100;
+    private int stepCount = 0;
+    private int health = 100;
     
 
     public Player() {

@@ -4,12 +4,14 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Player player;
         
 
     public Game() 
     {
         createRooms();
         parser = new Parser();
+        player = new Player();
     }
 
 
@@ -64,8 +66,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to Fire Escape!");
+        System.out.println("In Fire Escape, your goal is to escape your home.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
@@ -87,6 +89,8 @@ public class Game
         }
         else if (commandWord == CommandWord.GO) {
             goRoom(command);
+            player.addStep();
+            
         }
         else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
@@ -97,9 +101,10 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around at you own home.");
         System.out.println();
         System.out.println("Your command words are:");
+        System.out.println("you have walked " + player.getStepCount() + " steps so far");
         parser.showCommands();
     }
 
@@ -120,6 +125,7 @@ public class Game
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
+            System.out.println("your health is: " + player.getHealth());
         }
     }
 
