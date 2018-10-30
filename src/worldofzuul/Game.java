@@ -65,11 +65,18 @@ public class Game
 
     private void printWelcome()
     {
-        System.out.println();
+//        System.out.println();
+//        System.out.println("Welcome to Fire Escape!");
+//        System.out.println("In Fire Escape, your goal is to escape your home.");
+//        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+//        System.out.println();
+//        System.out.println(currentRoom.getLongDescription());
         System.out.println("Welcome to Fire Escape!");
-        System.out.println("In Fire Escape, your goal is to escape your home.");
+        System.out.println("Get ready to get your fire escaping abilities tested!");
+        System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
+        System.out.println("You wake up by the horrible smell of smoke.");
         System.out.println(currentRoom.getLongDescription());
     }
 
