@@ -5,7 +5,7 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private Player player;
-    Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
+    private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
 
     public Game() {
         createRooms();
@@ -14,11 +14,11 @@ public class Game {
 
     }
 
-    private void createRooms() { //Jeg har ændret en anden fil
+    private void createRooms() {
 
         bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking");
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
-        sistersRoom = new Room("in your sisters room");
+        sistersRoom = new Room("in your sister's room");
         livingRoom = new Room("in the living room");
         lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
@@ -29,7 +29,7 @@ public class Game {
         bedroom.setExit("window", window);
 
         hallway.setExit("bedroom", bedroom);
-        hallway.setExit("door", sistersRoom);
+        hallway.setExit("sister-room", sistersRoom);
         hallway.setExit("stairs", livingRoom);
         hallway.setExit("toilet", wc);
 
@@ -58,12 +58,6 @@ public class Game {
     }
 
     private void printWelcome() {
-//        System.out.println();
-//        System.out.println("Welcome to Fire Escape!");
-//        System.out.println("In Fire Escape, your goal is to escape your home.");
-//        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
-//        System.out.println();
-//        System.out.println(currentRoom.getLongDescription());
         System.out.println("Welcome to Fire Escape!");
         System.out.println("Get ready to get your fire escaping abilities tested!");
         System.out.println("The goal of this game is to get out of the burning building alive.");
@@ -135,7 +129,7 @@ public class Game {
 
         }
         System.out.println("Your health is: " + player.getHealth());
-        
+
         if (player.isDead() == true) {
             System.exit(0);
         }
