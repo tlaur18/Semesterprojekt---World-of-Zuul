@@ -13,11 +13,11 @@ public class Player {
 
     private int stepCount = 0;
     private int health = 100;
-    
+    private final int lostHealth = 25;
 
     public Player() {
     }
-    
+
     public int getStepCount() {
         return stepCount;
     }
@@ -34,14 +34,18 @@ public class Player {
         this.health = health;
     }
 
-    
     public int addStep() {
-    stepCount = stepCount + 1;
-    return stepCount;
+        stepCount = stepCount + 1;
+        return stepCount;
     }
-    public void looseHealth() {
+
+    public int looseHealth() {
         health -= 25;
+        return health;
     }
-    
+
+    public int lostHealth() {
+        return this.lostHealth;
+    }
 
 }

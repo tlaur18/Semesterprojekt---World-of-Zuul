@@ -115,16 +115,19 @@ public class Game {
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
+            
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
-            System.out.println("Your health is: " + player.getHealth());
-        }
-        if (currentRoom == wc) {
-            player.looseHealth();
-            System.out.println("Your have been damaged by the fire. \n Your current health is now: " + player.getHealth());
 
         }
+        
+        if (currentRoom == wc) {
+            player.looseHealth();
+            System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
+
+        }
+        System.out.println("Your health is: " + player.getHealth());
 
     }
 
