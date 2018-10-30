@@ -4,45 +4,50 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Player player;
         
 
     public Game() 
     {
         createRooms();
         parser = new Parser();
+        player = new Player();
     }
 
 
     private void createRooms()
     { //Jeg har ændret en anden fil
-        Room outside, theatre, pub, lab, office, wc;
+        Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
       
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a chemistry lab");
-        office = new Room("in the computing admin office");
-        wc = new Room("on the toilet");
+        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking");
+        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
+        sistersRoom = new Room("in your sisters room");
+        livingRoom = new Room("in the living room");
+        lobby = new Room("in the lobby facing the front door");
+        wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
+        outside = new Room("Outside");
+        window = new Room("you jumped out the window! \n Did you forget you lived on 8th floor?! \n Anyway, you are dead! Restart the game?");
         
-        outside.setExit("east", theatre);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        
+        bedroom.setExit("door", hallway);
+        bedroom.setExit("window", window);
 
-        theatre.setExit("west", outside);
+        hallway.setExit("door", sistersRoom);
+        hallway.setExit("stairs", livingRoom);
+        hallway.setExit("toilet", wc);
         
-        pub.setExit("east", outside);
-        pub.setExit("west", wc);
+        sistersRoom.setExit("door", hallway);   
         
-        wc.setExit("east", pub);
+        wc.setExit("door", hallway);
 
-        lab.setExit("north", outside);
-        //changed from east to south
-        lab.setExit("south", office);
+        livingRoom.setExit("stairs", hallway);
+        livingRoom.setExit("lobby", lobby);
         
-        //changed from west to north
-        office.setExit("north", lab);
+ 
+        lobby.setExit("livingroom", livingRoom);
+        lobby.setExit("outside", outside);
 
-        currentRoom = outside;
+        currentRoom = bedroom;
     }
 
     public void play() 
@@ -60,11 +65,18 @@ public class Game
 
     private void printWelcome()
     {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+//        System.out.println();
+//        System.out.println("Welcome to Fire Escape!");
+//        System.out.println("In Fire Escape, your goal is to escape your home.");
+//        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+//        System.out.println();
+//        System.out.println(currentRoom.getLongDescription());
+        System.out.println("Welcome to Fire Escape!");
+        System.out.println("Get ready to get your fire escaping abilities tested!");
+        System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
+        System.out.println("You wake up by the horrible smell of smoke.");
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -84,6 +96,8 @@ public class Game
         }
         else if (commandWord == CommandWord.GO) {
             goRoom(command);
+            player.addStep();
+            
         }
         else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
@@ -94,9 +108,10 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around at you own home.");
         System.out.println();
         System.out.println("Your command words are:");
+        System.out.println("you have walked " + player.getStepCount() + " steps so far");
         parser.showCommands();
     }
 
@@ -117,6 +132,7 @@ public class Game
         else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
+            System.out.println("your health is: " + player.getHealth());
         }
     }
 
