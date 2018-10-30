@@ -63,7 +63,11 @@ public class Game {
         System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println("You wake up by the horrible smell of smoke.");
+        
+        //Dette er et eksempel på hvordan vi kunne starte ud.
+        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
+                + " \nThe smoke from the fire spread throughout the house.");
+        System.out.println("The horrible smell of smoke has awoken you.");
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -118,6 +122,11 @@ public class Game {
         }
 
         if (currentRoom == wc) {
+            /**
+             * Eksempel på hvis man fandt rummet, hvor ilden startede.
+             * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
+             */
+            System.out.println("You found the room where the fire started.");
             player.looseHealth();
             System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
 
@@ -126,8 +135,8 @@ public class Game {
                 player.looseHealth();
             }
             System.out.println("You lost " + (player.lostHealth() * 4) + " health!");
-
-        }
+            
+        } 
         System.out.println("Your health is: " + player.getHealth());
 
         if (player.isDead() == true) {
