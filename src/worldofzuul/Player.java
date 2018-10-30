@@ -13,7 +13,6 @@ public class Player {
 
     private int stepCount = 0;
     private int health = 100;
-    
 
     public Player() {
     }
