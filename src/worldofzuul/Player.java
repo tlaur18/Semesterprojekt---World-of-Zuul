@@ -17,7 +17,7 @@ public class Player {
 
     public Player() {
     }
-
+    
     public int getStepCount() {
         return stepCount;
     }
@@ -47,5 +47,12 @@ public class Player {
     public int lostHealth() {
         return this.lostHealth;
     }
-
+    
+    public boolean isDead() {
+        if (health <= 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

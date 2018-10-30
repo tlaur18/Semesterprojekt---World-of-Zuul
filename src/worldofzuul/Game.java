@@ -23,11 +23,12 @@ public class Game {
         lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
         outside = new Room("Outside");
-        window = new Room("you jumped out the window! \n Did you forget you lived on 8th floor?! \n Anyway, you are dead! Restart the game?");
+        window = new Room("jumping out of the window! \nDid you forget you lived on 8th floor?!");
 
         bedroom.setExit("door", hallway);
         bedroom.setExit("window", window);
 
+        hallway.setExit("bedroom", bedroom);
         hallway.setExit("door", sistersRoom);
         hallway.setExit("stairs", livingRoom);
         hallway.setExit("toilet", wc);
@@ -115,19 +116,29 @@ public class Game {
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
-            
+
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
 
         }
-        
+
         if (currentRoom == wc) {
             player.looseHealth();
             System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
 
+        } else if (currentRoom == window) {
+            for (int i = 1; i <= 4; i++) {
+                player.looseHealth();
+            }
+            System.out.println("You lost " + (player.lostHealth() * 4) + " health!");
+
         }
         System.out.println("Your health is: " + player.getHealth());
+        
+        if (player.isDead() == true) {
+            System.exit(0);
+        }
 
     }
 
