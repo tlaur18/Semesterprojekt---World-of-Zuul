@@ -6,6 +6,8 @@ public class Game {
     private Room currentRoom;
     private Player player;
 
+    private Item inventory = null;
+
     // NU HAR VI SAT DEM UDENFOR createRooms() OG DET ER MÅSKE IKKE GODT, MEN DET VIRKER DA.
     private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
 
@@ -45,8 +47,8 @@ public class Game {
 
         currentRoom = bedroom;
     }
-    
-    private void createItems(){
+
+    private void createItems() {
         Item bucket = new Item("bucket", "A bucket to hold liquid");
         Item toothbrush = new Item("toothbrush", "Makes your teeth shiny");
         wc.addItem(bucket);
@@ -89,9 +91,12 @@ public class Game {
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
             player.addStep();
-
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
+        } else if (commandWord == CommandWord.TAKE) {
+            pickUpItem(command);
+        } else if (commandWord == CommandWord.DROP) {
+            dropItem();
         }
         return wantToQuit;
     }
@@ -130,6 +135,35 @@ public class Game {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private void pickUpItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Take what?");
+            return;
+        }
+
+        String itemName = command.getSecondWord();
+
+        for (int i = 0; i < currentRoom.getItems().size(); i++) {
+            if (itemName.equals(currentRoom.getItems().get(i).getName())) {
+                inventory = currentRoom.getItems().get(i);
+                System.out.println("You picked up the" + currentRoom.getItems().get(i).getName());
+                currentRoom.getItems().remove(i);
+                return;
+            }
+        }
+        System.out.println("The room contains no such thing.");
+    }
+
+    private void dropItem() {
+        if (inventory != null) {
+            System.out.println("You drop the " + inventory.getName());
+            currentRoom.getItems().add(inventory);
+            inventory = null;
+        } else {
+            System.out.println("You do not carry anything to drop.");
         }
     }
 }

@@ -32,8 +32,7 @@ public class Player {
     public void setHealth(int health) {
         this.health = health;
     }
-
-    
+ 
     public int addStep() {
     stepCount = stepCount + 1;
     return stepCount;
