@@ -17,7 +17,7 @@ public class Player {
 
     public Player() {
     }
-
+    
     public int getStepCount() {
         return stepCount;
     }
@@ -40,7 +40,7 @@ public class Player {
     return stepCount;
     }
     public void looseHealth() {
-        health = health - 50;
+        health -= 25;
     }
     
 
