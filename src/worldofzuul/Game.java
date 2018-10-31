@@ -22,22 +22,22 @@ public class Game {
         livingRoom = new Room("in the living room");
         lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
-        outside = new Room("Outside");
+        outside = new Room("outside");
         window = new Room("jumping out of the window! \nDid you forget you lived on 8th floor?!");
 
-        bedroom.setExit("door", hallway);
+        bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
 
         hallway.setExit("bedroom", bedroom);
         hallway.setExit("sister-room", sistersRoom);
-        hallway.setExit("stairs", livingRoom);
+        hallway.setExit("downstairs", livingRoom);
         hallway.setExit("toilet", wc);
 
-        sistersRoom.setExit("door", hallway);
+        sistersRoom.setExit("hallway", hallway);
 
-        wc.setExit("door", hallway);
+        wc.setExit("hallway", hallway);
 
-        livingRoom.setExit("stairs", hallway);
+        livingRoom.setExit("upstairs", hallway);
         livingRoom.setExit("lobby", lobby);
 
         lobby.setExit("livingroom", livingRoom);
@@ -65,8 +65,8 @@ public class Game {
         System.out.println();
         
         //Dette er et eksempel på hvordan vi kunne starte ud.
-        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
-                + " \nThe smoke from the fire spread throughout the house.");
+//        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
+//                + " \nThe smoke from the fire spread throughout the house.");
         System.out.println("The horrible smell of smoke has awoken you.");
         System.out.println(currentRoom.getLongDescription());
     }
@@ -126,7 +126,7 @@ public class Game {
              * Eksempel på hvis man fandt rummet, hvor ilden startede.
              * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
              */
-            System.out.println("You found the room where the fire started.");
+         //   System.out.println("You found the room where the fire started.");
             player.looseHealth();
             System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
 
@@ -136,10 +136,15 @@ public class Game {
             }
             System.out.println("You lost " + (player.lostHealth() * 4) + " health!");
             
-        } 
+            //Her spreder ilden sig til hallway når man har gået 5+ skridt
+        } else if (currentRoom == hallway && player.getStepCount() > 5) {
+            player.looseHealth();
+            System.out.println("You lost " + player.lostHealth() + " health!");
+        }
         System.out.println("Your health is: " + player.getHealth());
 
         if (player.isDead() == true) {
+            System.out.println("You died...");
             System.exit(0);
         }
 
