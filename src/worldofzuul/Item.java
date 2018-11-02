@@ -1,27 +1,28 @@
 package worldofzuul;
 
 public class Item {
+
     private String name;
     private String description;
     private boolean pickedUp;
-    
-    public Item(String name, String description){
+
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
         pickedUp = false;
     }
-    
+
     /**
      * @return the name
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
-    
+
     /**
-     * @param name 
+     * @param name
      */
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -52,7 +53,5 @@ public class Item {
     public void setPickedUp(boolean pickedUp) {
         this.pickedUp = pickedUp;
     }
-    
-    
-    
+
 }

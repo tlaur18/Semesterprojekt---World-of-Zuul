@@ -3,17 +3,15 @@ package worldofzuul;
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
     private Player player;
-    private Item inventory = null;
+
     private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
 
     public Game() {
         createRooms();
         createItems();
         parser = new Parser();
-        player = new Player();
-
+        player = new Player(bedroom);
     }
 
     private void createRooms() {
@@ -43,13 +41,11 @@ public class Game {
 
         lobby.setExit("livingroom", livingRoom);
         lobby.setExit("outside", outside);
-
-        currentRoom = bedroom;
     }
 
     private void createItems() {
-        Item bucket = new Item("Bucket", "A bucket to hold liquid");
-        Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny");
+        Item bucket = new Item("Bucket", "Holds liquid well.");
+        Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny.");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
     }
@@ -76,7 +72,7 @@ public class Game {
 //        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
 //                + " \nThe smoke from the fire spread throughout the house.");
         System.out.println("The horrible smell of smoke has awoken you.");
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
     private boolean processCommand(Command command) {
@@ -92,13 +88,15 @@ public class Game {
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
-            goRoom(command);
+            player.goRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.TAKE) {
-            takeItem(command);
+            player.takeItem(command);
         } else if (commandWord == CommandWord.DROP) {
-            dropItem();
+            player.dropItem();
+        } else if (commandWord == CommandWord.INSPECT) {
+            player.inspectInventory();
         }
         return wantToQuit;
     }
@@ -112,89 +110,12 @@ public class Game {
         parser.showCommands();
     }
 
-    private void goRoom(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        } else {
-            currentRoom = nextRoom;
-            player.addStep();
-            System.out.println(currentRoom.getLongDescription());
-
-        }
-
-        if (currentRoom == wc) {
-            /**
-             * Eksempel på hvis man fandt rummet, hvor ilden startede.
-             * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
-             */
-         //   System.out.println("You found the room where the fire started.");
-            player.looseHealth();
-            System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
-
-        } else if (currentRoom == window) {
-            for (int i = 1; i <= 4; i++) {
-                player.looseHealth();
-            }
-            System.out.println("You lost " + (player.lostHealth() * 4) + " health!");
-            
-            //Her spreder ilden sig til hallway når man har gået 5+ skridt
-        } else if (currentRoom == hallway && player.getStepCount() > 5) {
-            player.looseHealth();
-            System.out.println("You lost " + player.lostHealth() + " health!");
-        }
-        System.out.println("Your health is: " + player.getHealth());
-
-        if (player.isDead() == true) {
-            System.out.println("You died...");
-            System.exit(0);
-        }
-
-    }
-
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
         } else {
             return true;
-        }
-    }
-
-    private void takeItem(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println("Take what?");
-            return;
-        }
-
-        String itemName = command.getSecondWord();
-
-        for (int i = 0; i < currentRoom.getItems().size(); i++) {
-            if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
-                inventory = currentRoom.getItems().get(i);
-                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName() + ".");
-                currentRoom.getItems().remove(i);
-                return;
-            }
-        }
-        System.out.println("The room contains no such thing.");
-    }
-
-    private void dropItem() {
-        if (inventory != null) {
-            System.out.println("You drop the " + inventory.getName() + ".");
-            currentRoom.getItems().add(inventory);
-            inventory = null;
-        } else {
-            System.out.println("You do not carry anything to drop.");
         }
     }
 }

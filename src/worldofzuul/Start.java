@@ -1,4 +1,3 @@
-
 package worldofzuul;
 
 public class Start {
@@ -7,5 +6,5 @@ public class Start {
         Game game = new Game();
         game.play();
     }
-    
+
 }

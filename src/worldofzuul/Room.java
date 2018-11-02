@@ -51,11 +51,11 @@ public class Room {
 
     public String printItems() {
         String itemString = "";
-        
-        for (int i = 0; i < items.size(); i++){
-            itemString += items.get(i).getName() + (i+1 == items.size() ? "" : ", ");
+
+        for (int i = 0; i < items.size(); i++) {
+            itemString += items.get(i).getName() + (i + 1 == items.size() ? "" : ", ");
         }
-        
+
         return itemString;
     }
 }
