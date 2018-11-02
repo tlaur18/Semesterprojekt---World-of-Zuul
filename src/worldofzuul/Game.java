@@ -94,7 +94,7 @@ public class Game {
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.TAKE) {
-            pickUpItem(command);
+            takeItem(command);
         } else if (commandWord == CommandWord.DROP) {
             dropItem();
         }
@@ -138,7 +138,7 @@ public class Game {
         }
     }
 
-    private void pickUpItem(Command command) {
+    private void takeItem(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("Take what?");
             return;
@@ -149,7 +149,7 @@ public class Game {
         for (int i = 0; i < currentRoom.getItems().size(); i++) {
             if (itemName.equals(currentRoom.getItems().get(i).getName())) {
                 inventory = currentRoom.getItems().get(i);
-                System.out.println("You picked up the" + currentRoom.getItems().get(i).getName());
+                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName());
                 currentRoom.getItems().remove(i);
                 return;
             }
