@@ -23,7 +23,7 @@ public class Game {
         lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
         outside = new Room("outside");
-        window = new Room("jumping out of the window! \nDid you forget you lived on 8th floor?!");
+        window = new Room("jumping out of the window! \nYou took a fatal hit to your head");
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
@@ -127,7 +127,6 @@ public class Game {
              * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
              */
          //   System.out.println("You found the room where the fire started.");
-            player.looseHealth();
             System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
 
         } else if (currentRoom == window) {
