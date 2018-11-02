@@ -5,9 +5,7 @@ public class Game {
     private Parser parser;
     private Room currentRoom;
     private Player player;
-
     private Item inventory = null;
-
     private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
 
     public Game() {
@@ -15,30 +13,32 @@ public class Game {
         createItems();
         parser = new Parser();
         player = new Player();
+
     }
 
-    private void createRooms() { //Jeg har ændret en anden fil
+    private void createRooms() {
         bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking");
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
-        sistersRoom = new Room("in your sisters room");
+        sistersRoom = new Room("in your sister's room");
         livingRoom = new Room("in the living room");
         lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
-        outside = new Room("Outside");
-        window = new Room("you jumped out the window! \n Did you forget you lived on 8th floor?! \n Anyway, you are dead! Restart the game?");
+        outside = new Room("outside");
+        window = new Room("jumping out of the window! \nYou took a fatal hit to your head");
 
-        bedroom.setExit("door", hallway);
+        bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
 
-        hallway.setExit("door", sistersRoom);
-        hallway.setExit("stairs", livingRoom);
+        hallway.setExit("bedroom", bedroom);
+        hallway.setExit("sister-room", sistersRoom);
+        hallway.setExit("downstairs", livingRoom);
         hallway.setExit("toilet", wc);
 
-        sistersRoom.setExit("door", hallway);
+        sistersRoom.setExit("hallway", hallway);
 
-        wc.setExit("door", hallway);
+        wc.setExit("hallway", hallway);
 
-        livingRoom.setExit("stairs", hallway);
+        livingRoom.setExit("upstairs", hallway);
         livingRoom.setExit("lobby", lobby);
 
         lobby.setExit("livingroom", livingRoom);
@@ -71,7 +71,11 @@ public class Game {
         System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println("You wake up by the horrible smell of smoke.");
+        
+        //Dette er et eksempel på hvordan vi kunne starte ud.
+//        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
+//                + " \nThe smoke from the fire spread throughout the house.");
+        System.out.println("The horrible smell of smoke has awoken you.");
         System.out.println(currentRoom.getLongDescription());
     }
 
@@ -124,8 +128,35 @@ public class Game {
         } else {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
-            System.out.println("your health is: " + player.getHealth());
+
         }
+
+        if (currentRoom == wc) {
+            /**
+             * Eksempel på hvis man fandt rummet, hvor ilden startede.
+             * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
+             */
+         //   System.out.println("You found the room where the fire started.");
+            System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
+
+        } else if (currentRoom == window) {
+            for (int i = 1; i <= 4; i++) {
+                player.looseHealth();
+            }
+            System.out.println("You lost " + (player.lostHealth() * 4) + " health!");
+            
+            //Her spreder ilden sig til hallway når man har gået 5+ skridt
+        } else if (currentRoom == hallway && player.getStepCount() > 5) {
+            player.looseHealth();
+            System.out.println("You lost " + player.lostHealth() + " health!");
+        }
+        System.out.println("Your health is: " + player.getHealth());
+
+        if (player.isDead() == true) {
+            System.out.println("You died...");
+            System.exit(0);
+        }
+
     }
 
     private boolean quit(Command command) {
