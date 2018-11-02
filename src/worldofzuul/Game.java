@@ -8,7 +8,6 @@ public class Game {
 
     private Item inventory = null;
 
-    // NU HAR VI SAT DEM UDENFOR createRooms() OG DET ER MÅSKE IKKE GODT, MEN DET VIRKER DA.
     private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
 
     public Game() {
@@ -147,9 +146,9 @@ public class Game {
         String itemName = command.getSecondWord();
 
         for (int i = 0; i < currentRoom.getItems().size(); i++) {
-            if (itemName.equals(currentRoom.getItems().get(i).getName())) {
+            if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
                 inventory = currentRoom.getItems().get(i);
-                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName());
+                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName() + ".");
                 currentRoom.getItems().remove(i);
                 return;
             }
@@ -159,7 +158,7 @@ public class Game {
 
     private void dropItem() {
         if (inventory != null) {
-            System.out.println("You drop the " + inventory.getName());
+            System.out.println("You drop the " + inventory.getName() + ".");
             currentRoom.getItems().add(inventory);
             inventory = null;
         } else {
