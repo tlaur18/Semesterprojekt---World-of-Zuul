@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.util.Scanner;
+
 public class Game {
 
     private Parser parser;
@@ -65,13 +67,18 @@ public class Game {
         System.out.println("Thank you for playing.  Good bye.");
     }
 
+    public void restart() {
+        Game game = new Game();
+        game.play();
+    }
+
     private void printWelcome() {
         System.out.println("Welcome to Fire Escape!");
         System.out.println("Get ready to get your fire escaping abilities tested!");
         System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        
+
         //Dette er et eksempel på hvordan vi kunne starte ud.
 //        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
 //                + " \nThe smoke from the fire spread throughout the house.");
@@ -133,10 +140,12 @@ public class Game {
 
         if (currentRoom == wc) {
             /**
-             * Eksempel på hvis man fandt rummet, hvor ilden startede.
-             * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
+             * Eksempel på hvis man fandt rummet, hvor ilden startede. Man kan
+             * derfor bruge dette til at senere hen tilføje noget med stepcount
+             * + spredning af ild.
              */
-         //   System.out.println("You found the room where the fire started.");
+            //   System.out.println("You found the room where the fire started.");
+            player.looseHealth();
             System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
 
         } else if (currentRoom == window) {
@@ -144,7 +153,7 @@ public class Game {
                 player.looseHealth();
             }
             System.out.println("You lost " + (player.lostHealth() * 4) + " health!");
-            
+
             //Her spreder ilden sig til hallway når man har gået 5+ skridt
         } else if (currentRoom == hallway && player.getStepCount() > 5) {
             player.looseHealth();
@@ -154,9 +163,18 @@ public class Game {
 
         if (player.isDead() == true) {
             System.out.println("You died...");
-            System.exit(0);
-        }
+            System.out.println("Do you wanna try agian?[Y/N]");
+            Scanner option = new Scanner(System.in);
+            String userInput = option.nextLine();
 
+            if (userInput.equals("Y")) {
+               System.out.println();
+                restart();
+            }   
+             else if (userInput.equals("N")) {
+                System.exit(0);
+            }
+        }
     }
 
     private boolean quit(Command command) {

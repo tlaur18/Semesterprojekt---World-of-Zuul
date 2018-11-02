@@ -7,6 +7,9 @@ public class Parser {
 
     private CommandWords commands;
     private Scanner reader;
+    private String word1 = null;
+    private String word2 = null;
+
 
     public Parser() {
         commands = new CommandWords();
@@ -15,9 +18,7 @@ public class Parser {
 
     public Command getCommand() {
         String inputLine;
-        String word1 = null;
-        String word2 = null;
-
+        
         System.out.print("> ");
 
         inputLine = reader.nextLine();
@@ -36,4 +37,5 @@ public class Parser {
     public void showCommands() {
         commands.showAll();
     }
+
 }
