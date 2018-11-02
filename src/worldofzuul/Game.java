@@ -93,7 +93,6 @@ public class Game {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
             goRoom(command);
-            player.addStep();
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.TAKE) {
@@ -127,6 +126,7 @@ public class Game {
             System.out.println("There is no door!");
         } else {
             currentRoom = nextRoom;
+            player.addStep();
             System.out.println(currentRoom.getLongDescription());
 
         }
