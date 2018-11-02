@@ -48,8 +48,8 @@ public class Game {
     }
 
     private void createItems() {
-        Item bucket = new Item("Bucket", "A bucket to hold liquid");
-        Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny");
+        Item bucket = new Item("Bucket", "Holds liquid well.");
+        Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny.");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
     }
@@ -96,6 +96,8 @@ public class Game {
             takeItem(command);
         } else if (commandWord == CommandWord.DROP) {
             dropItem();
+        } else if (commandWord == CommandWord.INSPECT) {
+            inspectInventory();
         }
         return wantToQuit;
     }
@@ -163,6 +165,15 @@ public class Game {
             inventory = null;
         } else {
             System.out.println("You do not carry anything to drop.");
+        }
+    }
+    
+    private void inspectInventory() {
+        if (inventory != null) {
+            System.out.println("You are carrying a " + inventory.getName() + ".");
+            System.out.println(inventory.getDescription());
+        } else {
+            System.out.println("You are not carrying anything.");
         }
     }
 }
