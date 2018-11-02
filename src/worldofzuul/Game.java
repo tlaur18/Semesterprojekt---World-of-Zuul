@@ -137,6 +137,7 @@ public class Game {
              * Man kan derfor bruge dette til at senere hen tilføje noget med stepcount + spredning af ild.
              */
          //   System.out.println("You found the room where the fire started.");
+            player.looseHealth();
             System.out.println("You have been damaged by the fire. \nYou lost " + player.lostHealth() + " health!");
 
         } else if (currentRoom == window) {
