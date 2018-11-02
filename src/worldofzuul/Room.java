@@ -25,7 +25,7 @@ public class Room {
     }
 
     public String getLongDescription() {
-        return "You are " + description + ".\n" + getExitString() + ".\n" + printItems();
+        return ("You are " + description + ".\n" + getExitString() + ".") + (!items.isEmpty() ? "\nItems: " + printItems() : "");
     }
 
     private String getExitString() {
@@ -53,7 +53,7 @@ public class Room {
         String itemString = "";
         
         for (int i = 0; i < items.size(); i++){
-            itemString += items.get(i).getName() + ", ";
+            itemString += items.get(i).getName() + (i+1 == items.size() ? "" : ", ");
         }
         
         return itemString;

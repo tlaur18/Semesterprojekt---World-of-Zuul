@@ -49,8 +49,8 @@ public class Game {
     }
 
     private void createItems() {
-        Item bucket = new Item("bucket", "A bucket to hold liquid");
-        Item toothbrush = new Item("toothbrush", "Makes your teeth shiny");
+        Item bucket = new Item("Bucket", "A bucket to hold liquid");
+        Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
     }
