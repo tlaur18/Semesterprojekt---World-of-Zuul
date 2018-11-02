@@ -3,10 +3,7 @@ package worldofzuul;
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
     private Player player;
-
-    private Item inventory = null;
 
     private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
 
@@ -14,10 +11,10 @@ public class Game {
         createRooms();
         createItems();
         parser = new Parser();
-        player = new Player();
+        player = new Player(bedroom);
     }
 
-    private void createRooms() { //Jeg har ændret en anden fil
+    private void createRooms() {
         bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking");
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
         sistersRoom = new Room("in your sisters room");
@@ -43,8 +40,6 @@ public class Game {
 
         lobby.setExit("livingroom", livingRoom);
         lobby.setExit("outside", outside);
-
-        currentRoom = bedroom;
     }
 
     private void createItems() {
@@ -72,7 +67,7 @@ public class Game {
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println("You wake up by the horrible smell of smoke.");
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
     private boolean processCommand(Command command) {
@@ -88,16 +83,16 @@ public class Game {
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
-            goRoom(command);
+            player.goRoom(command);
             player.addStep();
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.TAKE) {
-            takeItem(command);
+            player.takeItem(command);
         } else if (commandWord == CommandWord.DROP) {
-            dropItem();
+            player.dropItem();
         } else if (commandWord == CommandWord.INSPECT) {
-            inspectInventory();
+            player.inspectInventory();
         }
         return wantToQuit;
     }
@@ -111,69 +106,12 @@ public class Game {
         parser.showCommands();
     }
 
-    private void goRoom(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        } else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
-            System.out.println("your health is: " + player.getHealth());
-        }
-    }
-
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
         } else {
             return true;
-        }
-    }
-
-    private void takeItem(Command command) {
-        if (!command.hasSecondWord()) {
-            System.out.println("Take what?");
-            return;
-        }
-
-        String itemName = command.getSecondWord();
-
-        for (int i = 0; i < currentRoom.getItems().size(); i++) {
-            if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
-                inventory = currentRoom.getItems().get(i);
-                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName() + ".");
-                currentRoom.getItems().remove(i);
-                return;
-            }
-        }
-        System.out.println("The room contains no such thing.");
-    }
-
-    private void dropItem() {
-        if (inventory != null) {
-            System.out.println("You drop the " + inventory.getName() + ".");
-            currentRoom.getItems().add(inventory);
-            inventory = null;
-        } else {
-            System.out.println("You do not carry anything to drop.");
-        }
-    }
-    
-    private void inspectInventory() {
-        if (inventory != null) {
-            System.out.println("You are carrying a " + inventory.getName() + ".");
-            System.out.println(inventory.getDescription());
-        } else {
-            System.out.println("You are not carrying anything.");
         }
     }
 }

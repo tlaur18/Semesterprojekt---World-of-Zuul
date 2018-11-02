@@ -1,27 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package worldofzuul;
 
-/**
- *
- * @author Morten K. Jensen
- */
 public class Player {
 
-    private int stepCount = 0;
-    private int health = 100;
+    private int stepCount;
+    private int health;
+    private Item inventory;
+    private Room currentRoom;
 
-    public Player() {
+    public Player(Room room) {
+        stepCount = 0;
+        health = 100;
+        inventory = null;
+        currentRoom = room;
     }
 
     public int getStepCount() {
         return stepCount;
     }
 
-    public int getHealth() {
+    public int getHealth() {        
         return health;
     }
 
@@ -32,14 +29,86 @@ public class Player {
     public void setHealth(int health) {
         this.health = health;
     }
- 
-    public int addStep() {
-    stepCount = stepCount + 1;
-    return stepCount;
+    
+    public void setInventory(Item item) {
+        inventory = item;
     }
+    
+    public Item getInventory() {
+        return inventory;
+    }
+    
+    public void setCurrentRoom(Room room) {
+        currentRoom = room;
+    }
+    
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public int addStep() {
+        stepCount = stepCount + 1;
+        return stepCount;
+    }
+
     public void looseHealth() {
         health = health - 50;
     }
     
+    public void takeItem(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Take what?");
+            return;
+        }
 
+        String itemName = command.getSecondWord();
+
+        for (int i = 0; i < currentRoom.getItems().size(); i++) {
+            if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
+                inventory = currentRoom.getItems().get(i);
+                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName() + ".");
+                currentRoom.getItems().remove(i);
+                return;
+            }
+        }
+        System.out.println("The room contains no such thing.");
+    }
+    
+    public void dropItem() {
+        if (inventory != null) {
+            System.out.println("You drop the " + inventory.getName() + ".");
+            currentRoom.getItems().add(inventory);
+            inventory = null;
+        } else {
+            System.out.println("You do not carry anything to drop.");
+        }
+    }
+    
+    public void inspectInventory() {
+        if (inventory != null) {
+            System.out.println("You are carrying a " + inventory.getName() + ".");
+            System.out.println(inventory.getDescription());
+        } else {
+            System.out.println("You are not carrying anything.");
+        }
+    }
+    
+    public void goRoom(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("Go where?");
+            return;
+        }
+
+        String direction = command.getSecondWord();
+
+        Room nextRoom = currentRoom.getExit(direction);
+
+        if (nextRoom == null) {
+            System.out.println("There is no door!");
+        } else {
+            currentRoom = nextRoom;
+            System.out.println(currentRoom.getLongDescription());
+            System.out.println("your health is: " + health);
+        }
+    }
 }
