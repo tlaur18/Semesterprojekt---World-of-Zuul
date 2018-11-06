@@ -1,5 +1,8 @@
 package worldofzuul;
 
+import java.util.Scanner;
+
+
 public class Game {
 
     private Parser parser;
@@ -9,10 +12,19 @@ public class Game {
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
+        System.out.println("welcome to Fire Escape!");
+        System.out.println("What is your name?");
         createRooms();
         createItems();
         parser = new Parser();
-        player = new Player(bedroom);
+        Scanner pn = new Scanner(System.in);
+        String playerName = pn.nextLine();
+        player = new Player(bedroom, playerName);
+        
+        
+        
+        
+        
     }
 
     private void createRooms() {
@@ -89,12 +101,14 @@ public class Game {
         }
         System.out.println("Thank you for playing. Good bye.");
     }
-
+    
     private void printWelcome() {
-        System.out.println("Welcome to Fire Escape!");
-        System.out.println("Get ready to get your fire escaping abilities tested!");
-        System.out.println("The goal of this game is to get out of the burning building alive.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        
+        System.out.println("\t Hello " + player.getPlayerName() + "!");
+        
+        System.out.println("\t Get ready to get your fire escaping abilities tested!");
+        System.out.println("\t The goal of this game is to get out of the burning building alive.");
+        System.out.println("\t Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         
         //Dette er et eksempel på hvordan vi kunne starte ud.

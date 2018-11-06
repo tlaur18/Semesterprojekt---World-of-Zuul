@@ -40,7 +40,7 @@ public class Room {
         }
         return returnString;
     }
-
+   
     public Room getExit(String direction) {
         return exits.get(direction);
     }
@@ -62,4 +62,8 @@ public class Room {
 
         return itemString;
     }
+
+    
+
+    
 }

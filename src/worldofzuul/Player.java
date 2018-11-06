@@ -1,18 +1,26 @@
 package worldofzuul;
 
 public class Player {
-
+    private String playerName; 
     private int stepCount;
     private int health;
     private final int lostHealth = 25;
     private Item inventory;
     private Room currentRoom;
 
-    public Player(Room room) {
+    public Player(Room room, String playerName) {
         stepCount = 0;
         health = 100;
         inventory = null;
         currentRoom = room;
+         this.playerName = playerName;
+    }
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+    
+    public String getPlayerName(){
+        return playerName;
     }
 
     public int getStepCount() {
