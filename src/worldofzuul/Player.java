@@ -109,6 +109,10 @@ public class Player {
             System.out.println("You are not carrying anything.");
         }
     }
+    
+    public void searchRoom() {
+        System.out.println(currentRoom.getItemDescription());
+    }
 
     public void goRoom(Command command) {
         if (!command.hasSecondWord()) {
