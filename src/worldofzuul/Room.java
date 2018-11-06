@@ -70,4 +70,10 @@ public class Room {
     public Fire getFire() {
         return fire;
     }
+    
+    public void updateFire() {
+        if (fire != null) {
+            fire.updateFire();
+        }
+    }
 }

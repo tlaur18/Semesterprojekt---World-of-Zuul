@@ -2,7 +2,7 @@ package worldofzuul;
 
 public class Player {
 
-    private int stepCount;
+    private static int stepCount;
     private int health;
     private Item inventory;
     private Room currentRoom;
@@ -15,7 +15,7 @@ public class Player {
         currentRoom = room;
     }
 
-    public int getStepCount() {
+    public static int getStepCount() {
         return stepCount;
     }
 
@@ -130,6 +130,7 @@ public class Player {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
+            updateFire();
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
             
@@ -152,6 +153,12 @@ public class Player {
         if (isDead() == true) {
             System.out.println("You died...");
             System.exit(0);
+        }
+    }
+    
+    public void updateFire() {
+        for (Room room : Game.getRooms()) {
+            room.updateFire();
         }
     }
 }

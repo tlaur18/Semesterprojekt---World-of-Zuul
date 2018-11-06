@@ -10,5 +10,10 @@ public class Fire {
     public int getLvl() {
         return lvl;
     }
-
+    
+    public void updateFire() {
+        if (Player.getStepCount() % 5 == 0) {
+            lvl++;
+        }
+    }
 }
