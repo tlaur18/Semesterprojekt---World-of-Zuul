@@ -5,7 +5,8 @@ public class Game {
     private Parser parser;
     private Player player;
 
-    private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, outside, window;
+    private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, wc2, outside, window,
+            office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
         createRooms();
@@ -21,8 +22,16 @@ public class Game {
         livingRoom = new Room("in the living room");
         lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
+        wc2 = new Room("on the toilet");
         outside = new Room("outside");
         window = new Room("jumping out of the window! \nYou took a fatal hit to your head");
+        office = new Room("in the office");
+        kitchen = new Room("in the kitchen");
+        entrance = new Room("in the entrace");
+        conservatory = new Room("in the conservatory");
+        basement = new Room("in the basement");
+        garage = new Room("in the garage");
+        masterBedroom = new Room("in the master bedroom");
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
@@ -37,10 +46,30 @@ public class Game {
         wc.setExit("hallway", hallway);
 
         livingRoom.setExit("upstairs", hallway);
-        livingRoom.setExit("lobby", lobby);
-
-        lobby.setExit("livingroom", livingRoom);
-        lobby.setExit("outside", outside);
+        livingRoom.setExit("basement", basement);
+        livingRoom.setExit("kitchen", kitchen);
+        livingRoom.setExit("office", office);
+        
+        basement.setExit("livingroom", livingRoom);
+        basement.setExit("garage", garage);
+        
+        garage.setExit("basement", basement);
+        
+        kitchen.setExit("livingroom", livingRoom);
+        kitchen.setExit("entrance", entrance);
+        kitchen.setExit("conservatory", conservatory);
+        
+        conservatory.setExit("kitchen", kitchen);
+        
+        entrance.setExit("kitchen", kitchen);
+        
+        office.setExit("livingroom", livingRoom);
+        office.setExit("master-bedroom", masterBedroom);
+        
+        masterBedroom.setExit("office", office);
+        masterBedroom.setExit("toilet", wc2);
+        
+        wc2.setExit("master-bedroom", masterBedroom);
     }
 
     private void createItems() {
@@ -58,7 +87,7 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing. Good bye.");
     }
 
     private void printWelcome() {
