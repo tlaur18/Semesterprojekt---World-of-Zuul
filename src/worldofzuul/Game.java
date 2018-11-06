@@ -74,14 +74,14 @@ public class Game {
     }
 
     private void createItems() {
-        Items bucket = new Items("Bucket", "Holds liquid well.");
-        Items toothbrush = new Items("Toothbrush", "Makes your teeth shiny.");
-        Items smallFireExtinguisherONE = new Items("FirstFireExtinguisher", "Used to extinguish small fire.");
-        Items smallFireExtinguisherTWO = new Items("SecondFireExtinguisher", "Used to extinguish small fire");
-        Items bigFireExtinguisher = new Items("FireExtinguisher", "Used to extinguish big fire.");
-        Items towel = new Items("Towel", "Used to dry yourself");
-        Items doll = new Items("Doll", "A girly play doll");
-        Items football = new Items("Football", "A round toy used to being kicked");
+        Items bucket = new UseableItems("Bucket", "Holds liquid well.");
+        Items toothbrush = new NonUseableItems("Toothbrush", "Makes your teeth shiny.");
+        Items smallFireExtinguisherONE = new UseableItems("FirstFireExtinguisher", "Used to extinguish small fire.");
+        Items smallFireExtinguisherTWO = new UseableItems("SecondFireExtinguisher", "Used to extinguish small fire");
+        Items bigFireExtinguisher = new UseableItems("FireExtinguisher", "Used to extinguish big fire.");
+        Items towel = new NonUseableItems("Towel", "Used to dry yourself");
+        Items doll = new NonUseableItems("Doll", "A girly play doll");
+        Items football = new UseableItems("Football", "A round toy used to being kicked");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);
@@ -144,6 +144,9 @@ public class Game {
             player.inspectInventory();
         } else if (commandWord == CommandWord.SEARCH) {
             player.searchRoom();
+        }
+        else if (commandWord == CommandWord.USE) {
+           player.useItem();
         }
         return wantToQuit;
     }

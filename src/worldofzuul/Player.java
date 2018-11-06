@@ -49,6 +49,15 @@ public class Player {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+    public void useItem() {
+        if (inventory instanceof UseableItems){
+        ((UseableItems)inventory).use();
+        }
+        else {
+            System.out.println("You can't use this item.");
+        }
+           
+    }
 
     public int addStep() {
         stepCount = stepCount + 1;
