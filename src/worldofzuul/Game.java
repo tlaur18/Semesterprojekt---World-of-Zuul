@@ -97,6 +97,8 @@ public class Game {
             player.dropItem();
         } else if (commandWord == CommandWord.INSPECT) {
             player.inspectInventory();
+        } else if (commandWord == CommandWord.SEARCH) {
+            player.searchRoom();
         }
         return wantToQuit;
     }

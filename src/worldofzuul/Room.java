@@ -25,7 +25,11 @@ public class Room {
     }
 
     public String getLongDescription() {
-        return ("You are " + description + ".\n" + getExitString() + ".") + (!items.isEmpty() ? "\nItems: " + printItems() : "");
+        return ("You are " + description + ".\n" + getExitString() + ".");
+    }
+    
+    public String getItemDescription() {
+        return (!items.isEmpty() ? "Items: " + printItems() : "There are no items in this room.");
     }
 
     private String getExitString() {
