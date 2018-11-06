@@ -116,6 +116,7 @@ public class Game {
 //                + " \nThe smoke from the fire spread throughout the house.");
         System.out.println("The horrible smell of smoke has awoken you.");
         System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.println(player.getCurrentRoom().getExitString());
     }
 
     private boolean processCommand(Command command) {
