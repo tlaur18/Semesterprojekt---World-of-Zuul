@@ -75,8 +75,22 @@ public class Game {
     private void createItems() {
         Item bucket = new Item("Bucket", "Holds liquid well.");
         Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny.");
+        Item smallFireExtinguisherONE = new Item("FirstFireExtinguisher", "Used to extinguish small fire.");
+        Item smallFireExtinguisherTWO = new Item("SecondFireExtinguisher", "Used to extinguish small fire");
+        Item bigFireExtinguisher = new Item("FireExtinguisher", "Used to extinguish big fire.");
+        Item towel = new Item("Towel", "Used to dry yourself");
+        Item doll = new Item("Doll", "A girly play doll");
+        Item football = new Item("Football", "A round toy used to being kicked");
+        Item bunny = new Item("Bunny", "Thomas Steenholdt's bunny");
+        livingRoom.addItem(bunny);
         wc.addItem(bucket);
         wc.addItem(toothbrush);
+        wc2.addItem(towel);
+        bedroom.addItem(football);
+        sistersRoom.addItem(doll);
+        garage.addItem(smallFireExtinguisherONE);
+        garage.addItem(smallFireExtinguisherTWO);
+        masterBedroom.addItem(bigFireExtinguisher);
     }
 
     public void play() {
