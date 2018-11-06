@@ -1,7 +1,14 @@
 package worldofzuul;
 
 public class Fire {
-
-    public Fire() {
+    private int lvl;    
+    
+    public Fire(int lvl) {
+        this.lvl = lvl;
     }
+    
+    public int getLvl() {
+        return lvl;
+    }
+
 }

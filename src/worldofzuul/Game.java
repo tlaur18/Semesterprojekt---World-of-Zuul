@@ -11,6 +11,7 @@ public class Game {
     public Game() {
         createRooms();
         createItems();
+        createFire();
         parser = new Parser();
         player = new Player(bedroom);
     }
@@ -78,6 +79,12 @@ public class Game {
         wc.addItem(bucket);
         wc.addItem(toothbrush);
     }
+    
+    private void createFire() {
+        kitchen.addFire(3);
+        office.addFire(1);
+        livingRoom.addFire(1);
+    }
 
     public void play() {
         printWelcome();
@@ -96,11 +103,7 @@ public class Game {
         System.out.println("The goal of this game is to get out of the burning building alive.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        
-        //Dette er et eksempel på hvordan vi kunne starte ud.
-//        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
-//                + " \nThe smoke from the fire spread throughout the house.");
-        System.out.println("The horrible smell of smoke has awoken you.");
+        System.out.println("You wake up by the horrible smell of smoke.");
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
