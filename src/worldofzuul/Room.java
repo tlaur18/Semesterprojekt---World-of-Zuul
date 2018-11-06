@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Room {
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<Item> items = new ArrayList();
+    private ArrayList<Items> items = new ArrayList();
     private Fire fire = null;
 
     public Room(String description) {
@@ -45,11 +45,11 @@ public class Room {
         return exits.get(direction);
     }
 
-    public void addItem(Item item) {
+    public void addItem(Items item) {
         items.add(item);
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<Items> getItems() {
         return items;
     }
 

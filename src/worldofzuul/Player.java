@@ -4,7 +4,7 @@ public class Player {
 
     private int stepCount;
     private int health;
-    private Item inventory;
+    private Items inventory;
     private Room currentRoom;
     private Room previousRoom;
 
@@ -34,11 +34,11 @@ public class Player {
         this.health = health;
     }
 
-    public void setInventory(Item item) {
+    public void setInventory(Items item) {
         inventory = item;
     }
 
-    public Item getInventory() {
+    public Items getInventory() {
         return inventory;
     }
 

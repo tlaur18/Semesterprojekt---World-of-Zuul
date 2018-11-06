@@ -1,12 +1,12 @@
 package worldofzuul;
 
-public class Item {
+public class Items {
 
     private String name;
     private String description;
     private boolean pickedUp;
 
-    public Item(String name, String description) {
+    public Items(String name, String description) {
         this.name = name;
         this.description = description;
         pickedUp = false;
