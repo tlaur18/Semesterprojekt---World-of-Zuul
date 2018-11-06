@@ -77,6 +77,11 @@ public class Player {
             System.out.println("Take what?");
             return;
         }
+        
+        if (inventory != null) {
+            System.out.println("You are already carrying a " + inventory.getName());
+            return;
+        }
 
         String itemName = command.getSecondWord();
 
