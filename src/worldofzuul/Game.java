@@ -5,7 +5,7 @@ public class Game {
     private Parser parser;
     private Player player;
 
-    private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, wc2, outside, window,
+    private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
@@ -20,7 +20,6 @@ public class Game {
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
         sistersRoom = new Room("in your sister's room");
         livingRoom = new Room("in the living room");
-        lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
         wc2 = new Room("on the toilet");
         outside = new Room("outside");
@@ -62,6 +61,7 @@ public class Game {
         conservatory.setExit("kitchen", kitchen);
         
         entrance.setExit("kitchen", kitchen);
+        entrance.setExit("outside", outside);
         
         office.setExit("livingroom", livingRoom);
         office.setExit("master-bedroom", masterBedroom);

@@ -135,6 +135,9 @@ public class Player {
             currentRoom = nextRoom;
             addStep();
             System.out.println(currentRoom.getLongDescription());
+            if (!(currentRoom.getShortDescription().equals("outside")) && (!(currentRoom.getShortDescription().equals("jumping out of the window! \nYou took a fatal hit to your head")))) {
+            System.out.println(currentRoom.getExitString());
+            }
         }
 
         if (currentRoom.getShortDescription().equals("on the toilet, the room is filled with smoke and fire - GET OUT!")) {  //FIX DET HER DET ER NOGET MØG
@@ -157,6 +160,9 @@ public class Player {
         } else if (currentRoom.getShortDescription().equals("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs") && stepCount > 5) {
             looseHealth();
             System.out.println("You lost " + lostHealth() + " health!");
+        } else if (currentRoom.getShortDescription().equals("outside")) {
+            System.out.println("YOU WON THE GAME!");
+            System.exit(0);
         }
         System.out.println("Your health is: " + getHealth());
         
