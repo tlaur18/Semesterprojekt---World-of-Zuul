@@ -167,11 +167,12 @@ public class Game {
             Scanner option = new Scanner(System.in);
             String userInput = option.nextLine();
 
-            if (userInput.equals("Y")) {
-               System.out.println();
+            if (userInput.equals("Y") || userInput.equals("y")) {
+               System.out.println("Nice!");
                 restart();
             }   
-             else if (userInput.equals("N")) {
+             else if (userInput.equals("N") || userInput.equals("n")) {
+                 System.out.println("Thanks for playing!");
                 System.exit(0);
             }
         }
