@@ -73,7 +73,7 @@ public class Room {
     
     public void updateFire() {
         if (fire != null) {
-            fire.updateFire();
+            fire.updateLvl();
         }
     }
 }
