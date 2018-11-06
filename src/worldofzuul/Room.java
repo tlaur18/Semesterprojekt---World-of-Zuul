@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 public class Room {
-
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> items = new ArrayList();
+    private Fire fire = null;
 
     public Room(String description) {
         this.description = description;
@@ -61,5 +61,13 @@ public class Room {
         }
 
         return itemString;
+    }
+    
+    public void addFire(int lvl) {
+        fire = new Fire(lvl);
+    }
+    
+    public Fire getFire() {
+        return fire;
     }
 }

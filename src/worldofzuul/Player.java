@@ -4,9 +4,9 @@ public class Player {
 
     private int stepCount;
     private int health;
-    private final int lostHealth = 25;
     private Item inventory;
     private Room currentRoom;
+    private Room previousRoom;
 
     public Player(Room room) {
         stepCount = 0;
@@ -55,21 +55,13 @@ public class Player {
         return stepCount;
     }
 
-    public int looseHealth() {
-        health -= lostHealth;
+    public int takeDamage(int damage) {
+        health -= damage;
         return health;
     }
 
-    public int lostHealth() {
-        return lostHealth;
-    }
-
     public boolean isDead() {
-        if (health <= 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return health <= 0;
     }
 
     public void takeItem(Command command) {
@@ -77,7 +69,7 @@ public class Player {
             System.out.println("Take what?");
             return;
         }
-        
+
         if (inventory != null) {
             System.out.println("You are already carrying a " + inventory.getName());
             return;
@@ -114,7 +106,7 @@ public class Player {
             System.out.println("You are not carrying anything.");
         }
     }
-    
+
     public void searchRoom() {
         System.out.println(currentRoom.getItemDescription());
     }
@@ -126,40 +118,31 @@ public class Player {
         }
 
         String direction = command.getSecondWord();
-
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
+            return;
+        } else if (currentRoom.getFire() != null && nextRoom != previousRoom) {
+            System.out.println("The fire inside the room prevents you from getting to this door.");
+            return;
         } else {
+            previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
             System.out.println(currentRoom.getLongDescription());
-        }
-
-        if (currentRoom.getShortDescription().equals("on the toilet, the room is filled with smoke and fire - GET OUT!")) {  //FIX DET HER DET ER NOGET MØG
-            /**
-             * Eksempel på hvis man fandt rummet, hvor ilden startede. Man kan
-             * derfor bruge dette til at senere hen tilføje noget med stepcount
-             * + spredning af ild.
-             */
-            //   System.out.println("You found the room where the fire started.");
-            looseHealth();
-            System.out.println("You have been damaged by the fire. \nYou lost " + lostHealth() + " health!");
-            
-        } else if (currentRoom.getShortDescription().equals("jumping out of the window! \nYou took a fatal hit to your head")) {
-            for (int i = 1; i <= 4; i++) {
-                looseHealth();
+            if (currentRoom.getFire() != null) {
+                takeDamage(25 * currentRoom.getFire().getLvl());
+                System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
             }
-            System.out.println("You lost " + (lostHealth() * 4) + " health!");
-
-            //Her spreder ilden sig til hallway når man har gået 5+ skridt
-        } else if (currentRoom.getShortDescription().equals("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs") && stepCount > 5) {
-            looseHealth();
-            System.out.println("You lost " + lostHealth() + " health!");
+            System.out.println("Your health is: " + getHealth());
         }
-        System.out.println("Your health is: " + getHealth());
-        
+
+        if (currentRoom.getShortDescription().equals("jumping out of the window! You took a fatal hit to your head")) {
+            takeDamage(100);
+            System.out.println("You lost " + 100 + " health!");
+        }
+
         if (isDead() == true) {
             System.out.println("You died...");
             System.exit(0);
