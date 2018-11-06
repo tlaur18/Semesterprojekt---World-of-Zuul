@@ -61,11 +61,7 @@ public class Player {
     }
 
     public boolean isDead() {
-        if (health <= 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return health <= 0;
     }
 
     public void takeItem(Command command) {
@@ -123,32 +119,29 @@ public class Player {
 
         String direction = command.getSecondWord();
         Room nextRoom = currentRoom.getExit(direction);
-        
-        if (currentRoom.getFire() != null && nextRoom != previousRoom) {
-            System.out.println("The fire inside the room prevents you from getting to this door.");
-            return;
-        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
+            return;
+        } else if (currentRoom.getFire() != null && nextRoom != previousRoom) {
+            System.out.println("The fire inside the room prevents you from getting to this door.");
+            return;
         } else {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
             System.out.println(currentRoom.getLongDescription());
-        }
-
-        if (currentRoom.getFire() != null) {
-            takeDamage(25 * currentRoom.getFire().getLvl());
-            System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
+            if (currentRoom.getFire() != null) {
+                takeDamage(25 * currentRoom.getFire().getLvl());
+                System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
+            }
+            System.out.println("Your health is: " + getHealth());
         }
 
         if (currentRoom.getShortDescription().equals("jumping out of the window! You took a fatal hit to your head")) {
             takeDamage(100);
             System.out.println("You lost " + 100 + " health!");
         }
-
-        System.out.println("Your health is: " + getHealth());
 
         if (isDead() == true) {
             System.out.println("You died...");
