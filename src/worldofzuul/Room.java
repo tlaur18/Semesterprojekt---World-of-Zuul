@@ -25,18 +25,18 @@ public class Room {
     }
 
     public String getLongDescription() {
-        return ("You are " + description + ".\n" + getExitString() + ".");
+        return ("You are " + description + ".");
     }
     
     public String getItemDescription() {
         return (!items.isEmpty() ? "Items: " + printItems() : "There are no items in this room.");
     }
 
-    private String getExitString() {
+    public String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for (String exit : keys) {
-            returnString += " " + exit;
+            returnString += " " + exit + ", ";
         }
         return returnString;
     }

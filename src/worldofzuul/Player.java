@@ -131,9 +131,12 @@ public class Player {
             currentRoom = nextRoom;
             addStep();
             System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getExitString());
+            
             if (currentRoom.getFire() != null) {
                 takeDamage(25 * currentRoom.getFire().getLvl());
                 System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
+
             }
             System.out.println("Your health is: " + getHealth());
         }
@@ -141,6 +144,9 @@ public class Player {
         if (currentRoom.getShortDescription().equals("jumping out of the window! You took a fatal hit to your head")) {
             takeDamage(100);
             System.out.println("You lost " + 100 + " health!");
+        } else if (currentRoom.getShortDescription().equals("outside")) {
+            System.out.println("YOU WON THE GAME!");
+            System.exit(0);
         }
 
         if (isDead() == true) {

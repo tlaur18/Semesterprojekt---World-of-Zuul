@@ -5,7 +5,7 @@ public class Game {
     private Parser parser;
     private Player player;
 
-    private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, wc2, outside, window,
+    private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
@@ -21,7 +21,6 @@ public class Game {
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
         sistersRoom = new Room("in your sister's room");
         livingRoom = new Room("in the living room");
-        lobby = new Room("in the lobby facing the front door");
         wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
         wc2 = new Room("on the toilet");
         outside = new Room("outside");
@@ -63,6 +62,7 @@ public class Game {
         conservatory.setExit("kitchen", kitchen);
         
         entrance.setExit("kitchen", kitchen);
+        entrance.setExit("outside", outside);
         
         office.setExit("livingroom", livingRoom);
         office.setExit("master-bedroom", masterBedroom);
@@ -76,8 +76,20 @@ public class Game {
     private void createItems() {
         Item bucket = new Item("Bucket", "Holds liquid well.");
         Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny.");
+        Item smallFireExtinguisherONE = new Item("FirstFireExtinguisher", "Used to extinguish small fire.");
+        Item smallFireExtinguisherTWO = new Item("SecondFireExtinguisher", "Used to extinguish small fire");
+        Item bigFireExtinguisher = new Item("FireExtinguisher", "Used to extinguish big fire.");
+        Item towel = new Item("Towel", "Used to dry yourself");
+        Item doll = new Item("Doll", "A girly play doll");
+        Item football = new Item("Football", "A round toy used to being kicked");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
+        wc2.addItem(towel);
+        bedroom.addItem(football);
+        sistersRoom.addItem(doll);
+        garage.addItem(smallFireExtinguisherONE);
+        garage.addItem(smallFireExtinguisherTWO);
+        masterBedroom.addItem(bigFireExtinguisher);
     }
     
     private void createFire() {
@@ -105,6 +117,7 @@ public class Game {
         System.out.println();
         System.out.println("You wake up by the horrible smell of smoke.");
         System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.println(player.getCurrentRoom().getExitString());
     }
 
     private boolean processCommand(Command command) {
