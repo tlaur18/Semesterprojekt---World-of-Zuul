@@ -4,12 +4,10 @@ public class Item {
 
     private String name;
     private String description;
-    private boolean pickedUp;
 
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        pickedUp = false;
     }
 
     /**
@@ -39,19 +37,4 @@ public class Item {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    /**
-     * @return the pickedUp
-     */
-    public boolean isPickedUp() {
-        return pickedUp;
-    }
-
-    /**
-     * @param pickedUp the pickedUp to set
-     */
-    public void setPickedUp(boolean pickedUp) {
-        this.pickedUp = pickedUp;
-    }
-
 }

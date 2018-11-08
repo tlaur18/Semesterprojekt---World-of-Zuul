@@ -4,8 +4,7 @@ public class Game {
 
     private Parser parser;
     private Player player;
-
-    private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
+    private static Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
@@ -49,27 +48,27 @@ public class Game {
         livingRoom.setExit("basement", basement);
         livingRoom.setExit("kitchen", kitchen);
         livingRoom.setExit("office", office);
-        
+
         basement.setExit("livingroom", livingRoom);
         basement.setExit("garage", garage);
-        
+
         garage.setExit("basement", basement);
-        
+
         kitchen.setExit("livingroom", livingRoom);
         kitchen.setExit("entrance", entrance);
         kitchen.setExit("conservatory", conservatory);
-        
+
         conservatory.setExit("kitchen", kitchen);
-        
+
         entrance.setExit("kitchen", kitchen);
         entrance.setExit("outside", outside);
-        
+
         office.setExit("livingroom", livingRoom);
         office.setExit("master-bedroom", masterBedroom);
-        
+
         masterBedroom.setExit("office", office);
         masterBedroom.setExit("toilet", wc2);
-        
+
         wc2.setExit("master-bedroom", masterBedroom);
     }
 
@@ -91,7 +90,7 @@ public class Game {
         garage.addItem(smallFireExtinguisherTWO);
         masterBedroom.addItem(bigFireExtinguisher);
     }
-    
+
     private void createFire() {
         kitchen.addFire(3);
         office.addFire(1);
@@ -164,5 +163,11 @@ public class Game {
         } else {
             return true;
         }
+    }
+
+    public static Room[] getRooms() {
+        Room[] rooms = {bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window, 
+            office, kitchen, entrance, conservatory, basement, garage, masterBedroom};
+        return rooms;
     }
 }
