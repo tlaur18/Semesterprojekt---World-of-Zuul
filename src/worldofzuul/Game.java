@@ -9,10 +9,10 @@ public class Game {
 
     public Game() {
         createRooms();
+        player = new Player(bedroom);
         createItems();
         createFire();
         parser = new Parser();
-        player = new Player(bedroom);
     }
 
     private void createRooms() {
@@ -73,7 +73,7 @@ public class Game {
     }
 
     private void createItems() {
-        Items bucket = new Items("Bucket", "Holds liquid well.");
+        Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2, player);
         Items toothbrush = new Items("Toothbrush", "Makes your teeth shiny.");
         Items smallFireExtinguisherONE = new Items("FirstFireExtinguisher", "Used to extinguish small fire.");
         Items smallFireExtinguisherTWO = new Items("SecondFireExtinguisher", "Used to extinguish small fire");
@@ -143,6 +143,10 @@ public class Game {
             player.inspectInventory();
         } else if (commandWord == CommandWord.SEARCH) {
             player.searchRoom();
+        } else if (commandWord == CommandWord.USE) {
+            if (player.getInventory() instanceof UseableItems) {
+                ((UseableItems) player.getInventory()).use();
+            }
         }
         return wantToQuit;
     }
@@ -166,7 +170,7 @@ public class Game {
     }
 
     public static Room[] getRooms() {
-        Room[] rooms = {bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window, 
+        Room[] rooms = {bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom};
         return rooms;
     }
