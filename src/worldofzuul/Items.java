@@ -12,44 +12,26 @@ public class Items {
         pickedUp = false;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @return the description
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description the description to set
-     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * @return the pickedUp
-     */
     public boolean isPickedUp() {
         return pickedUp;
     }
 
-    /**
-     * @param pickedUp the pickedUp to set
-     */
     public void setPickedUp(boolean pickedUp) {
         this.pickedUp = pickedUp;
     }
