@@ -55,8 +55,7 @@ public class Player {
         }
         else {
             System.out.println("You can't use this item.");
-        }
-           
+        }  
     }
 
     public int addStep() {
