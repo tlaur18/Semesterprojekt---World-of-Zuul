@@ -74,7 +74,7 @@ public class Game {
     }
 
     private void createItems() {
-        Items bucket = new Items("Bucket", "Holds liquid well.");
+        Bucket bucket = new Bucket("Bucket", "Holds liquid well.");
         Items toothbrush = new NonUseableItems("Toothbrush", "Makes your teeth shiny.");
         Items smallFireExtinguisherONE = new Items("FirstFireExtinguisher", "Used to extinguish small fire.");
         Items smallFireExtinguisherTWO = new Items("SecondFireExtinguisher", "Used to extinguish small fire");

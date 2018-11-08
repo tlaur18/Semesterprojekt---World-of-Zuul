@@ -1,11 +1,10 @@
 package worldofzuul;
 
-public abstract class UseableItems extends Items implements Usable{
+public abstract class UseableItems extends Items{
     
     public UseableItems(String name, String description) {
         super(name, description);
     }
-
-    @Override
+    
     public abstract void use();
 }
