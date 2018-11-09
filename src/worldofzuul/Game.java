@@ -1,9 +1,12 @@
 package worldofzuul;
 
+import java.io.File;
+
 public class Game {
 
     private Parser parser;
     private Player player;
+    private Highscore highscore;
     private static Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
@@ -11,6 +14,7 @@ public class Game {
         createRooms();
         createItems();
         createFire();
+//        highscore = new Highscore();
         parser = new Parser();
         player = new Player(bedroom);
     }
