@@ -12,14 +12,28 @@ public class Game {
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
-        System.out.println("welcome to Fire Escape!");
-        System.out.println("What is your name?");
+        System.out.println("welcome to Fire Escape!\n");
+        
         createRooms();
         createItems();
         parser = new Parser();
+     
+        System.out.println("\t BIP BIP BIP! there is a loud noise that has just wakened you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room \n");
+        System.out.println("\t The first thing you do is to take you cellphone and call for emergency,\n \t the number is 1-1-2. \n");
+        System.out.println("112: \n- This is 1-1-2 and what is your emergency? \n");
+        System.out.println("You: \n- There is smoke in the room and i am all alone in the house.\n");
+        System.out.println("Falck: \n- Okay , just stay calm and lets get you to safety.\n- It doesn't help to panic.\n"
+                + "- What is your name?  \n");
         Scanner pn = new Scanner(System.in);
         String playerName = pn.nextLine();
-        player = new Player(bedroom, playerName);
+        
+        
+        
+        
+           player = new Player(bedroom, playerName);
+        
+       
+        
         
     }
 
@@ -100,22 +114,15 @@ public class Game {
     
     private void printWelcome() {
         
-        System.out.println("\t Hello " + player.getPlayerName() + "!");
-        
-        System.out.println("\t Get ready to get your fire escaping abilities tested!");
-        System.out.println("\t The goal of this game is to get out of the burning building alive.");
-        System.out.println("\t Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println("\t __________________________________________________________________________ \n");
-        
+      
         //Dette er et eksempel på hvordan vi kunne starte ud.
 //        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
 //                + " \nThe smoke from the fire spread throughout the house.");
-        System.out.println("\t BIP BIP BIP! there is a loud noise that has just wakened you up, \n \t its stressing and then you notice the smell and the thin \n \t layer of smoke in you room \n");
-        System.out.println("\t The first thing you do is to take you cellphone and call for emergency,\n \t the number is 1-1-2. \n");
-        System.out.println("Falck: \n- Hello this Is the emergency central, what is your situation? \n");
-        System.out.println(player.getPlayerName() + ": \n- There is smoke in the room and I am home alone.\n");
-        System.out.println("Falck: \n- Okay, just stay calm and lets get you to safty.\n- It does not help to panick \n");
+        
         System.out.println(player.getPlayerName() + ": \n- okay, i will try my best with your help.\n");
+        System.out.println("Falck: \n- You need to get to safety and thats your primary objektive you\n "
+                + " will meet some obstacles and you will need to figure a way out of the house\n"
+                + "- if you have any questions just ask for '"+ CommandWord.HELP +"'.\n");
         
         
         
