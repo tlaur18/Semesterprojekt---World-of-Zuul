@@ -73,7 +73,7 @@ public class Game {
     }
 
     private void createItems() {
-        Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2, player);
+        Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
         Items toothbrush = new Items("Toothbrush", "Makes your teeth shiny.");
         Items smallFireExtinguisherONE = new Items("FirstFireExtinguisher", "Used to extinguish small fire.");
         Items smallFireExtinguisherTWO = new Items("SecondFireExtinguisher", "Used to extinguish small fire");
@@ -144,9 +144,7 @@ public class Game {
         } else if (commandWord == CommandWord.SEARCH) {
             player.searchRoom();
         } else if (commandWord == CommandWord.USE) {
-            if (player.getInventory() instanceof UseableItems) {
-                ((UseableItems) player.getInventory()).use();
-            }
+            player.useItem();
         }
         return wantToQuit;
     }

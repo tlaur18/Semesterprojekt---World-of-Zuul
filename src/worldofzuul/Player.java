@@ -133,7 +133,7 @@ public class Player {
             updateFire();
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
-            
+
             if (currentRoom.getFire() != null) {
                 takeDamage(25 * currentRoom.getFire().getLvl());
                 System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
@@ -155,10 +155,20 @@ public class Player {
             System.exit(0);
         }
     }
-    
+
     public void updateFire() {
         for (Room room : Game.getRooms()) {
             room.updateFire();
+        }
+    }
+
+    public void useItem() {
+        if (inventory == null) {
+            System.out.println("You do not carry anything to use");
+        } else if (inventory instanceof UseableItems) {
+            ((UseableItems) inventory).use(this);
+        } else {
+            System.out.println("There is nothing interesting to use this item for.");
         }
     }
 }
