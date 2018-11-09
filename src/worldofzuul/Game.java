@@ -21,10 +21,6 @@ public class Game {
         String playerName = pn.nextLine();
         player = new Player(bedroom, playerName);
         
-        
-        
-        
-        
     }
 
     private void createRooms() {
@@ -109,12 +105,23 @@ public class Game {
         System.out.println("\t Get ready to get your fire escaping abilities tested!");
         System.out.println("\t The goal of this game is to get out of the burning building alive.");
         System.out.println("\t Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println();
+        System.out.println("\t __________________________________________________________________________ \n");
         
         //Dette er et eksempel på hvordan vi kunne starte ud.
 //        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
 //                + " \nThe smoke from the fire spread throughout the house.");
-        System.out.println("The horrible smell of smoke has awoken you.");
+        System.out.println("\t BIP BIP BIP! there is a loud noise that has just wakened you up, \n \t its stressing and then you notice the smell and the thin \n \t layer of smoke in you room \n");
+        System.out.println("\t The first thing you do is to take you cellphone and call for emergency,\n \t the number is 1-1-2. \n");
+        System.out.println("Falck: \n- Hello this Is the emergency central, what is your situation? \n");
+        System.out.println(player.getPlayerName() + ": \n- There is smoke in the room and I am home alone.\n");
+        System.out.println("Falck: \n- Okay, just stay calm and lets get you to safty.\n- It does not help to panick \n");
+        System.out.println(player.getPlayerName() + ": \n- okay, i will try my best with your help.\n");
+        
+        
+        
+        
+        
+        System.out.println("");
         System.out.println(player.getCurrentRoom().getLongDescription());
     }
 
@@ -151,8 +158,10 @@ public class Game {
         System.out.println("around at you own home.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("you have walked " + player.getStepCount() + " steps so far");
         parser.showCommands();
+        
+        System.out.println("\n you have walked " + player.getStepCount() + " steps so far");
+        
     }
 
     private boolean quit(Command command) {
