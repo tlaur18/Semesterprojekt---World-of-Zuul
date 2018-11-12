@@ -109,6 +109,12 @@ public class Player {
             System.out.println("You do not carry anything to drop.");
         }
     }
+    public void removeItem() {
+        if (inventory != null) {
+            currentRoom.getItems().remove(1);
+            inventory= null;
+        }
+    }
 
     public void inspectInventory() {
         if (inventory != null) {
