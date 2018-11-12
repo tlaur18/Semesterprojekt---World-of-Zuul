@@ -11,10 +11,16 @@ public class Room {
     private HashMap<String, Room> exits;
     private ArrayList<Items> items = new ArrayList();
     private Fire fire = null;
+    private int damage;
 
-    public Room(String description) {
+    public Room(String description, int damage) {
+        this.damage = damage;
         this.description = description;
         exits = new HashMap<String, Room>();
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void setExit(String direction, Room neighbor) {

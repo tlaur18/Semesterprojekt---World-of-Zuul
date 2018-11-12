@@ -6,9 +6,9 @@ public class Player {
 
     private int stepCount;
     private String playerName;
-    private int health;
+    protected int health;
     private Items inventory;
-    private Room currentRoom;
+    protected Room currentRoom;
     private Room previousRoom;
 
     public Player(Room room, String playerName) {
@@ -67,9 +67,8 @@ public class Player {
         return stepCount;
     }
 
-    public int takeDamage(int damage) {
-        health -= damage;
-        return health;
+    public int takeDamage() {
+        return health -= (currentRoom.getDamage() * currentRoom.getFire().getLvl());
     }
 
     public boolean isDead() {
@@ -109,10 +108,11 @@ public class Player {
             System.out.println("You do not carry anything to drop.");
         }
     }
+
     public void removeItem() {
         if (inventory != null) {
             currentRoom.getItems().remove(1);
-            inventory= null;
+            inventory = null;
         }
     }
 
@@ -151,19 +151,26 @@ public class Player {
             updateFire(game);
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
-
+                    if (currentRoom.equals(game.getRooms().get(7))) {
+            setHealth(0);
+            System.out.println("You lost " + 100 + " health!");
+        }
             if (currentRoom.getFire() != null) {
-                takeDamage(25 * currentRoom.getFire().getLvl());
-                System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
+                takeDamage();
+                System.out.println("You have been damaged by the fire and lost " + (currentRoom.getDamage() * currentRoom.getFire().getLvl()) + " health!");
 
             }
             System.out.println("Your health is: " + getHealth());
         }
 
-        if (currentRoom.equals(game.getRooms().get(7))) {
-            takeDamage(100);
-            System.out.println("You lost " + 100 + " health!");
-        }
+        /** WINDOW SUICIDE PROBLEM
+         * 
+         * Når man hopper ud ad vinduet, så dør man ikke pga. takeDamage() metoden er nu blevet brugt til "fire damage"
+         * Der kommer en string hvor der står "Your health is: 100" selvom man er død.
+         * Exits: string bliver stadig kørt.
+         * 
+         */
+
 
         if (currentRoom.equals(game.getRooms().get(6))) {
             System.out.println("YOU WON THE GAME!");
