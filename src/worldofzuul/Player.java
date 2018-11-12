@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.util.Random;
+
 public class Player {
 
     private static int stepCount;
@@ -152,9 +154,18 @@ public class Player {
         }
 
         if (currentRoom.getShortDescription().equals("jumping out of the window! You took a fatal hit to your head")) {
+            Random random = new Random();
+            int deadOrAlive = random.nextInt(100) + 1;
+            if (deadOrAlive == 1) {
+                System.out.println("YOU WON THE GAME!");
+                System.exit(0);
+            } else {
             takeDamage(100);
             System.out.println("You lost " + 100 + " health!");
-        } else if (currentRoom.getShortDescription().equals("outside")) {
+            }
+        }
+            
+        if (currentRoom.getShortDescription().equals("outside")) {
             System.out.println("YOU WON THE GAME!");
             System.exit(0);
         }
@@ -179,5 +190,9 @@ public class Player {
         } else {
             System.out.println("There is nothing interesting to use this item for.");
         }
+    }
+    
+    public void exits() {
+        System.out.println(currentRoom.getExitString());
     }
 }

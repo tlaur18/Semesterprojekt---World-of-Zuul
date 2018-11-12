@@ -26,7 +26,7 @@ public class Game {
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
         sistersRoom = new Room("in your sister's room");
         livingRoom = new Room("in the living room");
-        wc = new Room("on the toilet, the room is filled with smoke and fire - GET OUT!");
+        wc = new Room("on the toilet");
         wc2 = new Room("on the toilet");
         outside = new Room("outside");
         window = new Room("jumping out of the window! \nYou took a fatal hit to your head");
@@ -173,6 +173,8 @@ public class Game {
             player.searchRoom();
         } else if (commandWord == CommandWord.USE) {
             player.useItem();
+        } else if (commandWord == CommandWord.EXITS) {
+            player.exits();
         }
         return wantToQuit;
     }
