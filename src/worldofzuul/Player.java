@@ -153,7 +153,7 @@ public class Player {
             System.out.println("Your health is: " + getHealth());
         }
 
-        if (currentRoom.getShortDescription().equals("jumping out of the window! You took a fatal hit to your head")) {
+        if (currentRoom.equals(game.getRooms().get(7))) {
             Random random = new Random();
             int deadOrAlive = random.nextInt(100) + 1;
             if (deadOrAlive == 1) {
@@ -165,7 +165,7 @@ public class Player {
             }
         }
             
-        if (currentRoom.getShortDescription().equals("outside")) {
+        if (currentRoom.equals(game.getRooms().get(6))) {
             System.out.println("YOU WON THE GAME!");
             System.exit(0);
         }

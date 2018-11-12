@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +11,7 @@ public class Game {
     private Player player;
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
-    private Room[] rooms;
+    private ArrayList<Room> rooms;
 
     public Game() throws InterruptedException {
         System.out.println("Welcome to Fire Escape!\n");
@@ -20,7 +22,8 @@ public class Game {
         parser = new Parser();
         printWelcome();
         
-        rooms = new Room[]{bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window, office, kitchen, entrance, conservatory, basement, garage, masterBedroom};
+        rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
+            office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
     }
 
     private void createRooms() {
@@ -201,7 +204,7 @@ public class Game {
         }
     }
 
-    public Room[] getRooms() {
+    public ArrayList<Room> getRooms() {
         return rooms;
     }
 }
