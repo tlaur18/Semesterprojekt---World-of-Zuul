@@ -16,13 +16,14 @@ public class Player {
         health = 100;
         inventory = null;
         currentRoom = room;
-         this.playerName = playerName;
+        this.playerName = playerName;
     }
+
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
-    
-    public String getPlayerName(){
+
+    public String getPlayerName() {
         return playerName;
     }
 
@@ -153,19 +154,17 @@ public class Player {
             System.out.println("Your health is: " + getHealth());
         }
 
-        if (currentRoom.getShortDescription().equals("jumping out of the window! You took a fatal hit to your head")) {
-            Random random = new Random();
-            int deadOrAlive = random.nextInt(100) + 1;
-            if (deadOrAlive == 1) {
-                System.out.println("YOU WON THE GAME!");
-                System.exit(0);
-            } else {
+        Random random = new Random();
+        int deadOrAlive = 1;
+
+        if (currentRoom.getShortDescription().equals("jumping out of the window! \nYou took a fatal hit to your head")) {
             takeDamage(100);
             System.out.println("You lost " + 100 + " health!");
-            }
-        }
-            
-        if (currentRoom.getShortDescription().equals("outside")) {
+        } else if (currentRoom.getShortDescription().equals("jumping out of the window! \nYou took a fatal hit to your head")
+                && deadOrAlive == 1) {
+            System.out.println("You were lucky and survived the jump. \nYOU WON THE GAME");
+            System.exit(0);
+        } else if (currentRoom.getShortDescription().equals("outside")) {
             System.out.println("YOU WON THE GAME!");
             System.exit(0);
         }
@@ -191,7 +190,7 @@ public class Player {
             System.out.println("There is nothing interesting to use this item for.");
         }
     }
-    
+
     public void exits() {
         System.out.println(currentRoom.getExitString());
     }
