@@ -25,7 +25,6 @@ public class Game {
         System.out.println("Falck: \n- Okay, just stay calm and lets get you to safety.\n- It doesn't help to panic."
                 + "- What is your name?  \n");
         Scanner pn = new Scanner(System.in);
-        System.out.print("> ");
         String playerName = pn.nextLine();
         
         
@@ -120,10 +119,10 @@ public class Game {
 //        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
 //                + " \nThe smoke from the fire spread throughout the house.");
         
-        System.out.println(player.getPlayerName() + ": \n- Okay, I will try my best while you are helping.\n");
-        System.out.println("Falck: \n- You need to get to safety and that is your primary objective.\n "
-                + " You will encounter obstacles and you will need to figure a way out of the house.\n"
-                + "- If you have any questions just ask for '"+ CommandWord.HELP +"'.\n");
+        System.out.println(player.getPlayerName() + ": \n- okay, i will try my best with your help.\n");
+        System.out.println("Falck: \n- You need to get to safety and thats your primary objektive you\n "
+                + " will meet some obstacles and you will need to figure a way out of the house\n"
+                + "- if you have any questions just ask for '"+ CommandWord.HELP +"'.\n");
         
         
         
