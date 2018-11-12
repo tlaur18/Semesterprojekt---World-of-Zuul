@@ -93,7 +93,7 @@ public class Game {
         wc2.addItem(towel);
         bedroom.addItem(football);
         sistersRoom.addItem(doll);
-        wc.addItem(yankieBar);
+        office.addItem(yankieBar);
         garage.addItem(smallFireExtinguisherONE);
         garage.addItem(smallFireExtinguisherTWO);
         masterBedroom.addItem(bigFireExtinguisher);
