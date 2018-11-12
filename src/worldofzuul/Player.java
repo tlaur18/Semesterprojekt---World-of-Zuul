@@ -111,7 +111,7 @@ public class Player {
     }
     public void removeItem() {
         if (inventory != null) {
-            currentRoom.getItems().remove(1);
+            currentRoom.getItems().remove(0);
             inventory= null;
         }
     }
