@@ -153,7 +153,7 @@ public class Player {
             System.out.println(currentRoom.getExitString());
 
             if (currentRoom.getFire() != null) {
-                takeDamage(25 * currentRoom.getFire().getLvl());
+                takeDamage(15 * currentRoom.getFire().getLvl());
                 System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
 
             }
