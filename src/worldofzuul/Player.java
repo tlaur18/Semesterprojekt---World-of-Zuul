@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Player {
 
-    private static int stepCount;
+    private int stepCount;
     private String playerName;
     private int health;
     private Items inventory;
@@ -26,7 +26,7 @@ public class Player {
         return playerName;
     }
 
-    public static int getStepCount() {
+    public int getStepCount() {
         return stepCount;
     }
 
@@ -178,7 +178,7 @@ public class Player {
 
     public void updateFire() {
         for (Room room : Game.getRooms()) {
-            room.updateFire();
+            room.updateFire(this);
         }
     }
 
