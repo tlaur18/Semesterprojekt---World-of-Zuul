@@ -12,17 +12,17 @@ public class Game {
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Game() {
-        System.out.println("welcome to Fire Escape!\n");
+        System.out.println("Welcome to Fire Escape!\n");
         
         createRooms();
         createItems();
         parser = new Parser();
      
-        System.out.println("\t BIP BIP BIP! there is a loud noise that has just wakened you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room \n");
-        System.out.println("\t The first thing you do is to take you cellphone and call for emergency,\n \t the number is 1-1-2. \n");
-        System.out.println("112: \n- This is 1-1-2 and what is your emergency? \n");
-        System.out.println("You: \n- There is smoke in the room and i am all alone in the house.\n");
-        System.out.println("Falck: \n- Okay , just stay calm and lets get you to safety.\n- It doesn't help to panic.\n"
+        System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
+        System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
+        System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
+        System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
+        System.out.println("Falck: \n- Okay, just stay calm and lets get you to safety.\n- It doesn't help to panic."
                 + "- What is your name?  \n");
         Scanner pn = new Scanner(System.in);
         String playerName = pn.nextLine();
