@@ -7,8 +7,9 @@ public class Game {
 
     private Parser parser;
     private Player player;
-    private static Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
+    private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
+    private Room[] rooms;
 
     public Game() throws InterruptedException {
         System.out.println("Welcome to Fire Escape!\n");
@@ -18,7 +19,8 @@ public class Game {
         createFire();
         parser = new Parser();
         printWelcome();
-
+        
+        rooms = new Room[]{bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window, office, kitchen, entrance, conservatory, basement, garage, masterBedroom};
     }
 
     private void createRooms() {
@@ -160,7 +162,7 @@ public class Game {
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
-            player.goRoom(command);
+            player.goRoom(command, this);
         } else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
         } else if (commandWord == CommandWord.TAKE) {
@@ -199,9 +201,7 @@ public class Game {
         }
     }
 
-    public static Room[] getRooms() {
-        Room[] rooms = {bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
-            office, kitchen, entrance, conservatory, basement, garage, masterBedroom};
+    public Room[] getRooms() {
         return rooms;
     }
 }

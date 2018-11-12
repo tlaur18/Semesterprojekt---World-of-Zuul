@@ -122,7 +122,7 @@ public class Player {
         System.out.println(currentRoom.getItemDescription());
     }
 
-    public void goRoom(Command command) {
+    public void goRoom(Command command, Game game) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
@@ -141,7 +141,7 @@ public class Player {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
-            updateFire();
+            updateFire(game);
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
 
@@ -176,8 +176,8 @@ public class Player {
         }
     }
 
-    public void updateFire() {
-        for (Room room : Game.getRooms()) {
+    public void updateFire(Game game) {
+        for (Room room : game.getRooms()) {
             room.updateFire(this);
         }
     }
