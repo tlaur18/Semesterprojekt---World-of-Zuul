@@ -17,8 +17,8 @@ public class Game {
         createItems();
         createFire();
         parser = new Parser();
-
         printWelcome();
+
     }
 
     private void createRooms() {
@@ -79,14 +79,14 @@ public class Game {
     }
 
     private void createItems() {
-        Item bucket = new Item("Bucket", "Holds liquid well.");
-        Item toothbrush = new Item("Toothbrush", "Makes your teeth shiny.");
-        Item smallFireExtinguisherONE = new Item("FirstFireExtinguisher", "Used to extinguish small fire.");
-        Item smallFireExtinguisherTWO = new Item("SecondFireExtinguisher", "Used to extinguish small fire");
-        Item bigFireExtinguisher = new Item("FireExtinguisher", "Used to extinguish big fire.");
-        Item towel = new Item("Towel", "Used to dry yourself");
-        Item doll = new Item("Doll", "A girly play doll");
-        Item football = new Item("Football", "A round toy used to being kicked");
+        Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
+        Items toothbrush = new Items("Toothbrush", "Makes your teeth shiny.");
+        Items smallFireExtinguisherONE = new Items("FirstFireExtinguisher", "Used to extinguish small fire.");
+        Items smallFireExtinguisherTWO = new Items("SecondFireExtinguisher", "Used to extinguish small fire");
+        Items bigFireExtinguisher = new Items("FireExtinguisher", "Used to extinguish big fire.");
+        Items towel = new Items("Towel", "Used to dry yourself");
+        Items doll = new Items("Doll", "A girly play doll");
+        Items football = new Items("Football", "A round toy used to being kicked");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);
@@ -171,6 +171,8 @@ public class Game {
             player.inspectInventory();
         } else if (commandWord == CommandWord.SEARCH) {
             player.searchRoom();
+        } else if (commandWord == CommandWord.USE) {
+            player.useItem();
         }
         return wantToQuit;
     }
@@ -196,7 +198,7 @@ public class Game {
     }
 
     public static Room[] getRooms() {
-        Room[] rooms = {bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window, 
+        Room[] rooms = {bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom};
         return rooms;
     }
