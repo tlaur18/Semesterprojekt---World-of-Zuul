@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 public class Room {
+
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> items = new ArrayList();
@@ -27,7 +28,7 @@ public class Room {
     public String getLongDescription() {
         return ("You are " + description + ".");
     }
-    
+
     public String getItemDescription() {
         return (!items.isEmpty() ? "Items: " + printItems() : "There are no items in this room.");
     }
@@ -62,15 +63,15 @@ public class Room {
 
         return itemString;
     }
-    
+
     public void addFire(int lvl) {
         fire = new Fire(lvl);
     }
-    
+
     public Fire getFire() {
         return fire;
     }
-    
+
     public void updateFire() {
         if (fire != null) {
             fire.updateLvl();

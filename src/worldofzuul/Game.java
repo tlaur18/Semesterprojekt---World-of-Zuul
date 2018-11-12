@@ -1,5 +1,8 @@
 package worldofzuul;
 
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
 public class Game {
 
     private Parser parser;
@@ -7,12 +10,15 @@ public class Game {
     private static Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
-    public Game() {
+    public Game() throws InterruptedException {
+        System.out.println("Welcome to Fire Escape!\n");
+
         createRooms();
         createItems();
         createFire();
         parser = new Parser();
-        player = new Player(bedroom);
+
+        printWelcome();
     }
 
     private void createRooms() {
@@ -98,8 +104,6 @@ public class Game {
     }
 
     public void play() {
-        printWelcome();
-
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
@@ -108,14 +112,38 @@ public class Game {
         System.out.println("Thank you for playing. Good bye.");
     }
 
-    private void printWelcome() {
-        System.out.println("Welcome to Fire Escape!");
-        System.out.println("Get ready to get your fire escaping abilities tested!");
-        System.out.println("The goal of this game is to get out of the burning building alive.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
-        System.out.println();
-        System.out.println("You wake up by the horrible smell of smoke.");
-        System.out.println(player.getCurrentRoom().getLongDescription());
+
+    private void printWelcome() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
+        System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
+        TimeUnit.SECONDS.sleep(3);
+        System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("");
+        System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("");
+        System.out.println("112: \n- Okay, just stay calm and lets get you to safety.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- It doesn't help to panic.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- What is your name?");
+        System.out.print("> ");
+        
+        Scanner pn = new Scanner(System.in);
+        String playerName = pn.nextLine();
+        player = new Player(bedroom, playerName);
+        
+        System.out.println("");
+        System.out.println(player.getPlayerName() + ": \n- My name is " + player.getPlayerName() + ". I will try my best with your help.\n");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("112: \n- You need to get to safety and thats your primary objective.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- You will meet some obstacles, and you will need to figure a way out of the house");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- if you have any questions just ask for '" + CommandWord.HELP + "'.\n");
+        
         System.out.println(player.getCurrentRoom().getExitString());
     }
 
@@ -152,8 +180,10 @@ public class Game {
         System.out.println("around at you own home.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("you have walked " + player.getStepCount() + " steps so far");
         parser.showCommands();
+
+        System.out.println("\n you have walked " + player.getStepCount() + " steps so far");
+
     }
 
     private boolean quit(Command command) {
