@@ -99,7 +99,7 @@ public class Game {
         bedroom.addItem(football);
         sistersRoom.addItem(doll);
         office.addItem(yankieBar);
-        bedroom.addItem(smallFireExtinguisherONE);
+        garage.addItem(smallFireExtinguisherONE);
         garage.addItem(smallFireExtinguisherTWO);
         masterBedroom.addItem(bigFireExtinguisher);
     }
