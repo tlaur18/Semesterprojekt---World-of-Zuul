@@ -87,11 +87,13 @@ public class Game {
         Items towel = new Items("Towel", "Used to dry yourself");
         Items doll = new Items("Doll", "A girly play doll");
         Items football = new Items("Football", "A round toy used to being kicked");
+        Items yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);
         bedroom.addItem(football);
         sistersRoom.addItem(doll);
+        wc.addItem(yankieBar);
         garage.addItem(smallFireExtinguisherONE);
         garage.addItem(smallFireExtinguisherTWO);
         masterBedroom.addItem(bigFireExtinguisher);
