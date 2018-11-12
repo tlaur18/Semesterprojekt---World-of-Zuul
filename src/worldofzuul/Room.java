@@ -34,12 +34,16 @@ public class Room {
     }
 
     public String getExitString() {
-        String returnString = "Exits:";
-        Set<String> keys = exits.keySet();
-        for (String exit : keys) {
-            returnString += " " + exit + ", ";
+        if (exits.values() == null) {
+            return "";
+        } else {
+            String returnString = "Exits:";
+            Set<String> keys = exits.keySet();
+            for (String exit : keys) {
+                returnString += " " + exit + ", ";
+            }
+            return returnString;
         }
-        return returnString;
     }
 
     public Room getExit(String direction) {
@@ -76,9 +80,9 @@ public class Room {
         fire = null;
     }
 
-    public void updateFire() {
+    public void updateFire(Player player) {
         if (fire != null) {
-            fire.updateLvl();
+            fire.updateLvl(player);
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Player {
 
-    private static int stepCount;
+    private int stepCount;
     private String playerName;
     private int health;
     private Items inventory;
@@ -27,7 +27,7 @@ public class Player {
         return playerName;
     }
 
-    public static int getStepCount() {
+    public int getStepCount() {
         return stepCount;
     }
 
@@ -123,7 +123,7 @@ public class Player {
         System.out.println(currentRoom.getItemDescription());
     }
 
-    public void goRoom(Command command) {
+    public void goRoom(Command command, Game game) {
         if (!command.hasSecondWord()) {
             System.out.println("Go where?");
             return;
@@ -142,7 +142,7 @@ public class Player {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
-            updateFire();
+            updateFire(game);
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
 
@@ -154,17 +154,12 @@ public class Player {
             System.out.println("Your health is: " + getHealth());
         }
 
-        Random random = new Random();
-        int deadOrAlive = 1;
-
-        if (currentRoom.getShortDescription().equals("jumping out of the window! \nYou took a fatal hit to your head")) {
+        if (currentRoom.equals(game.getRooms().get(7))) {
             takeDamage(100);
             System.out.println("You lost " + 100 + " health!");
-        } else if (currentRoom.getShortDescription().equals("jumping out of the window! \nYou took a fatal hit to your head")
-                && deadOrAlive == 1) {
-            System.out.println("You were lucky and survived the jump. \nYOU WON THE GAME");
-            System.exit(0);
-        } else if (currentRoom.getShortDescription().equals("outside")) {
+        }
+
+        if (currentRoom.equals(game.getRooms().get(6))) {
             System.out.println("YOU WON THE GAME!");
             System.exit(0);
         }
@@ -175,9 +170,9 @@ public class Player {
         }
     }
 
-    public void updateFire() {
-        for (Room room : Game.getRooms()) {
-            room.updateFire();
+    public void updateFire(Game game) {
+        for (Room room : game.getRooms()) {
+            room.updateFire(this);
         }
     }
 
