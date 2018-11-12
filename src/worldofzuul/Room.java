@@ -34,16 +34,12 @@ public class Room {
     }
 
     public String getExitString() {
-        if (exits.values() == null) {
-            return "";
-        } else {
-            String returnString = "Exits:";
-            Set<String> keys = exits.keySet();
-            for (String exit : keys) {
-                returnString += " " + exit + ", ";
-            }
-            return returnString;
+        String returnString = "Exits:";
+        Set<String> keys = exits.keySet();
+        for (String exit : keys) {
+            returnString += " " + exit + ", ";
         }
+        return returnString;
     }
 
     public Room getExit(String direction) {
