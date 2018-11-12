@@ -1,6 +1,7 @@
 package worldofzuul;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
 
@@ -10,7 +11,7 @@ public class Game {
     private Room bedroom, hallway, sistersRoom, livingRoom, lobby, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
-    public Game() {
+    public Game() throws InterruptedException {
         System.out.println("Welcome to Fire Escape!\n");
 
         createRooms();
@@ -93,24 +94,37 @@ public class Game {
         System.out.println("Thank you for playing. Good bye.");
     }
 
-    private void printWelcome() {
+    private void printWelcome() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
         System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
         System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
+        TimeUnit.SECONDS.sleep(3);
         System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("");
         System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
-        System.out.println("112: \n- Okay, just stay calm and lets get you to safety.\n- It doesn't help to panic."
-                + "\n- What is your name?  \n");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("");
+        System.out.println("112: \n- Okay, just stay calm and lets get you to safety.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- It doesn't help to panic.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- What is your name?");
+        System.out.print("> ");
+        
         Scanner pn = new Scanner(System.in);
         String playerName = pn.nextLine();
-
         player = new Player(bedroom, playerName);
-
-        System.out.println(player.getPlayerName() + ": \n- Okay, i will try my best with your help.\n");
-        System.out.println("112: \n- You need to get to safety and thats your primary objective.\n "
-                + " You will meet some obstacles, and you will need to figure a way out of the house\n"
-                + "- if you have any questions just ask for '" + CommandWord.HELP + "'.\n");
-
+        
         System.out.println("");
+        System.out.println(player.getPlayerName() + ": \n- My name is " + player.getPlayerName() + ". I will try my best with your help.\n");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("112: \n- You need to get to safety and thats your primary objective.");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- You will meet some obstacles, and you will need to figure a way out of the house");
+        TimeUnit.SECONDS.sleep(2);
+        System.out.println("- if you have any questions just ask for '" + CommandWord.HELP + "'.\n");
+
         System.out.println(player.getCurrentRoom().getExitString());
     }
 
