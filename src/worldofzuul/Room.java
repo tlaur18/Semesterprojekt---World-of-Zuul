@@ -32,7 +32,7 @@ public class Room {
         return (!items.isEmpty() ? "Items: " + printItems() : "There are no items in this room.");
     }
 
-    private String getExitString() {
+    public String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for (String exit : keys) {

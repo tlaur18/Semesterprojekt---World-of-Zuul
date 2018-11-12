@@ -2,7 +2,6 @@ package worldofzuul;
 
 import java.util.Scanner;
 
-
 public class Game {
 
     private Parser parser;
@@ -13,28 +12,12 @@ public class Game {
 
     public Game() {
         System.out.println("Welcome to Fire Escape!\n");
-        
+
         createRooms();
         createItems();
         parser = new Parser();
-     
-        System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
-        System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
-        System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
-        System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
-        System.out.println("Falck: \n- Okay, just stay calm and lets get you to safety.\n- It doesn't help to panic."
-                + "- What is your name?  \n");
-        Scanner pn = new Scanner(System.in);
-        String playerName = pn.nextLine();
-        
-        
-        
-        
-           player = new Player(bedroom, playerName);
-        
-       
-        
-        
+
+        printWelcome();
     }
 
     private void createRooms() {
@@ -71,26 +54,26 @@ public class Game {
         livingRoom.setExit("basement", basement);
         livingRoom.setExit("kitchen", kitchen);
         livingRoom.setExit("office", office);
-        
+
         basement.setExit("livingroom", livingRoom);
         basement.setExit("garage", garage);
-        
+
         garage.setExit("basement", basement);
-        
+
         kitchen.setExit("livingroom", livingRoom);
         kitchen.setExit("entrance", entrance);
         kitchen.setExit("conservatory", conservatory);
-        
+
         conservatory.setExit("kitchen", kitchen);
-        
+
         entrance.setExit("kitchen", kitchen);
-        
+
         office.setExit("livingroom", livingRoom);
         office.setExit("master-bedroom", masterBedroom);
-        
+
         masterBedroom.setExit("office", office);
         masterBedroom.setExit("toilet", wc2);
-        
+
         wc2.setExit("master-bedroom", masterBedroom);
     }
 
@@ -102,8 +85,6 @@ public class Game {
     }
 
     public void play() {
-        printWelcome();
-
         boolean finished = false;
         while (!finished) {
             Command command = parser.getCommand();
@@ -111,25 +92,26 @@ public class Game {
         }
         System.out.println("Thank you for playing. Good bye.");
     }
-    
+
     private void printWelcome() {
-        
-      
-        //Dette er et eksempel på hvordan vi kunne starte ud.
-//        System.out.println("A lightbulb somewhere in the house exploded and started a fire."
-//                + " \nThe smoke from the fire spread throughout the house.");
-        
-        System.out.println(player.getPlayerName() + ": \n- okay, i will try my best with your help.\n");
-        System.out.println("Falck: \n- You need to get to safety and thats your primary objektive you\n "
-                + " will meet some obstacles and you will need to figure a way out of the house\n"
-                + "- if you have any questions just ask for '"+ CommandWord.HELP +"'.\n");
-        
-        
-        
-        
-        
+        System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
+        System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
+        System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
+        System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
+        System.out.println("112: \n- Okay, just stay calm and lets get you to safety.\n- It doesn't help to panic."
+                + "\n- What is your name?  \n");
+        Scanner pn = new Scanner(System.in);
+        String playerName = pn.nextLine();
+
+        player = new Player(bedroom, playerName);
+
+        System.out.println(player.getPlayerName() + ": \n- Okay, i will try my best with your help.\n");
+        System.out.println("112: \n- You need to get to safety and thats your primary objective.\n "
+                + " You will meet some obstacles, and you will need to figure a way out of the house\n"
+                + "- if you have any questions just ask for '" + CommandWord.HELP + "'.\n");
+
         System.out.println("");
-        System.out.println(player.getCurrentRoom().getLongDescription());
+        System.out.println(player.getCurrentRoom().getExitString());
     }
 
     private boolean processCommand(Command command) {
@@ -166,9 +148,9 @@ public class Game {
         System.out.println();
         System.out.println("Your command words are:");
         parser.showCommands();
-        
+
         System.out.println("\n you have walked " + player.getStepCount() + " steps so far");
-        
+
     }
 
     private boolean quit(Command command) {
