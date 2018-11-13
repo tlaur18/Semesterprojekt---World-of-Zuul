@@ -25,6 +25,7 @@ public class YankieBar extends UseableItems {
             Logger.getLogger(YankieBar.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("*OM NOM NOM*");
+        System.out.println("Your health has been restored to 100.");
         player.removeItem();
         player.setHealth(100);
     }

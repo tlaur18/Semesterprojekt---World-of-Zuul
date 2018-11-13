@@ -8,6 +8,7 @@ public class Player {
     private Items inventory;
     protected Room currentRoom;
     private Room previousRoom;
+    private Room nextRoom;
 
     public Player(Room room, String playerName) {
         stepCount = 0;
@@ -50,6 +51,10 @@ public class Player {
 
     public Items getInventory() {
         return inventory;
+    }
+
+    public Room getNextRoom() {
+        return nextRoom;
     }
 
     public void setCurrentRoom(Room room) {
@@ -109,7 +114,6 @@ public class Player {
 
     public void removeItem() {
         if (inventory != null) {
-            currentRoom.getItems().remove(0);
             inventory = null;
         }
     }
@@ -134,7 +138,7 @@ public class Player {
         }
 
         String direction = command.getSecondWord();
-        Room nextRoom = currentRoom.getExit(direction);
+        nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -142,6 +146,18 @@ public class Player {
         } else if (currentRoom.getFire() != null && nextRoom != previousRoom) {
             System.out.println("The fire inside the room prevents you from getting to this door.");
             return;
+
+        } else if (nextRoom.isLocked()) {
+            if (getInventory() != null) {
+                if (getInventory().equals(game.getItems().get(6))) {
+                    System.out.println("The door was locked, but you used the key to get though the door!");
+                    nextRoom.unlockRoom();
+                } else {
+                    System.out.println("The door is locked! You need a key to get through!");
+                }
+            } else {
+                System.out.println("The door is locked! You need a key to open the door!");
+            }
         } else {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
@@ -170,6 +186,7 @@ public class Player {
             System.out.println("You died...");
             System.exit(0);
         }
+
     }
 
     public void updateFire(Game game) {

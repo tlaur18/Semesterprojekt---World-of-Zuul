@@ -9,9 +9,11 @@ public class Game {
 
     private Parser parser;
     private Player player;
+    private Items bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2;
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
+    private ArrayList<Items> items;
 
     public Game() throws InterruptedException {
         System.out.println("Welcome to Fire Escape!\n");
@@ -24,24 +26,25 @@ public class Game {
         
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
+            items = new ArrayList(Arrays.asList(bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2));
     }
 
     private void createRooms() {
-        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking", 0);
-        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0);
-        sistersRoom = new Room("in your sister's room", 0);
-        livingRoom = new Room("in the living room", 0);
-        wc = new Room("on the toilet", 0);
-        wc2 = new Room("on the toilet", 0);
-        outside = new Room("outside", 0);
-        window = new Room("jumping out of the window! \nYou took a fatal hit to your head", 0);
-        office = new Room("in the office", 0);
-        kitchen = new Room("in the kitchen", 0);
-        entrance = new Room("in the entrace", 0);
-        conservatory = new Room("in the conservatory", 0);
-        basement = new Room("in the basement", 0);
-        garage = new Room("in the garage", 0);
-        masterBedroom = new Room("in the master bedroom", 0);
+        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking", 0, false);
+        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0, false);
+        sistersRoom = new Room("in your sister's room", 0, false);
+        livingRoom = new Room("in the living room", 0, false);
+        wc = new Room("on the toilet", 0, false);
+        wc2 = new Room("on the toilet", 0, false);
+        outside = new Room("outside", 0, true);
+        window = new Room("jumping out of the window! \nYou took a fatal hit to your head", 0, false);
+        office = new Room("in the office", 0, false);
+        kitchen = new Room("in the kitchen", 0, false);
+        entrance = new Room("in the entrace", 0, false);
+        conservatory = new Room("in the conservatory", 0, false);
+        basement = new Room("in the basement", 0, false);
+        garage = new Room("in the garage", 0, false);
+        masterBedroom = new Room("in the master bedroom", 0, false);
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
@@ -84,24 +87,29 @@ public class Game {
     }
 
     private void createItems() {
-        Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
-        NonUseableItems toothbrush = new NonUseableItems("Toothbrush", "Makes your teeth shiny.");
-        SmallFireExtinguisher smallFireExtinguisherONE = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
-        SmallFireExtinguisher smallFireExtinguisherTWO = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
-        BigFireExtinguisher bigFireExtinguisher = new BigFireExtinguisher("FireExXL", "Used to extinguish big fire.", kitchen);
-        NonUseableItems towel = new NonUseableItems("Towel", "Used to dry yourself");
-        Doll doll = new Doll("Doll", "A girly play doll");
-        NonUseableItems football = new NonUseableItems("Football", "A round toy used to being kicked");
-        YankieBar yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
+        bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
+        toothbrush = new NonUseableItems("Toothbrush", "Makes your teeth shiny.");
+        smallFireExtinguisher = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
+        smallFireExtinguisher2 = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
+        bigFireExtinguisher = new BigFireExtinguisher("FireExXL", "Used to extinguish big fire.", kitchen);
+        towel = new NonUseableItems("Towel", "Used to dry yourself");
+        doll = new Doll("Doll", "A girly play doll");
+        key = new Key("Key", "Used to unlock things.", entrance);
+        football = new NonUseableItems("Football", "A round toy used to being kicked");
+        yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);
         bedroom.addItem(football);
         sistersRoom.addItem(doll);
         office.addItem(yankieBar);
-        garage.addItem(smallFireExtinguisherONE);
-        garage.addItem(smallFireExtinguisherTWO);
+        garage.addItem(smallFireExtinguisher);
+        garage.addItem(smallFireExtinguisher2);
         masterBedroom.addItem(bigFireExtinguisher);
+        conservatory.addItem(key);
+    }
+    public ArrayList<Items> getItems() {
+        return items;
     }
 
     private void createFire() {
@@ -209,4 +217,5 @@ public class Game {
     public ArrayList<Room> getRooms() {
         return rooms;
     }
+
 }
