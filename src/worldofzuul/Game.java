@@ -85,13 +85,13 @@ public class Game {
 
     private void createItems() {
         Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
-        Items toothbrush = new Items("Toothbrush", "Makes your teeth shiny.");
-        Items smallFireExtinguisherONE = new Items("FirstFireExtinguisher", "Used to extinguish small fire.");
-        Items smallFireExtinguisherTWO = new Items("SecondFireExtinguisher", "Used to extinguish small fire");
-        Items bigFireExtinguisher = new Items("FireExtinguisher", "Used to extinguish big fire.");
-        Items towel = new Items("Towel", "Used to dry yourself");
-        Items doll = new Items("Doll", "A girly play doll");
-        Items football = new Items("Football", "A round toy used to being kicked");
+        ToothBrush toothbrush = new ToothBrush("Toothbrush", "Makes your teeth shiny.");
+        SmallFireExtinguisher smallFireExtinguisherONE = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
+        SmallFireExtinguisher smallFireExtinguisherTWO = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
+        BigFireExtinguisher bigFireExtinguisher = new BigFireExtinguisher("FireExXL", "Used to extinguish big fire.", kitchen);
+        Towel towel = new Towel("Towel", "Used to dry yourself");
+        Doll doll = new Doll("Doll", "A girly play doll");
+        Football football = new Football("Football", "A round toy used to being kicked");
         YankieBar yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
@@ -105,7 +105,7 @@ public class Game {
     }
 
     private void createFire() {
-        kitchen.addFire(3);
+        kitchen.addFire(1);
         office.addFire(1);
         livingRoom.addFire(1);
     }
