@@ -10,7 +10,7 @@ public class Game {
     private Parser parser;
     private Player player;
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
-            office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
+            office, kitchen, entrance, conservatory, basement, garage, masterBedroom, secretRoom;
     private ArrayList<Room> rooms;
 
     public Game() throws InterruptedException {
@@ -42,9 +42,14 @@ public class Game {
         basement = new Room("in the basement", 0);
         garage = new Room("in the garage", 0);
         masterBedroom = new Room("in the master bedroom", 0);
+        secretRoom = new Room("Welcome to the secret room of Thomas KANINUS Steenholdt", 0);
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
+        bedroom.setExit(".", secretRoom);
+        
+        secretRoom.setExit("bedroom", bedroom);
+        secretRoom.setExit("outside", outside);
 
         hallway.setExit("bedroom", bedroom);
         hallway.setExit("sister-room", sistersRoom);
@@ -93,6 +98,7 @@ public class Game {
         Doll doll = new Doll("Doll", "A girly play doll");
         NonUseableItems football = new NonUseableItems("Football", "A round toy used to being kicked");
         YankieBar yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
+        HappyBunny happyBunny = new HappyBunny("HappyBunny", "Pet this Happy Bunny to get 100 health");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);
@@ -102,6 +108,7 @@ public class Game {
         garage.addItem(smallFireExtinguisherONE);
         garage.addItem(smallFireExtinguisherTWO);
         masterBedroom.addItem(bigFireExtinguisher);
+        secretRoom.addItem(happyBunny);
     }
 
     private void createFire() {
