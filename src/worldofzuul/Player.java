@@ -1,7 +1,5 @@
 package worldofzuul;
 
-import java.util.Random;
-
 public class Player {
 
     private int stepCount;
