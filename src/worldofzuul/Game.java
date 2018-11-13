@@ -85,13 +85,13 @@ public class Game {
 
     private void createItems() {
         Bucket bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
-        ToothBrush toothbrush = new ToothBrush("Toothbrush", "Makes your teeth shiny.");
+        NonUseableItems toothbrush = new NonUseableItems("Toothbrush", "Makes your teeth shiny.");
         SmallFireExtinguisher smallFireExtinguisherONE = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
         SmallFireExtinguisher smallFireExtinguisherTWO = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
         BigFireExtinguisher bigFireExtinguisher = new BigFireExtinguisher("FireExXL", "Used to extinguish big fire.", kitchen);
-        Towel towel = new Towel("Towel", "Used to dry yourself");
+        NonUseableItems towel = new NonUseableItems("Towel", "Used to dry yourself");
         Doll doll = new Doll("Doll", "A girly play doll");
-        Football football = new Football("Football", "A round toy used to being kicked");
+        NonUseableItems football = new NonUseableItems("Football", "A round toy used to being kicked");
         YankieBar yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
