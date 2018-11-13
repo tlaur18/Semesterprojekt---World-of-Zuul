@@ -12,11 +12,13 @@ public class Room {
     private ArrayList<Items> items = new ArrayList();
     private Fire fire = null;
     private int damage;
+    private boolean isLocked;
 
-    public Room(String description, int damage) {
+    public Room(String description, int damage,boolean isLocked) {
         this.damage = damage;
         this.description = description;
         exits = new HashMap<String, Room>();
+        this.isLocked = isLocked;
     }
 
     public int getDamage() {
@@ -86,5 +88,11 @@ public class Room {
         if (fire != null) {
             fire.updateLvl();
         }
+    }
+    public void unlockRoom() {
+        this.isLocked = false;
+    }
+    public boolean isLocked() {
+        return isLocked;
     }
 }
