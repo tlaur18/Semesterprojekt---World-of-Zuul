@@ -67,8 +67,8 @@ public class Player {
         return stepCount;
     }
 
-    public int takeDamage() {
-        return health -= (currentRoom.getDamage() * currentRoom.getFire().getLvl());
+    public int takeDamage(int dmg) {
+        return health -= dmg;
     }
 
     public boolean isDead() {
@@ -151,26 +151,18 @@ public class Player {
             updateFire(game);
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
-                    if (currentRoom.equals(game.getRooms().get(7))) {
-            setHealth(0);
-            System.out.println("You lost " + 100 + " health!");
-        }
+            
+            if (currentRoom.equals(game.getRooms().get(7))) {
+                takeDamage(100);
+                System.out.println("You lost " + 100 + " health!");
+            }
             if (currentRoom.getFire() != null) {
-                takeDamage();
-                System.out.println("You have been damaged by the fire and lost " + (currentRoom.getDamage() * currentRoom.getFire().getLvl()) + " health!");
+                takeDamage((currentRoom.getDamage() + (25 * currentRoom.getFire().getLvl())));
+                System.out.println("You have been damaged by the fire and lost " + (currentRoom.getDamage() + (25 * currentRoom.getFire().getLvl())) + " health!");
 
             }
             System.out.println("Your health is: " + getHealth());
         }
-
-        /** WINDOW SUICIDE PROBLEM
-         * 
-         * Når man hopper ud ad vinduet, så dør man ikke pga. takeDamage() metoden er nu blevet brugt til "fire damage"
-         * Der kommer en string hvor der står "Your health is: 100" selvom man er død.
-         * Exits: string bliver stadig kørt.
-         * 
-         */
-
 
         if (currentRoom.equals(game.getRooms().get(6))) {
             System.out.println("YOU WON THE GAME!");
@@ -184,9 +176,13 @@ public class Player {
     }
 
     public void updateFire(Game game) {
-        for (Room room : game.getRooms()) {
-            room.updateFire(this);
+        if (getStepCount() % 5 == 0) {
+            System.out.println("The fire got bigger...");
+            for (Room room : game.getRooms()) {
+                room.updateFire();
+            }
         }
+
     }
 
     public void useItem() {

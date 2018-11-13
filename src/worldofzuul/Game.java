@@ -30,13 +30,13 @@ public class Game {
         bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking", 0);
         hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0);
         sistersRoom = new Room("in your sister's room", 0);
-        livingRoom = new Room("in the living room", 20);
+        livingRoom = new Room("in the living room", 0);
         wc = new Room("on the toilet", 0);
         wc2 = new Room("on the toilet", 0);
         outside = new Room("outside", 0);
-        window = new Room("jumping out of the window! \nYou took a fatal hit to your head", 100);
-        office = new Room("in the office", 30);
-        kitchen = new Room("in the kitchen", 80);
+        window = new Room("jumping out of the window! \nYou took a fatal hit to your head", 0);
+        office = new Room("in the office", 0);
+        kitchen = new Room("in the kitchen", 0);
         entrance = new Room("in the entrace", 0);
         conservatory = new Room("in the conservatory", 0);
         basement = new Room("in the basement", 0);
@@ -105,7 +105,7 @@ public class Game {
     }
 
     private void createFire() {
-        kitchen.addFire(1);
+        kitchen.addFire(3);
         office.addFire(1);
         livingRoom.addFire(1);
     }
@@ -147,9 +147,9 @@ public class Game {
       //  TimeUnit.SECONDS.sleep(2);
         System.out.println("112: \n- You need to get to safety and thats your primary objective.");
      //   TimeUnit.SECONDS.sleep(2);
-        System.out.println("- You will meet some obstacles, and you will need to figure a way out of the house");
+        System.out.println("- You will encoutner some obstacles, and you will need to figure a way out of the house");
      //   TimeUnit.SECONDS.sleep(2);
-        System.out.println("- if you have any questions just ask for '" + CommandWord.HELP + "'.\n");
+        System.out.println("- If you have any questions just ask for '" + CommandWord.HELP + "'.\n");
         
         System.out.println(player.getCurrentRoom().getExitString());
     }

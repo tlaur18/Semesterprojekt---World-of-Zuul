@@ -82,9 +82,9 @@ public class Room {
         fire = null;
     }
 
-    public void updateFire(Player player) {
+    public void updateFire() {
         if (fire != null) {
-            fire.updateLvl(player);
+            fire.updateLvl();
         }
     }
 }
