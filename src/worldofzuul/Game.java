@@ -27,21 +27,21 @@ public class Game {
     }
 
     private void createRooms() {
-        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking");
-        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs");
-        sistersRoom = new Room("in your sister's room");
-        livingRoom = new Room("in the living room");
-        wc = new Room("on the toilet");
-        wc2 = new Room("on the toilet");
-        outside = new Room("outside");
-        window = new Room("jumping out of the window! \nYou took a fatal hit to your head");
-        office = new Room("in the office");
-        kitchen = new Room("in the kitchen");
-        entrance = new Room("in the entrace");
-        conservatory = new Room("in the conservatory");
-        basement = new Room("in the basement");
-        garage = new Room("in the garage");
-        masterBedroom = new Room("in the master bedroom");
+        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking", 0);
+        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0);
+        sistersRoom = new Room("in your sister's room", 0);
+        livingRoom = new Room("in the living room", 0);
+        wc = new Room("on the toilet", 0);
+        wc2 = new Room("on the toilet", 0);
+        outside = new Room("outside", 0);
+        window = new Room("jumping out of the window! \nYou took a fatal hit to your head", 0);
+        office = new Room("in the office", 0);
+        kitchen = new Room("in the kitchen", 0);
+        entrance = new Room("in the entrace", 0);
+        conservatory = new Room("in the conservatory", 0);
+        basement = new Room("in the basement", 0);
+        garage = new Room("in the garage", 0);
+        masterBedroom = new Room("in the master bedroom", 0);
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
@@ -121,20 +121,20 @@ public class Game {
 
 
     private void printWelcome() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+        //TimeUnit.SECONDS.sleep(1);
         System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
         System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
-        TimeUnit.SECONDS.sleep(3);
+        //TimeUnit.SECONDS.sleep(3);
         System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
-        TimeUnit.SECONDS.sleep(2);
+        //TimeUnit.SECONDS.sleep(2);
         System.out.println("");
         System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
-        TimeUnit.SECONDS.sleep(2);
+       // TimeUnit.SECONDS.sleep(2);
         System.out.println("");
         System.out.println("112: \n- Okay, just stay calm and lets get you to safety.");
-        TimeUnit.SECONDS.sleep(2);
+     //   TimeUnit.SECONDS.sleep(2);
         System.out.println("- It doesn't help to panic.");
-        TimeUnit.SECONDS.sleep(2);
+      //  TimeUnit.SECONDS.sleep(2);
         System.out.println("- What is your name?");
         System.out.print("> ");
         
@@ -144,12 +144,12 @@ public class Game {
         
         System.out.println("");
         System.out.println(player.getPlayerName() + ": \n- My name is " + player.getPlayerName() + ". I will try my best with your help.\n");
-        TimeUnit.SECONDS.sleep(2);
+      //  TimeUnit.SECONDS.sleep(2);
         System.out.println("112: \n- You need to get to safety and thats your primary objective.");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("- You will meet some obstacles, and you will need to figure a way out of the house");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("- if you have any questions just ask for '" + CommandWord.HELP + "'.\n");
+     //   TimeUnit.SECONDS.sleep(2);
+        System.out.println("- You will encoutner some obstacles, and you will need to figure a way out of the house");
+     //   TimeUnit.SECONDS.sleep(2);
+        System.out.println("- If you have any questions just ask for '" + CommandWord.HELP + "'.\n");
         
         System.out.println(player.getCurrentRoom().getExitString());
     }

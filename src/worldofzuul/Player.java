@@ -6,9 +6,9 @@ public class Player {
 
     private int stepCount;
     private String playerName;
-    private int health;
+    protected int health;
     private Items inventory;
-    private Room currentRoom;
+    protected Room currentRoom;
     private Room previousRoom;
 
     public Player(Room room, String playerName) {
@@ -67,9 +67,8 @@ public class Player {
         return stepCount;
     }
 
-    public int takeDamage(int damage) {
-        health -= damage;
-        return health;
+    public int takeDamage(int dmg) {
+        return health -= dmg;
     }
 
     public boolean isDead() {
@@ -109,10 +108,11 @@ public class Player {
             System.out.println("You do not carry anything to drop.");
         }
     }
+
     public void removeItem() {
         if (inventory != null) {
             currentRoom.getItems().remove(0);
-            inventory= null;
+            inventory = null;
         }
     }
 
@@ -152,17 +152,15 @@ public class Player {
             System.out.println(currentRoom.getLongDescription());
             System.out.println(currentRoom.getExitString());
 
+            if (currentRoom.equals(game.getRooms().get(7))) {
+                takeDamage(100);
+                System.out.println("You lost " + 100 + " health!");
+            }
             if (currentRoom.getFire() != null) {
-                takeDamage(15 * currentRoom.getFire().getLvl());
-                System.out.println("You have been damaged by the fire and lost " + (25 * currentRoom.getFire().getLvl()) + " health!");
-
+                takeDamage((currentRoom.getDamage() + (25 * currentRoom.getFire().getLvl())));
+                System.out.println("You have been damaged by the fire and lost " + (currentRoom.getDamage() + (25 * currentRoom.getFire().getLvl())) + " health!");
             }
             System.out.println("Your health is: " + getHealth());
-        }
-
-        if (currentRoom.equals(game.getRooms().get(7))) {
-            takeDamage(100);
-            System.out.println("You lost " + 100 + " health!");
         }
 
         if (currentRoom.equals(game.getRooms().get(6))) {
@@ -177,9 +175,13 @@ public class Player {
     }
 
     public void updateFire(Game game) {
-        for (Room room : game.getRooms()) {
-            room.updateFire(this);
+        if (getStepCount() % 5 == 0) {
+            System.out.println("The fire got bigger...");
+            for (Room room : game.getRooms()) {
+                room.updateFire();
+            }
         }
+
     }
 
     public void useItem() {
