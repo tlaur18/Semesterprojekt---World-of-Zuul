@@ -42,11 +42,11 @@ public class Game {
         basement = new Room("in the basement", 0);
         garage = new Room("in the garage", 0);
         masterBedroom = new Room("in the master bedroom", 0);
-        secretRoom = new Room("Welcome to the secret room of Thomas KANINUS Steenholdt", 0);
+        secretRoom = new Room("in the secret room of Thomas KANINUS Steenholdt", 0);
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
-        bedroom.setExit(".", secretRoom);
+        bedroom.setExit(" ", secretRoom);
         
         secretRoom.setExit("bedroom", bedroom);
         secretRoom.setExit("outside", outside);

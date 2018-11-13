@@ -40,7 +40,7 @@ public class Room {
     }
 
     public String getExitString() {
-        String returnString = "| . | EXITS: | ";
+        String returnString = "| - | EXITS: | ";
         Set<String> keys = exits.keySet();
         for (String exit : keys) {
             returnString += exit + " | ";
