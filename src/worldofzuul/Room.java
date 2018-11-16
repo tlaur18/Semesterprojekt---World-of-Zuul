@@ -9,7 +9,7 @@ public class Room {
 
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<Items> items = new ArrayList();
+    private ArrayList<Item> items = new ArrayList();
     private Fire fire = null;
     private int damage;
     private boolean isLocked;
@@ -54,11 +54,11 @@ public class Room {
         return exits.get(direction);
     }
 
-    public void addItem(Items item) {
+    public void addItem(Item item) {
         items.add(item);
     }
 
-    public ArrayList<Items> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 

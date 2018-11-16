@@ -1,6 +1,6 @@
 package worldofzuul;
 
-public class SmallFireExtinguisher extends UseableItems {
+public class SmallFireExtinguisher extends UseableItem {
 
     boolean isEmpty = false;
     private Room[] useableRooms;

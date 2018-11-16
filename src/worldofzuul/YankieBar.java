@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class YankieBar extends UseableItems {
+public class YankieBar extends UseableItem {
 
     public YankieBar(String name, String description) {
         super(name, description);

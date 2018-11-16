@@ -5,7 +5,7 @@ public class Player {
     private int stepCount;
     private String playerName;
     protected int health;
-    private Items inventory;
+    private Item inventory;
     protected Room currentRoom;
     private Room previousRoom;
     private Room nextRoom;
@@ -45,11 +45,11 @@ public class Player {
         this.health = health;
     }
 
-    public void setInventory(Items item) {
+    public void setInventory(Item item) {
         inventory = item;
     }
 
-    public Items getInventory() {
+    public Item getInventory() {
         return inventory;
     }
 
@@ -202,8 +202,8 @@ public class Player {
     public void useItem() {
         if (inventory == null) {
             System.out.println("You do not carry anything to use");
-        } else if (inventory instanceof UseableItems) {
-            ((UseableItems) inventory).use(this);
+        } else if (inventory instanceof UseableItem) {
+            ((UseableItem) inventory).use(this);
         } else {
             System.out.println("There is nothing interesting to use this item for.");
         }

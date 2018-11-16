@@ -9,11 +9,11 @@ public class Game {
 
     private Parser parser;
     private Player player;
-    private Items bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2;
+    private Item bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2;
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
-    private ArrayList<Items> items;
+    private ArrayList<Item> items;
 
     public Game() throws InterruptedException {
         System.out.println("Welcome to Fire Escape!\n");
@@ -88,14 +88,14 @@ public class Game {
 
     private void createItems() {
         bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2);
-        toothbrush = new NonUseableItems("Toothbrush", "Makes your teeth shiny.");
+        toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.");
         smallFireExtinguisher = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
         smallFireExtinguisher2 = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office);
         bigFireExtinguisher = new BigFireExtinguisher("FireExXL", "Used to extinguish big fire.", kitchen);
-        towel = new NonUseableItems("Towel", "Used to dry yourself");
+        towel = new NonUseableItem("Towel", "Used to dry yourself");
         doll = new Doll("Doll", "A girly play doll");
         key = new Key("Key", "Used to unlock things.");
-        football = new NonUseableItems("Football", "A round toy used to being kicked");
+        football = new NonUseableItem("Football", "A round toy used to being kicked");
         yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
@@ -108,7 +108,7 @@ public class Game {
         masterBedroom.addItem(bigFireExtinguisher);
         conservatory.addItem(key);
     }
-    public ArrayList<Items> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 

@@ -1,8 +1,8 @@
 package worldofzuul;
 
-public abstract class UseableItems extends Items{
+public abstract class UseableItem extends Item{
     
-    public UseableItems(String name, String description) {
+    public UseableItem(String name, String description) {
         super(name, description);
     }
     
