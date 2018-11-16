@@ -1,6 +1,6 @@
 package worldofzuul;
 
-public class Bucket extends UseableItems {
+public class Bucket extends UseableItem {
 
     private boolean isFilled;
     private Room[] useableRooms;

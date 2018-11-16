@@ -1,6 +1,6 @@
 package worldofzuul;
 
-public class Doll extends UseableItems {
+public class Doll extends UseableItem {
 
     public Doll(String name, String description) {
         super(name, description);
