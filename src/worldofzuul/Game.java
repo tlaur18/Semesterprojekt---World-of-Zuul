@@ -22,7 +22,7 @@ public class Game {
         createItems();
         createFire();
         parser = new Parser();
-        printWelcome();
+        // printWelcome();
         
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
