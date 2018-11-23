@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.WelcomeTextController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.WelcomeTextController">
    <top>
       <GridPane prefHeight="73.0" prefWidth="603.0" style="-fx-background-color: grey; -fx-border-color: black;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -74,6 +74,11 @@
                   <Font name="System Bold" size="15.0" />
                </font></Button>
             <ImageView fx:id="inventoryImage" fitHeight="60.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="buttonStart" mnemonicParsing="false" onAction="#buttonStart" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Start" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </right>

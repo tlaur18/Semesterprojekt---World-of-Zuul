@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.GamePageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.GamePageController">
    <top>
       <GridPane prefHeight="73.0" prefWidth="603.0" style="-fx-background-color: grey; -fx-border-color: black;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -24,7 +24,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextArea fx:id="TextAreaTop" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 100;" text="YOLO&#10;&#10;" GridPane.columnIndex="1">
+            <TextArea fx:id="TextAreaTop" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 100;" text="TextArea&#10;&#10;" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets bottom="8.0" top="8.0" />
                </GridPane.margin></TextArea>
@@ -40,7 +40,11 @@
       <StackPane cacheShape="false" prefHeight="150.0" prefWidth="200.0" scaleShape="false" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <TextArea fx:id="TextAreaStart" prefHeight="200.0" prefWidth="200.0" />
+            <ImageView fx:id="ImageFloor" fitHeight="599.0" fitWidth="790.0">
+               <image>
+                  <Image url="@46476967_2172207723096749_4327188823554392064_n.jpg" />
+               </image>
+            </ImageView>
          </children>
       </StackPane>
    </center>

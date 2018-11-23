@@ -48,7 +48,6 @@ public class StartPageController implements Initializable {
     }
 
     private void setScene(Scene scene1) {
-
     }
 
     @FXML

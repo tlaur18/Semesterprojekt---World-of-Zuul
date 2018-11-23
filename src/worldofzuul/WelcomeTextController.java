@@ -13,10 +13,15 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import static javafx.util.Duration.seconds;
 
@@ -40,6 +45,8 @@ public class WelcomeTextController implements Initializable {
     @FXML
     private ImageView inventoryImage;
     @FXML
+    private Button buttonStart;
+    @FXML
     private TextArea TextAreaStart;
 
     /**
@@ -47,12 +54,12 @@ public class WelcomeTextController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        TextAreaStart.appendText("Hejsa");
     }
 
     @FXML
     private void buttonTake(ActionEvent event) throws IOException, InterruptedException {
-        
+        TextAreaStart.appendText("Ost");
     }
 
     @FXML
@@ -66,5 +73,12 @@ public class WelcomeTextController implements Initializable {
     @FXML
     private void buttonInspect(ActionEvent event) {
     }
-
+    @FXML
+    private void buttonStart(ActionEvent event) throws IOException{
+        Parent root1 = FXMLLoader.load(getClass().getResource("GamePage.fxml"));
+        Scene scene2 = new Scene(root1);
+        Stage nextstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        nextstage.setScene(scene2);
+        nextstage.show();
+    }
 }
