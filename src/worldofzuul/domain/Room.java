@@ -13,6 +13,8 @@ public class Room {
     private Fire fire = null;
     private int damage;
     private boolean isLocked;
+     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
+            office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
 
     public Room(String description, int damage,boolean isLocked) {
         this.damage = damage;
@@ -95,4 +97,5 @@ public class Room {
     public boolean isLocked() {
         return isLocked;
     }
+       
 }

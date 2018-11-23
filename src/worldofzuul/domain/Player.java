@@ -1,30 +1,35 @@
 package worldofzuul.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Player {
 
     private int stepCount;
-    private String playerName;
+//    private String playerName;
     protected int health;
     private Item inventory;
     protected Room currentRoom;
     private Room previousRoom;
     private Room nextRoom;
+    
 
-    public Player(Room room, String playerName) {
+    public Player(Room room) {
+        
         stepCount = 0;
         health = 100;
         inventory = null;
         currentRoom = room;
-        this.playerName = playerName;
+//        this.playerName = playerName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public String getPlayerName() {
-        return playerName;
-    }
+//    public void setPlayerName(String playerName) {
+//        this.playerName = playerName;
+//    }
+//
+//    public String getPlayerName() {
+//        return playerName;
+//    }
 
     public int getStepCount() {
         return stepCount;

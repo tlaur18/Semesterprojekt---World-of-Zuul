@@ -28,7 +28,7 @@ import worldofzuul.domain.Game;
  * @author Morten K. Jensen
  */
 public class StartPageController implements Initializable {
-
+    
     @FXML
     private Button start1;
     @FXML
@@ -48,12 +48,14 @@ public class StartPageController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         try {
             Game game = new Game();
             game.getRooms();
         } catch (InterruptedException ex) {
             Logger.getLogger(StartPageController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
 
     }
 
