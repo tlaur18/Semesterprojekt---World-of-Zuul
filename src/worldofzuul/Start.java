@@ -1,10 +1,12 @@
 package worldofzuul;
 
+import WorldOfZuulIO.TextIO;
+
 public class Start {
 
     public static void main(String[] args) throws InterruptedException {
-        Game game = new Game();
-        game.play();
+        TextIO textIO = new TextIO(new Game());
+        textIO.play();
     }
 
 }

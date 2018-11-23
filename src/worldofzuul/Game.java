@@ -16,8 +16,6 @@ public class Game {
     private ArrayList<Item> items;
 
     public Game() throws InterruptedException {
-        System.out.println("Welcome to Fire Escape!\n");
-
         createRooms();
         createItems();
         createFire();
@@ -118,15 +116,6 @@ public class Game {
         livingRoom.addFire(1);
     }
 
-    public void play() {
-        boolean finished = false;
-        while (!finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        System.out.println("Thank you for playing. Good bye.");
-    }
-
 
     private void printWelcome() throws InterruptedException {
         TimeUnit.SECONDS.sleep(1);
@@ -162,50 +151,7 @@ public class Game {
         System.out.println(player.getCurrentRoom().getExitString());
     }
 
-    private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-
-        CommandWord commandWord = command.getCommandWord();
-
-        if (commandWord == CommandWord.UNKNOWN) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
-
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        } else if (commandWord == CommandWord.GO) {
-            player.goRoom(command, this);
-        } else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
-        } else if (commandWord == CommandWord.TAKE) {
-            player.takeItem(command);
-        } else if (commandWord == CommandWord.DROP) {
-            player.dropItem();
-        } else if (commandWord == CommandWord.INSPECT) {
-            player.inspectInventory();
-        } else if (commandWord == CommandWord.SEARCH) {
-            player.searchRoom();
-        } else if (commandWord == CommandWord.USE) {
-            player.useItem();
-        } else if (commandWord == CommandWord.EXITS) {
-            player.exits();
-        }
-        return wantToQuit;
-    }
-
-    private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at you own home.");
-        System.out.println();
-        System.out.println("Your command words are:");
-        parser.showCommands();
-
-        System.out.println("\n you have walked " + player.getStepCount() + " steps so far");
-
-    }
-
-    private boolean quit(Command command) {
+    public boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
@@ -216,6 +162,10 @@ public class Game {
 
     public ArrayList<Room> getRooms() {
         return rooms;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
 }
