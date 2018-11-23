@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author Morten K. Jensen
  */
-public class FXMLDocumentController implements Initializable {
+public class StartPageController implements Initializable {
 
     @FXML
     private Button start1;
@@ -37,18 +37,7 @@ public class FXMLDocumentController implements Initializable {
     private Button start4;
     @FXML
     private TextArea titel;
-    @FXML
-    private Button takeButton;
-    @FXML
-    private Button helpButton;
-    @FXML
-    private Button dropButton;
-    @FXML
-    private Button inspectButton;
-    @FXML
-    private ImageView inventoryImage ;
-    @FXML
-    private TextArea welcometext;
+    
 
     /**
      * Initializes the controller class.
@@ -64,7 +53,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void start1(ActionEvent event) throws IOException {
-        Parent root1 = FXMLLoader.load(getClass().getResource("FXMLDocument1.fxml"));
+        Parent root1 = FXMLLoader.load(getClass().getResource("WelcomeTextXML.fxml"));
         Scene scene2 = new Scene(root1);
         Stage nextstage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         nextstage.setScene(scene2);
@@ -83,23 +72,4 @@ public class FXMLDocumentController implements Initializable {
     private void start4(ActionEvent event) {    
     }
 
-    @FXML
-    private void takeButton(ActionEvent event) {
-    }
-    
-    @FXML
-    private void helpbutton(ActionEvent event) {
-    }
-    
-    @FXML
-    private void dropButton(ActionEvent event) {
-    }
-    
-    @FXML
-    private void inspectButton(ActionEvent event) {
-    }
-    
-    @FXML
-    private void test5(ActionEvent event) {
-    }
 }

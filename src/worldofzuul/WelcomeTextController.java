@@ -5,8 +5,12 @@
  */
 package worldofzuul;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,17 +18,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 
+import static javafx.util.Duration.seconds;
+
 /**
  * FXML Controller class
  *
  * @author Morten K. Jensen
  */
-public class StylesheetController implements Initializable {
+public class WelcomeTextController implements Initializable {
 
     @FXML
     private TextArea TextAreaTop;
-    @FXML
-    private ImageView ImageFloor;
     @FXML
     private Button takeButton;
     @FXML
@@ -36,16 +40,7 @@ public class StylesheetController implements Initializable {
     @FXML
     private ImageView inventoryImage;
     @FXML
-    private Button start1;
-    @FXML
-    private Button start2;
-    @FXML
-    private Button start3;
-    @FXML
-    private Button start4;
-    @FXML
-    private TextArea titel;
-    
+    private TextArea TextAreaStart;
 
     /**
      * Initializes the controller class.
@@ -53,10 +48,11 @@ public class StylesheetController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
-    private void buttonTake(ActionEvent event) {
+    private void buttonTake(ActionEvent event) throws IOException, InterruptedException {
+        
     }
 
     @FXML
@@ -70,17 +66,5 @@ public class StylesheetController implements Initializable {
     @FXML
     private void buttonInspect(ActionEvent event) {
     }
-    @FXML
-    private void start1(ActionEvent event) {
-    }
-    @FXML
-    private void start2(ActionEvent event) {
-    }
-    @FXML
-    private void start3(ActionEvent event) {
-    }
-    @FXML
-    private void start4(ActionEvent event) {
-    }
-    
+
 }

@@ -14,7 +14,7 @@ public class Start extends Application {
         System.out.println("noget");
         
 
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("StartPage.fxml"));
 
         Scene scene = new Scene(root);
 
