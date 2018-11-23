@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="792.0" style="-fx-border-color: black; -fx-background-color: grey;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.presentation.StartPageController">
+   <children>
+      <Button layoutX="325.0" layoutY="220.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="143.0" text="Start" onAction="#start1" fx:id="start1"/>
+      <Button layoutX="325.0" layoutY="276.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="143.0" text="Highscore" onAction="#start2" fx:id="start2"/>
+      <Button layoutX="325.0" layoutY="328.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="143.0" text="FAQ" onAction="#start3" fx:id="start3"/>
+      <Button layoutX="325.0" layoutY="384.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="143.0" text="Quit" onAction="#start4" fx:id="start4"/>
+      <TextArea fx:id="titel" editable="false" layoutX="239.0" layoutY="98.0" prefHeight="58.0" prefWidth="347.0" style="-fx-background-color: grey; -fx-background-color: grey;" text="Welcome to FireEscape">
+         <font>
+            <Font name="System Bold Italic" size="27.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>
