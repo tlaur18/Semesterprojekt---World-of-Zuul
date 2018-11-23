@@ -18,6 +18,10 @@ public class Player {
         this.playerName = playerName;
     }
 
+    public Player(Room room) {
+        this(room, "*N/A*");
+    }
+
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }

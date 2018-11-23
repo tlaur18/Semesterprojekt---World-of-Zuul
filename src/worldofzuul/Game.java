@@ -19,12 +19,12 @@ public class Game {
         createRooms();
         createItems();
         createFire();
+        player = new Player(bedroom);
         parser = new Parser();
-        printWelcome();
-        
+
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
-            office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
-            items = new ArrayList(Arrays.asList(bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2));
+                office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
+        items = new ArrayList(Arrays.asList(bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2));
     }
 
     private void createRooms() {
@@ -106,6 +106,7 @@ public class Game {
         masterBedroom.addItem(bigFireExtinguisher);
         conservatory.addItem(key);
     }
+
     public ArrayList<Item> getItems() {
         return items;
     }
@@ -114,50 +115,6 @@ public class Game {
         kitchen.addFire(1);
         office.addFire(1);
         livingRoom.addFire(1);
-    }
-
-
-    private void printWelcome() throws InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.");
-        System.out.println("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
-        TimeUnit.SECONDS.sleep(3);
-        System.out.println("112: \n- This is 1-1-2. What is your emergency? ");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("");
-        System.out.println("You: \n- There is smoke in the room and I am all alone in the house.");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("");
-        System.out.println("112: \n- Okay, just stay calm and lets get you to safety.");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("- It doesn't help to panic.");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("- What is your name?");
-        System.out.print("> ");
-        
-        Scanner pn = new Scanner(System.in);
-        String playerName = pn.nextLine();
-        player = new Player(bedroom, playerName);
-        
-        System.out.println("");
-        System.out.println(player.getPlayerName() + ": \n- My name is " + player.getPlayerName() + ". I will try my best with your help.\n");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("112: \n- You need to get to safety and thats your primary objective.");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("- You will encoutner some obstacles, and you will need to figure a way out of the house");
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println("- If you have any questions just ask for '" + CommandWord.HELP + "'.\n");
-        
-        System.out.println(player.getCurrentRoom().getExitString());
-    }
-
-    public boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        } else {
-            return true;
-        }
     }
 
     public ArrayList<Room> getRooms() {
