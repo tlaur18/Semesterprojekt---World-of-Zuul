@@ -54,7 +54,18 @@ public class WelcomeTextController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        TextAreaStart.appendText("Hejsa");
+        TextAreaStart.appendText("\t BIP BIP BIP! There is a loud noise that woke you up, \n \t you notice the smell and the thin \n \t layer of smoke in you room.\n");
+        TextAreaStart.appendText("\t The first thing you do is to take your cellphone and call for emergency,\n \t the number is 1-1-2.");
+        TextAreaStart.appendText("112: \n- This is 1-1-2. What is your emergency? \n");
+        TextAreaStart.appendText("\n");
+        TextAreaStart.appendText("You:\n- There is smoke in the room and I am all alone in the house.\n");
+        TextAreaStart.appendText("\n");
+        TextAreaStart.appendText("112: \n- Okay, just stay calm and lets get you to safety.\n");
+        TextAreaStart.appendText("- It doesn't help to panic.\n\n");
+        TextAreaStart.appendText("You:\n -I will try my best with your help.\n\n");
+        TextAreaStart.appendText("112: \n- You need to get to safety and thats your primary objective.\n");
+        TextAreaStart.appendText("- You will encoutner some obstacles, and you will need to figure a way out of the house\n");
+        TextAreaStart.appendText("\n- To start Press the \"Start \" button in the bottom right corner");
     }
 
     @FXML
