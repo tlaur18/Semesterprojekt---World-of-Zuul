@@ -2,23 +2,52 @@ package worldofzuul;
 
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.ArrayList;
 
 public class Room {
 
+    private String name;
     private String description;
     private HashMap<String, Room> exits;
     private ArrayList<Item> items = new ArrayList();
     private Fire fire = null;
     private int damage;
     private boolean isLocked;
+    private boolean isGameComplete;
+    private boolean isGameOver;
 
-    public Room(String description, int damage,boolean isLocked) {
+    public Room(String name, String description, int damage,boolean isLocked) {
+        this.name = name;
         this.damage = damage;
         this.description = description;
         exits = new HashMap<String, Room>();
         this.isLocked = isLocked;
+        this.isGameComplete = false;
+        this.isGameOver = false;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setGameComplete() {
+        isGameComplete = true;
+    }
+    
+    public boolean getGameComplete() {
+        return isGameComplete;
+    }
+    
+    public void setGameOver() {
+        isGameOver = true;
+    }
+    
+    public boolean getGameOver() {
+        return isGameOver;
     }
 
     public int getDamage() {
@@ -38,7 +67,11 @@ public class Room {
     }
 
     public String getItemDescription() {
-        return (!items.isEmpty() ? "Items: " + printItems() : "There are no items in this room.");
+        return (!items.isEmpty() ? "Items: " + getItemsString() : "There are no items in this room.");
+    }
+    
+    public HashMap<String, Room> getExits() {
+        return exits;
     }
 
     public String getExitString() {
@@ -62,7 +95,7 @@ public class Room {
         return items;
     }
 
-    public String printItems() {
+    public String getItemsString() {
         String itemString = "";
 
         for (int i = 0; i < items.size(); i++) {

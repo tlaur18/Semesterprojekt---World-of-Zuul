@@ -1,6 +1,6 @@
 package worldofzuul;
 
-import WorldOfZuulIO.TextIO;
+import worldofzuulIO.TextIO;
 
 public class Start {
 

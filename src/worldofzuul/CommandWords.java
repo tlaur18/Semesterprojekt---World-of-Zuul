@@ -5,7 +5,6 @@ import java.util.HashMap;
 public class CommandWords {
 
     private HashMap<String, CommandWord> validCommands;
-    private String[] desc = new String[8];
 
     public CommandWords() {
         validCommands = new HashMap<String, CommandWord>();
@@ -29,21 +28,19 @@ public class CommandWords {
         return validCommands.containsKey(aString);
     }
 
-    public void showAll() {
+    public String getCommandsString() {
+        String commandsString = "";
 
-        desc[0] = "drop    |   drop an item in the current room";
-        desc[1] = "help    |   opening this tab";
-        desc[2] = "take    |   pick up an item in the current room";
-        desc[3] = "search  |   search for item(s) in the current room";
-        desc[4] = "go      |   move to the next room";
-        desc[5] = "inspect |   inspect the item in your inventory";
-        desc[6] = "quit    |   quit the game";
-        desc[7] = "exits   |   get the exits for the current room";
+        commandsString += "\t'go'      |   Move to a new room\n";
+        commandsString += "\t'search'  |   Search for items in the current room\n";
+        commandsString += "\t'take'    |   Pick up an item in the current room\n";
+        commandsString += "\t'drop'    |   Drop the item you are holding\n";
+        commandsString += "\t'inspect' |   Get a description of the item you are holding\n";
+        commandsString += "\t'exits'   |   Get the exits for the current room\n";
+        commandsString += "\t'help'    |   Show the list of available commands and amount of steps walked\n";
+        commandsString += "\t'quit'    |   Quit the game\n";
 
-      for (int i = 0; i < desc.length; i++) {
-            System.out.print(desc[i] + "\n");
-        }
-        System.out.println();
+        return commandsString;
     }
 
 }

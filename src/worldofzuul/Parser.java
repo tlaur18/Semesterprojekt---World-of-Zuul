@@ -33,7 +33,7 @@ public class Parser {
         return new Command(commands.getCommandWord(word1), word2);
     }
 
-    public void showCommands() {
-        commands.showAll();
+    public String getCommandsString() {
+        return commands.getCommandsString();
     }
 }

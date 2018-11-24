@@ -6,5 +6,5 @@ public abstract class UseableItem extends Item{
         super(name, description);
     }
     
-    public abstract void use(Player player);
+    public abstract String use(Player player);
 }

@@ -1,12 +1,22 @@
 package worldofzuul;
 
+import worldofzuul.exceptions.MovingThroughFireException;
+import worldofzuul.exceptions.MovingThroughLockedDoorException;
+import worldofzuul.exceptions.NoExitException;
+import worldofzuul.exceptions.NoItemToDropException;
+import worldofzuul.exceptions.NoSecondWordGivenException;
+import worldofzuul.exceptions.NoSuchItemInRoomException;
+import worldofzuul.exceptions.PlayerInventoryFullException;
+import worldofzuul.exceptions.UseNonUseableItemException;
+import worldofzuul.exceptions.UseWithEmptyInventoryException;
+
 public class Player {
 
     private int stepCount;
     private String playerName;
     protected int health;
     private Item inventory;
-    protected Room currentRoom;
+    private Room currentRoom;
     private Room previousRoom;
     private Room nextRoom;
 
@@ -82,15 +92,13 @@ public class Player {
         return health <= 0;
     }
 
-    public void takeItem(Command command) {
+    public void takeItem(Command command) throws NoSecondWordGivenException, PlayerInventoryFullException, NoSuchItemInRoomException {
         if (!command.hasSecondWord()) {
-            System.out.println("Take what?");
-            return;
+            throw new NoSecondWordGivenException();
         }
 
         if (inventory != null) {
-            System.out.println("You are already carrying a " + inventory.getName());
-            return;
+            throw new PlayerInventoryFullException();
         }
 
         String itemName = command.getSecondWord();
@@ -98,21 +106,19 @@ public class Player {
         for (int i = 0; i < currentRoom.getItems().size(); i++) {
             if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
                 inventory = currentRoom.getItems().get(i);
-                System.out.println("You pick up the " + currentRoom.getItems().get(i).getName() + ".");
                 currentRoom.getItems().remove(i);
                 return;
             }
         }
-        System.out.println("The room contains no such thing.");
+        throw new NoSuchItemInRoomException();
     }
 
-    public void dropItem() {
+    public void dropItem() throws NoItemToDropException {
         if (inventory != null) {
-            System.out.println("You drop the " + inventory.getName() + ".");
             currentRoom.getItems().add(inventory);
             inventory = null;
         } else {
-            System.out.println("You do not carry anything to drop.");
+            throw new NoItemToDropException();
         }
     }
 
@@ -122,98 +128,40 @@ public class Player {
         }
     }
 
-    public void inspectInventory() {
-        if (inventory != null) {
-            System.out.println("You are carrying a " + inventory.getName() + ".");
-            System.out.println(inventory.getDescription());
-        } else {
-            System.out.println("You are not carrying anything.");
-        }
-    }
-
-    public void searchRoom() {
-        System.out.println(currentRoom.getItemDescription());
-    }
-
-    public void goRoom(Command command, Game game) {
+    public void goRoom(Command command) throws NoSecondWordGivenException, NoExitException, MovingThroughFireException, MovingThroughLockedDoorException {
         if (!command.hasSecondWord()) {
-            System.out.println("Go where?");
-            return;
+            throw new NoSecondWordGivenException();
         }
 
         String direction = command.getSecondWord();
         nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
-            return;
+            throw new NoExitException();
         } else if (currentRoom.getFire() != null && nextRoom != previousRoom) {
-            System.out.println("The fire inside the room prevents you from getting to this door.");
-            return;
-
+            throw new MovingThroughFireException();
         } else if (nextRoom.isLocked()) {
-            if (getInventory() != null) {
-                if (getInventory().equals(game.getItems().get(6))) {
-                    System.out.println("The door was locked, but you used the key to get though the door!");
-                    nextRoom.unlockRoom();
-                } else {
-                    System.out.println("The door is locked! You need a key to get through!");
-                }
-            } else {
-                System.out.println("The door is locked! You need a key to open the door!");
-            }
+            throw new MovingThroughLockedDoorException();
         } else {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
-            updateFire(game);
-            System.out.println(currentRoom.getLongDescription());
-            System.out.println(currentRoom.getExitString());
-
-            if (currentRoom.equals(game.getRooms().get(7))) {
-                takeDamage(100);
-                System.out.println("You lost " + 100 + " health!");
-            }
-            if (currentRoom.getFire() != null) {
-                takeDamage((currentRoom.getDamage() + (25 * currentRoom.getFire().getLvl())));
-                System.out.println("You have been damaged by the fire and lost " + (currentRoom.getDamage() + (25 * currentRoom.getFire().getLvl())) + " health!");
-            }
-            System.out.println("Your health is: " + getHealth());
         }
-
-        if (currentRoom.equals(game.getRooms().get(6))) {
-            System.out.println("YOU WON THE GAME!");
-            System.exit(0);
-        }
-
-        if (isDead() == true) {
-            System.out.println("You died...");
-            System.exit(0);
-        }
-
     }
 
-    public void updateFire(Game game) {
-        if (getStepCount() % 5 == 0) {
-            System.out.println("The fire got bigger...");
-            for (Room room : game.getRooms()) {
-                room.updateFire();
-            }
-        }
-
-    }
-
-    public void useItem() {
+    public String useItem() throws UseWithEmptyInventoryException, UseNonUseableItemException {
+        String outputText = "";
         if (inventory == null) {
-            System.out.println("You do not carry anything to use");
+            throw new UseWithEmptyInventoryException();
         } else if (inventory instanceof UseableItem) {
-            ((UseableItem) inventory).use(this);
+            outputText = ((UseableItem) inventory).use(this);
         } else {
-            System.out.println("There is nothing interesting to use this item for.");
+            throw new UseNonUseableItemException();
         }
+        return outputText;
     }
 
-    public void exits() {
-        System.out.println(currentRoom.getExitString());
+    public boolean hasWon() {
+        return currentRoom.getGameComplete();
     }
 }

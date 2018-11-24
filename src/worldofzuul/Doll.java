@@ -7,8 +7,13 @@ public class Doll extends UseableItem {
     }
 
     @Override
-    public void use(Player player) {
-        System.out.println("You play with the doll, but get bored quick.");
+    public String use(Player player) {
+        String outputText = "";
+        
+        outputText = "You play with the doll, but quickly get bored.";
+        outputText += "\nYou realize that you probably shoudl focus on getting to safety.";
+        
+        return outputText;
     }
     
     

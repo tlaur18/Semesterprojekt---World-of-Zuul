@@ -7,8 +7,14 @@ public class Key extends UseableItem {
     }
 
     @Override
-    public void use(Player player) {
-        System.out.println("To use this key, you need to go to the locked door!");
+    public String use(Player player) {
+        for (Room room : player.getCurrentRoom().getExits().values()) {
+            if (room.isLocked()) {
+                room.unlockRoom();
+                return "You are able to unlock the door to the " + room.getName() + " with your key.";
+            }
+        }
+        return "This key can not be used on any of the doors around you.";
     }
 
 }

@@ -2,8 +2,6 @@ package worldofzuul;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class Game {
 
@@ -13,7 +11,6 @@ public class Game {
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
-    private ArrayList<Item> items;
 
     public Game() throws InterruptedException {
         createRooms();
@@ -24,25 +21,24 @@ public class Game {
 
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
                 office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
-        items = new ArrayList(Arrays.asList(bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2));
     }
 
     private void createRooms() {
-        bedroom = new Room("in your smokefilled bedroom and you hear the fire cracking", 0, false);
-        hallway = new Room("in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0, false);
-        sistersRoom = new Room("in your sister's room", 0, false);
-        livingRoom = new Room("in the living room", 0, false);
-        wc = new Room("on the toilet", 0, false);
-        wc2 = new Room("on the toilet", 0, false);
-        outside = new Room("outside", 0, true);
-        window = new Room("jumping out of the window! \nYou took a fatal hit to your head", 0, false);
-        office = new Room("in the office", 0, false);
-        kitchen = new Room("in the kitchen", 0, false);
-        entrance = new Room("in the entrace", 0, false);
-        conservatory = new Room("in the conservatory", 0, false);
-        basement = new Room("in the basement", 0, false);
-        garage = new Room("in the garage", 0, false);
-        masterBedroom = new Room("in the master bedroom", 0, false);
+        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", 0, false);
+        hallway = new Room("Hallway", "in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0, false);
+        sistersRoom = new Room("Sisters Room", "in your sister's room", 0, false);
+        livingRoom = new Room("Living Room", "in the living room", 0, false);
+        wc = new Room("Toilet", "on the toilet", 0, false);
+        wc2 = new Room("Toilet", "on the toilet", 0, false);
+        outside = new Room("Outside", "outside", 0, true);
+        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", 0, false);
+        office = new Room("Office", "in the office", 0, false);
+        kitchen = new Room("Kitchen", "in the kitchen", 0, false);
+        entrance = new Room("Entrance", "in the entrace", 0, false);
+        conservatory = new Room("Conservatory", "in the conservatory", 0, false);
+        basement = new Room("Basement", "in the basement", 0, false);
+        garage = new Room("Garage", "in the garage", 0, false);
+        masterBedroom = new Room("Master Bedroom", "in the master bedroom", 0, false);
 
         bedroom.setExit("hallway", hallway);
         bedroom.setExit("window", window);
@@ -82,6 +78,12 @@ public class Game {
         masterBedroom.setExit("toilet", wc2);
 
         wc2.setExit("master-bedroom", masterBedroom);
+
+        //Sætter rum man skal nå for at vinde:
+        outside.setGameComplete();
+
+        //Sætter rum hvor spillet tabes så snart man går derind
+        window.setGameOver();
     }
 
     private void createItems() {
@@ -105,10 +107,6 @@ public class Game {
         garage.addItem(smallFireExtinguisher2);
         masterBedroom.addItem(bigFireExtinguisher);
         conservatory.addItem(key);
-    }
-
-    public ArrayList<Item> getItems() {
-        return items;
     }
 
     private void createFire() {
