@@ -13,14 +13,9 @@ public class Parser {
         reader = new Scanner(System.in);
     }
 
-    public Command getCommand() {
-        String inputLine;
+    public Command getCommand(String inputLine) {
         String word1 = null;
         String word2 = null;
-
-        System.out.print("> ");
-
-        inputLine = reader.nextLine();
 
         Scanner tokenizer = new Scanner(inputLine);
         if (tokenizer.hasNext()) {

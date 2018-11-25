@@ -30,17 +30,21 @@ public class TextIO {
         parser = new Parser();
     }
 
-    public void play() throws InterruptedException {
-        printWelcome();
-        boolean finished = false;
-        while (!finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-        }
-        txtAreaOutput.appendText("\nThank you for playing. Good bye.");
+//    public void play() throws InterruptedException {
+//        printWelcome();
+//        boolean finished = false;
+//        while (!finished) {
+//            Command command = parser.getCommand();
+//            finished = processCommand(command);
+//        }
+//        txtAreaOutput.appendText("\nThank you for playing. Good bye.");
+//    }
+
+    public Game getGame() {
+        return game;
     }
 
-    private boolean processCommand(Command command) {
+    public boolean processCommand(Command command) {
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
@@ -86,39 +90,36 @@ public class TextIO {
         txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }
 
-    private void printWelcome() throws InterruptedException {
-        txtAreaOutput.appendText("\nWelcome to Fire Escape!\n");
-        TimeUnit.SECONDS.sleep(1);
+    public void printWelcome() throws InterruptedException {
+        txtAreaOutput.appendText("Welcome to Fire Escape!\n");
+        
         txtAreaOutput.appendText("\n\tBEEEP! BEEEP! BEEEP!... A loud noise woke you up.");
         txtAreaOutput.appendText("\n\tYou notice the smell and see a thin layer of smoke in you room.");
         txtAreaOutput.appendText("\n\tThe first thing you do is to take your cellphone and call for emergency.");
         txtAreaOutput.appendText("\n\tThe number is 1-1-2.");
-        TimeUnit.SECONDS.sleep(3);
+        
+        txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112: \n- This is 1-1-2. What is your emergency? ");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\nYou: \n- There is smoke in the room and I am all alone in the house.");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112: \n- Okay, just stay calm and lets get you to safety.");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n- It doesn't help to panic.");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n- What is your name?");
         txtAreaOutput.appendText("> ");
 
-        Scanner pn = new Scanner(System.in);
-        game.getPlayer().setPlayerName(pn.nextLine());
-
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n" + game.getPlayer().getPlayerName() + ": \n- My name is " + game.getPlayer().getPlayerName() + ". I will try my best with your help.\n");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n112: \n- You need to get to safety and thats your primary objective.");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n- You will encoutner some obstacles, and you will need to figure a way out of the house");
-        TimeUnit.SECONDS.sleep(2);
+        
         txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.\n");
-        TimeUnit.SECONDS.sleep(2);
 
         txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }

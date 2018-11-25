@@ -3,6 +3,7 @@ package worldofzuul;
 import worldofzuulIO.TextIO;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -33,17 +35,23 @@ public class Start extends Application {
         lblCurrentRoom.setFont(new Font("Calibri", 30));
         lblCurrentRoom.setText("Bedroom");
         lblCurrentRoom.setVisible(false);
+        
+        //Ny Button der starter spillet
+        Button btnStart = new Button();
+        btnStart.setText("Start");
+        btnStart.setOnAction(new btnStartActionEventHandler(textIO, lblCurrentRoom, btnStart));
+        
+        //Her sættes label og knap ind i en VBOX som skal være i midten.
+        VBox vbCenter = new VBox();
+        vbCenter.setAlignment(Pos.CENTER);
+        vbCenter.getChildren().add(lblCurrentRoom);
+        vbCenter.getChildren().add(btnStart);
 
         //Ny Button der fungerer som input-knap
         Button btnInput = new Button();
         btnInput.setText("Input");
-//        btnInput.setOnAction(new btnInputActionEventHandler(game, txtFieldInput, lblCurrentRoom, txtAreaOutput));
-
-        //Ny Button der starter spillet
-        Button btnStart = new Button();
-        btnStart.setText("Start");
-        btnStart.setOnAction(new btnInputActionEventHandler(textIO, lblCurrentRoom, btnStart));
-
+        btnInput.setOnAction(new btnInputActionEventHandler(textIO, txtFieldInput, lblCurrentRoom, txtAreaOutput));
+        
         //HBox oprettes og TextField og Button sættes ind.
         HBox hbBottom = new HBox();
         hbBottom.setPadding(new Insets(10, 10, 10, 10));
@@ -56,8 +64,7 @@ public class Start extends Application {
         BorderPane root = new BorderPane();
         root.setBottom(hbBottom);
         root.setTop(txtAreaOutput);
-        root.setCenter(lblCurrentRoom);
-        root.setCenter(btnStart);
+        root.setCenter(vbCenter);
 
         Scene scene = new Scene(root, 600, 500);
 
