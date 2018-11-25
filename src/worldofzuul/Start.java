@@ -15,15 +15,59 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Start extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Ny TextArea
+        TextArea txtAreaOutput = new TextArea();
+        txtAreaOutput.setPadding(new Insets(10, 10, 10, 10));
+        txtAreaOutput.setEditable(false);
+        
+        TextIO textIO = new TextIO(new Game(), txtAreaOutput);
+
+        //Ny textField
+        TextField txtFieldInput = new TextField();
+
+        //Ny label der siger hvilket rum man befinder sig i.
+        Label lblCurrentRoom = new Label();
+        lblCurrentRoom.setFont(new Font("Calibri", 30));
+        lblCurrentRoom.setText("Bedroom");
+        lblCurrentRoom.setVisible(false);
+
+        //Ny Button der fungerer som input-knap
+        Button btnInput = new Button();
+        btnInput.setText("Input");
+//        btnInput.setOnAction(new btnInputActionEventHandler(game, txtFieldInput, lblCurrentRoom, txtAreaOutput));
+
+        //Ny Button der starter spillet
+        Button btnStart = new Button();
+        btnStart.setText("Start");
+        btnStart.setOnAction(new btnInputActionEventHandler(textIO, lblCurrentRoom, btnStart));
+
+        //HBox oprettes og TextField og Button sættes ind.
+        HBox hbBottom = new HBox();
+        hbBottom.setPadding(new Insets(10, 10, 10, 10));
+        hbBottom.setSpacing(10);
+        hbBottom.getChildren().add(txtFieldInput);
+        HBox.setHgrow(txtFieldInput, Priority.ALWAYS);
+
+        hbBottom.getChildren().add(btnInput);
+
+        BorderPane root = new BorderPane();
+        root.setBottom(hbBottom);
+        root.setTop(txtAreaOutput);
+        root.setCenter(lblCurrentRoom);
+        root.setCenter(btnStart);
+
+        Scene scene = new Scene(root, 600, 500);
+
+        primaryStage.setTitle("Fire Escape");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public static void main(String[] args) throws InterruptedException {
-        TextIO textIO = new TextIO(new Game());
-        textIO.play();
+        launch(args);
     }
 
 }
