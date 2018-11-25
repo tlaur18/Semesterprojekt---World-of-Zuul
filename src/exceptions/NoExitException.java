@@ -1,4 +1,4 @@
-package worldofzuul.exceptions;
+package exceptions;
 
 public class NoExitException extends Exception{
     public NoExitException() {

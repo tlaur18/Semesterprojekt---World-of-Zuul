@@ -1,14 +1,14 @@
 package worldofzuul;
 
-import worldofzuul.exceptions.MovingThroughFireException;
-import worldofzuul.exceptions.MovingThroughLockedDoorException;
-import worldofzuul.exceptions.NoExitException;
-import worldofzuul.exceptions.NoItemToDropException;
-import worldofzuul.exceptions.NoSecondWordGivenException;
-import worldofzuul.exceptions.NoSuchItemInRoomException;
-import worldofzuul.exceptions.PlayerInventoryFullException;
-import worldofzuul.exceptions.UseNonUseableItemException;
-import worldofzuul.exceptions.UseWithEmptyInventoryException;
+import exceptions.MovingThroughFireException;
+import exceptions.MovingThroughLockedDoorException;
+import exceptions.NoExitException;
+import exceptions.NoItemToDropException;
+import exceptions.NoSecondWordGivenException;
+import exceptions.NoSuchItemInRoomException;
+import exceptions.PlayerInventoryFullException;
+import exceptions.UseNonUseableItemException;
+import exceptions.UseWithEmptyInventoryException;
 
 public class Player {
 
