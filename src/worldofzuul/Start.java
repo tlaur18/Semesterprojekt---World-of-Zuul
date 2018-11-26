@@ -2,6 +2,8 @@ package worldofzuul;
 
 import worldofzuulIO.TextIO;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,7 +26,7 @@ public class Start extends Application {
         TextArea txtAreaOutput = new TextArea();
         txtAreaOutput.setPadding(new Insets(10, 10, 10, 10));
         txtAreaOutput.setEditable(false);
-        
+
         TextIO textIO = new TextIO(new Game(), txtAreaOutput);
 
         //Ny textField
@@ -35,12 +37,20 @@ public class Start extends Application {
         lblCurrentRoom.setFont(new Font("Calibri", 30));
         lblCurrentRoom.setText("Bedroom");
         lblCurrentRoom.setVisible(false);
-        
+
         //Ny Button der starter spillet
         Button btnStart = new Button();
         btnStart.setText("Start");
-        btnStart.setOnAction(new btnStartActionEventHandler(textIO, lblCurrentRoom, btnStart));
-        
+        btnStart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                lblCurrentRoom.setVisible(true);
+                btnStart.setVisible(false);
+                textIO.printWelcome();
+            }
+
+        });
+
         //Her sættes label og knap ind i en VBOX som skal være i midten.
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
@@ -50,15 +60,25 @@ public class Start extends Application {
         //Ny Button der fungerer som input-knap
         Button btnInput = new Button();
         btnInput.setText("Input");
-        btnInput.setOnAction(new btnInputActionEventHandler(textIO, txtFieldInput, lblCurrentRoom, txtAreaOutput));
-        
+        btnInput.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Parser parser = new Parser();
+                txtAreaOutput.appendText("\n");
+                String userInput = txtFieldInput.getText();
+                Command command = parser.getCommand(userInput);
+                textIO.processCommand(command);
+                lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
+                txtFieldInput.clear();
+            }
+        });
+
         //HBox oprettes og TextField og Button sættes ind.
         HBox hbBottom = new HBox();
         hbBottom.setPadding(new Insets(10, 10, 10, 10));
         hbBottom.setSpacing(10);
         hbBottom.getChildren().add(txtFieldInput);
         HBox.setHgrow(txtFieldInput, Priority.ALWAYS);
-
         hbBottom.getChildren().add(btnInput);
 
         BorderPane root = new BorderPane();

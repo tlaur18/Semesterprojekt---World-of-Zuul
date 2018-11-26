@@ -1,7 +1,5 @@
 package worldofzuulIO;
 
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import worldofzuul.Command;
 import worldofzuul.CommandWord;
 import worldofzuul.Game;
@@ -39,7 +37,6 @@ public class TextIO {
 //        }
 //        txtAreaOutput.appendText("\nThank you for playing. Good bye.");
 //    }
-
     public Game getGame() {
         return game;
     }
@@ -90,35 +87,35 @@ public class TextIO {
         txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }
 
-    public void printWelcome() throws InterruptedException {
+    public void printWelcome() {
         txtAreaOutput.appendText("Welcome to Fire Escape!\n");
-        
+
         txtAreaOutput.appendText("\n\tBEEEP! BEEEP! BEEEP!... A loud noise woke you up.");
         txtAreaOutput.appendText("\n\tYou notice the smell and see a thin layer of smoke in you room.");
         txtAreaOutput.appendText("\n\tThe first thing you do is to take your cellphone and call for emergency.");
         txtAreaOutput.appendText("\n\tThe number is 1-1-2.");
-        
+
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112: \n- This is 1-1-2. What is your emergency? ");
-        
+
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\nYou: \n- There is smoke in the room and I am all alone in the house.");
-        
+
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112: \n- Okay, just stay calm and lets get you to safety.");
-        
+
         txtAreaOutput.appendText("\n- It doesn't help to panic.");
-        
+
         txtAreaOutput.appendText("\n- What is your name?");
         txtAreaOutput.appendText("> ");
 
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n" + game.getPlayer().getPlayerName() + ": \n- My name is " + game.getPlayer().getPlayerName() + ". I will try my best with your help.\n");
-        
+
         txtAreaOutput.appendText("\n112: \n- You need to get to safety and thats your primary objective.");
-        
+
         txtAreaOutput.appendText("\n- You will encoutner some obstacles, and you will need to figure a way out of the house");
-        
+
         txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.\n");
 
         txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
@@ -138,19 +135,19 @@ public class TextIO {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
             updateFire();
-            
+
             //Tjekker om spilleren har vundet.
             if (game.getPlayer().hasWon()) {
                 txtAreaOutput.appendText("\nYOU WON THE GAME!");
                 return true;
             }
-            
+
             //Tjeker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
             if (game.getPlayer().getCurrentRoom().getGameOver()) {
                 txtAreaOutput.appendText("\nYou died...");
                 return true;
             }
-            
+
             //Sørger for at spilleren mister liv af ild.
             if (game.getPlayer().getCurrentRoom().getFire() != null) {
                 game.getPlayer().takeDamage((game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())));
@@ -176,7 +173,7 @@ public class TextIO {
         }
         return false;
     }
-    
+
     public void updateFire() {
         if (game.getPlayer().getStepCount() % 5 == 0) {
             txtAreaOutput.appendText("\nYou feel the fire inside the buidling getting worse...");
