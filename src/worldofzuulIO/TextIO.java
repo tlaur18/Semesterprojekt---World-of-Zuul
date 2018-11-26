@@ -27,36 +27,24 @@ public class TextIO {
         this.txtAreaOutput = txtAreaOutput;
         parser = new Parser();
     }
-
-//    public void play() throws InterruptedException {
-//        printWelcome();
-//        boolean finished = false;
-//        while (!finished) {
-//            Command command = parser.getCommand();
-//            finished = processCommand(command);
-//        }
-//        txtAreaOutput.appendText("\nThank you for playing. Good bye.");
-//    }
+    
     public Game getGame() {
         return game;
     }
 
-    public boolean processCommand(Command command) {
-        boolean wantToQuit = false;
-
+    public void processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
             txtAreaOutput.appendText("\nI don't know what you mean...");
-            return false;
         }
 
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
-            wantToQuit = processGoRoom(command);
+            processGoRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
-            wantToQuit = quit(command);
+            processQuit();
         } else if (commandWord == CommandWord.TAKE) {
             processTakeItem(command);
         } else if (commandWord == CommandWord.DROP) {
@@ -70,7 +58,6 @@ public class TextIO {
         } else if (commandWord == CommandWord.EXITS) {
             printExits();
         }
-        return wantToQuit;
     }
 
     private void printHelp() {
@@ -78,7 +65,7 @@ public class TextIO {
         txtAreaOutput.appendText("\naround at you own home.");
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\nYour command words are:");
-        txtAreaOutput.appendText("\n" + parser.getCommandsString());
+        txtAreaOutput.appendText(parser.getCommandsString());
 
         txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
     }
@@ -121,13 +108,8 @@ public class TextIO {
         txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }
 
-    private boolean quit(Command command) {
-        if (command.hasSecondWord()) {
-            txtAreaOutput.appendText("\nQuit what?");
-            return false;
-        } else {
-            return true;
-        }
+    private void processQuit() {
+        txtAreaOutput.appendText("\nTo quit, simply press the 'X' button in the top right corner of the window.");
     }
 
     private boolean processGoRoom(Command command) {
@@ -200,14 +182,14 @@ public class TextIO {
     private void processDropItem(Command command) {
         try {
             game.getPlayer().dropItem();
-            txtAreaOutput.appendText("You drop the ");
+            txtAreaOutput.appendText("\nYou drop the ");
             String nameOfDroppedItem = "";
             for (int i = 0; i < game.getPlayer().getCurrentRoom().getItems().size(); i++) {
                 if (i == game.getPlayer().getCurrentRoom().getItems().size() - 1) {
                     nameOfDroppedItem = game.getPlayer().getCurrentRoom().getItems().get(i).getName();
                 }
             }
-            txtAreaOutput.appendText("\n" + nameOfDroppedItem + ".");
+            txtAreaOutput.appendText(nameOfDroppedItem + ".");
         } catch (NoItemToDropException ex) {
             txtAreaOutput.appendText("\nYou do not carry anything to drop.");
         }

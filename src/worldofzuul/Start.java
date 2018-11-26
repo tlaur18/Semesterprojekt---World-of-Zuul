@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -28,16 +30,30 @@ public class Start extends Application {
         txtAreaOutput.setEditable(false);
 
         TextIO textIO = new TextIO(new Game(), txtAreaOutput);
-
-        //Ny textField
-        TextField txtFieldInput = new TextField();
-
+        
         //Ny label der siger hvilket rum man befinder sig i.
         Label lblCurrentRoom = new Label();
         lblCurrentRoom.setFont(new Font("Calibri", 30));
         lblCurrentRoom.setText("Bedroom");
         lblCurrentRoom.setVisible(false);
 
+        //Ny textField
+        TextField txtFieldInput = new TextField();
+        txtFieldInput.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode().equals(KeyCode.ENTER)) {
+                    Parser parser = new Parser();
+                    txtAreaOutput.appendText("\n");
+                    String userInput = txtFieldInput.getText();
+                    Command command = parser.getCommand(userInput);
+                    textIO.processCommand(command);
+                    lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
+                    txtFieldInput.clear();
+                }
+            }
+        });
+        
         //Ny Button der starter spillet
         Button btnStart = new Button();
         btnStart.setText("Start");
@@ -57,29 +73,12 @@ public class Start extends Application {
         vbCenter.getChildren().add(lblCurrentRoom);
         vbCenter.getChildren().add(btnStart);
 
-        //Ny Button der fungerer som input-knap
-        Button btnInput = new Button();
-        btnInput.setText("Input");
-        btnInput.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Parser parser = new Parser();
-                txtAreaOutput.appendText("\n");
-                String userInput = txtFieldInput.getText();
-                Command command = parser.getCommand(userInput);
-                textIO.processCommand(command);
-                lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
-                txtFieldInput.clear();
-            }
-        });
-
         //HBox oprettes og TextField og Button sættes ind.
         HBox hbBottom = new HBox();
         hbBottom.setPadding(new Insets(10, 10, 10, 10));
         hbBottom.setSpacing(10);
         hbBottom.getChildren().add(txtFieldInput);
         HBox.setHgrow(txtFieldInput, Priority.ALWAYS);
-        hbBottom.getChildren().add(btnInput);
 
         BorderPane root = new BorderPane();
         root.setBottom(hbBottom);
