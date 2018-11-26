@@ -28,9 +28,10 @@ public class Start extends Application {
         TextArea txtAreaOutput = new TextArea();
         txtAreaOutput.setPadding(new Insets(10, 10, 10, 10));
         txtAreaOutput.setEditable(false);
+        txtAreaOutput.setVisible(false);
 
         TextIO textIO = new TextIO(new Game(), txtAreaOutput);
-        
+
         //Ny label der siger hvilket rum man befinder sig i.
         Label lblCurrentRoom = new Label();
         lblCurrentRoom.setFont(new Font("Calibri", 30));
@@ -39,6 +40,7 @@ public class Start extends Application {
 
         //Ny textField
         TextField txtFieldInput = new TextField();
+        txtFieldInput.setVisible(false);
         txtFieldInput.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -53,15 +55,19 @@ public class Start extends Application {
                 }
             }
         });
-        
+
         //Ny Button der starter spillet
         Button btnStart = new Button();
         btnStart.setText("Start");
+        btnStart.setPrefSize(100, 40);
+        btnStart.setFont(new Font("Calibri", 30));
         btnStart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 lblCurrentRoom.setVisible(true);
                 btnStart.setVisible(false);
+                txtAreaOutput.setVisible(true);
+                txtFieldInput.setVisible(true);
                 textIO.printWelcome();
             }
 
@@ -70,8 +76,8 @@ public class Start extends Application {
         //Her sættes label og knap ind i en VBOX som skal være i midten.
         VBox vbCenter = new VBox();
         vbCenter.setAlignment(Pos.CENTER);
-        vbCenter.getChildren().add(lblCurrentRoom);
         vbCenter.getChildren().add(btnStart);
+        vbCenter.getChildren().add(lblCurrentRoom);
 
         //HBox oprettes og TextField og Button sættes ind.
         HBox hbBottom = new HBox();
