@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import worldofzuul.Command;
 import worldofzuul.Game;
 import worldofzuul.Parser;
@@ -44,6 +41,12 @@ public class MainController implements Initializable {
     private Button btnInspect;
     @FXML
     private Button btnHelp;
+    @FXML
+    private Label lblInventoryHeadline;
+    @FXML
+    private Label lblItemInInventory;
+    @FXML
+    private ImageView imgBackground;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -54,12 +57,13 @@ public class MainController implements Initializable {
     private void btnStartEventHandler(ActionEvent event) {
         lblCurrentRoom.setVisible(true);
         btnStart.setVisible(false);
-        txtAreaOutput.setVisible(true);
-        imgPhone.setVisible(true);
-        btnTake.setVisible(true);
-        btnDrop.setVisible(true);
-        btnInspect.setVisible(true);
-        btnHelp.setVisible(true);
+        btnTake.setDisable(false);
+        btnDrop.setDisable(false);
+        btnInspect.setDisable(false);
+        btnHelp.setDisable(false);
+        lblInventoryHeadline.setDisable(false);
+        lblItemInInventory.setDisable(false);
+        imgBackground.setVisible(true);
         printDirectionButtons();
         textIO.printWelcome();
     }
@@ -90,18 +94,22 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnTakeEventHandler(ActionEvent event) {
+
     }
 
     @FXML
     private void btnDropEventHandler(ActionEvent event) {
+        processCommand("drop");
     }
 
     @FXML
     private void btnInspectEventHandler(ActionEvent event) {
+        processCommand("inspect");
     }
 
     @FXML
     private void btnHelpEventHandler(ActionEvent event) {
+        processCommand("help");
     }
 
     private void processCommand(String inputLine) {
@@ -122,17 +130,25 @@ public class MainController implements Initializable {
             switch (exitString) {
                 case "north":
                     btnNorth.setVisible(true);
+                    btnNorth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("north").getName());
                     break;
                 case "west":
                     btnWest.setVisible(true);
+                    btnWest.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("west").getName());
                     break;
                 case "south":
                     btnSouth.setVisible(true);
+                    btnSouth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("south").getName());
                     break;
                 case "east":
                     btnEast.setVisible(true);
+                    btnEast.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("east").getName());
                     break;
             }
         }
+    }
+
+    private void printItems() {
+        
     }
 }
