@@ -40,44 +40,44 @@ public class Game {
         garage = new Room("Garage", "in the garage", 0, false);
         masterBedroom = new Room("Master Bedroom", "in the master bedroom", 0, false);
 
-        bedroom.setExit("hallway", hallway);
-        bedroom.setExit("window", window);
+        bedroom.setExit("east", hallway);
+        bedroom.setExit("west", window);
 
-        hallway.setExit("bedroom", bedroom);
-        hallway.setExit("sister-room", sistersRoom);
-        hallway.setExit("downstairs", livingRoom);
-        hallway.setExit("toilet", wc);
+        hallway.setExit("west", bedroom);
+        hallway.setExit("south", sistersRoom);
+        hallway.setExit("east", livingRoom);
+        hallway.setExit("north", wc);
 
-        sistersRoom.setExit("hallway", hallway);
+        sistersRoom.setExit("north", hallway);
 
-        wc.setExit("hallway", hallway);
+        wc.setExit("south", hallway);
 
-        livingRoom.setExit("upstairs", hallway);
-        livingRoom.setExit("basement", basement);
-        livingRoom.setExit("kitchen", kitchen);
-        livingRoom.setExit("office", office);
+        livingRoom.setExit("west", hallway);
+        livingRoom.setExit("south", basement);
+        livingRoom.setExit("east", kitchen);
+        livingRoom.setExit("north", office);
 
-        basement.setExit("livingroom", livingRoom);
-        basement.setExit("garage", garage);
+        basement.setExit("north", livingRoom);
+        basement.setExit("west", garage);
 
-        garage.setExit("basement", basement);
+        garage.setExit("east", basement);
 
-        kitchen.setExit("livingroom", livingRoom);
-        kitchen.setExit("entrance", entrance);
-        kitchen.setExit("conservatory", conservatory);
+        kitchen.setExit("west", livingRoom);
+        kitchen.setExit("east", entrance);
+        kitchen.setExit("south", conservatory);
 
-        conservatory.setExit("kitchen", kitchen);
+        conservatory.setExit("north", kitchen);
 
-        entrance.setExit("kitchen", kitchen);
-        entrance.setExit("outside", outside);
+        entrance.setExit("west", kitchen);
+        entrance.setExit("east", outside);
 
-        office.setExit("livingroom", livingRoom);
-        office.setExit("master-bedroom", masterBedroom);
+        office.setExit("south", livingRoom);
+        office.setExit("east", masterBedroom);
 
-        masterBedroom.setExit("office", office);
-        masterBedroom.setExit("toilet", wc2);
+        masterBedroom.setExit("west", office);
+        masterBedroom.setExit("east", wc2);
 
-        wc2.setExit("master-bedroom", masterBedroom);
+        wc2.setExit("west", masterBedroom);
 
         //Sætter rum man skal nå for at vinde:
         outside.setGameComplete();

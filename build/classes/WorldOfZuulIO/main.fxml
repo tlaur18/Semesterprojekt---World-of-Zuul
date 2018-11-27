@@ -31,10 +31,10 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnNorth" mnemonicParsing="false" onAction="#btnNorthEventHandler" text="Button" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
-            <Button fx:id="btnWest" mnemonicParsing="false" onAction="#btnWestEventHandler" text="Button" visible="false" GridPane.rowIndex="1" />
-            <Button fx:id="btnSouth" mnemonicParsing="false" onAction="#btnSouthEventHandler" text="Button" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-            <Button fx:id="btnEast" mnemonicParsing="false" onAction="#btnEastEventHandler" text="Button" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="btnNorth" mnemonicParsing="false" onAction="#btnNorthEventHandler" text="Go north" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP" />
+            <Button fx:id="btnWest" mnemonicParsing="false" onAction="#btnWestEventHandler" text="Go west" visible="false" GridPane.rowIndex="1" />
+            <Button fx:id="btnSouth" mnemonicParsing="false" onAction="#btnSouthEventHandler" text="Go south" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+            <Button fx:id="btnEast" mnemonicParsing="false" onAction="#btnEastEventHandler" text="Go east" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Label fx:id="lblCurrentRoom" text="Bedroom" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="30.0" />

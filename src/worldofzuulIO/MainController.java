@@ -60,6 +60,7 @@ public class MainController implements Initializable {
         btnStart.setVisible(false);
         txtAreaOutput.setVisible(true);
         txtFieldInput.setVisible(true);
+        printButtons();
         textIO.printWelcome();
     }
 
@@ -79,4 +80,27 @@ public class MainController implements Initializable {
     private void btnEastEventHandler(ActionEvent event) {
     }
 
+    private void printButtons() {
+        btnNorth.setVisible(false);
+        btnWest.setVisible(false);
+        btnSouth.setVisible(false);
+        btnEast.setVisible(false);
+
+        for (String exitString : textIO.getGame().getPlayer().getCurrentRoom().getExits().keySet()) {
+            switch (exitString) {
+                case "north":
+                    btnNorth.setVisible(true);
+                    break;
+                case "west":
+                    btnWest.setVisible(true);
+                    break;
+                case "south":
+                    btnSouth.setVisible(true);
+                    break;
+                case "east":
+                    btnEast.setVisible(true);
+                    break;
+            }
+        }
+    }
 }
