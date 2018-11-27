@@ -105,7 +105,7 @@ public class TextIO {
         txtAreaOutput.appendText("\n112:");
         txtAreaOutput.appendText("\n- You need to get to safety and thats your primary objective.");
         
-        txtAreaOutput.appendText("\n- You will encoutner some obstacles, and you will need to figure a way out of the house");
+        txtAreaOutput.appendText("\n- You will most likely encoutner some obstacles on your way out.");
 
         txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.");
 

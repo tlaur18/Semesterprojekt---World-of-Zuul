@@ -25,7 +25,7 @@ public class Game {
 
     private void createRooms() {
         bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", 0, false);
-        hallway = new Room("Hallway", "in the hallway with your sisters room, the door to the toilet and the staircase to downstairs", 0, false);
+        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", 0, false);
         sistersRoom = new Room("Sisters Room", "in your sister's room", 0, false);
         livingRoom = new Room("Living Room", "in the living room", 0, false);
         wc = new Room("Toilet", "on the toilet", 0, false);

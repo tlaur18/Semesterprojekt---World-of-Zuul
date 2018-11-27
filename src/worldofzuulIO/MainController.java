@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import worldofzuul.Command;
@@ -22,8 +23,6 @@ public class MainController implements Initializable {
     @FXML
     private TextArea txtAreaOutput;
     @FXML
-    private TextField txtFieldInput;
-    @FXML
     private Button btnStart;
     @FXML
     private Button btnNorth;
@@ -35,6 +34,16 @@ public class MainController implements Initializable {
     private Button btnEast;
     @FXML
     private Label lblCurrentRoom;
+    @FXML
+    private ImageView imgPhone;
+    @FXML
+    private Button btnTake;
+    @FXML
+    private Button btnDrop;
+    @FXML
+    private Button btnInspect;
+    @FXML
+    private Button btnHelp;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -42,56 +51,68 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void txtFieldInputEventHandler(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER)) {
-            processCommand(txtFieldInput.getText());
-        }
-    }
-
-    @FXML
     private void btnStartEventHandler(ActionEvent event) {
         lblCurrentRoom.setVisible(true);
         btnStart.setVisible(false);
         txtAreaOutput.setVisible(true);
-        txtFieldInput.setVisible(true);
-        printButtons();
+        imgPhone.setVisible(true);
+        btnTake.setVisible(true);
+        btnDrop.setVisible(true);
+        btnInspect.setVisible(true);
+        btnHelp.setVisible(true);
+        printDirectionButtons();
         textIO.printWelcome();
     }
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
         processCommand("go north");
-        printButtons();
+        printDirectionButtons();
     }
 
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
         processCommand("go west");
-        printButtons();
+        printDirectionButtons();
     }
 
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
         processCommand("go south");
-        printButtons();
+        printDirectionButtons();
     }
 
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
         processCommand("go east");
-        printButtons();
+        printDirectionButtons();
     }
-    
+
+    @FXML
+    private void btnTakeEventHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnDropEventHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnInspectEventHandler(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnHelpEventHandler(ActionEvent event) {
+    }
+
     private void processCommand(String inputLine) {
         Parser parser = new Parser();
         txtAreaOutput.appendText("\n");
         Command command = parser.getCommand(inputLine);
         textIO.processCommand(command);
         lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
-        txtFieldInput.clear();
     }
 
-    private void printButtons() {
+    private void printDirectionButtons() {
         btnNorth.setVisible(false);
         btnWest.setVisible(false);
         btnSouth.setVisible(false);
