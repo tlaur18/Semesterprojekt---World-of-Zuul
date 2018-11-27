@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -35,6 +36,8 @@ public class GamePageController implements Initializable {
     private Button inspectButton;
     @FXML
     private ImageView inventoryImage;
+    @FXML
+    private ImageView timon;
 
     /**
      * Initializes the controller class.
@@ -61,5 +64,4 @@ public class GamePageController implements Initializable {
     @FXML
     private void buttonInspect(ActionEvent event) {
     }
-    
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.WelcomeTextController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.WelcomeTextController">
    <top>
       <GridPane prefHeight="73.0" prefWidth="603.0" style="-fx-background-color: grey; -fx-border-color: black;" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -30,7 +30,7 @@
                </GridPane.margin></TextArea>
             <ImageView fitHeight="66.0" fitWidth="65.0" opacity="0.71" pickOnBounds="true" preserveRatio="true" x="100.0">
                <image>
-                  <Image url="@mobile-circle-logo-png-30.png" />
+                  <Image url="File:src/Images/mobile-circle-logo-png-30.png" />
                </image>
             </ImageView>
          </children>

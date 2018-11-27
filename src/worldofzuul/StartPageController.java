@@ -68,7 +68,8 @@ public class StartPageController implements Initializable {
     }
     
     @FXML
-    private void start4(ActionEvent event) {    
+    private void start4(ActionEvent event) {
+        System.exit(0);
     }
 
 }

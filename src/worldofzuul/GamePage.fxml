@@ -12,73 +12,83 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.GamePageController">
-   <top>
-      <GridPane prefHeight="73.0" prefWidth="603.0" style="-fx-background-color: grey; -fx-border-color: black;" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" percentWidth="0.0" prefWidth="93.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="507.0" minWidth="10.0" prefWidth="389.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="507.0" minWidth="10.0" prefWidth="118.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <TextArea fx:id="TextAreaTop" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 100;" text="TextArea&#10;&#10;" GridPane.columnIndex="1">
-               <GridPane.margin>
-                  <Insets bottom="8.0" top="8.0" />
-               </GridPane.margin></TextArea>
-            <ImageView fitHeight="66.0" fitWidth="65.0" opacity="0.71" pickOnBounds="true" preserveRatio="true" x="100.0">
-               <image>
-                  <Image url="@mobile-circle-logo-png-30.png" />
-               </image>
-            </ImageView>
-         </children>
-      </GridPane>
-   </top>
-   <center>
-      <StackPane cacheShape="false" prefHeight="150.0" prefWidth="200.0" scaleShape="false" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="ImageFloor" fitHeight="599.0" fitWidth="790.0">
-               <image>
-                  <Image url="@46476967_2172207723096749_4327188823554392064_n.jpg" />
-               </image>
-            </ImageView>
-         </children>
-      </StackPane>
-   </center>
-   <right>
-      <GridPane gridLinesVisible="true" prefHeight="245.0" prefWidth="118.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="121.0" minHeight="10.0" percentHeight="25.0" prefHeight="121.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="176.0" minHeight="10.0" percentHeight="25.0" prefHeight="74.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="301.0" minHeight="10.0" percentHeight="25.0" prefHeight="64.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="301.0" minHeight="10.0" percentHeight="25.0" prefHeight="141.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="301.0" minHeight="10.0" percentHeight="25.0" prefHeight="141.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Button fx:id="takeButton" mnemonicParsing="false" onAction="#buttonTake" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Take" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Button>
-            <Button fx:id="helpButton" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#buttonHelp" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Help" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Button>
-            <Button fx:id="dropButton" alignment="CENTER" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#buttonDrop" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Drop" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Button>
-            <Button fx:id="inspectButton" layoutX="10.0" layoutY="158.0" mnemonicParsing="false" onAction="#buttonInspect" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Inspect" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font></Button>
-            <ImageView fx:id="inventoryImage" fitHeight="60.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-         </children>
-      </GridPane>
-   </right>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuul.GamePageController">
+    <top>
+        <GridPane prefHeight="73.0" prefWidth="603.0" style="-fx-background-color: grey; -fx-border-color: black;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" percentWidth="0.0" prefWidth="93.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="507.0" minWidth="10.0" prefWidth="389.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="507.0" minWidth="10.0" prefWidth="118.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <TextArea fx:id="TextAreaTop" editable="false" prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 100;" text="TextArea&#10;&#10;" GridPane.columnIndex="1">
+                    <GridPane.margin>
+                        <Insets bottom="8.0" top="8.0" />
+                    </GridPane.margin>
+                </TextArea>
+                <ImageView fitHeight="66.0" fitWidth="65.0" opacity="0.71" pickOnBounds="true" preserveRatio="true" x="100.0">
+                    <image>
+                        <Image url="File:src/Images/mobile-circle-logo-png-30.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </GridPane>
+    </top>
+    <center>
+        <StackPane cacheShape="false" prefHeight="150.0" prefWidth="200.0" scaleShape="false" style="-fx-background-color: black;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true"/>
+                <ImageView fx:id="timon" fitHeight="50.0" fitWidth="50.0">
+                    <image>
+                        <Image url="File:src/Images/Timon.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="ImageFloor" fitHeight="450.0" fitWidth="600.0">
+                    <image>
+                        <Image url="File:src/Images/46476967_2172207723096749_4327188823554392064_n.jpg" />
+                    </image>
+                </ImageView>
+            </children>
+        </StackPane>
+    </center>
+    <right>
+        <GridPane gridLinesVisible="true" prefHeight="245.0" prefWidth="118.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="121.0" minHeight="10.0" percentHeight="25.0" prefHeight="121.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="176.0" minHeight="10.0" percentHeight="25.0" prefHeight="74.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="301.0" minHeight="10.0" percentHeight="25.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="301.0" minHeight="10.0" percentHeight="25.0" prefHeight="141.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="301.0" minHeight="10.0" percentHeight="25.0" prefHeight="141.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button fx:id="takeButton" mnemonicParsing="false" onAction="#buttonTake" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Take" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="helpButton" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#buttonHelp" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Help" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="dropButton" alignment="CENTER" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#buttonDrop" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Drop" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Button fx:id="inspectButton" layoutX="10.0" layoutY="158.0" mnemonicParsing="false" onAction="#buttonInspect" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: black;" text="Inspect" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <ImageView fx:id="inventoryImage" fitHeight="60.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            </children>
+        </GridPane>
+    </right>
 </BorderPane>
