@@ -44,13 +44,7 @@ public class MainController implements Initializable {
     @FXML
     private void txtFieldInputEventHandler(KeyEvent event) {
         if (event.getCode().equals(KeyCode.ENTER)) {
-            Parser parser = new Parser();
-            txtAreaOutput.appendText("\n");
-            String userInput = txtFieldInput.getText();
-            Command command = parser.getCommand(userInput);
-            textIO.processCommand(command);
-            lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
-            txtFieldInput.clear();
+            processCommand(txtFieldInput.getText());
         }
     }
 
@@ -66,18 +60,35 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
+        processCommand("go north");
+        printButtons();
     }
 
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
+        processCommand("go west");
+        printButtons();
     }
 
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
+        processCommand("go south");
+        printButtons();
     }
 
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
+        processCommand("go east");
+        printButtons();
+    }
+    
+    private void processCommand(String inputLine) {
+        Parser parser = new Parser();
+        txtAreaOutput.appendText("\n");
+        Command command = parser.getCommand(inputLine);
+        textIO.processCommand(command);
+        lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
+        txtFieldInput.clear();
     }
 
     private void printButtons() {
