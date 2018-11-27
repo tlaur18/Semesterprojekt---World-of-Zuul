@@ -29,7 +29,6 @@ public class Start extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Ny TextArea
         TextArea txtAreaOutput = new TextArea();
-        txtAreaOutput.setPadding(new Insets(10, 10, 10, 10));
         txtAreaOutput.setEditable(false);
         txtAreaOutput.setVisible(false);
 
@@ -88,10 +87,16 @@ public class Start extends Application {
         hbBottom.setSpacing(10);
         hbBottom.getChildren().add(txtFieldInput);
         HBox.setHgrow(txtFieldInput, Priority.ALWAYS);
+        
+        HBox hbTop = new HBox();
+        hbTop.setPadding(new Insets(10, 10, 10, 10));
+        hbTop.setSpacing(10);
+        hbTop.getChildren().add(txtAreaOutput);
+        HBox.setHgrow(txtAreaOutput, Priority.ALWAYS);
 
         BorderPane root = new BorderPane();
         root.setBottom(hbBottom);
-        root.setTop(txtAreaOutput);
+        root.setTop(hbTop);
         root.setCenter(vbCenter);
 
         Scene scene = new Scene(root, 600, 500);
