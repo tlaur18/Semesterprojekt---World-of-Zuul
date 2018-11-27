@@ -1,4 +1,4 @@
-package worldofzuul;
+package worldofzuulIO;
 
 import worldofzuulIO.TextIO;
 import javafx.application.Application;
@@ -19,6 +19,9 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import worldofzuul.Command;
+import worldofzuul.Game;
+import worldofzuul.Parser;
 
 public class Start extends Application {
 
