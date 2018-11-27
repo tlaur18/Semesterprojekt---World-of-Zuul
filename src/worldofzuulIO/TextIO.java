@@ -75,36 +75,41 @@ public class TextIO {
     }
 
     public void printWelcome() {
-        txtAreaOutput.appendText("Welcome to Fire Escape!\n");
+        txtAreaOutput.appendText("Welcome to Fire Escape!");
 
+        txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n\tBEEEP! BEEEP! BEEEP!... A loud noise woke you up.");
         txtAreaOutput.appendText("\n\tYou notice the smell and see a thin layer of smoke in you room.");
         txtAreaOutput.appendText("\n\tThe first thing you do is to take your cellphone and call for emergency.");
         txtAreaOutput.appendText("\n\tThe number is 1-1-2.");
 
         txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n112: \n- This is 1-1-2. What is your emergency? ");
-
+        txtAreaOutput.appendText("\n112:");
+        txtAreaOutput.appendText("\n- This is 1-1-2. What is your emergency?");
+        
         txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\nYou: \n- There is smoke in the room and I am all alone in the house.");
-
+        txtAreaOutput.appendText("\nYou:");
+        txtAreaOutput.appendText("\n- There is smoke in the room and I am all alone in the house.");
+        
         txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n112: \n- Okay, just stay calm and lets get you to safety.");
-
+        txtAreaOutput.appendText("\n112:");
+        txtAreaOutput.appendText("\n- Okay, just stay calm and lets get you to safety.");
         txtAreaOutput.appendText("\n- It doesn't help to panic.");
-
         txtAreaOutput.appendText("\n- What is your name?");
-        txtAreaOutput.appendText("> ");
 
         txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n" + game.getPlayer().getPlayerName() + ": \n- My name is " + game.getPlayer().getPlayerName() + ". I will try my best with your help.\n");
+        txtAreaOutput.appendText("\n" + game.getPlayer().getPlayerName() + ": ");
+        txtAreaOutput.appendText("\n- My name is " + game.getPlayer().getPlayerName() + ". I will try my best with your help.");
 
-        txtAreaOutput.appendText("\n112: \n- You need to get to safety and thats your primary objective.");
-
+        txtAreaOutput.appendText("\n");
+        txtAreaOutput.appendText("\n112:");
+        txtAreaOutput.appendText("\n- You need to get to safety and thats your primary objective.");
+        
         txtAreaOutput.appendText("\n- You will encoutner some obstacles, and you will need to figure a way out of the house");
 
-        txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.\n");
+        txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.");
 
+        txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }
 
@@ -112,7 +117,7 @@ public class TextIO {
         txtAreaOutput.appendText("\nTo quit, simply press the 'X' button in the top right corner of the window.");
     }
 
-    private boolean processGoRoom(Command command) {
+    private void processGoRoom(Command command) {
         try {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
@@ -121,13 +126,13 @@ public class TextIO {
             //Tjekker om spilleren har vundet.
             if (game.getPlayer().hasWon()) {
                 txtAreaOutput.appendText("\nYOU WON THE GAME!");
-                return true;
+                return;
             }
 
             //Tjeker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
             if (game.getPlayer().getCurrentRoom().getGameOver()) {
                 txtAreaOutput.appendText("\nYou died...");
-                return true;
+                return;
             }
 
             //Sørger for at spilleren mister liv af ild.
@@ -137,7 +142,7 @@ public class TextIO {
                 if (game.getPlayer().isDead() == true) {
                     txtAreaOutput.appendText("\nYour health is: " + game.getPlayer().getHealth());
                     txtAreaOutput.appendText("\nYou died...");
-                    return true;
+                    return;
                 }
             }
 
@@ -153,7 +158,6 @@ public class TextIO {
         } catch (MovingThroughLockedDoorException ex) {
             txtAreaOutput.appendText("\nThe door is locked! You need a key to open the door!");
         }
-        return false;
     }
 
     public void updateFire() {
