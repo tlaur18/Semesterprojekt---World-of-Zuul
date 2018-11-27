@@ -12,7 +12,7 @@ public class Game {
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
 
-    public Game() throws InterruptedException {
+    public Game() {
         createRooms();
         createItems();
         createFire();
