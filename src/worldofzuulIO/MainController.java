@@ -3,14 +3,18 @@ package worldofzuulIO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import worldofzuul.Command;
 import worldofzuul.Game;
+import worldofzuul.Item;
 import worldofzuul.Parser;
 
 public class MainController implements Initializable {
@@ -44,9 +48,11 @@ public class MainController implements Initializable {
     @FXML
     private Label lblInventoryHeadline;
     @FXML
-    private Label lblItemInInventory;
-    @FXML
     private ImageView imgBackground;
+    @FXML
+    private Pane paneRoom;
+    @FXML
+    private ImageView imgInventory;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -62,34 +68,42 @@ public class MainController implements Initializable {
         btnInspect.setDisable(false);
         btnHelp.setDisable(false);
         lblInventoryHeadline.setDisable(false);
-        lblItemInInventory.setDisable(false);
         imgBackground.setVisible(true);
         printDirectionButtons();
         textIO.printWelcome();
+        printItems();
     }
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
+        removeItems();
         processCommand("go north");
         printDirectionButtons();
+        printItems();
     }
 
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
+        removeItems();
         processCommand("go west");
         printDirectionButtons();
+        printItems();
     }
 
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
+        removeItems();
         processCommand("go south");
         printDirectionButtons();
+        printItems();
     }
 
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
+        removeItems();
         processCommand("go east");
         printDirectionButtons();
+        printItems();
     }
 
     @FXML
@@ -99,7 +113,10 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnDropEventHandler(ActionEvent event) {
+        removeItems();
         processCommand("drop");
+        printItems();
+        imgInventory.setImage(null);
     }
 
     @FXML
@@ -149,6 +166,25 @@ public class MainController implements Initializable {
     }
 
     private void printItems() {
-        
+        for (Item item : textIO.getGame().getPlayer().getCurrentRoom().getItems()) {
+            ImageView img = item.getImage();
+            paneRoom.getChildren().add(img);
+
+            img.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent e) {
+                    processCommand("take " + item.getName());
+                    imgInventory.setImage(img.getImage());
+                    paneRoom.getChildren().remove(img);
+                }
+            });
+        }
+    }
+
+    private void removeItems() {
+        for (Item item : textIO.getGame().getPlayer().getCurrentRoom().getItems()) {
+            ImageView img = item.getImage();
+            paneRoom.getChildren().remove(img);
+        }
     }
 }

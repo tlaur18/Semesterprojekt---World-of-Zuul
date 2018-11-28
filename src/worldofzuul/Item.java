@@ -1,13 +1,21 @@
 package worldofzuul;
 
+import javafx.scene.image.ImageView;
+
 public class Item {
 
     private String name;
     private String description;
+    private ImageView img;
 
     public Item(String name, String description) {
         this.name = name;
         this.description = description;
+        img = new ImageView("Imgs\\Bucket.png");
+        img.fitHeightProperty().set(50);
+        img.fitWidthProperty().set(50);
+        img.setTranslateX(Math.random() * 400);
+        img.setTranslateY(Math.random() * 400);
     }
 
     public String getName() {
@@ -24,5 +32,9 @@ public class Item {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ImageView getImage() {
+        return img;
     }
 }
