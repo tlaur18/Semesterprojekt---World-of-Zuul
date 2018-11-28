@@ -6,8 +6,8 @@ public class Bucket extends UseableItem {
     private Room[] useableRooms;
     private boolean isUsed;
 
-    public Bucket(String name, String description, Room r1, Room r2) {
-        super(name, description);
+    public Bucket(String name, String description, Room r1, Room r2, String imgURL) {
+        super(name, description, imgURL);
         isFilled = false;
         isUsed = false;
         useableRooms = new Room[2];

@@ -8,10 +8,10 @@ public class Item {
     private String description;
     private ImageView img;
 
-    public Item(String name, String description) {
+    public Item(String name, String description, String imgURL) {
         this.name = name;
         this.description = description;
-        img = new ImageView("Imgs\\Bucket.png");
+        img = new ImageView(imgURL);
         img.fitHeightProperty().set(50);
         img.fitWidthProperty().set(50);
         img.setTranslateX(Math.random() * 400);

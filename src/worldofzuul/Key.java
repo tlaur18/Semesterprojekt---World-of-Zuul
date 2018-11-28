@@ -2,8 +2,8 @@ package worldofzuul;
 
 public class Key extends UseableItem {
 
-    public Key(String name, String description) {
-        super(name, description);
+    public Key(String name, String description, String imgURL) {
+        super(name, description, imgURL);
     }
 
     @Override

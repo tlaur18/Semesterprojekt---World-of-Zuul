@@ -5,8 +5,8 @@ public class BigFireExtinguisher extends UseableItem {
     boolean isEmpty = false;
     private Room[] useableRooms;
 
-    public BigFireExtinguisher(String name, String description, Room r1) {
-        super(name, description);
+    public BigFireExtinguisher(String name, String description, Room r1, String imgURL) {
+        super(name, description, imgURL);
         useableRooms = new Room[1];
         useableRooms[0] = r1;
     }

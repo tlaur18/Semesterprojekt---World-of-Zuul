@@ -2,8 +2,8 @@ package worldofzuul;
 
 public class Doll extends UseableItem {
 
-    public Doll(String name, String description) {
-        super(name, description);
+    public Doll(String name, String description, String imgURL) {
+        super(name, description, imgURL);
     }
 
     @Override

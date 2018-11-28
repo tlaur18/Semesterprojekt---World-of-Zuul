@@ -2,8 +2,8 @@ package worldofzuul;
 
 public class YankieBar extends UseableItem {
 
-    public YankieBar(String name, String description) {
-        super(name, description);
+    public YankieBar(String name, String description, String imgURL) {
+        super(name, description, imgURL);
     }
 
     @Override

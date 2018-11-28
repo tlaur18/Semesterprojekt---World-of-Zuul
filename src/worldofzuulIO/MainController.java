@@ -173,9 +173,11 @@ public class MainController implements Initializable {
             img.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent e) {
+                    if (textIO.getGame().getPlayer().getInventory() == null) {
+                        imgInventory.setImage(img.getImage());
+                        paneRoom.getChildren().remove(img);
+                    }
                     processCommand("take " + item.getName());
-                    imgInventory.setImage(img.getImage());
-                    paneRoom.getChildren().remove(img);
                 }
             });
         }
