@@ -108,7 +108,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnUseEventHandler(ActionEvent event) {
-        processCommand("use " + textIO.getGame().getPlayer().getInventory().getName());
+        processCommand("use " + (textIO.getGame().getPlayer().getInventory() != null ? textIO.getGame().getPlayer().getInventory().getName() : ""));
         if (textIO.getGame().getPlayer().getInventory() == null) {
             imgInventory.setImage(null);
         }
