@@ -38,8 +38,6 @@ public class MainController implements Initializable {
     @FXML
     private ImageView imgPhone;
     @FXML
-    private Button btnTake;
-    @FXML
     private Button btnDrop;
     @FXML
     private Button btnInspect;
@@ -53,6 +51,8 @@ public class MainController implements Initializable {
     private Pane paneRoom;
     @FXML
     private ImageView imgInventory;
+    @FXML
+    private Button btnUse;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,7 +63,7 @@ public class MainController implements Initializable {
     private void btnStartEventHandler(ActionEvent event) {
         lblCurrentRoom.setVisible(true);
         btnStart.setVisible(false);
-        btnTake.setDisable(false);
+        btnUse.setDisable(false);
         btnDrop.setDisable(false);
         btnInspect.setDisable(false);
         btnHelp.setDisable(false);
@@ -107,8 +107,8 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void btnTakeEventHandler(ActionEvent event) {
-
+    private void btnUseEventHandler(ActionEvent event) {
+        processCommand("use " + textIO.getGame().getPlayer().getInventory().getName());
     }
 
     @FXML

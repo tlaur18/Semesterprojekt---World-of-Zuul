@@ -89,14 +89,14 @@ public class Game {
     private void createItems() {
         bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2, "Imgs\\Bucket.png");
         toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs\\Toothbrush.png");
-        smallFireExtinguisher = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office, "Imgs\\SmallFireExtinguisher.png");
-        smallFireExtinguisher2 = new SmallFireExtinguisher("FireEx", "Used to extinguish small fire.", office, "Imgs\\SmallFireExtinguisher.png");
-        bigFireExtinguisher = new BigFireExtinguisher("FireExXL", "Used to extinguish big fire.", kitchen, "Imgs\\BigFireExtinguisher.png");
+        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", office, "Imgs\\SmallFireExtinguisher.png");
+        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", office, "Imgs\\SmallFireExtinguisher.png");
+        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", kitchen, "Imgs\\BigFireExtinguisher.png");
         towel = new NonUseableItem("Towel", "Used to dry yourself", "Imgs\\Towel.png");
         doll = new Doll("Doll", "A girly play doll", "Imgs\\Doll.png");
         key = new Key("Key", "Used to unlock things.", "Imgs\\Key.png");
         football = new NonUseableItem("Football", "A round toy used to being kicked", "Imgs\\Football.png");
-        yankieBar = new YankieBar("Yankie", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!", "Imgs\\YankieBar.png");
+        yankieBar = new YankieBar("YankieBar", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!", "Imgs\\YankieBar.png");
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);

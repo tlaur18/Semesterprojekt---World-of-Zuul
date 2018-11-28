@@ -46,7 +46,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnTake" disable="true" mnemonicParsing="false" onAction="#btnTakeEventHandler" prefWidth="80.0" text="Take" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="btnUse" disable="true" mnemonicParsing="false" onAction="#btnUseEventHandler" prefWidth="80.0" text="Use" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button fx:id="btnDrop" disable="true" mnemonicParsing="false" onAction="#btnDropEventHandler" prefWidth="80.0" text="Drop" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button fx:id="btnInspect" disable="true" mnemonicParsing="false" onAction="#btnInspectEventHandler" prefWidth="80.0" text="Inspect" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
             <Button fx:id="btnHelp" disable="true" mnemonicParsing="false" onAction="#btnHelpEventHandler" prefWidth="80.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
