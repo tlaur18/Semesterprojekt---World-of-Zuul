@@ -137,7 +137,6 @@ public class MainController implements Initializable {
     @FXML
     private void btnInspectEventHandler(ActionEvent event) {
         processCommand("inspect");
-        disableGame();
     }
 
     @FXML
