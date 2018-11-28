@@ -27,7 +27,7 @@ public class TextIO {
         this.txtAreaOutput = txtAreaOutput;
         parser = new Parser();
     }
-    
+
     public Game getGame() {
         return game;
     }
@@ -55,8 +55,6 @@ public class TextIO {
             processSearchRoom();
         } else if (commandWord == CommandWord.USE) {
             processUseItem();
-        } else if (commandWord == CommandWord.EXITS) {
-            printExits();
         }
     }
 
@@ -68,10 +66,6 @@ public class TextIO {
         txtAreaOutput.appendText(parser.getCommandsString());
 
         txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
-    }
-
-    private void printExits() {
-        txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }
 
     public void printWelcome() {
@@ -86,11 +80,11 @@ public class TextIO {
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112:");
         txtAreaOutput.appendText("\n- This is 1-1-2. What is your emergency?");
-        
+
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\nYou:");
         txtAreaOutput.appendText("\n- There is smoke in the room and I am all alone in the house.");
-        
+
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112:");
         txtAreaOutput.appendText("\n- Okay, just stay calm and lets get you to safety.");
@@ -104,13 +98,12 @@ public class TextIO {
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n112:");
         txtAreaOutput.appendText("\n- You need to get to safety and thats your primary objective.");
-        
+
         txtAreaOutput.appendText("\n- You will most likely encoutner some obstacles on your way out.");
 
         txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.");
 
         txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
     }
 
     private void processQuit() {
@@ -147,8 +140,6 @@ public class TextIO {
             }
 
             txtAreaOutput.appendText("\nYour health is: " + game.getPlayer().getHealth());
-
-            txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getExitString());
         } catch (NoSecondWordGivenException ex) {
             txtAreaOutput.appendText("\nGo where?");
         } catch (NoExitException ex) {

@@ -74,15 +74,6 @@ public class Room {
         return exits;
     }
 
-    public String getExitString() {
-        String returnString = "EXITS: | ";
-        Set<String> keys = exits.keySet();
-        for (String exit : keys) {
-            returnString += exit + " | ";
-        }
-        return returnString;
-    }
-
     public Room getExit(String direction) {
         return exits.get(direction);
     }
