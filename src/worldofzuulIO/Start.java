@@ -21,5 +21,8 @@ public class Start extends Application {
     public static void main(String[] args) throws InterruptedException {
         launch(args);
     }
-
+    
+    public void restart() throws Exception {
+        start(new Stage());
+    }
 }

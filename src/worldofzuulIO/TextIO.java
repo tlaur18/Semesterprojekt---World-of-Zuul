@@ -11,6 +11,7 @@ import exceptions.NoExitException;
 import exceptions.NoItemToDropException;
 import exceptions.NoSecondWordGivenException;
 import exceptions.NoSuchItemInRoomException;
+import exceptions.PlayerDiedException;
 import exceptions.PlayerInventoryFullException;
 import exceptions.UseNonUseableItemException;
 import exceptions.UseWithEmptyInventoryException;
@@ -32,7 +33,7 @@ public class TextIO {
         return game;
     }
 
-    public void processCommand(Command command) {
+    public void processCommand(Command command) throws PlayerDiedException {
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
@@ -110,7 +111,7 @@ public class TextIO {
         txtAreaOutput.appendText("\nTo quit, simply press the 'X' button in the top right corner of the window.");
     }
 
-    private void processGoRoom(Command command) {
+    private void processGoRoom(Command command) throws PlayerDiedException {
         try {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
@@ -124,8 +125,7 @@ public class TextIO {
 
             //Tjeker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
             if (game.getPlayer().getCurrentRoom().getGameOver()) {
-                txtAreaOutput.appendText("\nYou died...");
-                return;
+                throw new PlayerDiedException();
             }
 
             //Sørger for at spilleren mister liv af ild.
@@ -133,9 +133,7 @@ public class TextIO {
                 game.getPlayer().takeDamage((game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())));
                 txtAreaOutput.appendText("\nYou have been damaged by the fire and lost " + (game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())) + " health!");
                 if (game.getPlayer().isDead() == true) {
-                    txtAreaOutput.appendText("\nYour health is: " + game.getPlayer().getHealth());
-                    txtAreaOutput.appendText("\nYou died...");
-                    return;
+                    throw new PlayerDiedException();
                 }
             }
 

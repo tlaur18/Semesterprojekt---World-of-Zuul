@@ -1,17 +1,27 @@
 package worldofzuulIO;
 
+import exceptions.PlayerDiedException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Game;
 import worldofzuul.Item;
@@ -19,8 +29,10 @@ import worldofzuul.Parser;
 
 public class MainController implements Initializable {
 
-    TextIO textIO;
+    private TextIO textIO;
 
+    @FXML
+    private BorderPane root;
     @FXML
     private TextArea txtAreaOutput;
     @FXML
@@ -125,6 +137,7 @@ public class MainController implements Initializable {
     @FXML
     private void btnInspectEventHandler(ActionEvent event) {
         processCommand("inspect");
+        disableGame();
     }
 
     @FXML
@@ -133,11 +146,63 @@ public class MainController implements Initializable {
     }
 
     private void processCommand(String inputLine) {
-        Parser parser = new Parser();
-        txtAreaOutput.appendText("\n");
-        Command command = parser.getCommand(inputLine);
-        textIO.processCommand(command);
-        lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
+        try {
+            Parser parser = new Parser();
+            txtAreaOutput.appendText("\n");
+            Command command = parser.getCommand(inputLine);
+            textIO.processCommand(command);
+            lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
+        } catch (PlayerDiedException ex) {
+            txtAreaOutput.appendText("\nYou died...");
+            disableGame();
+
+            Label lblDead = new Label();
+            lblDead.setText("You died. Would you like to try again?");
+
+            Button btnYes = new Button();
+            btnYes.setText("Yes");
+            btnYes.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    Start start = new Start();
+                    try {
+                        start.restart();
+                    } catch (Exception ex1) {
+                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+                }
+            });
+
+            Button btnNo = new Button();
+            btnNo.setText("No");
+            btnNo.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+
+            HBox hBox = new HBox();
+            hBox.getChildren().add(btnYes);
+            hBox.getChildren().add(btnNo);
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setPadding(new Insets(10, 10, 10, 10));
+            hBox.setSpacing(10);
+
+            VBox vBox = new VBox();
+            vBox.getChildren().add(lblDead);
+            vBox.getChildren().add(hBox);
+            vBox.setAlignment(Pos.CENTER);
+
+            Scene scene = new Scene(vBox);
+
+            Stage deadStage = new Stage();
+            deadStage.setScene(scene);
+            deadStage.setHeight(150);
+            deadStage.setWidth(300);
+            deadStage.setTitle("Try again?");
+            deadStage.show();
+        }
     }
 
     private void printDirectionButtons() {
@@ -191,5 +256,9 @@ public class MainController implements Initializable {
             ImageView img = item.getImage();
             paneRoom.getChildren().remove(img);
         }
+    }
+
+    private void disableGame() {
+        root.setDisable(true);
     }
 }
