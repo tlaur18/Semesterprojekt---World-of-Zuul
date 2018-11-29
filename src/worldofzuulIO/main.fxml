@@ -67,6 +67,11 @@
                   <Image url="@../Imgs/46476967_2172207723096749_4327188823554392064_n.jpg" />
                </image>
             </ImageView>
+            <ImageView fx:id="timon" layoutX="313.0" layoutY="210.0" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" visible="false">
+                <image>
+                    <Image url="@../Imgs/Timon.png" />
+                </image>
+            </ImageView>
             <Button fx:id="btnStart" alignment="TOP_LEFT" layoutX="299.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnStartEventHandler" text="Start">
                <font>
                   <Font size="30.0" />

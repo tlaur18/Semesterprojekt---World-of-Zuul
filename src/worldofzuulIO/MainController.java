@@ -60,6 +60,8 @@ public class MainController implements Initializable {
     @FXML
     private ImageView imgBackground;
     @FXML
+    private ImageView timon;
+    @FXML
     private Pane paneRoom;
     @FXML
     private ImageView imgInventory;
@@ -81,6 +83,7 @@ public class MainController implements Initializable {
         btnHelp.setDisable(false);
         lblInventoryHeadline.setDisable(false);
         imgBackground.setVisible(true);
+        timon.setVisible(true);
         printDirectionButtons();
         textIO.printWelcome();
         printItems();
