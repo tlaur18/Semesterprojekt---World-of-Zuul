@@ -199,7 +199,7 @@ public class MainController implements Initializable {
                     
                     Start start = new Start();
                     try {
-                        start.restart();
+                        start.start(new Stage());
                     } catch (Exception ex1) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
                     }
