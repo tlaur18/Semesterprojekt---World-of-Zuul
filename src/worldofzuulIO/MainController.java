@@ -160,17 +160,6 @@ public class MainController implements Initializable {
 
             Button btnYes = new Button();
             btnYes.setText("Yes");
-            btnYes.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    Start start = new Start();
-                    try {
-                        start.restart();
-                    } catch (Exception ex1) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                }
-            });
 
             Button btnNo = new Button();
             btnNo.setText("No");
@@ -201,6 +190,23 @@ public class MainController implements Initializable {
             deadStage.setWidth(300);
             deadStage.setTitle("Try again?");
             deadStage.show();
+            
+            btnYes.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    Stage primaryStage = (Stage) root.getScene().getWindow();
+                    primaryStage.close();
+                    
+                    Start start = new Start();
+                    try {
+                        start.restart();
+                    } catch (Exception ex1) {
+                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
+                    }
+                    
+                    deadStage.close();
+                }
+            });
         }
     }
 
