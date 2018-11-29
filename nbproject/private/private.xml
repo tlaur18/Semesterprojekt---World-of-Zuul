@@ -3,22 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/BigFireExtinguisher.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Item.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/SmallFireExtinguisher.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/exceptions/PlayerDiedException.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuulIO/MainController.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/UseableItem.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/YankieBar.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Game.java</file>
             <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuulIO/Start.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/NonUseableItem.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Player.java</file>
             <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuulIO/TextIO.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Bucket.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Doll.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Room.java</file>
-            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuul/Key.java</file>
+            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuulIO/MainController.java</file>
+            <file>file:/C:/Users/thoma/Documents/GitHub/Semesterprojekt---World-of-Zuul/src/worldofzuulIO/printWithPacingEventHandler.java</file>
         </group>
     </open-files>
 </project-private>

@@ -155,7 +155,6 @@ public class MainController implements Initializable {
             textIO.processCommand(command);
             lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
-            txtAreaOutput.appendText("\nYou died...");
             disableGame();
 
             Label lblDead = new Label();
