@@ -58,23 +58,23 @@ public class Game {
         livingRoom.setExit("north", office);
 
         basement.setExit("north", livingRoom);
-        basement.setExit("west", garage);
+        basement.setExit("east", garage);
 
-        garage.setExit("east", basement);
+        garage.setExit("west", basement);
 
         kitchen.setExit("west", livingRoom);
         kitchen.setExit("east", entrance);
-        kitchen.setExit("south", conservatory);
+        kitchen.setExit("north", conservatory);
 
-        conservatory.setExit("north", kitchen);
+        conservatory.setExit("south", kitchen);
 
         entrance.setExit("west", kitchen);
         entrance.setExit("east", outside);
 
         office.setExit("south", livingRoom);
-        office.setExit("east", masterBedroom);
+        office.setExit("north", masterBedroom);
 
-        masterBedroom.setExit("west", office);
+        masterBedroom.setExit("south", office);
         masterBedroom.setExit("east", wc2);
 
         wc2.setExit("west", masterBedroom);
