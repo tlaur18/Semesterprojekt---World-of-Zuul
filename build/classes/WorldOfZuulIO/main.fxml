@@ -64,7 +64,7 @@
          <children>
             <ImageView fx:id="imgBackground" fitHeight="498.0" fitWidth="700.0" pickOnBounds="true" visible="false">
                <image>
-                  <Image url="@../Imgs/46476967_2172207723096749_4327188823554392064_n.jpg" />
+                  <Image url="@../Imgs/bedroom.png" />
                </image>
             </ImageView>
             <ImageView fx:id="timon" layoutX="313.0" layoutY="210.0" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" visible="false">
