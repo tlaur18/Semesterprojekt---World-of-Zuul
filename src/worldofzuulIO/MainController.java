@@ -190,20 +190,20 @@ public class MainController implements Initializable {
             deadStage.setWidth(300);
             deadStage.setTitle("Try again?");
             deadStage.show();
-            
+
             btnYes.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
                     Stage primaryStage = (Stage) root.getScene().getWindow();
                     primaryStage.close();
-                    
+
                     Start start = new Start();
                     try {
                         start.start(new Stage());
                     } catch (Exception ex1) {
                         Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
                     }
-                    
+
                     deadStage.close();
                 }
             });
