@@ -15,7 +15,6 @@ import exceptions.PlayerDiedException;
 import exceptions.PlayerInventoryFullException;
 import exceptions.UseNonUseableItemException;
 import exceptions.UseWithEmptyInventoryException;
-import java.util.ArrayList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
@@ -73,7 +72,7 @@ public class TextIO {
         txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
     }
 
-    public void printWelcome() {
+    public void printWelcome(TextArea txtArea) {
         String welcomeText = "";
         
         welcomeText += "Welcome to Fire Escape!";
@@ -112,11 +111,11 @@ public class TextIO {
 
         welcomeText += "\n";
         
-        printWithPacing(welcomeText);
+        printWithPacing(welcomeText, txtArea);
     }
     
-    private void printWithPacing(String textToPrint) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(30), new printWithPacingEventHandler(textToPrint, txtAreaOutput)));
+    private void printWithPacing(String textToPrint, TextArea txtArea) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(40), new printWithPacingEventHandler(textToPrint, txtArea)));
         timeline.setCycleCount(textToPrint.length());
         timeline.play();
     }
