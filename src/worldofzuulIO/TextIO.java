@@ -13,6 +13,7 @@ import exceptions.NoSecondWordGivenException;
 import exceptions.NoSuchItemInRoomException;
 import exceptions.PlayerDiedException;
 import exceptions.PlayerInventoryFullException;
+import exceptions.PlayerWinException;
 import exceptions.UseNonUseableItemException;
 import exceptions.UseWithEmptyInventoryException;
 import javafx.scene.control.TextArea;
@@ -33,7 +34,7 @@ public class TextIO {
         return game;
     }
 
-    public void processCommand(Command command) throws PlayerDiedException {
+    public void processCommand(Command command) throws PlayerDiedException, PlayerWinException {
         CommandWord commandWord = command.getCommandWord();
 
         if (commandWord == CommandWord.UNKNOWN) {
@@ -111,7 +112,7 @@ public class TextIO {
         txtAreaOutput.appendText("\nTo quit, simply press the 'X' button in the top right corner of the window.");
     }
 
-    private void processGoRoom(Command command) throws PlayerDiedException {
+    private void processGoRoom(Command command) throws PlayerDiedException, PlayerWinException {
         try {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
@@ -119,8 +120,7 @@ public class TextIO {
 
             //Tjekker om spilleren har vundet.
             if (game.getPlayer().hasWon()) {
-                txtAreaOutput.appendText("\nYOU WON THE GAME!");
-                return;
+                throw new PlayerWinException();
             }
 
             //Tjeker om spilleren går ind i et rum der forsager øjeblikkelig nederlag

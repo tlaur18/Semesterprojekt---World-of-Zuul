@@ -1,6 +1,7 @@
 package worldofzuulIO;
 
 import exceptions.PlayerDiedException;
+import exceptions.PlayerWinException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -15,21 +16,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Game;
 import worldofzuul.Item;
 import worldofzuul.Parser;
+import worldofzuul.Player;
 
 public class MainController implements Initializable {
 
     private TextIO textIO;
+    private Game game;
 
     @FXML
     private BorderPane root;
@@ -75,18 +81,60 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnStartEventHandler(ActionEvent event) {
-        lblCurrentRoom.setVisible(true);
-        btnStart.setVisible(false);
-        btnUse.setDisable(false);
-        btnDrop.setDisable(false);
-        btnInspect.setDisable(false);
-        btnHelp.setDisable(false);
-        lblInventoryHeadline.setDisable(false);
         imgBackground.setVisible(true);
         timon.setVisible(true);
-        printDirectionButtons();
-        textIO.printWelcome();
-        printItems();
+        lblCurrentRoom.setVisible(true);
+        btnStart.setVisible(false);
+
+        Label lblName = new Label();
+        lblName.setAlignment(Pos.CENTER);
+        lblName.setLayoutX(85);
+        lblName.setLayoutY(25);
+        lblName.prefHeight(25);
+        lblName.prefWidth(300);
+        lblName.setText("What is your name?");
+        lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 18));
+
+        Button btnOk = new Button();
+        btnOk.setLayoutX(145);
+        btnOk.setLayoutY(100);
+        btnOk.setText("OK");
+
+        TextField nameInput = new TextField();
+        nameInput.setLayoutX(85);
+        nameInput.setLayoutY(63);
+        nameInput.prefHeight(25);
+        nameInput.prefWidth(220);
+
+        Pane paneName = new Pane();
+        paneName.prefHeight(150);
+        paneName.prefWidth(300);
+        paneName.getChildren().addAll(lblName, btnOk, nameInput);
+
+        Scene scene = new Scene(paneName);
+
+        Stage nameStage = new Stage();
+        nameStage.setHeight(175);
+        nameStage.setWidth(325);
+        nameStage.setScene(scene);
+        nameStage.setTitle("Player");
+        nameStage.show();
+
+        btnOk.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
+                nameStage.close();
+                btnUse.setDisable(false);
+                btnDrop.setDisable(false);
+                btnInspect.setDisable(false);
+                btnHelp.setDisable(false);
+                lblInventoryHeadline.setDisable(false);
+                printDirectionButtons();
+                textIO.printWelcome();
+                printItems();
+            }
+        });
     }
 
     @FXML
@@ -210,6 +258,41 @@ public class MainController implements Initializable {
                     deadStage.close();
                 }
             });
+        } catch (PlayerWinException ex) {
+            txtAreaOutput.appendText("\nYOU WON THE GAME!");
+            disableGame();
+
+            Label lblDead = new Label();
+            lblDead.setText("YOU WIN!");
+
+            Button btnNo = new Button();
+            btnNo.setText("OK");
+            btnNo.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+
+            HBox hBox = new HBox();
+            hBox.getChildren().add(btnNo);
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setPadding(new Insets(10, 10, 10, 10));
+            hBox.setSpacing(10);
+
+            VBox vBox = new VBox();
+            vBox.getChildren().add(lblDead);
+            vBox.getChildren().add(hBox);
+            vBox.setAlignment(Pos.CENTER);
+
+            Scene scene = new Scene(vBox);
+
+            Stage deadStage = new Stage();
+            deadStage.setScene(scene);
+            deadStage.setHeight(150);
+            deadStage.setWidth(300);
+            deadStage.setTitle("Congratulation");
+            deadStage.show();
         }
     }
 
