@@ -79,6 +79,8 @@ public class MainController implements Initializable {
         btnStart.setVisible(false);
 
         TextArea txtAreaIntro = new TextArea();
+        txtAreaIntro.setEditable(false);
+        txtAreaIntro.setFont(new Font("Calibri", 18));
 
         Button btnContinue = new Button();
         btnContinue.setText("Continue");

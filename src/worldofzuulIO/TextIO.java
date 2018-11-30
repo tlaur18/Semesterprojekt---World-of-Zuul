@@ -115,7 +115,7 @@ public class TextIO {
     }
     
     private void printWithPacing(String textToPrint, TextArea txtArea) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(40), new printWithPacingEventHandler(textToPrint, txtArea)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), new printWithPacingEventHandler(textToPrint, txtArea)));
         timeline.setCycleCount(textToPrint.length());
         timeline.play();
     }
