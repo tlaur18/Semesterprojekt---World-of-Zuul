@@ -16,7 +16,10 @@ import exceptions.PlayerInventoryFullException;
 import exceptions.PlayerWinException;
 import exceptions.UseNonUseableItemException;
 import exceptions.UseWithEmptyInventoryException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
+import javafx.util.Duration;
 
 public class TextIO {
 
@@ -70,42 +73,52 @@ public class TextIO {
         txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
     }
 
-    public void printWelcome() {
-        txtAreaOutput.appendText("Welcome to Fire Escape!");
+    public void printWelcome(TextArea txtArea) {
+        String welcomeText = "";
+        
+        welcomeText += "Welcome to Fire Escape!";
 
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n\tBEEEP! BEEEP! BEEEP!... A loud noise woke you up.");
-        txtAreaOutput.appendText("\n\tYou notice the smell and see a thin layer of smoke in you room.");
-        txtAreaOutput.appendText("\n\tThe first thing you do is to take your cellphone and call for emergency.");
-        txtAreaOutput.appendText("\n\tThe number is 1-1-2.");
+        welcomeText += "\n";
+        welcomeText += "\n\tBEEEP! BEEEP! BEEEP!... A loud noise woke you up.";
+        welcomeText += "\n\tYou notice the smell and see a thin layer of smoke in you room.";
+        welcomeText += "\n\tThe first thing you do is to take your cellphone and call for emergency.";
+        welcomeText += "\n\tThe number is 1-1-2.";
 
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n112:");
-        txtAreaOutput.appendText("\n- This is 1-1-2. What is your emergency?");
+        welcomeText += "\n";
+        welcomeText += "\n112:";
+        welcomeText += "\n- This is 1-1-2. What is your emergency?";
 
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\nYou:");
-        txtAreaOutput.appendText("\n- There is smoke in the room and I am all alone in the house.");
+        welcomeText += "\n";
+        welcomeText += "\nYou:";
+        welcomeText += "\n- There is smoke in the room and I am all alone in the house.";
 
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n112:");
-        txtAreaOutput.appendText("\n- Okay, just stay calm and lets get you to safety.");
-        txtAreaOutput.appendText("\n- It doesn't help to panic.");
-        txtAreaOutput.appendText("\n- What is your name?");
+        welcomeText += "\n";
+        welcomeText += "\n112:";
+        welcomeText += "\n- Okay, just stay calm and lets get you to safety.";
+        welcomeText += "\n- It doesn't help to panic.";
+        welcomeText += "\n- What is your name?";
 
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n" + game.getPlayer().getPlayerName() + ": ");
-        txtAreaOutput.appendText("\n- My name is " + game.getPlayer().getPlayerName() + ". I will try my best with your help.");
+        welcomeText += "\n";
+        welcomeText += "\n" + game.getPlayer().getPlayerName() + ": ";
+        welcomeText += "\n- My name is " + game.getPlayer().getPlayerName() + ". I will try my best with your help.";
 
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\n112:");
-        txtAreaOutput.appendText("\n- You need to get to safety and thats your primary objective.");
+        welcomeText += "\n";
+        welcomeText += "\n112:";
+        welcomeText += "\n- You need to get to safety and thats your primary objective.";
 
-        txtAreaOutput.appendText("\n- You will most likely encoutner some obstacles on your way out.");
+        welcomeText += "\n- You will most likely encoutner some obstacles on your way out.";
 
-        txtAreaOutput.appendText("\n- If you have any questions just ask for '" + CommandWord.HELP + "'.");
+        welcomeText += "\n- If you have any questions just ask for '" + CommandWord.HELP + "'.";
 
-        txtAreaOutput.appendText("\n");
+        welcomeText += "\n";
+        
+        printWithPacing(welcomeText, txtArea);
+    }
+    
+    private void printWithPacing(String textToPrint, TextArea txtArea) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), new printWithPacingEventHandler(textToPrint, txtArea)));
+        timeline.setCycleCount(textToPrint.length());
+        timeline.play();
     }
 
     private void processQuit() {

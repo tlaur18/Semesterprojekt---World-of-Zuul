@@ -30,12 +30,10 @@ import worldofzuul.Command;
 import worldofzuul.Game;
 import worldofzuul.Item;
 import worldofzuul.Parser;
-import worldofzuul.Player;
 
 public class MainController implements Initializable {
 
     private TextIO textIO;
-    private Game game;
 
     @FXML
     private BorderPane root;
@@ -81,9 +79,6 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnStartEventHandler(ActionEvent event) {
-        imgBackground.setVisible(true);
-        timon.setVisible(true);
-        lblCurrentRoom.setVisible(true);
         btnStart.setVisible(false);
 
         Label lblName = new Label();
@@ -125,14 +120,44 @@ public class MainController implements Initializable {
             public void handle(ActionEvent e) {
                 textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
                 nameStage.close();
-                btnUse.setDisable(false);
-                btnDrop.setDisable(false);
-                btnInspect.setDisable(false);
-                btnHelp.setDisable(false);
-                lblInventoryHeadline.setDisable(false);
-                printDirectionButtons();
-                textIO.printWelcome();
-                printItems();
+
+                TextArea txtAreaIntro = new TextArea();
+                txtAreaIntro.setEditable(false);
+                txtAreaIntro.setFont(new Font("Calibri", 18));
+
+                Button btnContinue = new Button();
+                btnContinue.setText("Continue");
+                btnContinue.setFont(new Font("Calibri", 32));
+                btnContinue.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        Scene scene = txtAreaIntro.getScene();
+                        scene.setRoot(root);
+
+                        lblCurrentRoom.setVisible(true);
+                        imgBackground.setVisible(true);
+                        timon.setVisible(true);
+                        btnUse.setDisable(false);
+                        btnDrop.setDisable(false);
+                        btnInspect.setDisable(false);
+                        btnHelp.setDisable(false);
+                        lblInventoryHeadline.setDisable(false);
+                        printDirectionButtons();
+                        printItems();
+                    }
+                });
+
+                VBox introRoot = new VBox();
+                introRoot.setAlignment(Pos.CENTER);
+                introRoot.setPadding(new Insets(10, 10, 10, 10));
+                introRoot.setSpacing(50);
+                introRoot.getChildren().add(txtAreaIntro);
+                introRoot.getChildren().add(btnContinue);
+
+                Scene scene = root.getScene();
+                scene.setRoot(introRoot);
+
+                textIO.printWelcome(txtAreaIntro);
             }
         });
     }
@@ -203,7 +228,6 @@ public class MainController implements Initializable {
             textIO.processCommand(command);
             lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
-            txtAreaOutput.appendText("\nYou died...");
             disableGame();
 
             Label lblDead = new Label();
