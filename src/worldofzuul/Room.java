@@ -17,9 +17,8 @@ public class Room {
     private boolean isGameOver;
     private ImageView img;
 
-    public Room(String name, String description, int damage, boolean isLocked, String imgURL) {
+    public Room(String name, String description, boolean isLocked, String imgURL) {
         this.name = name;
-        this.damage = damage;
         this.description = description;
         exits = new HashMap<String, Room>();
         this.isLocked = isLocked;

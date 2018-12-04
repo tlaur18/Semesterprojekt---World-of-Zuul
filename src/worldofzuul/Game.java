@@ -24,21 +24,21 @@ public class Game {
     }
 
     private void createRooms() {
-        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", 0, false, "Imgs/bedroom.png");
-        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", 0, false, "Imgs/hallway.png");
-        sistersRoom = new Room("Sisters Room", "in your sister's room", 0, false, "Imgs/sistersRoom.png");
-        livingRoom = new Room("Living Room", "in the living room", 0, false, "Imgs/Livingroom.png");
-        wc = new Room("Toilet", "on the toilet", 0, false, "Imgs/bathroom.png");
-        wc2 = new Room("Toilet", "on the toilet", 0, false, "Imgs/bathroom.png");
-        outside = new Room("Outside", "outside", 0, true, "Imgs/outside.png");
-        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", 0, false, "Imgs/bedroom.png");
-        office = new Room("Office", "in the office", 0, false, "Imgs/office.png");
-        kitchen = new Room("Kitchen", "in the kitchen", 0, false, "Imgs/kitchen.png");
-        entrance = new Room("Entrance", "in the entrace", 0, false, "Imgs/basement.png");
-        conservatory = new Room("Conservatory", "in the conservatory", 0, false, "Imgs/conservatory.png");
-        basement = new Room("Basement", "in the basement", 0, false, "Imgs/basement.png");
-        garage = new Room("Garage", "in the garage", 0, false, "Imgs/garage.png");
-        masterBedroom = new Room("Master Bedroom", "in the master bedroom", 0, false, "Imgs/masterbedroom.png");
+        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", false, "Imgs/bedroom.png");
+        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", false, "Imgs/hallway.png");
+        sistersRoom = new Room("Sisters Room", "in your sister's room", false, "Imgs/sistersRoom.png");
+        livingRoom = new Room("Living Room", "in the living room", false, "Imgs/Livingroom.png");
+        wc = new Room("Toilet", "on the toilet", false, "Imgs/bathroom.png");
+        wc2 = new Room("Toilet", "on the toilet", false, "Imgs/bathroom.png");
+        outside = new Room("Outside", "outside", true, "Imgs/outside.png");
+        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", false, "Imgs/bedroom.png");
+        office = new Room("Office", "in the office", false, "Imgs/office.png");
+        kitchen = new Room("Kitchen", "in the kitchen", false, "Imgs/kitchen.png");
+        entrance = new Room("Entrance", "in the entrace", false, "Imgs/basement.png");
+        conservatory = new Room("Conservatory", "in the conservatory", false, "Imgs/conservatory.png");
+        basement = new Room("Basement", "in the basement", false, "Imgs/basement.png");
+        garage = new Room("Garage", "in the garage", false, "Imgs/garage.png");
+        masterBedroom = new Room("Master Bedroom", "in the master bedroom", false, "Imgs/masterbedroom.png");
 
         bedroom.setExit("east", hallway);
         bedroom.setExit("west", window);
