@@ -168,6 +168,7 @@ public class MainController implements Initializable {
         processCommand("go north");
         printDirectionButtons();
         printItems();
+        setBackground();
     }
 
     @FXML
@@ -176,6 +177,7 @@ public class MainController implements Initializable {
         processCommand("go west");
         printDirectionButtons();
         printItems();
+        setBackground();
     }
 
     @FXML
@@ -184,6 +186,7 @@ public class MainController implements Initializable {
         processCommand("go south");
         printDirectionButtons();
         printItems();
+        setBackground();
     }
 
     @FXML
@@ -192,6 +195,7 @@ public class MainController implements Initializable {
         processCommand("go east");
         printDirectionButtons();
         printItems();
+        setBackground();
     }
 
     @FXML
@@ -375,5 +379,10 @@ public class MainController implements Initializable {
 
     private void disableGame() {
         root.setDisable(true);
+    }
+    
+    private void setBackground() {  
+            ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
+            imgBackground.setImage(img.getImage());
     }
 }

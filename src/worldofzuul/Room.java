@@ -1,8 +1,8 @@
 package worldofzuul;
 
-import java.util.Set;
 import java.util.HashMap;
 import java.util.ArrayList;
+import javafx.scene.image.ImageView;
 
 public class Room {
 
@@ -15,8 +15,9 @@ public class Room {
     private boolean isLocked;
     private boolean isGameComplete;
     private boolean isGameOver;
+    private ImageView img;
 
-    public Room(String name, String description, int damage,boolean isLocked) {
+    public Room(String name, String description, int damage,boolean isLocked, String imgURL) {
         this.name = name;
         this.damage = damage;
         this.description = description;
@@ -24,6 +25,7 @@ public class Room {
         this.isLocked = isLocked;
         this.isGameComplete = false;
         this.isGameOver = false;
+        img = new ImageView(imgURL);
     }
 
     public String getName() {
@@ -118,5 +120,8 @@ public class Room {
     }
     public boolean isLocked() {
         return isLocked;
+    }
+    public ImageView getImage() {
+        return img;
     }
 }
