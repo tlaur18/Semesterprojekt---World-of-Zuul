@@ -87,7 +87,7 @@ public class Game {
     }
 
     private void createItems() {
-        bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2, "Imgs/Bucket.png");
+        bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2, "Imgs/EmptyBucket.png");
         toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs/Toothbrush.png");
         smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", office, "Imgs/SmallFireExtinguisher.png");
         smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", office, "Imgs/SmallFireExtinguisher.png");

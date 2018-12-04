@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import javafx.scene.image.Image;
+
 public class Bucket extends UseableItem {
 
     private boolean isFilled;
@@ -18,11 +20,14 @@ public class Bucket extends UseableItem {
     @Override
     public String use(Player player) {
         String outputText = "";
+        Image filledBucket = new Image("Imgs/FilledBucket.png");
+        Image meltedBucket = new Image("Imgs/MeltedBucket.png");
 
         if (!(isUsed)) {
             for (int i = 0; i < useableRooms.length; i++) {
                 if (player.getCurrentRoom().equals(useableRooms[i])) {
                     if (!isFilled) {
+                        getImage().setImage(filledBucket);
                         outputText = "You fill the bucket with water from the sink.";
                         isFilled = true;
                         break;
@@ -38,6 +43,7 @@ public class Bucket extends UseableItem {
             if (player.getCurrentRoom().getFire() != null) {
                 if (isFilled) {
                     outputText = "You empty the bucket over the fire and it goes out.";
+                    getImage().setImage(meltedBucket);
                     player.getCurrentRoom().removeFire();
                     isFilled = false;
                     isUsed = true;

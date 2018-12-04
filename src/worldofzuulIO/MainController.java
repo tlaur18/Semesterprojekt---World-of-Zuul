@@ -203,7 +203,9 @@ public class MainController implements Initializable {
         processCommand("use " + (textIO.getGame().getPlayer().getInventory() != null ? textIO.getGame().getPlayer().getInventory().getName() : ""));
         if (textIO.getGame().getPlayer().getInventory() == null) {
             imgInventory.setImage(null);
-        }
+        } else if (!(textIO.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
+            imgInventory.setImage(textIO.getGame().getPlayer().getInventory().getImage().getImage());
+        }   
     }
 
     @FXML
