@@ -380,9 +380,9 @@ public class MainController implements Initializable {
     private void disableGame() {
         root.setDisable(true);
     }
-    
-    private void setBackground() {  
-            ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
-            imgBackground.setImage(img.getImage());
+
+    private void setBackground() {
+        ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
+        imgBackground.setImage(img.getImage());
     }
 }

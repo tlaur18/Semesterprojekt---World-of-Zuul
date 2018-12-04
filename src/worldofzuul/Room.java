@@ -17,7 +17,7 @@ public class Room {
     private boolean isGameOver;
     private ImageView img;
 
-    public Room(String name, String description, int damage,boolean isLocked, String imgURL) {
+    public Room(String name, String description, int damage, boolean isLocked, String imgURL) {
         this.name = name;
         this.damage = damage;
         this.description = description;
@@ -35,19 +35,19 @@ public class Room {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public void setGameComplete() {
         isGameComplete = true;
     }
-    
+
     public boolean getGameComplete() {
         return isGameComplete;
     }
-    
+
     public void setGameOver() {
         isGameOver = true;
     }
-    
+
     public boolean getGameOver() {
         return isGameOver;
     }
@@ -71,7 +71,7 @@ public class Room {
     public String getItemDescription() {
         return (!items.isEmpty() ? "Items: " + getItemsString() : "There are no items in this room.");
     }
-    
+
     public HashMap<String, Room> getExits() {
         return exits;
     }
@@ -115,12 +115,15 @@ public class Room {
             fire.updateLvl();
         }
     }
+
     public void unlockRoom() {
         this.isLocked = false;
     }
+
     public boolean isLocked() {
         return isLocked;
     }
+
     public ImageView getImage() {
         return img;
     }

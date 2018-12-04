@@ -75,7 +75,7 @@ public class TextIO {
 
     public void printWelcome(TextArea txtArea) {
         String welcomeText = "";
-        
+
         welcomeText += "Welcome to Fire Escape!";
 
         welcomeText += "\n";
@@ -111,10 +111,10 @@ public class TextIO {
         welcomeText += "\n- If you have any questions just ask for '" + CommandWord.HELP + "'.";
 
         welcomeText += "\n";
-        
+
         printWithPacing(welcomeText, txtArea);
     }
-    
+
     private void printWithPacing(String textToPrint, TextArea txtArea) {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), new printWithPacingEventHandler(textToPrint, txtArea)));
         timeline.setCycleCount(textToPrint.length());
