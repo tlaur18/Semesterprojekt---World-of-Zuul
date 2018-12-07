@@ -399,12 +399,12 @@ public class MainController implements Initializable {
     private void printFire() {
         Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
-            for (int i = 0; i < fire.getLvl() * 2; i++) {
+            for (int i = 0; i < fire.getLvl() * 3; i++) {
                 ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
                 imgFire.fitHeightProperty().set(100);
                 imgFire.fitWidthProperty().set(60);
-                imgFire.setTranslateX(Math.random() * 600);
-                imgFire.setTranslateY(Math.random() * 400);
+                imgFire.setTranslateX(80 + Math.random() * 480);
+                imgFire.setTranslateY(30 + Math.random() * 330);
                 paneRoom.getChildren().add(imgFire);
             }
         }
