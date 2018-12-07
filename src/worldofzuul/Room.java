@@ -82,7 +82,6 @@ public class Room {
 
     public void addItem(Item item) {
         items.add(item);
-        
     }
 
     public ArrayList<Item> getItems() {
@@ -104,7 +103,6 @@ public class Room {
     }
 
     public Fire getFire() {
-        
         return fire;
     }
 

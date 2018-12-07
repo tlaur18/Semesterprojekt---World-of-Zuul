@@ -12,11 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -165,8 +167,10 @@ public class MainController implements Initializable {
 
     private void redrawRoom() {
         removeItems();
+        removeFire();
         printDirectionButtons();
         printItems();
+        printFire();
         setBackground();
     }
 
@@ -417,9 +421,17 @@ public class MainController implements Initializable {
         }
 
     }
-//     private void removeFire() {
-//        textIO.getGame().getPlayer().getCurrentRoom().getItems()
-//            ImageView img = item.getImage();
-//            paneRoom.getChildren().remove(img);
-//        }
+
+    private void removeFire() {
+        for (Node node : paneRoom.getChildren()) {
+            if (node instanceof ImageView) {
+                if () {
+                    = null;
+                }
+
+            }
+        }
+//        ImageView img = new ImageView("imgs/Fire.png");
+//        paneRoom.getChildren().remove(img);
+    }
 }
