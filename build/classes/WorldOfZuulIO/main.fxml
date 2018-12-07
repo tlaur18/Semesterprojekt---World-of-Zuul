@@ -68,6 +68,11 @@
                   <Image url="@../Imgs/bedroom.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="deadTimon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true" visible="false">
+               <image>
+                  <Image url="@../Imgs/DeadTimon.png" />
+               </image>
+            </ImageView>
             <ImageView fx:id="timon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true" visible="false">
                 <image>
                     <Image url="@../Imgs/Timon.png" />

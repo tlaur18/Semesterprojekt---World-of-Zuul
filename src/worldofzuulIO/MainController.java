@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -67,6 +68,8 @@ public class MainController implements Initializable {
     private ImageView imgBackground;
     @FXML
     private ImageView timon;
+    @FXML
+    private ImageView deadTimon;
     @FXML
     private Pane paneRoom;
     @FXML
@@ -266,8 +269,8 @@ public class MainController implements Initializable {
             textIO.processCommand(command);
             lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
-            disableGame();
-
+            disableGame();           
+            
             Label lblDead = new Label();
             lblDead.setText("You died. Would you like to try again?");
 
@@ -298,6 +301,8 @@ public class MainController implements Initializable {
             Scene scene = new Scene(vBox);
 
             Stage deadStage = new Stage();
+            timon.setVisible(false);
+            deadTimon.setVisible(true);
             deadStage.setScene(scene);
             deadStage.setHeight(150);
             deadStage.setWidth(300);
@@ -324,8 +329,8 @@ public class MainController implements Initializable {
             txtAreaOutput.appendText("\nYOU WON THE GAME!");
             disableGame();
 
-            Label lblDead = new Label();
-            lblDead.setText("YOU WIN!");
+            Label lblWin = new Label();
+            lblWin.setText("YOU WIN!");
 
             Button btnNo = new Button();
             btnNo.setText("OK");
@@ -343,18 +348,18 @@ public class MainController implements Initializable {
             hBox.setSpacing(10);
 
             VBox vBox = new VBox();
-            vBox.getChildren().add(lblDead);
+            vBox.getChildren().add(lblWin);
             vBox.getChildren().add(hBox);
             vBox.setAlignment(Pos.CENTER);
 
             Scene scene = new Scene(vBox);
 
-            Stage deadStage = new Stage();
-            deadStage.setScene(scene);
-            deadStage.setHeight(150);
-            deadStage.setWidth(300);
-            deadStage.setTitle("Congratulation");
-            deadStage.show();
+            Stage winStage = new Stage();
+            winStage.setScene(scene);
+            winStage.setHeight(150);
+            winStage.setWidth(300);
+            winStage.setTitle("Congratulation");
+            winStage.show();
         }
     }
 
