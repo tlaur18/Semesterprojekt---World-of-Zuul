@@ -27,6 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import worldofzuul.Command;
+import worldofzuul.Fire;
 import worldofzuul.Game;
 import worldofzuul.Item;
 import worldofzuul.Parser;
@@ -162,40 +163,35 @@ public class MainController implements Initializable {
         });
     }
 
-    @FXML
-    private void btnNorthEventHandler(ActionEvent event) {
+    private void redrawRoom() {
         removeItems();
-        processCommand("go north");
         printDirectionButtons();
         printItems();
         setBackground();
+    }
+
+    @FXML
+    private void btnNorthEventHandler(ActionEvent event) {
+        processCommand("go north");
+        redrawRoom();
     }
 
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
-        removeItems();
         processCommand("go west");
-        printDirectionButtons();
-        printItems();
-        setBackground();
+        redrawRoom();
     }
 
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
-        removeItems();
         processCommand("go south");
-        printDirectionButtons();
-        printItems();
-        setBackground();
+        redrawRoom();
     }
 
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
-        removeItems();
         processCommand("go east");
-        printDirectionButtons();
-        printItems();
-        setBackground();
+        redrawRoom();
     }
 
     @FXML
@@ -333,18 +329,22 @@ public class MainController implements Initializable {
         for (String exitString : textIO.getGame().getPlayer().getCurrentRoom().getExits().keySet()) {
             switch (exitString) {
                 case "north":
+                    btnNorth.toFront();
                     btnNorth.setVisible(true);
                     btnNorth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("north").getName());
                     break;
                 case "west":
+                    btnWest.toFront();
                     btnWest.setVisible(true);
                     btnWest.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("west").getName());
                     break;
                 case "south":
+                    btnSouth.toFront();
                     btnSouth.setVisible(true);
                     btnSouth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("south").getName());
                     break;
                 case "east":
+                    btnEast.toFront();
                     btnEast.setVisible(true);
                     btnEast.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("east").getName());
                     break;
@@ -371,7 +371,7 @@ public class MainController implements Initializable {
     }
 
     private void removeItems() {
-        for (Item item : textIO.getGame().getPlayer().getCurrentRoom().getItems()) {
+        for (Item item : textIO.getGame().getPlayer().getPreviousRoom().getItems()) {
             ImageView img = item.getImage();
             paneRoom.getChildren().remove(img);
         }
@@ -385,4 +385,41 @@ public class MainController implements Initializable {
         ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
         imgBackground.setImage(img.getImage());
     }
+
+//    private void printFire() {
+//        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
+//        if (fire != null) {
+//             {
+//                ImageView img = new ImageView("imgs/Fire.png");
+//                img.fitHeightProperty().set(100);
+//                img.fitWidthProperty().set(60);
+//                img.setTranslateX(Math.random() * 600);
+//                img.setTranslateY(Math.random() * 400);
+//                paneRoom.getChildren().add(img);
+//            }
+//
+//        }
+//    }
+    private void printFire() {
+        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
+        if (fire != null) {
+
+            for (int i = 0; i < fire.getLvl(); i++) {
+                ImageView img = new ImageView("imgs/Fire.png");
+                img.fitHeightProperty().set(100);
+                img.fitWidthProperty().set(60);
+                img.setTranslateX(Math.random() * 600);
+                img.setTranslateY(Math.random() * 400);
+                paneRoom.getChildren().add(img);
+
+            }
+
+        }
+
+    }
+//     private void removeFire() {
+//        textIO.getGame().getPlayer().getCurrentRoom().getItems()
+//            ImageView img = item.getImage();
+//            paneRoom.getChildren().remove(img);
+//        }
 }

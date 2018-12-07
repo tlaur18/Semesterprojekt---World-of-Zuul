@@ -82,6 +82,7 @@ public class Room {
 
     public void addItem(Item item) {
         items.add(item);
+        
     }
 
     public ArrayList<Item> getItems() {
@@ -103,13 +104,14 @@ public class Room {
     }
 
     public Fire getFire() {
+        
         return fire;
     }
 
     public void removeFire() {
         fire = null;
     }
-
+   
     public void updateFire() {
         if (fire != null) {
             fire.updateLvl();

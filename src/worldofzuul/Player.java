@@ -78,6 +78,10 @@ public class Player {
     public Room getCurrentRoom() {
         return currentRoom;
     }
+    
+    public Room getPreviousRoom(){
+        return previousRoom;
+    }
 
     public int addStep() {
         stepCount = stepCount + 1;
