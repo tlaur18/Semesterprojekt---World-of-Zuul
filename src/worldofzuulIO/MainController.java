@@ -71,6 +71,8 @@ public class MainController implements Initializable {
     private ImageView imgInventory;
     @FXML
     private Button btnUse;
+    @FXML
+    private Button btnHighscore;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -205,7 +207,7 @@ public class MainController implements Initializable {
             imgInventory.setImage(null);
         } else if (!(textIO.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
             imgInventory.setImage(textIO.getGame().getPlayer().getInventory().getImage().getImage());
-        }   
+        }
     }
 
     @FXML
@@ -386,5 +388,21 @@ public class MainController implements Initializable {
     private void setBackground() {
         ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
         imgBackground.setImage(img.getImage());
+    }
+
+    @FXML
+    private void btnHighscore(ActionEvent event) {
+        TextArea txtAreaIntro = new TextArea();
+        txtAreaIntro.setEditable(false);
+        txtAreaIntro.setFont(new Font("Calibri", 18));
+        VBox highscoreRoot = new VBox();
+        highscoreRoot.setAlignment(Pos.CENTER);
+        highscoreRoot.setPadding(new Insets(10, 10, 10, 10));
+        highscoreRoot.setSpacing(50);
+        highscoreRoot.getChildren().add(txtAreaIntro);
+
+        Scene scene = root.getScene();
+        scene.setRoot(highscoreRoot);
+        textIO.printHighscore(txtAreaIntro);
     }
 }

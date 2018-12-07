@@ -20,6 +20,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
+import worldofzuul.Highscore;
 
 public class TextIO {
 
@@ -31,6 +32,7 @@ public class TextIO {
         this.game = game;
         this.txtAreaOutput = txtAreaOutput;
         parser = new Parser();
+
     }
 
     public Game getGame() {
@@ -222,5 +224,14 @@ public class TextIO {
         } catch (UseNonUseableItemException ex) {
             txtAreaOutput.appendText("\nThere is nothing interesting to use this item for.");
         }
+
+    }
+
+    public void printHighscore(TextArea txtArea) {
+        String highscoretxt = "";
+        for (String data : game.getHighscore().getDataAccess().load()) {
+            highscoretxt += data + "\n";
+        }
+        printWithPacing(highscoretxt, txtArea);
     }
 }
