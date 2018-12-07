@@ -37,8 +37,9 @@ public class TextIO {
         return game;
     }
 
-    public void processCommand(Command command) throws PlayerDiedException, PlayerWinException {
+    public boolean processCommand(Command command) throws PlayerDiedException, PlayerWinException {
         CommandWord commandWord = command.getCommandWord();
+        boolean changedRoom= false; 
 
         if (commandWord == CommandWord.UNKNOWN) {
             txtAreaOutput.appendText("\nI don't know what you mean...");
@@ -47,7 +48,7 @@ public class TextIO {
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
-            processGoRoom(command);
+            changedRoom = processGoRoom(command);
         } else if (commandWord == CommandWord.QUIT) {
             processQuit();
         } else if (commandWord == CommandWord.TAKE) {
@@ -61,6 +62,8 @@ public class TextIO {
         } else if (commandWord == CommandWord.USE) {
             processUseItem();
         }
+        
+        return changedRoom; 
     }
 
     private void printHelp() {
@@ -125,7 +128,8 @@ public class TextIO {
         txtAreaOutput.appendText("\nTo quit, simply press the 'X' button in the top right corner of the window.");
     }
 
-    private void processGoRoom(Command command) throws PlayerDiedException, PlayerWinException {
+    private boolean processGoRoom(Command command) throws PlayerDiedException, PlayerWinException {
+        boolean changedRoom = false;
         try {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
@@ -151,6 +155,7 @@ public class TextIO {
             }
 
             txtAreaOutput.appendText("\nYour health is: " + game.getPlayer().getHealth());
+            changedRoom = true;
         } catch (NoSecondWordGivenException ex) {
             txtAreaOutput.appendText("\nGo where?");
         } catch (NoExitException ex) {
@@ -160,6 +165,7 @@ public class TextIO {
         } catch (MovingThroughLockedDoorException ex) {
             txtAreaOutput.appendText("\nThe door is locked! You need a key to open the door!");
         }
+        return changedRoom;
     }
 
     public void updateFire() {

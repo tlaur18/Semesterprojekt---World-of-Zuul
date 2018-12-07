@@ -167,26 +167,30 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
-        processCommand("go north");
-        redrawRoom();
+        if (processCommand("go north")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
-        processCommand("go west");
-        redrawRoom();
+        if (processCommand("go west")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
-        processCommand("go south");
-        redrawRoom();
+        if (processCommand("go south")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
-        processCommand("go east");
-        redrawRoom();
+        if (processCommand("go east")) {
+            redrawRoom();
+        }
     }
 
     @FXML
@@ -215,12 +219,13 @@ public class MainController implements Initializable {
         processCommand("help");
     }
 
-    private void processCommand(String inputLine) {
+    private boolean processCommand(String inputLine) {
+        boolean changedRoom = false;
         try {
             Parser parser = new Parser();
             txtAreaOutput.appendText("\n");
             Command command = parser.getCommand(inputLine);
-            textIO.processCommand(command);
+            changedRoom = textIO.processCommand(command);
             lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
             disableGame();
@@ -313,6 +318,7 @@ public class MainController implements Initializable {
             deadStage.setTitle("Congratulation");
             deadStage.show();
         }
+        return changedRoom;
     }
 
     private void redrawRoom() {
@@ -406,7 +412,7 @@ public class MainController implements Initializable {
 
     private void removeFire() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
-        
+
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 Fire fire = textIO.getGame().getPlayer().getPreviousRoom().getFire();
@@ -419,7 +425,7 @@ public class MainController implements Initializable {
                 }
             }
         }
-        
+
         paneRoom.getChildren().removeAll(nodesToRemove);
     }
 }
