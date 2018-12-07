@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -23,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -71,6 +73,14 @@ public class MainController implements Initializable {
     private ImageView imgInventory;
     @FXML
     private Button btnUse;
+    @FXML
+    private Rectangle greenbar;
+    @FXML
+    private Rectangle redbar;
+    @FXML
+    private Label healthText;
+    @FXML
+    private Label stepCounterText;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -142,6 +152,10 @@ public class MainController implements Initializable {
                         btnInspect.setDisable(false);
                         btnHelp.setDisable(false);
                         lblInventoryHeadline.setDisable(false);
+                        redbar.setVisible(true);
+                        greenbar.setVisible(true);
+                        healthText.setVisible(true);
+                        stepCounterText.setVisible(true);
                         printDirectionButtons();
                         printItems();
                     }
@@ -169,6 +183,8 @@ public class MainController implements Initializable {
         printDirectionButtons();
         printItems();
         setBackground();
+        drawHealthBar();
+        stepCounterText();
     }
 
     @FXML
@@ -178,6 +194,8 @@ public class MainController implements Initializable {
         printDirectionButtons();
         printItems();
         setBackground();
+        drawHealthBar();
+        stepCounterText();
     }
 
     @FXML
@@ -187,6 +205,8 @@ public class MainController implements Initializable {
         printDirectionButtons();
         printItems();
         setBackground();
+        drawHealthBar();
+        stepCounterText();
     }
 
     @FXML
@@ -196,6 +216,8 @@ public class MainController implements Initializable {
         printDirectionButtons();
         printItems();
         setBackground();
+        drawHealthBar();
+        stepCounterText();
     }
 
     @FXML
@@ -205,7 +227,8 @@ public class MainController implements Initializable {
             imgInventory.setImage(null);
         } else if (!(textIO.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
             imgInventory.setImage(textIO.getGame().getPlayer().getInventory().getImage().getImage());
-        }   
+        }
+        drawHealthBar();
     }
 
     @FXML
@@ -224,6 +247,15 @@ public class MainController implements Initializable {
     @FXML
     private void btnHelpEventHandler(ActionEvent event) {
         processCommand("help");
+    }
+
+    private void drawHealthBar() {
+        greenbar.setWidth(textIO.getGame().getPlayer().getHealth() * 1.5);
+        healthText.setText(Integer.toString(textIO.getGame().getPlayer().getHealth()) + " " + "HP");
+    }
+    
+    private void stepCounterText() {
+        stepCounterText.setText("Step counter: " + Integer.toString(textIO.getGame().getPlayer().getStepCount()));
     }
 
     private void processCommand(String inputLine) {

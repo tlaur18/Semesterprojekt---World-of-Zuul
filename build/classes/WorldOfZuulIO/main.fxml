@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="worldofzuulIO.MainController">
@@ -67,7 +68,7 @@
                   <Image url="@../Imgs/bedroom.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="timon" layoutX="313.0" layoutY="210.0" fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="timon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true" visible="false">
                 <image>
                     <Image url="@../Imgs/Timon.png" />
                 </image>
@@ -84,6 +85,18 @@
             <Label fx:id="lblCurrentRoom" alignment="CENTER" contentDisplay="CENTER" layoutX="289.0" layoutY="61.0" text="Bedroom" textAlignment="CENTER" visible="false">
                <font>
                   <Font size="30.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="redbar" arcHeight="5.0" arcWidth="5.0" fill="#f00f07" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="150.0" />
+            <Rectangle fx:id="greenbar" arcHeight="5.0" arcWidth="5.0" fill="#5ef52c" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="150.0" />
+            <Label fx:id="healthText" alignment="CENTER" layoutX="275.0" layoutY="168.0" prefHeight="30.0" prefWidth="150.0" text="100 HP" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="stepCounterText" layoutX="585.0" prefHeight="29.0" prefWidth="115.0" text="Step counter: 0" visible="false">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
          </children>

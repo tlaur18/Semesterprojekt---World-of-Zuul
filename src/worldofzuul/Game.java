@@ -110,7 +110,7 @@ public class Game {
     }
 
     private void createFire() {
-        kitchen.addFire(1);
+        kitchen.addFire(3);
         office.addFire(1);
         livingRoom.addFire(1);
     }

@@ -144,13 +144,12 @@ public class TextIO {
             //Sørger for at spilleren mister liv af ild.
             if (game.getPlayer().getCurrentRoom().getFire() != null) {
                 game.getPlayer().takeDamage((game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())));
-                txtAreaOutput.appendText("\nYou have been damaged by the fire and lost " + (game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())) + " health!");
+                txtAreaOutput.appendText("\nYou have been damaged by the fire");
                 if (game.getPlayer().isDead() == true) {
                     throw new PlayerDiedException();
                 }
             }
 
-            txtAreaOutput.appendText("\nYour health is: " + game.getPlayer().getHealth());
         } catch (NoSecondWordGivenException ex) {
             txtAreaOutput.appendText("\nGo where?");
         } catch (NoExitException ex) {
