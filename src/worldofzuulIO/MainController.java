@@ -3,6 +3,7 @@ package worldofzuulIO;
 import exceptions.PlayerDiedException;
 import exceptions.PlayerWinException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -163,15 +163,6 @@ public class MainController implements Initializable {
                 textIO.printWelcome(txtAreaIntro);
             }
         });
-    }
-
-    private void redrawRoom() {
-        removeItems();
-        removeFire();
-        printDirectionButtons();
-        printItems();
-        printFire();
-        setBackground();
     }
 
     @FXML
@@ -324,6 +315,15 @@ public class MainController implements Initializable {
         }
     }
 
+    private void redrawRoom() {
+        removeItems();
+        removeFire();
+        printDirectionButtons();
+        printItems();
+        printFire();
+        setBackground();
+    }
+
     private void printDirectionButtons() {
         btnNorth.setVisible(false);
         btnWest.setVisible(false);
@@ -390,48 +390,36 @@ public class MainController implements Initializable {
         imgBackground.setImage(img.getImage());
     }
 
-//    private void printFire() {
-//        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
-//        if (fire != null) {
-//             {
-//                ImageView img = new ImageView("imgs/Fire.png");
-//                img.fitHeightProperty().set(100);
-//                img.fitWidthProperty().set(60);
-//                img.setTranslateX(Math.random() * 600);
-//                img.setTranslateY(Math.random() * 400);
-//                paneRoom.getChildren().add(img);
-//            }
-//
-//        }
-//    }
     private void printFire() {
         Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
-
-            for (int i = 0; i < fire.getLvl(); i++) {
-                ImageView img = new ImageView("imgs/Fire.png");
-                img.fitHeightProperty().set(100);
-                img.fitWidthProperty().set(60);
-                img.setTranslateX(Math.random() * 600);
-                img.setTranslateY(Math.random() * 400);
-                paneRoom.getChildren().add(img);
-
+            for (int i = 0; i < fire.getLvl() * 2; i++) {
+                ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
+                imgFire.fitHeightProperty().set(100);
+                imgFire.fitWidthProperty().set(60);
+                imgFire.setTranslateX(Math.random() * 600);
+                imgFire.setTranslateY(Math.random() * 400);
+                paneRoom.getChildren().add(imgFire);
             }
-
         }
-
     }
 
     private void removeFire() {
+        ArrayList<Node> nodesToRemove = new ArrayList<>();
+        
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
-                if () {
-                    = null;
+                Fire fire = textIO.getGame().getPlayer().getPreviousRoom().getFire();
+                if (fire != null) {
+                    for (int j = 0; j < fire.getLvl(); j++) {
+                        if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
+                            nodesToRemove.add(node);
+                        }
+                    }
                 }
-
             }
         }
-//        ImageView img = new ImageView("imgs/Fire.png");
-//        paneRoom.getChildren().remove(img);
+        
+        paneRoom.getChildren().removeAll(nodesToRemove);
     }
 }
