@@ -130,4 +130,8 @@ public class Game {
     public Highscore getHighscore() {
         return highscore;
     }
+    public void saveHighscore(Player player){
+        highscore.saveHighscore(player);
+    }
+    
 }

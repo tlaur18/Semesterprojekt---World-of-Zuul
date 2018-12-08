@@ -7,8 +7,6 @@ package worldofzuul;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import worldofzuul.dataaccess.DataAccess;
 import worldofzuul.Player;
 
@@ -26,6 +24,7 @@ public class Highscore {
 
     public Highscore() {
         da = new DataAccess("Highscore.txt");
+        highscoreList = new ArrayList<>();
 
     }
 
@@ -34,12 +33,7 @@ public class Highscore {
         this.name = name;
     }
 
-    public void saveHighscore(Player player) {
-//        highscoreList = FXCollections.observableArrayList();
-        List<String> playerStrings = new ArrayList<>();
-        playerStrings.add(player.getPlayerName());
-        da.save(playerStrings);
-    }
+   
 
     public ArrayList<Highscore> getHighscore() {
         return highscoreList;
@@ -48,15 +42,41 @@ public class Highscore {
     public ArrayList<Highscore> loadHighscore() {
         for (String playerString : da.load()) {
             String[] contents = playerString.split(" ");
-            String name = contents[0];
-            int highscore = Integer.parseInt(contents[1]);
+            String fillName = contents[0];
+            this.name = contents[1];
+            String fillName1 = contents[2];
+            String fillname2 = contents[3];
+            this.highscore = Integer.parseInt(contents[4]);
 
             highscorePlayer = new Highscore(name, highscore);
-            highscoreList.add(highscorePlayer);
+            this.highscoreList.add(highscorePlayer);
         }
         return highscoreList;
     }
-    public DataAccess getDataAccess(){
-       return da;
+
+    public DataAccess getDataAccess() {
+        return da;
+    }
+
+    public void saveHighscore(Player player) {
+        loadHighscore();
+        this.highscorePlayer = new Highscore(player.getPlayerName(), player.getPlayerScore());
+        this.highscoreList.add(this.highscorePlayer);
+        List<String> playerStrings = new ArrayList<>();
+        for (Highscore highscores : highscoreList) {
+            playerStrings.add(highscores.toString());
+        }
+        da.save(playerStrings);
+    }
+    public void calculateHighscore(Player player){
+        highscore =  player.getStepCount() * 1234;
+        player.setPlayerScore(highscore);
+    }
+    @Override
+    public String toString(){
+        String string = "";
+        string += "Name: " + this.name + " <->";
+        string += " Score: " + this.highscore;
+        return string;
     }
 }

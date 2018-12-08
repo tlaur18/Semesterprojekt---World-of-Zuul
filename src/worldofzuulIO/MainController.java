@@ -237,6 +237,7 @@ public class MainController implements Initializable {
             lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
             disableGame();
+            highscore();
 
             Label lblDead = new Label();
             lblDead.setText("You died. Would you like to try again?");
@@ -291,11 +292,12 @@ public class MainController implements Initializable {
                 }
             });
         } catch (PlayerWinException ex) {
+            highscore();
             txtAreaOutput.appendText("\nYOU WON THE GAME!");
             disableGame();
 
             Label lblDead = new Label();
-            lblDead.setText("YOU WIN!");
+            lblDead.setText("YOU WIN!\n Your score is: " + textIO.getGame().getPlayer().getPlayerScore());
 
             Button btnNo = new Button();
             btnNo.setText("OK");
@@ -404,5 +406,9 @@ public class MainController implements Initializable {
         Scene scene = root.getScene();
         scene.setRoot(highscoreRoot);
         textIO.printHighscore(txtAreaIntro);
+    }
+    public void highscore(){
+        textIO.getGame().getHighscore().calculateHighscore(textIO.getGame().getPlayer());
+        textIO.getGame().saveHighscore(textIO.getGame().getPlayer());
     }
 }

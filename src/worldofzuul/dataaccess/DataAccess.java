@@ -38,7 +38,7 @@ public class DataAccess {
         }
         catch(FileNotFoundException ex)
         {
-            System.out.println("Nothing found. Returning empty result.");
+            System.out.println("Nothing found. Empty Result.");
         }
         return highscore;
     }
@@ -53,7 +53,7 @@ public class DataAccess {
             }
             pw.close();
         } catch (FileNotFoundException ex) {
-            System.out.println("No file. Saving nothing.");
+            System.out.println("No file. Nothing is saved!.");
         }
     }
     
