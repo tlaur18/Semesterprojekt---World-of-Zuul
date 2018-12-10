@@ -17,11 +17,10 @@ public class Room {
     private boolean isGameOver;
     private ImageView img;
 
-    public Room(String name, String description, boolean isLocked, String imgURL) {
+    public Room(String name, String description, String imgURL) {
         this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
-        this.isLocked = isLocked;
         this.isGameComplete = false;
         this.isGameOver = false;
         img = new ImageView(imgURL);
@@ -121,6 +120,10 @@ public class Room {
 
     public boolean isLocked() {
         return isLocked;
+    }
+    
+    public void setLocked() {
+        isLocked = true;
     }
 
     public ImageView getImage() {

@@ -165,6 +165,12 @@ public class MainController implements Initializable {
                         stepCounterText.setVisible(true);
                         printDirectionButtons();
                         printItems();
+                        
+                        //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
+                        txtAreaOutput.appendText("\n");
+                        txtAreaOutput.appendText("\n");
+                        txtAreaOutput.appendText("\n");
+                        txtAreaOutput.appendText("\n");
                     }
                 });
 

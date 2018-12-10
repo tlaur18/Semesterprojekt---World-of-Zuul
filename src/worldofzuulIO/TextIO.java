@@ -41,24 +41,16 @@ public class TextIO {
         CommandWord commandWord = command.getCommandWord();
         boolean changedRoom = false;
 
-        if (commandWord == CommandWord.UNKNOWN) {
-            txtAreaOutput.appendText("\nI don't know what you mean...");
-        }
-
         if (commandWord == CommandWord.HELP) {
             printHelp();
         } else if (commandWord == CommandWord.GO) {
             changedRoom = processGoRoom(command);
-        } else if (commandWord == CommandWord.QUIT) {
-            processQuit();
         } else if (commandWord == CommandWord.TAKE) {
             processTakeItem(command);
         } else if (commandWord == CommandWord.DROP) {
             processDropItem(command);
         } else if (commandWord == CommandWord.INSPECT) {
             processInspectInventory();
-        } else if (commandWord == CommandWord.SEARCH) {
-            processSearchRoom();
         } else if (commandWord == CommandWord.USE) {
             processUseItem();
         }
@@ -67,11 +59,15 @@ public class TextIO {
     }
 
     private void printHelp() {
-        txtAreaOutput.appendText("\nYou are lost. You are alone. You wander");
-        txtAreaOutput.appendText("\naround at you own home.");
-        txtAreaOutput.appendText("\n");
-        txtAreaOutput.appendText("\nYour command words are:");
-        txtAreaOutput.appendText(parser.getCommandsString());
+        txtAreaOutput.appendText("\nYou are lost. You are alone. You wander around at you own home.");
+        txtAreaOutput.appendText("\nYour options are:");
+        txtAreaOutput.appendText("\n - To change room, simply press the buttons at the top, left, right or bottom of the room.");
+        txtAreaOutput.appendText("\n - To pick up items, simply click on them.");
+        txtAreaOutput.appendText("\n - To use the item you have picket up, press the 'use' button on the right.");
+        txtAreaOutput.appendText("\n - To drop the item you have picket up, press the 'drop' button on the right.");
+        txtAreaOutput.appendText("\n - To get information about the item you have picket up, press the 'inspect' button on the right.");
+        txtAreaOutput.appendText("\n - To get help, press the 'help' button on the right.");
+        txtAreaOutput.appendText("\n - To exit the game, simply close the window.");
 
         txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
     }
@@ -122,10 +118,6 @@ public class TextIO {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), new printWithPacingEventHandler(textToPrint, txtArea)));
         timeline.setCycleCount(textToPrint.length());
         timeline.play();
-    }
-
-    private void processQuit() {
-        txtAreaOutput.appendText("\nTo quit, simply press the 'X' button in the top right corner of the window.");
     }
 
     private boolean processGoRoom(Command command) throws PlayerDiedException, PlayerWinException {
@@ -214,10 +206,6 @@ public class TextIO {
         } else {
             txtAreaOutput.appendText("\nYou are not carrying anything.");
         }
-    }
-
-    private void processSearchRoom() {
-        txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getItemsString());
     }
 
     private void processUseItem() {
