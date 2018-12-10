@@ -33,6 +33,7 @@ import worldofzuul.Fire;
 import worldofzuul.Game;
 import worldofzuul.Item;
 import worldofzuul.Parser;
+import worldofzuul.Room;
 
 public class MainController implements Initializable {
 
@@ -196,14 +197,19 @@ public class MainController implements Initializable {
     @FXML
     private void btnUseEventHandler(ActionEvent event) {
         processCommand("use " + (textIO.getGame().getPlayer().getInventory() != null ? textIO.getGame().getPlayer().getInventory().getName() : ""));
+
         if (textIO.getGame().getPlayer().getInventory() == null) {
             imgInventory.setImage(null);
+        }
+
+        if (textIO.getGame().getPlayer().getCurrentRoom().getFire() == null) {
+            removeFire();
         }
     }
 
     @FXML
     private void btnDropEventHandler(ActionEvent event) {
-        removeItems();
+        removeItems(textIO.getGame().getPlayer().getCurrentRoom());
         processCommand("drop");
         printItems();
         imgInventory.setImage(null);
@@ -322,7 +328,7 @@ public class MainController implements Initializable {
     }
 
     private void redrawRoom() {
-        removeItems();
+        removeItems(textIO.getGame().getPlayer().getPreviousRoom());
         removeFire();
         printDirectionButtons();
         printItems();
@@ -380,8 +386,8 @@ public class MainController implements Initializable {
         }
     }
 
-    private void removeItems() {
-        for (Item item : textIO.getGame().getPlayer().getPreviousRoom().getItems()) {
+    private void removeItems(Room whereToRemoveItemsFrom) {
+        for (Item item : whereToRemoveItemsFrom.getItems()) {
             ImageView img = item.getImage();
             paneRoom.getChildren().remove(img);
         }
@@ -415,13 +421,8 @@ public class MainController implements Initializable {
 
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
-                Fire fire = textIO.getGame().getPlayer().getPreviousRoom().getFire();
-                if (fire != null) {
-                    for (int j = 0; j < fire.getLvl(); j++) {
-                        if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
-                            nodesToRemove.add(node);
-                        }
-                    }
+                if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
+                    nodesToRemove.add(node);
                 }
             }
         }
