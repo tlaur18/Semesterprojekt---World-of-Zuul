@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
@@ -100,86 +101,78 @@ public class MainController implements Initializable {
 
         Label lblName = new Label();
         lblName.setAlignment(Pos.CENTER);
-        lblName.setLayoutX(85);
-        lblName.setLayoutY(25);
+        lblName.setLayoutX(275);
+        lblName.setLayoutY(200);
         lblName.prefHeight(25);
         lblName.prefWidth(300);
-        lblName.setText("What is your name?");
-        lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 18));
+        lblName.setText("Before we begin.. \nWhat is your name?");
+        lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 30));
+        lblName.setTextAlignment(TextAlignment.CENTER);
 
         Button btnOk = new Button();
-        btnOk.setLayoutX(145);
-        btnOk.setLayoutY(100);
+        btnOk.setLayoutX(360);
+        btnOk.setLayoutY(400);
+        btnOk.setPrefHeight(40);
+        btnOk.setPrefWidth(80);
+        btnOk.setFont(new Font("Calibri", 16));
         btnOk.setText("OK");
 
         TextField nameInput = new TextField();
-        nameInput.setLayoutX(85);
-        nameInput.setLayoutY(63);
+        nameInput.setLayoutX(325);
+        nameInput.setLayoutY(325);
         nameInput.prefHeight(25);
         nameInput.prefWidth(220);
 
         Pane paneName = new Pane();
-        paneName.prefHeight(150);
-        paneName.prefWidth(300);
         paneName.getChildren().addAll(lblName, btnOk, nameInput);
 
-        Scene scene = new Scene(paneName);
+        Scene scene = root.getScene();
+        scene.setRoot(paneName);
 
-        Stage nameStage = new Stage();
-        nameStage.setHeight(175);
-        nameStage.setWidth(325);
-        nameStage.setScene(scene);
-        nameStage.setTitle("Player");
-        nameStage.show();
-
-        btnOk.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
-                nameStage.close();
-
-                TextArea txtAreaIntro = new TextArea();
-                txtAreaIntro.setEditable(false);
-                txtAreaIntro.setFont(new Font("Calibri", 18));
-
-                Button btnContinue = new Button();
-                btnContinue.setText("Continue");
-                btnContinue.setFont(new Font("Calibri", 32));
-                btnContinue.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent event) {
-                        Scene scene = txtAreaIntro.getScene();
-                        scene.setRoot(root);
-
-                        lblCurrentRoom.setVisible(true);
-                        imgBackground.setVisible(true);
-                        timon.setVisible(true);
-                        btnUse.setDisable(false);
-                        btnDrop.setDisable(false);
-                        btnInspect.setDisable(false);
-                        btnHelp.setDisable(false);
-                        lblInventoryHeadline.setDisable(false);
-                        redbar.setVisible(true);
-                        greenbar.setVisible(true);
-                        healthText.setVisible(true);
-                        stepCounterText.setVisible(true);
-                        printDirectionButtons();
-                        printItems();
-                    }
-                });
-
-                VBox introRoot = new VBox();
-                introRoot.setAlignment(Pos.CENTER);
-                introRoot.setPadding(new Insets(10, 10, 10, 10));
-                introRoot.setSpacing(50);
-                introRoot.getChildren().add(txtAreaIntro);
-                introRoot.getChildren().add(btnContinue);
-
-                Scene scene = root.getScene();
-                scene.setRoot(introRoot);
-
-                textIO.printWelcome(txtAreaIntro);
-            }
+        btnOk.setOnAction((ActionEvent e) -> {
+            textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
+            
+            TextArea txtAreaIntro = new TextArea();
+            txtAreaIntro.setEditable(false);
+            txtAreaIntro.setFont(new Font("Calibri", 18));
+            
+            Button btnContinue = new Button();
+            btnContinue.setText("Continue");
+            btnContinue.setFont(new Font("Calibri", 32));
+            btnContinue.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    Scene scene = txtAreaIntro.getScene();
+                    scene.setRoot(root);
+                    
+                    lblCurrentRoom.setVisible(true);
+                    imgBackground.setVisible(true);
+                    timon.setVisible(true);
+                    btnUse.setDisable(false);
+                    btnDrop.setDisable(false);
+                    btnInspect.setDisable(false);
+                    btnHelp.setDisable(false);
+                    lblInventoryHeadline.setDisable(false);
+                    redbar.setVisible(true);
+                    greenbar.setVisible(true);
+                    healthText.setVisible(true);
+                    stepCounterText.setVisible(true);
+                    printDirectionButtons();
+                    printItems();
+                }
+            });
+            
+            VBox introRoot = new VBox();
+            introRoot.setAlignment(Pos.CENTER);
+            introRoot.setPadding(new Insets(10, 10, 10, 10));
+            introRoot.setSpacing(50);
+            introRoot.getChildren().add(txtAreaIntro);
+            introRoot.getChildren().add(btnContinue);
+            
+            Scene intro = paneName.getScene();
+            intro.setRoot(introRoot);
+            
+            textIO.printWelcome(txtAreaIntro);
         });
     }
 
