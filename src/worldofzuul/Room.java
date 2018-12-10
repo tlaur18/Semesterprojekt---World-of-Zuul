@@ -108,7 +108,7 @@ public class Room {
     public void removeFire() {
         fire = null;
     }
-
+   
     public void updateFire() {
         if (fire != null) {
             fire.updateLvl();

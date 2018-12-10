@@ -3,6 +3,7 @@ package worldofzuulIO;
 import exceptions.PlayerDiedException;
 import exceptions.PlayerWinException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -30,9 +32,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import worldofzuul.Command;
+import worldofzuul.Fire;
 import worldofzuul.Game;
 import worldofzuul.Item;
 import worldofzuul.Parser;
+import worldofzuul.Room;
 
 public class MainController implements Initializable {
 
@@ -181,62 +185,52 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
-        removeItems();
-        processCommand("go north");
-        printDirectionButtons();
-        printItems();
-        setBackground();
-        drawHealthBar();
-        stepCounterText();
+        if (processCommand("go north")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
-        removeItems();
-        processCommand("go west");
-        printDirectionButtons();
-        printItems();
-        setBackground();
-        drawHealthBar();
-        stepCounterText();
+        if (processCommand("go west")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
-        removeItems();
-        processCommand("go south");
-        printDirectionButtons();
-        printItems();
-        setBackground();
-        drawHealthBar();
-        stepCounterText();
+        if (processCommand("go south")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
-        removeItems();
-        processCommand("go east");
-        printDirectionButtons();
-        printItems();
-        setBackground();
-        drawHealthBar();
-        stepCounterText();
+        if (processCommand("go east")) {
+            redrawRoom();
+        }
     }
 
     @FXML
     private void btnUseEventHandler(ActionEvent event) {
         processCommand("use " + (textIO.getGame().getPlayer().getInventory() != null ? textIO.getGame().getPlayer().getInventory().getName() : ""));
+
         if (textIO.getGame().getPlayer().getInventory() == null) {
             imgInventory.setImage(null);
         } else if (!(textIO.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
             imgInventory.setImage(textIO.getGame().getPlayer().getInventory().getImage().getImage());
         }
+
+        if (textIO.getGame().getPlayer().getCurrentRoom().getFire() == null) {
+            removeFire();
+        }
+
         drawHealthBar();
     }
 
     @FXML
     private void btnDropEventHandler(ActionEvent event) {
-        removeItems();
+        removeItems(textIO.getGame().getPlayer().getCurrentRoom());
         processCommand("drop");
         printItems();
         imgInventory.setImage(null);
@@ -256,21 +250,23 @@ public class MainController implements Initializable {
         greenbar.setWidth(textIO.getGame().getPlayer().getHealth() * 1.5);
         healthText.setText(Integer.toString(textIO.getGame().getPlayer().getHealth()) + " " + "HP");
     }
-    
+
     private void stepCounterText() {
         stepCounterText.setText("Step counter: " + Integer.toString(textIO.getGame().getPlayer().getStepCount()));
     }
 
-    private void processCommand(String inputLine) {
+    private boolean processCommand(String inputLine) {
+        boolean changedRoom = false;
         try {
             Parser parser = new Parser();
             txtAreaOutput.appendText("\n");
             Command command = parser.getCommand(inputLine);
-            textIO.processCommand(command);
+            changedRoom = textIO.processCommand(command);
             lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
-            disableGame();           
-            
+            redrawRoom();
+            disableGame();
+
             Label lblDead = new Label();
             lblDead.setText("You died. Would you like to try again?");
 
@@ -326,6 +322,7 @@ public class MainController implements Initializable {
                 }
             });
         } catch (PlayerWinException ex) {
+            redrawRoom();
             txtAreaOutput.appendText("\nYOU WON THE GAME!");
             disableGame();
 
@@ -361,6 +358,18 @@ public class MainController implements Initializable {
             winStage.setTitle("Congratulation");
             winStage.show();
         }
+        return changedRoom;
+    }
+
+    private void redrawRoom() {
+        removeItems(textIO.getGame().getPlayer().getPreviousRoom());
+        removeFire();
+        printDirectionButtons();
+        printItems();
+        printFire();
+        setBackground();
+        drawHealthBar();
+        stepCounterText();
     }
 
     private void printDirectionButtons() {
@@ -372,18 +381,22 @@ public class MainController implements Initializable {
         for (String exitString : textIO.getGame().getPlayer().getCurrentRoom().getExits().keySet()) {
             switch (exitString) {
                 case "north":
+                    btnNorth.toFront();
                     btnNorth.setVisible(true);
                     btnNorth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("north").getName());
                     break;
                 case "west":
+                    btnWest.toFront();
                     btnWest.setVisible(true);
                     btnWest.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("west").getName());
                     break;
                 case "south":
+                    btnSouth.toFront();
                     btnSouth.setVisible(true);
                     btnSouth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("south").getName());
                     break;
                 case "east":
+                    btnEast.toFront();
                     btnEast.setVisible(true);
                     btnEast.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("east").getName());
                     break;
@@ -409,8 +422,8 @@ public class MainController implements Initializable {
         }
     }
 
-    private void removeItems() {
-        for (Item item : textIO.getGame().getPlayer().getCurrentRoom().getItems()) {
+    private void removeItems(Room whereToRemoveItemsFrom) {
+        for (Item item : whereToRemoveItemsFrom.getItems()) {
             ImageView img = item.getImage();
             paneRoom.getChildren().remove(img);
         }
@@ -423,5 +436,33 @@ public class MainController implements Initializable {
     private void setBackground() {
         ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
         imgBackground.setImage(img.getImage());
+    }
+
+    private void printFire() {
+        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
+        if (fire != null) {
+            for (int i = 0; i < fire.getLvl() * 3; i++) {
+                ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
+                imgFire.fitHeightProperty().set(100);
+                imgFire.fitWidthProperty().set(60);
+                imgFire.setTranslateX(80 + Math.random() * 480);
+                imgFire.setTranslateY(30 + Math.random() * 330);
+                paneRoom.getChildren().add(imgFire);
+            }
+        }
+    }
+
+    private void removeFire() {
+        ArrayList<Node> nodesToRemove = new ArrayList<>();
+
+        for (Node node : paneRoom.getChildren()) {
+            if (node instanceof ImageView) {
+                if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
+                    nodesToRemove.add(node);
+                }
+            }
+        }
+
+        paneRoom.getChildren().removeAll(nodesToRemove);
     }
 }
