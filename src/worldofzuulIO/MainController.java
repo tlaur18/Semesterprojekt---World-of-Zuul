@@ -35,7 +35,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import worldofzuul.Game;
@@ -175,12 +174,6 @@ public class MainController implements Initializable {
                     stepCounterText.setVisible(true);
                     printDirectionButtons();
                     printItems();
-
-                    String fireAlarm = "src/sounds/FireAlarm.wav";
-                    Media alarmSound = new Media(new File(fireAlarm).toURI().toString());
-                    MediaPlayer alarmPlayer = new MediaPlayer(alarmSound);
-                    alarmPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-                    alarmPlayer.play();
                 }
             });
 
@@ -456,8 +449,7 @@ public class MainController implements Initializable {
     private void printFire() {
         Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
-            fireSound();
-            
+
             for (int i = 0; i < fire.getLvl() * 3; i++) {
                 ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
                 imgFire.fitHeightProperty().set(100);
@@ -482,19 +474,4 @@ public class MainController implements Initializable {
 
         paneRoom.getChildren().removeAll(nodesToRemove);
     }
-
-    public void fireSound() {
-        String flame = "src/sounds/Flames.wav";
-        Media flameSound = new Media(new File(flame).toURI().toString());
-        MediaPlayer flamePlayer = new MediaPlayer(flameSound);
-        flamePlayer.setCycleCount(flamePlayer.INDEFINITE);
-        flamePlayer.setVolume(1.0);
-        flamePlayer.play();
-
-        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
-        if (fire == null) {
-            flamePlayer.stop();
-        }
-    }
-
 }
