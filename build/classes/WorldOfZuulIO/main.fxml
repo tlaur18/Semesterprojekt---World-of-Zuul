@@ -63,19 +63,6 @@
    <center>
       <Pane fx:id="paneRoom" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="hasWon" disable="true" fitHeight="419.0" fitWidth="439.0" layoutX="215.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../Imgs/Win.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="hasWonBtnOk" disable="true" layoutX="319.0" layoutY="303.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="OK" visible="false" />
-            <ImageView disable="true" fitHeight="148.0" fitWidth="339.0" layoutX="181.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../Imgs/Lose.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="hasDiedBtnYes" disable="true" layoutX="224.0" layoutY="265.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Yes" visible="false" />
-            <Button fx:id="hasDiedBtnNo" disable="true" layoutX="363.0" layoutY="265.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="No" visible="false" />
             <ImageView fx:id="imgBackground" fitHeight="498.0" fitWidth="700.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@../Imgs/bedroom.png" />
@@ -96,13 +83,18 @@
                   <Font size="30.0" />
                </font>
             </Button>
+            <Button fx:id="btnHighscore" alignment="TOP_LEFT" layoutX="266.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnHighscore" text="Highscore">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
             <Button fx:id="btnNorth" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNorthEventHandler" prefWidth="80.0" text="Go north" visible="false" />
             <Button fx:id="btnWest" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnWestEventHandler" prefWidth="80.0" text="Go west" visible="false" />
             <Button fx:id="btnSouth" layoutX="310.0" layoutY="459.0" mnemonicParsing="false" onAction="#btnSouthEventHandler" prefWidth="80.0" text="Go south" visible="false" />
             <Button fx:id="btnEast" layoutX="606.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnEastEventHandler" prefWidth="80.0" text="Go east" visible="false" />
-            <Label fx:id="lblCurrentRoom" alignment="CENTER" contentDisplay="CENTER" layoutX="289.0" layoutY="61.0" text="Bedroom" textAlignment="CENTER" visible="false">
+            <Label fx:id="lblCurrentRoom" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" text="Bedroom" textAlignment="CENTER" visible="false">
                <font>
-                  <Font size="30.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Label>
             <Rectangle fx:id="redbar" arcHeight="5.0" arcWidth="5.0" fill="#f00f07" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="150.0" />
@@ -117,12 +109,20 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <ImageView fx:id="hasWon" fitHeight="419.0" fitWidth="439.0" layoutX="215.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Imgs/Win.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="hasWonBtnOk" layoutX="319.0" layoutY="303.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="OK" visible="false" />
             <Label fx:id="hasWonScore" layoutX="318.0" layoutY="380.0" prefHeight="38.0" prefWidth="72.0" text="Score: 99999" visible="false" />
-            <Button fx:id="btnHighscore" alignment="TOP_LEFT" layoutX="266.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnHighscore" text="Highscore">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
+            <ImageView fx:id="isDead" fitHeight="148.0" fitWidth="339.0" layoutX="207.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Imgs/Lose.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="isDeadBtnYes" layoutX="215.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Yes" visible="false" />
+            <Button fx:id="isDeadBtnNo" layoutX="418.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="No" visible="false" />
          </children>
       </Pane>
    </center>

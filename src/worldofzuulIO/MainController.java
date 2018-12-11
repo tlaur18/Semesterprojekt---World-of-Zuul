@@ -203,7 +203,6 @@ public class MainController implements Initializable {
             }
         });
     }
-      
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
@@ -371,7 +370,21 @@ public class MainController implements Initializable {
     }
 
     private void disableGame() {
-        root.setDisable(true);
+        //root.setDisable(true);
+        btnNorth.setDisable(true);
+        btnWest.setDisable(true);
+        btnSouth.setDisable(true);
+        btnEast.setDisable(true);
+        btnUse.setDisable(true);
+        btnDrop.setDisable(true);
+        btnInspect.setDisable(true);
+        btnHelp.setDisable(true);
+        
+        btnNorth.setVisible(false);
+        btnWest.setVisible(false);
+        btnSouth.setVisible(false);
+        btnEast.setVisible(false);
+        
     }
 
     private void setBackground() {
@@ -409,45 +422,21 @@ public class MainController implements Initializable {
     }
 
     private void drawDeadStage() {
-        Label lblDead = new Label();
-        lblDead.setText("You died. Would you like to try again?");
+        timon.setVisible(false);
+        deadTimon.setVisible(true);
 
-        Button btnYes = new Button();
-        btnYes.setText("Yes");
+        isDead.setVisible(true);
 
-        Button btnNo = new Button();
-        btnNo.setText("No");
-        btnNo.setOnAction(new EventHandler<ActionEvent>() {
+        isDeadBtnNo.setVisible(true);
+        isDeadBtnNo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 System.exit(0);
             }
         });
 
-        HBox hBox = new HBox();
-        hBox.getChildren().add(btnYes);
-        hBox.getChildren().add(btnNo);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(10, 10, 10, 10));
-        hBox.setSpacing(10);
-
-        VBox vBox = new VBox();
-        vBox.getChildren().add(lblDead);
-        vBox.getChildren().add(hBox);
-        vBox.setAlignment(Pos.CENTER);
-
-        Scene scene = new Scene(vBox);
-
-        Stage deadStage = new Stage();
-        timon.setVisible(false);
-        deadTimon.setVisible(true);
-        deadStage.setScene(scene);
-        deadStage.setHeight(150);
-        deadStage.setWidth(300);
-        deadStage.setTitle("Try again?");
-        deadStage.show();
-
-        btnYes.setOnAction(new EventHandler<ActionEvent>() {
+        isDeadBtnYes.setVisible(true);
+        isDeadBtnYes.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 Stage primaryStage = (Stage) root.getScene().getWindow();
@@ -459,44 +448,24 @@ public class MainController implements Initializable {
                 } catch (Exception ex1) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
                 }
-
-                deadStage.close();
             }
         });
     }
 
     private void drawWinStage() {
-        Label lblWin = new Label();
-        lblWin.setText("YOU WIN!\n Your score is: " + textUI.getGame().getPlayer().getPlayerScore());
+        hasWon.setVisible(true);
 
-        Button btnNo = new Button();
-        btnNo.setText("OK");
-        btnNo.setOnAction(new EventHandler<ActionEvent>() {
+        hasWonScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());
+        hasWonScore.setVisible(true);
+
+        hasWonBtnOk.setDisable(false);
+        hasWonBtnOk.setVisible(true);
+        hasWonBtnOk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 System.exit(0);
             }
         });
-
-        HBox hBox = new HBox();
-        hBox.getChildren().add(btnNo);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(10, 10, 10, 10));
-        hBox.setSpacing(10);
-
-        VBox vBox = new VBox();
-        vBox.getChildren().add(lblWin);
-        vBox.getChildren().add(hBox);
-        vBox.setAlignment(Pos.CENTER);
-
-        Scene scene = new Scene(vBox);
-
-        Stage winStage = new Stage();
-        winStage.setScene(scene);
-        winStage.setHeight(150);
-        winStage.setWidth(300);
-        winStage.setTitle("Congratulation");
-        winStage.show();
     }
 
     @FXML
@@ -514,8 +483,8 @@ public class MainController implements Initializable {
         scene.setRoot(highscoreRoot);
         textUI.printHighscore(txtAreaIntro);
     }
-    
-    public void highscore(){
+
+    public void highscore() {
         textUI.getGame().getPlayer().setPlayerScore();
         textUI.getGame().saveHighscore();
     }
