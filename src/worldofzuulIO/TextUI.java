@@ -21,13 +21,13 @@ import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 
-public class TextIO {
+public class TextUI {
 
     private Game game;
     private Parser parser;
     private TextArea txtAreaOutput;
 
-    public TextIO(Game game, TextArea txtAreaOutput) {
+    public TextUI(Game game, TextArea txtAreaOutput) {
         this.game = game;
         this.txtAreaOutput = txtAreaOutput;
         parser = new Parser();

@@ -1,11 +1,11 @@
 package exceptions;
 
 import worldofzuul.Game;
-import worldofzuulIO.TextIO;
+import worldofzuulIO.TextUI;
 
 public class PlayerWinException extends Exception {
 
-    private TextIO textIO;
+    private TextUI textIO;
 
     public PlayerWinException() {
         super("You won the game!");

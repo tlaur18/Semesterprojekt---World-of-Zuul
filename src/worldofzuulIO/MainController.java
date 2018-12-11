@@ -40,7 +40,7 @@ import worldofzuul.Room;
 
 public class MainController implements Initializable {
 
-    private TextIO textIO;
+    private TextUI textUI;
 
     @FXML
     private BorderPane root;
@@ -91,7 +91,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        textIO = new TextIO(new Game(), txtAreaOutput);
+        textUI = new TextUI(new Game(), txtAreaOutput);
     }
 
     @FXML
@@ -135,7 +135,7 @@ public class MainController implements Initializable {
         btnOk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
+                textUI.getGame().getPlayer().setPlayerName(nameInput.getText());
                 nameStage.close();
 
                 TextArea txtAreaIntro = new TextArea();
@@ -184,7 +184,7 @@ public class MainController implements Initializable {
                 Scene scene = root.getScene();
                 scene.setRoot(introRoot);
 
-                textIO.printWelcome(txtAreaIntro);
+                textUI.printWelcome(txtAreaIntro);
             }
         });
     }
@@ -219,15 +219,15 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnUseEventHandler(ActionEvent event) {
-        processCommand("use " + (textIO.getGame().getPlayer().getInventory() != null ? textIO.getGame().getPlayer().getInventory().getName() : ""));
+        processCommand("use " + (textUI.getGame().getPlayer().getInventory() != null ? textUI.getGame().getPlayer().getInventory().getName() : ""));
 
-        if (textIO.getGame().getPlayer().getInventory() == null) {
+        if (textUI.getGame().getPlayer().getInventory() == null) {
             imgInventory.setImage(null);
-        } else if (!(textIO.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
-            imgInventory.setImage(textIO.getGame().getPlayer().getInventory().getImage().getImage());
+        } else if (!(textUI.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
+            imgInventory.setImage(textUI.getGame().getPlayer().getInventory().getImage().getImage());
         }
 
-        if (textIO.getGame().getPlayer().getCurrentRoom().getFire() == null) {
+        if (textUI.getGame().getPlayer().getCurrentRoom().getFire() == null) {
             removeFire();
         }
 
@@ -236,7 +236,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnDropEventHandler(ActionEvent event) {
-        removeItems(textIO.getGame().getPlayer().getCurrentRoom());
+        removeItems(textUI.getGame().getPlayer().getCurrentRoom());
         processCommand("drop");
         printItems();
         imgInventory.setImage(null);
@@ -253,12 +253,12 @@ public class MainController implements Initializable {
     }
 
     private void drawHealthBar() {
-        greenbar.setWidth(textIO.getGame().getPlayer().getHealth() * 1.5);
-        healthText.setText(Integer.toString(textIO.getGame().getPlayer().getHealth()) + " " + "HP");
+        greenbar.setWidth(textUI.getGame().getPlayer().getHealth() * 1.5);
+        healthText.setText(Integer.toString(textUI.getGame().getPlayer().getHealth()) + " " + "HP");
     }
 
     private void stepCounterText() {
-        stepCounterText.setText("Step counter: " + Integer.toString(textIO.getGame().getPlayer().getStepCount()));
+        stepCounterText.setText("Step counter: " + Integer.toString(textUI.getGame().getPlayer().getStepCount()));
     }
 
     private boolean processCommand(String inputLine) {
@@ -267,8 +267,8 @@ public class MainController implements Initializable {
             Parser parser = new Parser();
             txtAreaOutput.appendText("\n");
             Command command = parser.getCommand(inputLine);
-            changedRoom = textIO.processCommand(command);
-            lblCurrentRoom.setText(textIO.getGame().getPlayer().getCurrentRoom().getName());
+            changedRoom = textUI.processCommand(command);
+            lblCurrentRoom.setText(textUI.getGame().getPlayer().getCurrentRoom().getName());
         } catch (PlayerDiedException ex) {
             redrawRoom();
             disableGame();
@@ -368,7 +368,7 @@ public class MainController implements Initializable {
     }
 
     private void redrawRoom() {
-        removeItems(textIO.getGame().getPlayer().getPreviousRoom());
+        removeItems(textUI.getGame().getPlayer().getPreviousRoom());
         removeFire();
         printDirectionButtons();
         printItems();
@@ -384,41 +384,41 @@ public class MainController implements Initializable {
         btnSouth.setVisible(false);
         btnEast.setVisible(false);
 
-        for (String exitString : textIO.getGame().getPlayer().getCurrentRoom().getExits().keySet()) {
+        for (String exitString : textUI.getGame().getPlayer().getCurrentRoom().getExits().keySet()) {
             switch (exitString) {
                 case "north":
                     btnNorth.toFront();
                     btnNorth.setVisible(true);
-                    btnNorth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("north").getName());
+                    btnNorth.setText(textUI.getGame().getPlayer().getCurrentRoom().getExit("north").getName());
                     break;
                 case "west":
                     btnWest.toFront();
                     btnWest.setVisible(true);
-                    btnWest.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("west").getName());
+                    btnWest.setText(textUI.getGame().getPlayer().getCurrentRoom().getExit("west").getName());
                     break;
                 case "south":
                     btnSouth.toFront();
                     btnSouth.setVisible(true);
-                    btnSouth.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("south").getName());
+                    btnSouth.setText(textUI.getGame().getPlayer().getCurrentRoom().getExit("south").getName());
                     break;
                 case "east":
                     btnEast.toFront();
                     btnEast.setVisible(true);
-                    btnEast.setText(textIO.getGame().getPlayer().getCurrentRoom().getExit("east").getName());
+                    btnEast.setText(textUI.getGame().getPlayer().getCurrentRoom().getExit("east").getName());
                     break;
             }
         }
     }
 
     private void printItems() {
-        for (Item item : textIO.getGame().getPlayer().getCurrentRoom().getItems()) {
+        for (Item item : textUI.getGame().getPlayer().getCurrentRoom().getItems()) {
             ImageView img = item.getImage();
             paneRoom.getChildren().add(img);
 
             img.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent e) {
-                    if (textIO.getGame().getPlayer().getInventory() == null) {
+                    if (textUI.getGame().getPlayer().getInventory() == null) {
                         imgInventory.setImage(img.getImage());
                         paneRoom.getChildren().remove(img);
                     }
@@ -440,12 +440,12 @@ public class MainController implements Initializable {
     }
 
     private void setBackground() {
-        ImageView img = textIO.getGame().getPlayer().getCurrentRoom().getImage();
+        ImageView img = textUI.getGame().getPlayer().getCurrentRoom().getImage();
         imgBackground.setImage(img.getImage());
     }
 
     private void printFire() {
-        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
+        Fire fire = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
             for (int i = 0; i < fire.getLvl() * 3; i++) {
                 ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
