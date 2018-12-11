@@ -79,6 +79,14 @@ public class Player {
         stepCount = stepCount + 1;
         return stepCount;
     }
+    
+    public boolean checkForFireDamage() {
+        if(currentRoom.getFire() != null) {
+            takeDamage(25 * currentRoom.getFire().getLvl());
+            return true;
+        }
+        return false;
+    }
 
     public int takeDamage(int dmg) {
         return health -= dmg;

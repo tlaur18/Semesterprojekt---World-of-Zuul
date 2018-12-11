@@ -112,10 +112,10 @@ public class TextUI {
     private boolean processGoRoom(Command command) {
         //SimpleBooleanProperty er en slags boolean der bare er en kompleks type. Andre variable der sættes lig med denne vil derfor henvise til den samme hukommelse.
         SimpleBooleanProperty changedRoom = new SimpleBooleanProperty(false);
-        
+
         //Udskriver resultatet af goRoom()-metoden.
         txtAreaOutput.appendText(game.getPlayer().goRoom(command, changedRoom));
-        
+
         if (changedRoom.get()) {
             txtAreaOutput.appendText(game.updateFire());
 
@@ -125,12 +125,9 @@ public class TextUI {
             }
 
             //Sørger for at spilleren mister liv af ild.
-            if (game.getPlayer().getCurrentRoom().getFire() != null) {
-                game.getPlayer().takeDamage((game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())));
-                txtAreaOutput.appendText("\nYou have been damaged by the fire");
-            }
+            txtAreaOutput.appendText((game.getPlayer().checkForFireDamage() ? "\nYou have been damaged by the fire" : ""));
         }
-        
+
         return changedRoom.get();
     }
 

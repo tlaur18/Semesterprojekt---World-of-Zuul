@@ -10,7 +10,7 @@ public class Doll extends UseableItem {
     public String use(Player player) {
         String outputText = "";
         
-        outputText = "You play with the doll, but quickly get bored.";
+        outputText = "\nYou play with the doll, but quickly get bored.";
         outputText += "\nYou realize that you probably shoudl focus on getting to safety.";
         
         return outputText;

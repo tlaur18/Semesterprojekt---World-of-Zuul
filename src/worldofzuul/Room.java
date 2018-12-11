@@ -11,7 +11,6 @@ public class Room {
     private HashMap<String, Room> exits;
     private ArrayList<Item> items = new ArrayList();
     private Fire fire = null;
-    private int damage;
     private boolean isLocked;
     private boolean isGameComplete;
     private boolean isGameOver;
@@ -49,11 +48,7 @@ public class Room {
     public boolean getGameOver() {
         return isGameOver;
     }
-
-    public int getDamage() {
-        return damage;
-    }
-
+    
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
