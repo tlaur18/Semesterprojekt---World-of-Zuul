@@ -2,6 +2,7 @@ package worldofzuulIO;
 
 import exceptions.PlayerDiedException;
 import exceptions.PlayerWinException;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -27,11 +28,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import worldofzuul.Game;
@@ -89,6 +93,18 @@ public class MainController implements Initializable {
     private Label healthText;
     @FXML
     private Label stepCounterText;
+    @FXML
+    private ImageView hasWon;
+    @FXML
+    private Button hasWonBtnOk;
+    @FXML
+    private Label hasWonScore;
+    @FXML
+    private ImageView isDead;
+    @FXML
+    private Button isDeadBtnYes;
+    @FXML
+    private Button isDeadBtnNo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -131,11 +147,11 @@ public class MainController implements Initializable {
 
         btnOk.setOnAction((ActionEvent e) -> {
             textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
-            
+
             TextArea txtAreaIntro = new TextArea();
             txtAreaIntro.setEditable(false);
             txtAreaIntro.setFont(new Font("Calibri", 18));
-            
+
             Button btnContinue = new Button();
             btnContinue.setText("Continue");
             btnContinue.setFont(new Font("Calibri", 32));
@@ -144,7 +160,7 @@ public class MainController implements Initializable {
                 public void handle(ActionEvent event) {
                     Scene scene = txtAreaIntro.getScene();
                     scene.setRoot(root);
-                    
+
                     lblCurrentRoom.setVisible(true);
                     imgBackground.setVisible(true);
                     timon.setVisible(true);
@@ -159,19 +175,25 @@ public class MainController implements Initializable {
                     stepCounterText.setVisible(true);
                     printDirectionButtons();
                     printItems();
+
+                    String fireAlarm = "src/sounds/FireAlarm.wav";
+                    Media alarmSound = new Media(new File(fireAlarm).toURI().toString());
+                    MediaPlayer alarmPlayer = new MediaPlayer(alarmSound);
+                    alarmPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+                    alarmPlayer.play();
                 }
             });
-            
+
             VBox introRoot = new VBox();
             introRoot.setAlignment(Pos.CENTER);
             introRoot.setPadding(new Insets(10, 10, 10, 10));
             introRoot.setSpacing(50);
             introRoot.getChildren().add(txtAreaIntro);
             introRoot.getChildren().add(btnContinue);
-            
+
             Scene intro = paneName.getScene();
             intro.setRoot(introRoot);
-            
+
             textIO.printWelcome(txtAreaIntro);
         });
     }
@@ -434,6 +456,8 @@ public class MainController implements Initializable {
     private void printFire() {
         Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
+            fireSound();
+            
             for (int i = 0; i < fire.getLvl() * 3; i++) {
                 ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
                 imgFire.fitHeightProperty().set(100);
@@ -458,4 +482,19 @@ public class MainController implements Initializable {
 
         paneRoom.getChildren().removeAll(nodesToRemove);
     }
+
+    public void fireSound() {
+        String flame = "src/sounds/Flames.wav";
+        Media flameSound = new Media(new File(flame).toURI().toString());
+        MediaPlayer flamePlayer = new MediaPlayer(flameSound);
+        flamePlayer.setCycleCount(flamePlayer.INDEFINITE);
+        flamePlayer.setVolume(1.0);
+        flamePlayer.play();
+
+        Fire fire = textIO.getGame().getPlayer().getCurrentRoom().getFire();
+        if (fire == null) {
+            flamePlayer.stop();
+        }
+    }
+
 }

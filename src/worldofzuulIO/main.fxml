@@ -63,6 +63,19 @@
    <center>
       <Pane fx:id="paneRoom" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <ImageView fx:id="hasWon" disable="true" fitHeight="419.0" fitWidth="439.0" layoutX="215.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Imgs/Win.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="hasWonBtnOk" disable="true" layoutX="319.0" layoutY="303.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="OK" visible="false" />
+            <ImageView disable="true" fitHeight="148.0" fitWidth="339.0" layoutX="181.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../Imgs/Lose.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="hasDiedBtnYes" disable="true" layoutX="224.0" layoutY="265.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Yes" visible="false" />
+            <Button fx:id="hasDiedBtnNo" disable="true" layoutX="363.0" layoutY="265.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="No" visible="false" />
             <ImageView fx:id="imgBackground" fitHeight="498.0" fitWidth="700.0" pickOnBounds="true" visible="false">
                <image>
                   <Image url="@../Imgs/bedroom.png" />
@@ -104,6 +117,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <Label fx:id="hasWonScore" layoutX="318.0" layoutY="380.0" prefHeight="38.0" prefWidth="72.0" text="Score: 99999" visible="false" />
          </children>
       </Pane>
    </center>
