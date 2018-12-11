@@ -1,5 +1,6 @@
 package worldofzuulIO;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -23,9 +24,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
@@ -84,6 +88,18 @@ public class MainController implements Initializable {
     private Label healthText;
     @FXML
     private Label stepCounterText;
+    @FXML
+    private ImageView hasWon;
+    @FXML
+    private Button hasWonBtnOk;
+    @FXML
+    private Label hasWonScore;
+    @FXML
+    private ImageView isDead;
+    @FXML
+    private Button isDeadBtnYes;
+    @FXML
+    private Button isDeadBtnNo;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,43 +112,38 @@ public class MainController implements Initializable {
 
         Label lblName = new Label();
         lblName.setAlignment(Pos.CENTER);
-        lblName.setLayoutX(85);
-        lblName.setLayoutY(25);
+        lblName.setLayoutX(275);
+        lblName.setLayoutY(200);
         lblName.prefHeight(25);
         lblName.prefWidth(300);
-        lblName.setText("What is your name?");
-        lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 18));
+        lblName.setText("Before we begin.. \nWhat is your name?");
+        lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 30));
+        lblName.setTextAlignment(TextAlignment.CENTER);
 
         Button btnOk = new Button();
-        btnOk.setLayoutX(145);
-        btnOk.setLayoutY(100);
+        btnOk.setLayoutX(360);
+        btnOk.setLayoutY(400);
+        btnOk.setPrefHeight(40);
+        btnOk.setPrefWidth(80);
+        btnOk.setFont(new Font("Calibri", 16));
         btnOk.setText("OK");
 
         TextField nameInput = new TextField();
-        nameInput.setLayoutX(85);
-        nameInput.setLayoutY(63);
+        nameInput.setLayoutX(325);
+        nameInput.setLayoutY(325);
         nameInput.prefHeight(25);
         nameInput.prefWidth(220);
 
         Pane paneName = new Pane();
-        paneName.prefHeight(150);
-        paneName.prefWidth(300);
         paneName.getChildren().addAll(lblName, btnOk, nameInput);
 
-        Scene scene = new Scene(paneName);
-
-        Stage nameStage = new Stage();
-        nameStage.setHeight(175);
-        nameStage.setWidth(325);
-        nameStage.setScene(scene);
-        nameStage.setTitle("Player");
-        nameStage.show();
+        Scene scene = root.getScene();
+        scene.setRoot(paneName);
 
         btnOk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
                 textUI.getGame().getPlayer().setPlayerName(nameInput.getText());
-                nameStage.close();
 
                 TextArea txtAreaIntro = new TextArea();
                 txtAreaIntro.setEditable(false);
@@ -170,17 +181,54 @@ public class MainController implements Initializable {
                     }
                 });
 
-                VBox introRoot = new VBox();
-                introRoot.setAlignment(Pos.CENTER);
-                introRoot.setPadding(new Insets(10, 10, 10, 10));
-                introRoot.setSpacing(50);
-                introRoot.getChildren().add(txtAreaIntro);
-                introRoot.getChildren().add(btnContinue);
+                btnOk.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        textUI.getGame().getPlayer().setPlayerName(nameInput.getText());
 
-                Scene scene = root.getScene();
-                scene.setRoot(introRoot);
+                        TextArea txtAreaIntro = new TextArea();
+                        txtAreaIntro.setEditable(false);
+                        txtAreaIntro.setFont(new Font("Calibri", 18));
 
-                textUI.printWelcome(txtAreaIntro);
+                        Button btnContinue = new Button();
+                        btnContinue.setText("Continue");
+                        btnContinue.setFont(new Font("Calibri", 32));
+                        btnContinue.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                Scene scene = txtAreaIntro.getScene();
+                                scene.setRoot(root);
+
+                                lblCurrentRoom.setVisible(true);
+                                imgBackground.setVisible(true);
+                                timon.setVisible(true);
+                                btnUse.setDisable(false);
+                                btnDrop.setDisable(false);
+                                btnInspect.setDisable(false);
+                                btnHelp.setDisable(false);
+                                lblInventoryHeadline.setDisable(false);
+                                redbar.setVisible(true);
+                                greenbar.setVisible(true);
+                                healthText.setVisible(true);
+                                stepCounterText.setVisible(true);
+                                printDirectionButtons();
+                                printItems();
+                            }
+                        });
+
+                        VBox introRoot = new VBox();
+                        introRoot.setAlignment(Pos.CENTER);
+                        introRoot.setPadding(new Insets(10, 10, 10, 10));
+                        introRoot.setSpacing(50);
+                        introRoot.getChildren().add(txtAreaIntro);
+                        introRoot.getChildren().add(btnContinue);
+
+                        Scene intro = paneName.getScene();
+                        intro.setRoot(introRoot);
+
+                        textUI.printWelcome(txtAreaIntro);
+                    }
+                });
             }
         });
     }
@@ -264,7 +312,7 @@ public class MainController implements Initializable {
         Command command = parser.getCommand(inputLine);
         changedRoom = textUI.processCommand(command);
         lblCurrentRoom.setText(textUI.getGame().getPlayer().getCurrentRoom().getName());
-        
+
         if (textUI.getGame().getPlayer().isDead()) {
             redrawRoom();
             disableGame();
@@ -276,7 +324,7 @@ public class MainController implements Initializable {
             disableGame();
             drawWinStage();
         }
-        
+
         return changedRoom;
     }
 
@@ -360,6 +408,7 @@ public class MainController implements Initializable {
     private void printFire() {
         Fire fire = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
+
             for (int i = 0; i < fire.getLvl() * 3; i++) {
                 ImageView imgFire = new ImageView(Fire.IMAGE_FIRE);
                 imgFire.fitHeightProperty().set(100);
