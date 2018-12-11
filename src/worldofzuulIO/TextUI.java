@@ -37,7 +37,7 @@ public class TextUI {
         return game;
     }
 
-    public boolean processCommand(Command command) throws PlayerDiedException, PlayerWinException {
+    public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         boolean changedRoom = false;
 
@@ -120,30 +120,22 @@ public class TextUI {
         timeline.play();
     }
 
-    private boolean processGoRoom(Command command) throws PlayerDiedException, PlayerWinException {
+    private boolean processGoRoom(Command command) {
         boolean changedRoom = false;
         try {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
             txtAreaOutput.appendText(game.updateFire());
 
-            //Tjekker om spilleren har vundet.
-            if (game.getPlayer().hasWon()) {
-                throw new PlayerWinException();
-            }
-
             //Tjeker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
             if (game.getPlayer().getCurrentRoom().getGameOver()) {
-                throw new PlayerDiedException();
+                game.getPlayer().setHealth(0);
             }
 
             //Sørger for at spilleren mister liv af ild.
             if (game.getPlayer().getCurrentRoom().getFire() != null) {
                 game.getPlayer().takeDamage((game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())));
                 txtAreaOutput.appendText("\nYou have been damaged by the fire");
-                if (game.getPlayer().isDead() == true) {
-                    throw new PlayerDiedException();
-                }
             }
 
             changedRoom = true;

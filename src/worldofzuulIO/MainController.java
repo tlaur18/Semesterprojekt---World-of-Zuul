@@ -1,7 +1,5 @@
 package worldofzuulIO;
 
-import exceptions.PlayerDiedException;
-import exceptions.PlayerWinException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -13,14 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -263,21 +259,24 @@ public class MainController implements Initializable {
 
     private boolean processCommand(String inputLine) {
         boolean changedRoom = false;
-        try {
-            Parser parser = new Parser();
-            txtAreaOutput.appendText("\n");
-            Command command = parser.getCommand(inputLine);
-            changedRoom = textUI.processCommand(command);
-            lblCurrentRoom.setText(textUI.getGame().getPlayer().getCurrentRoom().getName());
-        } catch (PlayerDiedException ex) {
+        Parser parser = new Parser();
+        txtAreaOutput.appendText("\n");
+        Command command = parser.getCommand(inputLine);
+        changedRoom = textUI.processCommand(command);
+        lblCurrentRoom.setText(textUI.getGame().getPlayer().getCurrentRoom().getName());
+        
+        if (textUI.getGame().getPlayer().isDead()) {
             redrawRoom();
             disableGame();
             drawDeadStage();
-        } catch (PlayerWinException ex) {
+        }
+
+        if (textUI.getGame().getPlayer().hasWon()) {
             redrawRoom();
             disableGame();
             drawWinStage();
         }
+        
         return changedRoom;
     }
 
