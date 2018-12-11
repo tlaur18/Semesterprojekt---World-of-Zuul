@@ -13,6 +13,7 @@ public class Player {
     private Room currentRoom;
     private Room previousRoom;
     private Room nextRoom;
+    private int highscore;
 
     public Player(Room room, String playerName) {
         stepCount = 0;
@@ -161,5 +162,13 @@ public class Player {
         } else {
             return "\nThere is nothing interesting to use this item for.";
         }
+    }
+
+    public int getPlayerScore() {
+        return highscore;
+    }
+
+    public void setPlayerScore() {
+        this.highscore = 1234 * stepCount;
     }
 }

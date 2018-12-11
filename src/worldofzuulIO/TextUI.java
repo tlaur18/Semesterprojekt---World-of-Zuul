@@ -1,5 +1,7 @@
 package worldofzuulIO;
 
+import exceptions.NameInputException;
+import java.util.List;
 import worldofzuul.Command;
 import worldofzuul.CommandWord;
 import worldofzuul.Game;
@@ -9,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
+import worldofzuul.Highscore;
 
 public class TextUI {
 
@@ -150,5 +153,27 @@ public class TextUI {
 
     private void processUseItem() {
         txtAreaOutput.appendText(game.getPlayer().useItem());
+    }
+    
+    public void printHighscore(TextArea txtArea) {
+        String highscoretxt = "";
+        List<Highscore> highscores = game.getHighscoreDatabase().getHighscores();
+        for (Highscore highscore : highscores) {
+            highscoretxt += "Name: " + highscore.getName() + "\t\t";
+            highscoretxt += " Score: " + highscore.getScore() + "\n";
+        }
+        printWithPacing(highscoretxt, txtArea);
+    }
+
+    public boolean validName(String str) throws NameInputException {
+        boolean valid = true;
+        char[] charArray = str.toCharArray();
+        for (char c : charArray) {
+            if (c == ',') {
+                valid = false;
+                throw new NameInputException();
+            }
+        }
+        return valid;
     }
 }

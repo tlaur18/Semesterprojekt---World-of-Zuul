@@ -1,0 +1,10 @@
+Morten,3120
+Thomas,6164
+Alexander,500
+Jacob,1000
+Mathias,3333
+Jens,1224
+Kurt,12098
+Bnag,1234
+BnagMaster,1234
+KjeldKebab,20978

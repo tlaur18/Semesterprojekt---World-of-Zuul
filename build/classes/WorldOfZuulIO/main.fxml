@@ -118,6 +118,11 @@
                </font>
             </Label>
             <Label fx:id="hasWonScore" layoutX="318.0" layoutY="380.0" prefHeight="38.0" prefWidth="72.0" text="Score: 99999" visible="false" />
+            <Button fx:id="btnHighscore" alignment="TOP_LEFT" layoutX="266.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnHighscore" text="Highscore">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </center>

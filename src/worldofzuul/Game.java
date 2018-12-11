@@ -19,6 +19,7 @@ public class Game {
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
+    private HighscoreDatabase highscoreDB;
 
     public Game() {
         createRooms();
@@ -28,6 +29,7 @@ public class Game {
         parser = new Parser();
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
                 office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
+        highscoreDB = new HighscoreDatabase();
     }
 
     private void createRooms() {
@@ -138,4 +140,11 @@ public class Game {
         return "";
     }
 
+    public HighscoreDatabase getHighscoreDatabase() {
+        return highscoreDB;
+    }
+    
+    public void saveHighscore(){
+        highscoreDB.saveHighscore(player);
+    }
 }
