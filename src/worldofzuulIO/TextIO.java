@@ -17,6 +17,7 @@ import exceptions.PlayerInventoryFullException;
 import exceptions.PlayerWinException;
 import exceptions.UseNonUseableItemException;
 import exceptions.UseWithEmptyInventoryException;
+import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.control.TextArea;
@@ -230,21 +231,22 @@ public class TextIO {
 
     public void printHighscore(TextArea txtArea) {
         String highscoretxt = "";
-        for (Highscore data : game.getHighscore().sortHighscore()) {
-            highscoretxt += "Name: " + data.getName() + "\t\t";
-            highscoretxt += " Score: " + data.getPlayerHighscore() + "\n";
+        List<Highscore> highscores = game.getHighscoreDatabase().getHighscores();
+        for (Highscore highscore : highscores) {
+            highscoretxt += "Name: " + highscore.getName() + "\t\t";
+            highscoretxt += " Score: " + highscore.getScore() + "\n";
         }
         printWithPacing(highscoretxt, txtArea);
     }
 
-    public boolean validName(String str) throws NameInputException{
+    public boolean validName(String str) throws NameInputException {
         boolean valid = true;
         char[] charArray = str.toCharArray();
         for (char c : charArray) {
             if (c == ',') {
                 valid = false;
                 throw new NameInputException();
-            } 
+            }
         }
         return valid;
     }

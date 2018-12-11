@@ -165,10 +165,12 @@ public class Player {
     public boolean hasWon() {
         return currentRoom.getGameComplete();
     }
-    public int getPlayerScore(){
+
+    public int getPlayerScore() {
         return highscore;
     }
-    public void setPlayerScore(int highscore){
-        this.highscore = highscore;
+
+    public void setPlayerScore() {
+        this.highscore = 1234 * stepCount;
     }
 }

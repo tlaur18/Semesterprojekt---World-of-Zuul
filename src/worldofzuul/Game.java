@@ -2,30 +2,26 @@ package worldofzuul;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import worldofzuul.dataaccess.DataAccess;
 
 public class Game {
+
     private Parser parser;
     private Player player;
-    private Highscore highscore;
     private Item bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2;
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
+    private HighscoreDatabase highscoreDB;
 
     public Game() {
         createRooms();
         createItems();
         createFire();
-        highscore = new Highscore();
         player = new Player(bedroom);
         parser = new Parser();
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
                 office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
-        
+        highscoreDB = new HighscoreDatabase();
     }
 
     private void createRooms() {
@@ -127,11 +123,13 @@ public class Game {
     public Player getPlayer() {
         return player;
     }
-    public Highscore getHighscore() {
-        return highscore;
+
+    public HighscoreDatabase getHighscoreDatabase() {
+        return highscoreDB;
     }
-    public void saveHighscore(Player player){
-        highscore.saveHighscore(player);
+    
+    public void saveHighscore(){
+        highscoreDB.saveHighscore(player);
     }
     
 }

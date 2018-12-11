@@ -417,9 +417,9 @@ public class MainController implements Initializable {
         scene.setRoot(highscoreRoot);
         textIO.printHighscore(txtAreaIntro);
     }
+    
     public void highscore(){
-        textIO.getGame().getHighscore().calculateHighscore(textIO.getGame().getPlayer());
-        textIO.getGame().saveHighscore(textIO.getGame().getPlayer());
+        textIO.getGame().getPlayer().setPlayerScore();
+        textIO.getGame().saveHighscore();
     }
-   
 }

@@ -17,38 +17,33 @@ import java.util.Scanner;
  * @author Morten K. Jensen
  */
 public class DataAccess {
-    
+
     private final String path;
 
     public DataAccess(String path) {
         this.path = path;
     }
-    
-    
-     public List<String> load(){
+
+    public List<String> load() {
         List<String> highscore = new ArrayList<>();
-        try{
+        try {
             File f = new File(path);
             Scanner scanner = new Scanner(f);
-            while(scanner.hasNextLine())
-            {
+            while (scanner.hasNextLine()) {
                 highscore.add(scanner.nextLine());
             }
             scanner.close();
-        }
-        catch(FileNotFoundException ex)
-        {
+        } catch (FileNotFoundException ex) {
             System.out.println("Nothing found. Empty Result.");
         }
         return highscore;
     }
-    public void save(List<String> data)
-    {
+
+    public void save(List<String> data) {
         try {
             File f = new File(path);
             PrintWriter pw = new PrintWriter(f);
-            for(String d : data)
-            {
+            for (String d : data) {
                 pw.println(d);
             }
             pw.close();
@@ -56,5 +51,5 @@ public class DataAccess {
             System.out.println("No file. Nothing is saved!.");
         }
     }
-    
+
 }
