@@ -6,6 +6,9 @@
 package worldofzuul;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import worldofzuul.dataaccess.DataAccess;
 import worldofzuul.Player;
@@ -61,6 +64,17 @@ public class Highscore {
         return highscore;
     }
     
+    public ArrayList<Highscore> sortHighscore() {
+        ArrayList<Highscore> sortedHighscore = new ArrayList<>();
+        // Sorting
+        for (int i = 0; i <= 10; i++) {
+      sortedHighscore.add(highscoreList.get(Integer.MAX_VALUE));
+        }
+        return sortedHighscore;
+    }
+                
+
+    
 
     public void saveHighscore(Player player) {
         loadHighscore();
@@ -85,3 +99,7 @@ public class Highscore {
     }
     
 }
+
+
+
+

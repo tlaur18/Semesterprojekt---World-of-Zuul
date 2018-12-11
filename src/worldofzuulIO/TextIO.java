@@ -230,7 +230,7 @@ public class TextIO {
 
     public void printHighscore(TextArea txtArea) {
         String highscoretxt = "";
-        for (Highscore data : game.getHighscore().loadHighscore()) {
+        for (Highscore data : game.getHighscore().sortHighscore()) {
             highscoretxt += "Name: " + data.getName() + "\t\t";
             highscoretxt += " Score: " + data.getPlayerHighscore() + "\n";
         }
