@@ -165,7 +165,7 @@ public class MainController implements Initializable {
                         stepCounterText.setVisible(true);
                         printDirectionButtons();
                         printItems();
-                        
+
                         //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
                         txtAreaOutput.appendText("\n");
                         txtAreaOutput.appendText("\n");
@@ -272,97 +272,11 @@ public class MainController implements Initializable {
         } catch (PlayerDiedException ex) {
             redrawRoom();
             disableGame();
-
-            Label lblDead = new Label();
-            lblDead.setText("You died. Would you like to try again?");
-
-            Button btnYes = new Button();
-            btnYes.setText("Yes");
-
-            Button btnNo = new Button();
-            btnNo.setText("No");
-            btnNo.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
-
-            HBox hBox = new HBox();
-            hBox.getChildren().add(btnYes);
-            hBox.getChildren().add(btnNo);
-            hBox.setAlignment(Pos.CENTER);
-            hBox.setPadding(new Insets(10, 10, 10, 10));
-            hBox.setSpacing(10);
-
-            VBox vBox = new VBox();
-            vBox.getChildren().add(lblDead);
-            vBox.getChildren().add(hBox);
-            vBox.setAlignment(Pos.CENTER);
-
-            Scene scene = new Scene(vBox);
-
-            Stage deadStage = new Stage();
-            timon.setVisible(false);
-            deadTimon.setVisible(true);
-            deadStage.setScene(scene);
-            deadStage.setHeight(150);
-            deadStage.setWidth(300);
-            deadStage.setTitle("Try again?");
-            deadStage.show();
-
-            btnYes.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    Stage primaryStage = (Stage) root.getScene().getWindow();
-                    primaryStage.close();
-
-                    Start start = new Start();
-                    try {
-                        start.start(new Stage());
-                    } catch (Exception ex1) {
-                        Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-
-                    deadStage.close();
-                }
-            });
+            drawDeadStage();
         } catch (PlayerWinException ex) {
             redrawRoom();
-            txtAreaOutput.appendText("\nYOU WON THE GAME!");
             disableGame();
-
-            Label lblWin = new Label();
-            lblWin.setText("YOU WIN!");
-
-            Button btnNo = new Button();
-            btnNo.setText("OK");
-            btnNo.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
-
-            HBox hBox = new HBox();
-            hBox.getChildren().add(btnNo);
-            hBox.setAlignment(Pos.CENTER);
-            hBox.setPadding(new Insets(10, 10, 10, 10));
-            hBox.setSpacing(10);
-
-            VBox vBox = new VBox();
-            vBox.getChildren().add(lblWin);
-            vBox.getChildren().add(hBox);
-            vBox.setAlignment(Pos.CENTER);
-
-            Scene scene = new Scene(vBox);
-
-            Stage winStage = new Stage();
-            winStage.setScene(scene);
-            winStage.setHeight(150);
-            winStage.setWidth(300);
-            winStage.setTitle("Congratulation");
-            winStage.show();
+            drawWinStage();
         }
         return changedRoom;
     }
@@ -470,5 +384,96 @@ public class MainController implements Initializable {
         }
 
         paneRoom.getChildren().removeAll(nodesToRemove);
+    }
+
+    private void drawDeadStage() {
+        Label lblDead = new Label();
+        lblDead.setText("You died. Would you like to try again?");
+
+        Button btnYes = new Button();
+        btnYes.setText("Yes");
+
+        Button btnNo = new Button();
+        btnNo.setText("No");
+        btnNo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        HBox hBox = new HBox();
+        hBox.getChildren().add(btnYes);
+        hBox.getChildren().add(btnNo);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(10, 10, 10, 10));
+        hBox.setSpacing(10);
+
+        VBox vBox = new VBox();
+        vBox.getChildren().add(lblDead);
+        vBox.getChildren().add(hBox);
+        vBox.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(vBox);
+
+        Stage deadStage = new Stage();
+        timon.setVisible(false);
+        deadTimon.setVisible(true);
+        deadStage.setScene(scene);
+        deadStage.setHeight(150);
+        deadStage.setWidth(300);
+        deadStage.setTitle("Try again?");
+        deadStage.show();
+
+        btnYes.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Stage primaryStage = (Stage) root.getScene().getWindow();
+                primaryStage.close();
+
+                Start start = new Start();
+                try {
+                    start.start(new Stage());
+                } catch (Exception ex1) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+
+                deadStage.close();
+            }
+        });
+    }
+
+    private void drawWinStage() {
+        Label lblWin = new Label();
+        lblWin.setText("YOU WIN!");
+
+        Button btnNo = new Button();
+        btnNo.setText("OK");
+        btnNo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        HBox hBox = new HBox();
+        hBox.getChildren().add(btnNo);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(10, 10, 10, 10));
+        hBox.setSpacing(10);
+
+        VBox vBox = new VBox();
+        vBox.getChildren().add(lblWin);
+        vBox.getChildren().add(hBox);
+        vBox.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(vBox);
+
+        Stage winStage = new Stage();
+        winStage.setScene(scene);
+        winStage.setHeight(150);
+        winStage.setWidth(300);
+        winStage.setTitle("Congratulation");
+        winStage.show();
     }
 }

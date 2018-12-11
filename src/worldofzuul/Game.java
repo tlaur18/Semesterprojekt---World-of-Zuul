@@ -18,7 +18,6 @@ public class Game {
         createFire();
         player = new Player(bedroom);
         parser = new Parser();
-
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
                 office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
     }
@@ -78,7 +77,7 @@ public class Game {
         masterBedroom.setExit("east", wc2);
 
         wc2.setExit("west", masterBedroom);
-        
+
         outside.setLocked();
 
         //Sætter rum man skal nå for at vinde:
@@ -117,12 +116,18 @@ public class Game {
         livingRoom.addFire(1);
     }
 
-    public ArrayList<Room> getRooms() {
-        return rooms;
-    }
-
     public Player getPlayer() {
         return player;
+    }
+
+    public String updateFire() {
+        if (player.getStepCount() % 5 == 0) {
+            for (Room room : rooms) {
+                room.raiseFireLvl();
+            }
+            return "\nYou feel the fire inside the buidling getting worse...";
+        }
+        return "";
     }
 
 }

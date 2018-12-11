@@ -115,7 +115,7 @@ public class TextUI {
     }
 
     private void printWithPacing(String textToPrint, TextArea txtArea) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(50), new printWithPacingEventHandler(textToPrint, txtArea)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(35), new printWithPacingEventHandler(textToPrint, txtArea)));
         timeline.setCycleCount(textToPrint.length());
         timeline.play();
     }
@@ -125,7 +125,7 @@ public class TextUI {
         try {
             game.getPlayer().goRoom(command);
             txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
-            updateFire();
+            txtAreaOutput.appendText(game.updateFire());
 
             //Tjekker om spilleren har vundet.
             if (game.getPlayer().hasWon()) {
@@ -158,16 +158,6 @@ public class TextUI {
             txtAreaOutput.appendText("\nThe door is locked! You need a key to open the door!");
         }
         return changedRoom;
-    }
-
-    public void updateFire() {
-        if (game.getPlayer().getStepCount() % 5 == 0) {
-            txtAreaOutput.appendText("\nYou feel the fire inside the buidling getting worse...");
-            for (Room room : game.getRooms()) {
-                room.updateFire();
-            }
-        }
-
     }
 
     private void processTakeItem(Command command) {

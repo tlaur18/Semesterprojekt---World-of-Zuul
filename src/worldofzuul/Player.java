@@ -95,6 +95,10 @@ public class Player {
     public boolean isDead() {
         return health <= 0;
     }
+    
+    public boolean hasWon() {
+        return currentRoom.getGameComplete();
+    }
 
     public void takeItem(Command command) throws NoSecondWordGivenException, PlayerInventoryFullException, NoSuchItemInRoomException {
         if (!command.hasSecondWord()) {
@@ -163,9 +167,5 @@ public class Player {
             throw new UseNonUseableItemException();
         }
         return outputText;
-    }
-
-    public boolean hasWon() {
-        return currentRoom.getGameComplete();
     }
 }
