@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import items.Item;
 import java.util.HashMap;
 import java.util.ArrayList;
 import javafx.scene.image.ImageView;

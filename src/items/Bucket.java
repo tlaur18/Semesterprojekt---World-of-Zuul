@@ -1,6 +1,8 @@
-package worldofzuul;
+package items;
 
 import javafx.scene.image.Image;
+import worldofzuul.Player;
+import worldofzuul.Room;
 
 public class Bucket extends UseableItem {
 

@@ -1,4 +1,4 @@
-package worldofzuul;
+package items;
 
 public class NonUseableItem extends Item {
     

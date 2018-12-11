@@ -1,4 +1,7 @@
-package worldofzuul;
+package items;
+
+import worldofzuul.Player;
+import worldofzuul.Room;
 
 public class BigFireExtinguisher extends UseableItem {
 

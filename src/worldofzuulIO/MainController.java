@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import worldofzuul.Game;
-import worldofzuul.Item;
+import items.Item;
 import worldofzuul.Parser;
 import worldofzuul.Room;
 

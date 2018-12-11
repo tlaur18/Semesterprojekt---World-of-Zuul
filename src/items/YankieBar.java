@@ -1,4 +1,6 @@
-package worldofzuul;
+package items;
+
+import worldofzuul.Player;
 
 public class YankieBar extends UseableItem {
 

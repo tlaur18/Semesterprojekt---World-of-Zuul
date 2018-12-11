@@ -1,5 +1,7 @@
 package worldofzuul;
 
+import items.UseableItem;
+import items.Item;
 import javafx.beans.property.SimpleBooleanProperty;
 
 public class Player {
