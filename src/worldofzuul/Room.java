@@ -1,5 +1,6 @@
 package worldofzuul;
 
+import items.Item;
 import java.util.HashMap;
 import java.util.ArrayList;
 import javafx.scene.image.ImageView;
@@ -11,17 +12,15 @@ public class Room {
     private HashMap<String, Room> exits;
     private ArrayList<Item> items = new ArrayList();
     private Fire fire = null;
-    private int damage;
     private boolean isLocked;
     private boolean isGameComplete;
     private boolean isGameOver;
     private ImageView img;
 
-    public Room(String name, String description, boolean isLocked, String imgURL) {
+    public Room(String name, String description, String imgURL) {
         this.name = name;
         this.description = description;
         exits = new HashMap<String, Room>();
-        this.isLocked = isLocked;
         this.isGameComplete = false;
         this.isGameOver = false;
         img = new ImageView(imgURL);
@@ -50,11 +49,7 @@ public class Room {
     public boolean getGameOver() {
         return isGameOver;
     }
-
-    public int getDamage() {
-        return damage;
-    }
-
+    
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
@@ -109,9 +104,9 @@ public class Room {
         fire = null;
     }
    
-    public void updateFire() {
+    public void raiseFireLvl() {
         if (fire != null) {
-            fire.updateLvl();
+            fire.raiseLvl();
         }
     }
 
@@ -121,6 +116,10 @@ public class Room {
 
     public boolean isLocked() {
         return isLocked;
+    }
+    
+    public void setLocked() {
+        isLocked = true;
     }
 
     public ImageView getImage() {

@@ -35,11 +35,7 @@ public class Command {
     public String getSecondWord() {
         return secondWord;
     }
-
-    public boolean isUnknown() {
-        return (commandWord == CommandWord.UNKNOWN);
-    }
-
+    
     public boolean hasSecondWord() {
         return (secondWord != null);
     }

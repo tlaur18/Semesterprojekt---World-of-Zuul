@@ -1,5 +1,13 @@
 package worldofzuul;
 
+import items.Key;
+import items.Doll;
+import items.SmallFireExtinguisher;
+import items.BigFireExtinguisher;
+import items.Item;
+import items.YankieBar;
+import items.NonUseableItem;
+import items.Bucket;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -18,27 +26,26 @@ public class Game {
         createFire();
         player = new Player(bedroom);
         parser = new Parser();
-
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
                 office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
     }
 
     private void createRooms() {
-        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", false, "Imgs/bedroom.png");
-        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", false, "Imgs/hallway.png");
-        sistersRoom = new Room("Sisters Room", "in your sister's room", false, "Imgs/sistersRoom.png");
-        livingRoom = new Room("Living Room", "in the living room", false, "Imgs/Livingroom.png");
-        wc = new Room("Toilet", "on the toilet", false, "Imgs/bathroom.png");
-        wc2 = new Room("Toilet", "on the toilet", false, "Imgs/bathroom.png");
-        outside = new Room("Outside", "outside", true, "Imgs/outside.png");
-        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", false, "Imgs/bedroom.png");
-        office = new Room("Office", "in the office", false, "Imgs/office.png");
-        kitchen = new Room("Kitchen", "in the kitchen", false, "Imgs/kitchen.png");
-        entrance = new Room("Entrance", "in the entrace", false, "Imgs/basement.png");
-        conservatory = new Room("Conservatory", "in the conservatory", false, "Imgs/conservatory.png");
-        basement = new Room("Basement", "in the basement", false, "Imgs/basement.png");
-        garage = new Room("Garage", "in the garage", false, "Imgs/garage.png");
-        masterBedroom = new Room("Master Bedroom", "in the master bedroom", false, "Imgs/masterbedroom.png");
+        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", "Imgs/bedroom.png");
+        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", "Imgs/hallway.png");
+        sistersRoom = new Room("Sisters Room", "in your sister's room", "Imgs/sistersRoom.png");
+        livingRoom = new Room("Living Room", "in the living room", "Imgs/Livingroom.png");
+        wc = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
+        wc2 = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
+        outside = new Room("Outside", "outside", "Imgs/outside.png");
+        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", "Imgs/bedroom.png");
+        office = new Room("Office", "in the office", "Imgs/office.png");
+        kitchen = new Room("Kitchen", "in the kitchen", "Imgs/kitchen.png");
+        entrance = new Room("Entrance", "in the entrace", "Imgs/basement.png");
+        conservatory = new Room("Conservatory", "in the conservatory", "Imgs/conservatory.png");
+        basement = new Room("Basement", "in the basement", "Imgs/basement.png");
+        garage = new Room("Garage", "in the garage", "Imgs/garage.png");
+        masterBedroom = new Room("Master Bedroom", "in the master bedroom", "Imgs/masterbedroom.png");
 
         bedroom.setExit("east", hallway);
         bedroom.setExit("west", window);
@@ -79,6 +86,8 @@ public class Game {
 
         wc2.setExit("west", masterBedroom);
 
+        outside.setLocked();
+
         //Sætter rum man skal nå for at vinde:
         outside.setGameComplete();
 
@@ -115,12 +124,18 @@ public class Game {
         livingRoom.addFire(1);
     }
 
-    public ArrayList<Room> getRooms() {
-        return rooms;
-    }
-
     public Player getPlayer() {
         return player;
+    }
+
+    public String updateFire() {
+        if (player.getStepCount() % 5 == 0) {
+            for (Room room : rooms) {
+                room.raiseFireLvl();
+            }
+            return "\nYou feel the fire inside the buidling getting worse...";
+        }
+        return "";
     }
 
 }

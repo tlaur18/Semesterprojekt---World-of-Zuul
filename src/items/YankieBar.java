@@ -1,4 +1,6 @@
-package worldofzuul;
+package items;
+
+import worldofzuul.Player;
 
 public class YankieBar extends UseableItem {
 
@@ -10,7 +12,7 @@ public class YankieBar extends UseableItem {
     public String use(Player player) {
         String outputText = "";
         
-        outputText = "*OM NOM NOM*";
+        outputText = "\n*OM NOM NOM*";
         outputText += "\nYour health has been restored to 100.";
         
         player.removeItem();

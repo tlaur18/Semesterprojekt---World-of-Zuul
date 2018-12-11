@@ -1,4 +1,4 @@
-package worldofzuul;
+package items;
 
 import javafx.scene.image.ImageView;
 

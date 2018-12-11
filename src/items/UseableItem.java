@@ -1,4 +1,6 @@
-package worldofzuul;
+package items;
+
+import worldofzuul.Player;
 
 public abstract class UseableItem extends Item{
     

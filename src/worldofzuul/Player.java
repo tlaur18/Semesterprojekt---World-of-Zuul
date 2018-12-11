@@ -1,14 +1,8 @@
 package worldofzuul;
 
-import exceptions.MovingThroughFireException;
-import exceptions.MovingThroughLockedDoorException;
-import exceptions.NoExitException;
-import exceptions.NoItemToDropException;
-import exceptions.NoSecondWordGivenException;
-import exceptions.NoSuchItemInRoomException;
-import exceptions.PlayerInventoryFullException;
-import exceptions.UseNonUseableItemException;
-import exceptions.UseWithEmptyInventoryException;
+import items.UseableItem;
+import items.Item;
+import javafx.beans.property.SimpleBooleanProperty;
 
 public class Player {
 
@@ -78,14 +72,22 @@ public class Player {
     public Room getCurrentRoom() {
         return currentRoom;
     }
-    
-    public Room getPreviousRoom(){
+
+    public Room getPreviousRoom() {
         return previousRoom;
     }
-    
+
     public int addStep() {
         stepCount = stepCount + 1;
         return stepCount;
+    }
+    
+    public boolean checkForFireDamage() {
+        if(currentRoom.getFire() != null) {
+            takeDamage(25 * currentRoom.getFire().getLvl());
+            return true;
+        }
+        return false;
     }
 
     public int takeDamage(int dmg) {
@@ -96,13 +98,13 @@ public class Player {
         return health <= 0;
     }
 
-    public void takeItem(Command command) throws NoSecondWordGivenException, PlayerInventoryFullException, NoSuchItemInRoomException {
-        if (!command.hasSecondWord()) {
-            throw new NoSecondWordGivenException();
-        }
+    public boolean hasWon() {
+        return currentRoom.getGameComplete();
+    }
 
+    public String takeItem(Command command) {
         if (inventory != null) {
-            throw new PlayerInventoryFullException();
+            return "\nYou are already carrying a " + inventory.getName();
         }
 
         String itemName = command.getSecondWord();
@@ -111,18 +113,20 @@ public class Player {
             if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
                 inventory = currentRoom.getItems().get(i);
                 currentRoom.getItems().remove(i);
-                return;
+                return "\nYou pick up the " + itemName + ".";
             }
         }
-        throw new NoSuchItemInRoomException();
+        return "";
     }
 
-    public void dropItem() throws NoItemToDropException {
+    public String dropItem() {
         if (inventory != null) {
+            String outputString = "\nYou drop the " + inventory.getName();
             currentRoom.getItems().add(inventory);
             inventory = null;
+            return outputString;
         } else {
-            throw new NoItemToDropException();
+            return "\nYou do not carry anything to drop.";
         }
     }
 
@@ -132,40 +136,30 @@ public class Player {
         }
     }
 
-    public void goRoom(Command command) throws NoSecondWordGivenException, NoExitException, MovingThroughFireException, MovingThroughLockedDoorException {
-        if (!command.hasSecondWord()) {
-            throw new NoSecondWordGivenException();
-        }
-
+    public String goRoom(Command command, SimpleBooleanProperty changedRoom) {
         String direction = command.getSecondWord();
         nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
-            throw new NoExitException();
-        } else if (currentRoom.getFire() != null && nextRoom != previousRoom) {
-            throw new MovingThroughFireException();
+        if (currentRoom.getFire() != null && nextRoom != previousRoom) {
+            return "\nThe fire inside the room prevents you from getting to this door.";
         } else if (nextRoom.isLocked()) {
-            throw new MovingThroughLockedDoorException();
+            return "\nThe door is locked! You need a key to open the door!";
         } else {
             previousRoom = currentRoom;
             currentRoom = nextRoom;
             addStep();
+            changedRoom.set(true);
+            return "\n" + currentRoom.getLongDescription();
         }
     }
 
-    public String useItem() throws UseWithEmptyInventoryException, UseNonUseableItemException {
-        String outputText = "";
+    public String useItem() {
         if (inventory == null) {
-            throw new UseWithEmptyInventoryException();
+            return "\nYou do not carry anything to use";
         } else if (inventory instanceof UseableItem) {
-            outputText = ((UseableItem) inventory).use(this);
+            return ((UseableItem) inventory).use(this);
         } else {
-            throw new UseNonUseableItemException();
+            return "\nThere is nothing interesting to use this item for.";
         }
-        return outputText;
-    }
-
-    public boolean hasWon() {
-        return currentRoom.getGameComplete();
     }
 }

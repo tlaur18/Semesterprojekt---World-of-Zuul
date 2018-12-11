@@ -1,4 +1,7 @@
-package worldofzuul;
+package items;
+
+import worldofzuul.Player;
+import worldofzuul.Room;
 
 public class Key extends UseableItem {
 
@@ -11,10 +14,10 @@ public class Key extends UseableItem {
         for (Room room : player.getCurrentRoom().getExits().values()) {
             if (room.isLocked()) {
                 room.unlockRoom();
-                return "You are able to unlock the door to the " + room.getName() + " with your key.";
+                return "\nYou are able to unlock the door to the " + room.getName() + " with your key.";
             }
         }
-        return "This key can not be used on any of the doors around you.";
+        return "\nThis key can not be used on any of the doors around you.";
     }
 
 }

@@ -15,7 +15,7 @@ public class Fire {
         return lvl;
     }
 
-    public void updateLvl() {
+    public void raiseLvl() {
         lvl++;
         if (lvl > 3) {
             lvl = 3;
