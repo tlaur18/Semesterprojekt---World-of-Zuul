@@ -83,6 +83,7 @@ public class MainController implements Initializable {
     @FXML
     private void btnStartEventHandler(ActionEvent event) {
         btnStart.setVisible(false);
+        btnHighscore.setVisible(false);
 
         Label lblName = new Label();
         lblName.setAlignment(Pos.CENTER);
