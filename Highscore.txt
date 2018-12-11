@@ -1,4 +1,3 @@
-Name: Morten <-> Score: 2397
-Name: Søren <-> Score: 2397
-Name: Benny <-> Score: 2397
-Name: DieHard <-> Score: 987
+Morten,3702
+Morten Svendsen,6170
+morten,jensen,6170

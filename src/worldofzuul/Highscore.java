@@ -41,12 +41,9 @@ public class Highscore {
 
     public ArrayList<Highscore> loadHighscore() {
         for (String playerString : da.load()) {
-            String[] contents = playerString.split(" ");
-            String fillName = contents[0];
-            this.name = contents[1];
-            String fillName1 = contents[2];
-            String fillname2 = contents[3];
-            this.highscore = Integer.parseInt(contents[4]);
+            String[] contents = playerString.split(",");
+            this.name = contents[0];
+            this.highscore = Integer.parseInt(contents[1]);
 
             highscorePlayer = new Highscore(name, highscore);
             this.highscoreList.add(highscorePlayer);
@@ -57,6 +54,13 @@ public class Highscore {
     public DataAccess getDataAccess() {
         return da;
     }
+    public String getName(){
+        return name;
+    }
+    public int getPlayerHighscore(){
+        return highscore;
+    }
+    
 
     public void saveHighscore(Player player) {
         loadHighscore();
@@ -75,8 +79,9 @@ public class Highscore {
     @Override
     public String toString(){
         String string = "";
-        string += "Name: " + this.name + " <->";
-        string += " Score: " + this.highscore;
+        string += this.name + ",";
+        string += this.highscore;
         return string;
     }
+    
 }

@@ -7,6 +7,7 @@ import worldofzuul.Parser;
 import worldofzuul.Room;
 import exceptions.MovingThroughFireException;
 import exceptions.MovingThroughLockedDoorException;
+import exceptions.NameInputException;
 import exceptions.NoExitException;
 import exceptions.NoItemToDropException;
 import exceptions.NoSecondWordGivenException;
@@ -229,9 +230,22 @@ public class TextIO {
 
     public void printHighscore(TextArea txtArea) {
         String highscoretxt = "";
-        for (String data : game.getHighscore().getDataAccess().load()) {
-            highscoretxt += data + "\n";
+        for (Highscore data : game.getHighscore().loadHighscore()) {
+            highscoretxt += "Name: " + data.getName() + "\t\t";
+            highscoretxt += " Score: " + data.getPlayerHighscore() + "\n";
         }
         printWithPacing(highscoretxt, txtArea);
+    }
+
+    public boolean validName(String str) throws NameInputException{
+        boolean valid = true;
+        char[] charArray = str.toCharArray();
+        for (char c : charArray) {
+            if (c == ',') {
+                valid = false;
+                throw new NameInputException();
+            } 
+        }
+        return valid;
     }
 }

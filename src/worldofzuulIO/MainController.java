@@ -1,5 +1,6 @@
 package worldofzuulIO;
 
+import exceptions.NameInputException;
 import exceptions.PlayerDiedException;
 import exceptions.PlayerWinException;
 import java.net.URL;
@@ -120,9 +121,11 @@ public class MainController implements Initializable {
         btnOk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
+                try {
+                textIO.validName(nameInput.getText());
                 textIO.getGame().getPlayer().setPlayerName(nameInput.getText());
                 nameStage.close();
-
+                
                 TextArea txtAreaIntro = new TextArea();
                 txtAreaIntro.setEditable(false);
                 txtAreaIntro.setFont(new Font("Calibri", 18));
@@ -160,9 +163,16 @@ public class MainController implements Initializable {
                 scene.setRoot(introRoot);
 
                 textIO.printWelcome(txtAreaIntro);
+            }   catch (NameInputException ex) {
+                    lblName.setText("Your name cant include comma!");
+                }
+                
             }
+            
         });
+        
     }
+                
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
@@ -411,4 +421,5 @@ public class MainController implements Initializable {
         textIO.getGame().getHighscore().calculateHighscore(textIO.getGame().getPlayer());
         textIO.getGame().saveHighscore(textIO.getGame().getPlayer());
     }
+   
 }
