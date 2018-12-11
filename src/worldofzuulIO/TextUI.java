@@ -4,17 +4,9 @@ import worldofzuul.Command;
 import worldofzuul.CommandWord;
 import worldofzuul.Game;
 import worldofzuul.Parser;
-import exceptions.MovingThroughFireException;
-import exceptions.MovingThroughLockedDoorException;
-import exceptions.NoExitException;
-import exceptions.NoItemToDropException;
-import exceptions.NoSecondWordGivenException;
-import exceptions.NoSuchItemInRoomException;
-import exceptions.PlayerInventoryFullException;
-import exceptions.UseNonUseableItemException;
-import exceptions.UseWithEmptyInventoryException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 
@@ -118,13 +110,16 @@ public class TextUI {
     }
 
     private boolean processGoRoom(Command command) {
-        boolean changedRoom = false;
-        try {
-            game.getPlayer().goRoom(command);
-            txtAreaOutput.appendText("\n" + game.getPlayer().getCurrentRoom().getLongDescription());
+        //SimpleBooleanProperty er en slags boolean der bare er en kompleks type. Andre variable der sættes lig med denne vil derfor henvise til den samme hukommelse.
+        SimpleBooleanProperty changedRoom = new SimpleBooleanProperty(false);
+        
+        //Udskriver resultatet af goRoom()-metoden.
+        txtAreaOutput.appendText(game.getPlayer().goRoom(command, changedRoom));
+        
+        if (changedRoom.get()) {
             txtAreaOutput.appendText(game.updateFire());
 
-            //Tjeker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
+            //Tjekker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
             if (game.getPlayer().getCurrentRoom().getGameOver()) {
                 game.getPlayer().setHealth(0);
             }
@@ -134,48 +129,17 @@ public class TextUI {
                 game.getPlayer().takeDamage((game.getPlayer().getCurrentRoom().getDamage() + (25 * game.getPlayer().getCurrentRoom().getFire().getLvl())));
                 txtAreaOutput.appendText("\nYou have been damaged by the fire");
             }
-
-            changedRoom = true;
-
-        } catch (NoSecondWordGivenException ex) {
-            txtAreaOutput.appendText("\nGo where?");
-        } catch (NoExitException ex) {
-            txtAreaOutput.appendText("\nThere is no exit.");
-        } catch (MovingThroughFireException ex) {
-            txtAreaOutput.appendText("\nThe fire inside the room prevents you from getting to this door.");
-        } catch (MovingThroughLockedDoorException ex) {
-            txtAreaOutput.appendText("\nThe door is locked! You need a key to open the door!");
         }
-        return changedRoom;
+        
+        return changedRoom.get();
     }
 
     private void processTakeItem(Command command) {
-        try {
-            game.getPlayer().takeItem(command);
-            txtAreaOutput.appendText("\nYou pick up the " + game.getPlayer().getInventory().getName() + ".");
-        } catch (NoSecondWordGivenException ex) {
-            txtAreaOutput.appendText("\nTake what?");
-        } catch (PlayerInventoryFullException ex) {
-            txtAreaOutput.appendText("\nYou are already carrying a " + game.getPlayer().getInventory().getName());
-        } catch (NoSuchItemInRoomException ex) {
-            txtAreaOutput.appendText("\nThe room contains no such thing.");
-        }
+        txtAreaOutput.appendText(game.getPlayer().takeItem(command));
     }
 
     private void processDropItem(Command command) {
-        try {
-            game.getPlayer().dropItem();
-            txtAreaOutput.appendText("\nYou drop the ");
-            String nameOfDroppedItem = "";
-            for (int i = 0; i < game.getPlayer().getCurrentRoom().getItems().size(); i++) {
-                if (i == game.getPlayer().getCurrentRoom().getItems().size() - 1) {
-                    nameOfDroppedItem = game.getPlayer().getCurrentRoom().getItems().get(i).getName();
-                }
-            }
-            txtAreaOutput.appendText(nameOfDroppedItem + ".");
-        } catch (NoItemToDropException ex) {
-            txtAreaOutput.appendText("\nYou do not carry anything to drop.");
-        }
+        txtAreaOutput.appendText(game.getPlayer().dropItem());
     }
 
     private void processInspectInventory() {
@@ -188,12 +152,6 @@ public class TextUI {
     }
 
     private void processUseItem() {
-        try {
-            txtAreaOutput.appendText("\n" + game.getPlayer().useItem());
-        } catch (UseWithEmptyInventoryException ex) {
-            txtAreaOutput.appendText("\nYou do not carry anything to use");
-        } catch (UseNonUseableItemException ex) {
-            txtAreaOutput.appendText("\nThere is nothing interesting to use this item for.");
-        }
+        txtAreaOutput.appendText(game.getPlayer().useItem());
     }
 }
