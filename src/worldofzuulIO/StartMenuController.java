@@ -3,6 +3,7 @@ package worldofzuulIO;
 import exceptions.NameInputException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +15,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,6 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import worldofzuul.Game;
+import worldofzuul.Highscore;
 
 public class StartMenuController implements Initializable {
 
@@ -128,10 +132,17 @@ public class StartMenuController implements Initializable {
 
     @FXML
     private void btnHighscoreEventHandler(ActionEvent event) {
-        TextArea txtAreaIntro = new TextArea();
-        txtAreaIntro.setEditable(false);
-        txtAreaIntro.setFont(new Font("Calibri", 18));
-
+        TableColumn<Highscore, String> tcName = new TableColumn<>();
+        tcName.setText("Name");
+        
+        TableColumn<Highscore, Integer> tcScore = new TableColumn<>();
+        tcScore.setText("Score");
+        
+        TableView<Highscore> tvHighscore = new TableView<>();
+        tvHighscore.getColumns().add(tcName);
+        tvHighscore.getColumns().add(tcScore);
+        tvHighscore.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
         VBox highscoreRoot = new VBox();
 
         Button btnBack = new Button("BACK");
@@ -147,11 +158,16 @@ public class StartMenuController implements Initializable {
         highscoreRoot.setAlignment(Pos.CENTER);
         highscoreRoot.setPadding(new Insets(10, 10, 10, 10));
         highscoreRoot.setSpacing(50);
-        highscoreRoot.getChildren().addAll(txtAreaIntro, btnBack);
+        highscoreRoot.getChildren().addAll(tvHighscore, btnBack);
 
         Scene scene = startMenuRoot.getScene();
         scene.setRoot(highscoreRoot);
-        textUI.printHighscore(txtAreaIntro);
+        
+        List<Highscore> highscores = textUI.getGame().getHighscoreDatabase().getHighscores();
+        
+        for (Highscore hs : highscores) {
+            tvHighscore.getItems().add(hs);
+        }
     }
 
     @FXML
