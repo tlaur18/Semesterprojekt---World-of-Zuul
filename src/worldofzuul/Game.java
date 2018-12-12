@@ -87,6 +87,9 @@ public class Game {
         masterBedroom.setExit("east", wc2);
 
         wc2.setExit("west", masterBedroom);
+        
+        wc.setHasWater();
+        wc2.setHasWater();
 
         outside.setLocked();
 
