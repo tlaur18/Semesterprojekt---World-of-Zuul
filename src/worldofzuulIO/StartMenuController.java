@@ -95,9 +95,13 @@ public class StartMenuController implements Initializable {
                         @Override
                         public void handle(ActionEvent event) {
                             try {
-                                BorderPane main = FXMLLoader.load(getClass().getResource("main.fxml"));
-                                scene.setRoot(main);
-
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
+                                BorderPane root = loader.load();
+                                
+                                MainController mainController = loader.<MainController>getController();
+                                mainController.setTextUI(textUI);
+                                
+                                scene.setRoot(root);
                             } catch (IOException ex) {
                                 System.out.println("Nothing to be found");
                             }

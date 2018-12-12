@@ -1,7 +1,5 @@
 package worldofzuulIO;
 
-import java.io.File;
-import exceptions.NameInputException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -11,33 +9,19 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
-import worldofzuul.Game;
 import items.Item;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 import worldofzuul.Parser;
 import worldofzuul.Room;
 import worldofzuul.Smoke;
@@ -105,8 +89,6 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        textUI = new TextUI(new Game(), txtAreaOutput);
-
         //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
@@ -369,8 +351,8 @@ public class MainController implements Initializable {
             }
         }
     }
-    
-        private void removeSmoke() {
+
+    private void removeSmoke() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
         //Alle imageViews af ild registreres og gemmes i nodesToRemove
@@ -459,5 +441,10 @@ public class MainController implements Initializable {
     public void highscore() {
         textUI.getGame().getPlayer().setPlayerScore();
         textUI.getGame().saveHighscore();
+    }
+
+    public void setTextUI(TextUI textUI) {
+        this.textUI = textUI;
+        textUI.setOutput(txtAreaOutput);
     }
 }
