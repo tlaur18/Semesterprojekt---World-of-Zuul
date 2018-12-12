@@ -20,7 +20,7 @@ public class BigFireExtinguisher extends UseableItem {
             if (player.getCurrentRoom().getFire() != null) {
                 outputText = "\nYou used the fireextinguisher on the fire.";
                 outputText += player.getCurrentRoom().lowerFireLvl(lvl);
-                isEmpty = false;
+                isEmpty = true;
             } else {
                 isEmpty = true;
                 outputText = "\nYou emptied the fireextinguisher in a room with no fire.\nWhat a waste!";
