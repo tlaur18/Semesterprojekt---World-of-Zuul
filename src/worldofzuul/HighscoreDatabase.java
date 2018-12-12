@@ -16,6 +16,7 @@ public class HighscoreDatabase {
     }
 
     public void loadHighscores() {
+        highscores.clear();
         for (String playerString : da.load()) {
             String[] contents = playerString.split(",");
             highscores.add(new Highscore(contents[0], Integer.parseInt(contents[1])));
@@ -24,22 +25,33 @@ public class HighscoreDatabase {
 
     public List<Highscore> getHighscores() {
         loadHighscores();
-        sortHighscores();
         return highscores;
     }
 
     public void sortHighscores() {
         Collections.sort(highscores);
+        
+        List<Highscore> temp = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            temp.add(highscores.get(i));
+        }
+        
+        highscores = temp;
     }
 
     public void saveHighscore(Player player) {
         loadHighscores();
+        
         Highscore highscorePlayer = new Highscore(player.getPlayerName(), player.getPlayerScore());
         highscores.add(highscorePlayer);
+        
+        sortHighscores();
+        
         List<String> playerStrings = new ArrayList<>();
         for (Highscore highscores : highscores) {
             playerStrings.add(highscores.toString());
         }
+        
         da.save(playerStrings);
     }
 }

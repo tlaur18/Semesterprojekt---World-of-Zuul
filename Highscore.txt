@@ -1,22 +1,10 @@
-*N/A*,23446
-*N/A*,20978
-Kurt,12098
-*N/A*,11106
+Lone,9872
+Svend Andersen,6170
 Thomas,6164
 Mathias,3333
 Morten,3120
-Jens,1224
-Jacob,1000
-Alexander,500
-Morten,3120
-Thomas,6164
-Alexander,500
-Jacob,1000
-Mathias,3333
-Jens,1224
-Kurt,12098
-*N/A*,11106
-*N/A*,20978
-*N/A*,23446
-YeetMaster,8638
-Mogens,1234
+,1234
+Kurt,1234
+,1234
+,1234
+Hans Jørgen,1234
