@@ -2,7 +2,6 @@ package items;
 
 import javafx.scene.image.Image;
 import worldofzuul.Player;
-import worldofzuul.Room;
 
 public class Bucket extends UseableItem {
 
@@ -10,7 +9,7 @@ public class Bucket extends UseableItem {
     private boolean isUsed;
     private int lvl;
 
-    public Bucket(String name, String description, Room r1, Room r2, String imgURL) {
+    public Bucket(String name, String description, String imgURL) {
         super(name, description, imgURL);
         isFilled = false;
         isUsed = false;
