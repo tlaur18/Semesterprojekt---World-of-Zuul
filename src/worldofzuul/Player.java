@@ -90,6 +90,14 @@ public class Player {
         }
         return false;
     }
+    
+    public boolean checkForSmokeDamage() {
+        if(currentRoom.getSmoke() != null) {
+            takeDamage(5 * currentRoom.getSmoke().getLvl());
+            return true;
+        }
+        return false;
+    }
 
     public int takeDamage(int dmg) {
         return health -= dmg;

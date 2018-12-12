@@ -25,6 +25,7 @@ public class Game {
         createRooms();
         createItems();
         createFire();
+        createSmoke();
         player = new Player(bedroom);
         parser = new Parser();
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
@@ -127,6 +128,11 @@ public class Game {
         kitchen.addFire(3);
         office.addFire(1);
         livingRoom.addFire(1);
+    }
+    
+    public void createSmoke() {
+        hallway.addSmoke(1);
+        basement.addSmoke(1);
     }
 
     public Player getPlayer() {

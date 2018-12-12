@@ -40,6 +40,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import worldofzuul.Parser;
 import worldofzuul.Room;
+import worldofzuul.Smoke;
 
 public class MainController implements Initializable {
 
@@ -152,6 +153,7 @@ public class MainController implements Initializable {
         }
 
         updateFireImgs();
+        updateSmokeImgs();
         drawHealthBar();
     }
 
@@ -208,9 +210,11 @@ public class MainController implements Initializable {
     private void redrawRoom() {
         removeItems(textUI.getGame().getPlayer().getPreviousRoom());
         removeFire();
+        removeSmoke();
         printDirectionButtons();
         printItems();
         printFire();
+        printSmoke();
         setBackground();
         drawHealthBar();
         stepCounterText();
@@ -322,12 +326,11 @@ public class MainController implements Initializable {
                 }
             }
         }
-        
+
         paneRoom.getChildren().removeAll(nodesToRemove);
 
-        
     }
-    
+
     //Metode til at styre hvilke imageViews der fjernes når ild slukkes
     private void updateFireImgs() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
@@ -340,13 +343,67 @@ public class MainController implements Initializable {
                 }
             }
         }
-        
+
         //Et antal der afhænger af ildens nuværende lvl fjernes.
         Fire fireInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fireInCurrentRoom == null) {
             paneRoom.getChildren().removeAll(nodesToRemove);
         } else {
             for (int i = 0; i < nodesToRemove.size() - fireInCurrentRoom.getLvl() * 3; i++) {
+                paneRoom.getChildren().remove(nodesToRemove.get(i));
+            }
+        }
+    }
+
+    private void printSmoke() {
+        Smoke smoke = textUI.getGame().getPlayer().getCurrentRoom().getSmoke();
+        if (smoke != null) {
+
+            for (int i = 0; i < smoke.getLvl() * 5; i++) {
+                ImageView imgSmoke = new ImageView(Smoke.IMAGE_SMOKE);
+                imgSmoke.fitHeightProperty().set(80);
+                imgSmoke.fitWidthProperty().set(120);
+                imgSmoke.setTranslateX(80 + Math.random() * 480);
+                imgSmoke.setTranslateY(30 + Math.random() * 330);
+                paneRoom.getChildren().add(imgSmoke);
+            }
+        }
+    }
+    
+        private void removeSmoke() {
+        ArrayList<Node> nodesToRemove = new ArrayList<>();
+
+        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        for (Node node : paneRoom.getChildren()) {
+            if (node instanceof ImageView) {
+                if (((ImageView) node).getImage().equals(Smoke.IMAGE_SMOKE)) {
+                    nodesToRemove.add(node);
+                }
+            }
+        }
+
+        paneRoom.getChildren().removeAll(nodesToRemove);
+
+    }
+
+    private void updateSmokeImgs() {
+        ArrayList<Node> nodesToRemove = new ArrayList<>();
+
+        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        for (Node node : paneRoom.getChildren()) {
+            if (node instanceof ImageView) {
+                if (((ImageView) node).getImage().equals(Smoke.IMAGE_SMOKE)) {
+                    nodesToRemove.add(node);
+                }
+            }
+        }
+
+        //Et antal der afhænger af ildens nuværende lvl fjernes.
+        Smoke smokeInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getSmoke();
+        if (smokeInCurrentRoom == null) {
+            paneRoom.getChildren().removeAll(nodesToRemove);
+        } else {
+            for (int i = 0; i < nodesToRemove.size() - smokeInCurrentRoom.getLvl() * 3; i++) {
                 paneRoom.getChildren().remove(nodesToRemove.get(i));
             }
         }
