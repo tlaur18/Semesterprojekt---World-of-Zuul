@@ -36,6 +36,8 @@ import worldofzuul.Command;
 import worldofzuul.Fire;
 import worldofzuul.Game;
 import items.Item;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
 import worldofzuul.Parser;
 import worldofzuul.Room;
 
@@ -47,8 +49,6 @@ public class MainController implements Initializable {
     private BorderPane root;
     @FXML
     private TextArea txtAreaOutput;
-    @FXML
-    private Button btnStart;
     @FXML
     private Button btnNorth;
     @FXML
@@ -101,8 +101,7 @@ public class MainController implements Initializable {
     private Button isDeadBtnYes;
     @FXML
     private Button isDeadBtnNo;
-    @FXML
-    private Button btnHighscore;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -110,98 +109,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void btnStartEventHandler(ActionEvent event) {
-        btnStart.setVisible(false);
-        btnHighscore.setVisible(false);
+    private void btnStartEventHandler(ActionEvent event) throws IOException{
+        //        btnStart.setVisible(false);
+        //        btnHighscore.setVisible(false);
 
-        Label lblName = new Label();
-        lblName.setAlignment(Pos.CENTER);
-        lblName.setLayoutX(275);
-        lblName.setLayoutY(200);
-        lblName.prefHeight(25);
-        lblName.prefWidth(300);
-        lblName.setText("Before we begin.. \nWhat is your name?");
-        lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 30));
-        lblName.setTextAlignment(TextAlignment.CENTER);
 
-        Button btnOk = new Button();
-        btnOk.setLayoutX(360);
-        btnOk.setLayoutY(400);
-        btnOk.setPrefHeight(40);
-        btnOk.setPrefWidth(80);
-        btnOk.setFont(new Font("Calibri", 16));
-        btnOk.setText("OK");
-
-        TextField nameInput = new TextField();
-        nameInput.setLayoutX(325);
-        nameInput.setLayoutY(325);
-        nameInput.prefHeight(25);
-        nameInput.prefWidth(220);
-
-        Pane paneName = new Pane();
-        paneName.getChildren().addAll(lblName, btnOk, nameInput);
-
-        Scene scene = root.getScene();
-        scene.setRoot(paneName);
-
-        btnOk.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                try {
-                    textUI.validName(nameInput.getText());
-                    textUI.getGame().getPlayer().setPlayerName(nameInput.getText());
-
-                    TextArea txtAreaIntro = new TextArea();
-                    txtAreaIntro.setEditable(false);
-                    txtAreaIntro.setFont(new Font("Calibri", 18));
-
-                    Button btnContinue = new Button();
-                    btnContinue.setText("Continue");
-                    btnContinue.setFont(new Font("Calibri", 32));
-                    btnContinue.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent event) {
-                            Scene scene = txtAreaIntro.getScene();
-                            scene.setRoot(root);
-
-                            lblCurrentRoom.setVisible(true);
-                            imgBackground.setVisible(true);
-                            timon.setVisible(true);
-                            btnUse.setDisable(false);
-                            btnDrop.setDisable(false);
-                            btnInspect.setDisable(false);
-                            btnHelp.setDisable(false);
-                            lblInventoryHeadline.setDisable(false);
-                            redbar.setVisible(true);
-                            greenbar.setVisible(true);
-                            healthText.setVisible(true);
-                            stepCounterText.setVisible(true);
-                            printDirectionButtons();
-                            printItems();
-
-                            //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
-                            txtAreaOutput.appendText("\n");
-                            txtAreaOutput.appendText("\n");
-                            txtAreaOutput.appendText("\n");
-                            txtAreaOutput.appendText("\n");
-                        }
-                    });
-                    VBox introRoot = new VBox();
-                    introRoot.setAlignment(Pos.CENTER);
-                    introRoot.setPadding(new Insets(10, 10, 10, 10));
-                    introRoot.setSpacing(50);
-                    introRoot.getChildren().add(txtAreaIntro);
-                    introRoot.getChildren().add(btnContinue);
-
-                    Scene intro = paneName.getScene();
-                    intro.setRoot(introRoot);
-
-                    textUI.printWelcome(txtAreaIntro);
-                } catch (NameInputException ex) {
-                    lblName.setText("Your name cant include comma!");
-                }
-            }
-        });
     }
 
     @FXML
@@ -379,12 +291,12 @@ public class MainController implements Initializable {
         btnDrop.setDisable(true);
         btnInspect.setDisable(true);
         btnHelp.setDisable(true);
-        
+
         btnNorth.setVisible(false);
         btnWest.setVisible(false);
         btnSouth.setVisible(false);
         btnEast.setVisible(false);
-        
+
     }
 
     private void setBackground() {

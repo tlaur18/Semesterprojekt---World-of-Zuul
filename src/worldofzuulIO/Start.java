@@ -10,9 +10,9 @@ public class Start extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Parent startMenuRoot = FXMLLoader.load(getClass().getResource("startmenu.fxml"));
 
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(startMenuRoot);
 
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
