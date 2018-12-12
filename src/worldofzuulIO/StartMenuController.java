@@ -30,8 +30,6 @@ public class StartMenuController implements Initializable {
     private TextUI textUI;
 
     @FXML
-    private TextArea txtAreaOutput;
-    @FXML
     private BorderPane startMenuRoot;
     @FXML
     private Button btnStart;
@@ -44,7 +42,7 @@ public class StartMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        textUI = new TextUI(new Game(), txtAreaOutput);
+        textUI = new TextUI(new Game(), new TextArea());
     }
 
     @FXML
@@ -78,56 +76,82 @@ public class StartMenuController implements Initializable {
 
         Scene scene = startMenuRoot.getScene();
         scene.setRoot(paneName);
-        
-//        btnOk.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent e) {
-//                try {
-//                    textUI.validName(nameInput.getText());
-//                    textUI.getGame().getPlayer().setPlayerName(nameInput.getText());
-//
-//                    TextArea txtAreaIntro = new TextArea();
-//                    txtAreaIntro.setEditable(false);
-//                    txtAreaIntro.setFont(new Font("Calibri", 18));
-//
-//                    Button btnContinue = new Button();
-//                    btnContinue.setText("Continue");
-//                    btnContinue.setFont(new Font("Calibri", 32));
-//                    btnContinue.setOnAction(new EventHandler<ActionEvent>() {
-//                        @Override
-//                        public void handle(ActionEvent event) {
-//                            try {
-//                                BorderPane main = FXMLLoader.load(getClass().getResource("main.fxml"));
-////                                startMenuRoot.getChildren().setAll(main);
-//                                scene.setRoot(main);
-//
-//                                //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
-//                                txtAreaOutput.appendText("\n");
-//                                txtAreaOutput.appendText("\n");
-//                                txtAreaOutput.appendText("\n");
-//                                txtAreaOutput.appendText("\n");
-//                            } catch (IOException ex) {
-//                                System.out.println("Nothing to be found");
-//                            }
-////                            Scene scene = txtAreaIntro.getScene();
-////                            scene.setRoot(root);
-//                        }
-//                    });
-//                    VBox introRoot = new VBox();
-//                    introRoot.setAlignment(Pos.CENTER);
-//                    introRoot.setPadding(new Insets(10, 10, 10, 10));
-//                    introRoot.setSpacing(50);
-//                    introRoot.getChildren().add(txtAreaIntro);
-//                    introRoot.getChildren().add(btnContinue);
-//
-//                    Scene intro = paneName.getScene();
-//                    intro.setRoot(introRoot);
-//
-//                    textUI.printWelcome(txtAreaIntro);
-//                } catch (NameInputException ex) {
-//                    lblName.setText("Your name cant include comma!");
-//                }
-//            }
-//        });
+
+        btnOk.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                try {
+                    textUI.validName(nameInput.getText());
+                    textUI.getGame().getPlayer().setPlayerName(nameInput.getText());
+
+                    TextArea txtAreaIntro = new TextArea();
+                    txtAreaIntro.setEditable(false);
+                    txtAreaIntro.setFont(new Font("Calibri", 18));
+
+                    Button btnContinue = new Button();
+                    btnContinue.setText("Continue");
+                    btnContinue.setFont(new Font("Calibri", 32));
+                    btnContinue.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            try {
+                                BorderPane main = FXMLLoader.load(getClass().getResource("main.fxml"));
+                                scene.setRoot(main);
+
+                            } catch (IOException ex) {
+                                System.out.println("Nothing to be found");
+                            }
+                        }
+                    });
+                    VBox introRoot = new VBox();
+                    introRoot.setAlignment(Pos.CENTER);
+                    introRoot.setPadding(new Insets(10, 10, 10, 10));
+                    introRoot.setSpacing(50);
+                    introRoot.getChildren().add(txtAreaIntro);
+                    introRoot.getChildren().add(btnContinue);
+
+                    Scene intro = paneName.getScene();
+                    intro.setRoot(introRoot);
+
+                    textUI.printWelcome(txtAreaIntro);
+                } catch (NameInputException ex) {
+                    lblName.setText("Your name cant include comma!");
+                }
+            }
+        });
+
+    }
+
+    @FXML
+    private void btnHighscoreEventHandler(ActionEvent event) {
+        TextArea txtAreaIntro = new TextArea();
+        txtAreaIntro.setEditable(false);
+        txtAreaIntro.setFont(new Font("Calibri", 18));
+
+        VBox highscoreRoot = new VBox();
+
+        Button btnBack = new Button("BACK");
+        btnBack.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
+        btnBack.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                Scene scene = highscoreRoot.getScene();
+                scene.setRoot(startMenuRoot);
+            }
+        });
+
+        highscoreRoot.setAlignment(Pos.CENTER);
+        highscoreRoot.setPadding(new Insets(10, 10, 10, 10));
+        highscoreRoot.setSpacing(50);
+        highscoreRoot.getChildren().addAll(txtAreaIntro, btnBack);
+
+        Scene scene = startMenuRoot.getScene();
+        scene.setRoot(highscoreRoot);
+        textUI.printHighscore(txtAreaIntro);
+    }
+
+    @FXML
+    public void btnQuitEventHandler(ActionEvent event) {
+        System.exit(0);
     }
 }

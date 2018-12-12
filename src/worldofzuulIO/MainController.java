@@ -102,18 +102,15 @@ public class MainController implements Initializable {
     @FXML
     private Button isDeadBtnNo;
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textUI = new TextUI(new Game(), txtAreaOutput);
-    }
 
-    @FXML
-    private void btnStartEventHandler(ActionEvent event) throws IOException{
-        //        btnStart.setVisible(false);
-        //        btnHighscore.setVisible(false);
-
-
+        //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
+        txtAreaOutput.appendText("\n");
+        txtAreaOutput.appendText("\n");
+        txtAreaOutput.appendText("\n");
+        txtAreaOutput.appendText("\n");
     }
 
     @FXML
@@ -378,22 +375,6 @@ public class MainController implements Initializable {
                 System.exit(0);
             }
         });
-    }
-
-    @FXML
-    private void btnHighscore(ActionEvent event) {
-        TextArea txtAreaIntro = new TextArea();
-        txtAreaIntro.setEditable(false);
-        txtAreaIntro.setFont(new Font("Calibri", 18));
-        VBox highscoreRoot = new VBox();
-        highscoreRoot.setAlignment(Pos.CENTER);
-        highscoreRoot.setPadding(new Insets(10, 10, 10, 10));
-        highscoreRoot.setSpacing(50);
-        highscoreRoot.getChildren().add(txtAreaIntro);
-
-        Scene scene = root.getScene();
-        scene.setRoot(highscoreRoot);
-        textUI.printHighscore(txtAreaIntro);
     }
 
     public void highscore() {

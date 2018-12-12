@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -15,12 +17,12 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnHighscore" mnemonicParsing="false" text="HIGHSCORE">
+            <Button fx:id="btnHighscore" mnemonicParsing="false" onAction="#btnHighscoreEventHandler" text="HIGHSCORE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Button>
-            <Button fx:id="btnQuit" mnemonicParsing="false" prefHeight="51.0" prefWidth="169.0" text="QUIT">
+            <Button fx:id="btnQuit" mnemonicParsing="false" onAction="#btnQuitEventHandler" prefHeight="51.0" prefWidth="169.0" text="QUIT">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -31,4 +33,14 @@
          </BorderPane.margin>
       </VBox>
    </center>
+   <top>
+      <ImageView fitHeight="250.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+         <image>
+            <Image url="@../Imgs/Logo.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets top="25.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </top>
 </BorderPane>
