@@ -2,21 +2,18 @@ package items;
 
 import javafx.scene.image.Image;
 import worldofzuul.Player;
-import worldofzuul.Room;
 
 public class Bucket extends UseableItem {
 
     private boolean isFilled;
-    private Room[] useableRooms;
     private boolean isUsed;
+    private int lvl;
 
-    public Bucket(String name, String description, Room r1, Room r2, String imgURL) {
+    public Bucket(String name, String description, String imgURL) {
         super(name, description, imgURL);
         isFilled = false;
         isUsed = false;
-        useableRooms = new Room[2];
-        useableRooms[0] = r1;
-        useableRooms[1] = r2;
+        lvl = 1;
     }
 
     @Override
@@ -25,28 +22,24 @@ public class Bucket extends UseableItem {
         Image filledBucket = new Image("Imgs/FilledBucket.png");
         Image meltedBucket = new Image("Imgs/MeltedBucket.png");
 
-        if (!(isUsed)) {
-            for (int i = 0; i < useableRooms.length; i++) {
-                if (player.getCurrentRoom().equals(useableRooms[i])) {
-                    if (!isFilled) {
-                        getImage().setImage(filledBucket);
-                        outputText = "\nYou fill the bucket with water from the sink.";
-                        isFilled = true;
-                        break;
-                    } else {
-                        outputText = "\nThe bucket is already full.";
-                        break;
-                    }
-                } else if (i == useableRooms.length - 1 && player.getCurrentRoom().getFire() == null) {
-                    outputText = "\nNothing interesting happens...";
+        if (!isUsed) {
+            if (player.getCurrentRoom().hasWater()) {
+                if (!isFilled) {
+                    getImage().setImage(filledBucket);
+                    outputText = "\nYou fill the bucket with water from the sink.";
+                    isFilled = true;
+                } else {
+                    outputText = "\nThe bucket is already full.";
                 }
+            } else if (player.getCurrentRoom().getFire() == null) {
+                outputText = "\nNothing interesting happens...";
             }
 
             if (player.getCurrentRoom().getFire() != null) {
                 if (isFilled) {
-                    outputText = "\nYou empty the bucket over the fire and it goes out.";
+                    outputText = "\nYou empty the bucket over the fire.";
                     getImage().setImage(meltedBucket);
-                    player.getCurrentRoom().removeFire();
+                    outputText += player.getCurrentRoom().lowerFireLvl(lvl);
                     isFilled = false;
                     isUsed = true;
                 } else {

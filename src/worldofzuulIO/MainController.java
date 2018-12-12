@@ -242,10 +242,7 @@ public class MainController implements Initializable {
             imgInventory.setImage(textUI.getGame().getPlayer().getInventory().getImage().getImage());
         }
 
-        if (textUI.getGame().getPlayer().getCurrentRoom().getFire() == null) {
-            removeFire();
-        }
-
+        updateFireImgs();
         drawHealthBar();
     }
 
@@ -286,14 +283,12 @@ public class MainController implements Initializable {
 
         if (textUI.getGame().getPlayer().isDead()) {
             highscore();
-            redrawRoom();
             disableGame();
             drawDeadStage();
         }
 
         if (textUI.getGame().getPlayer().hasWon()) {
             highscore();
-            redrawRoom();
             disableGame();
             drawWinStage();
         }
@@ -379,12 +374,12 @@ public class MainController implements Initializable {
         btnDrop.setDisable(true);
         btnInspect.setDisable(true);
         btnHelp.setDisable(true);
-        
+
         btnNorth.setVisible(false);
         btnWest.setVisible(false);
         btnSouth.setVisible(false);
         btnEast.setVisible(false);
-        
+
     }
 
     private void setBackground() {
@@ -410,6 +405,7 @@ public class MainController implements Initializable {
     private void removeFire() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
+        //Alle imageViews af ild registreres og gemmes i nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
@@ -417,8 +413,34 @@ public class MainController implements Initializable {
                 }
             }
         }
-
+        
         paneRoom.getChildren().removeAll(nodesToRemove);
+
+        
+    }
+    
+    //Metode til at styre hvilke imageViews der fjernes når ild slukkes
+    private void updateFireImgs() {
+        ArrayList<Node> nodesToRemove = new ArrayList<>();
+
+        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        for (Node node : paneRoom.getChildren()) {
+            if (node instanceof ImageView) {
+                if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
+                    nodesToRemove.add(node);
+                }
+            }
+        }
+        
+        //Et antal der afhænger af ildens nuværende lvl fjernes.
+        Fire fireInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getFire();
+        if (fireInCurrentRoom == null) {
+            paneRoom.getChildren().removeAll(nodesToRemove);
+        } else {
+            for (int i = 0; i < nodesToRemove.size() - fireInCurrentRoom.getLvl() * 3; i++) {
+                paneRoom.getChildren().remove(nodesToRemove.get(i));
+            }
+        }
     }
 
     private void drawDeadStage() {

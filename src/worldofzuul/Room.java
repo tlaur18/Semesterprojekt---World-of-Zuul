@@ -16,6 +16,7 @@ public class Room {
     private boolean isGameComplete;
     private boolean isGameOver;
     private ImageView img;
+    private boolean hasWater;
 
     public Room(String name, String description, String imgURL) {
         this.name = name;
@@ -24,6 +25,7 @@ public class Room {
         this.isGameComplete = false;
         this.isGameOver = false;
         img = new ImageView(imgURL);
+        hasWater = false;
     }
 
     public String getName() {
@@ -109,6 +111,15 @@ public class Room {
             fire.raiseLvl();
         }
     }
+    
+    public String lowerFireLvl(int lvlsToLower) {
+        fire.lowerLvl(lvlsToLower);
+        if (fire.getLvl() <= 0) {
+            fire = null;
+            return " The fire was put out.";
+        }
+        return " The fire was weakened.";
+    }
 
     public void unlockRoom() {
         this.isLocked = false;
@@ -124,5 +135,13 @@ public class Room {
 
     public ImageView getImage() {
         return img;
+    }
+    
+    public void setHasWater() {
+        hasWater = true;
+    }
+    
+    public boolean hasWater() {
+        return hasWater;
     }
 }

@@ -21,4 +21,8 @@ public class Fire {
             lvl = 3;
         }
     }
+    
+    public void lowerLvl(int lvlsToLower) {
+        lvl = lvl - lvlsToLower;
+    }
 }

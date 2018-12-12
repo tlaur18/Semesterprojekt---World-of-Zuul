@@ -87,6 +87,9 @@ public class Game {
         masterBedroom.setExit("east", wc2);
 
         wc2.setExit("west", masterBedroom);
+        
+        wc.setHasWater();
+        wc2.setHasWater();
 
         outside.setLocked();
 
@@ -98,11 +101,11 @@ public class Game {
     }
 
     private void createItems() {
-        bucket = new Bucket("Bucket", "Holds liquid well.", wc, wc2, "Imgs/EmptyBucket.png");
+        bucket = new Bucket("Bucket", "Holds liquid well.", "Imgs/EmptyBucket.png");
         toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs/Toothbrush.png");
-        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", office, "Imgs/SmallFireExtinguisher.png");
-        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", office, "Imgs/SmallFireExtinguisher.png");
-        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", kitchen, "Imgs/BigFireExtinguisher.png");
+        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png");
+        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png");
+        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", "Imgs/BigFireExtinguisher.png");
         towel = new NonUseableItem("Towel", "Used to dry yourself", "Imgs/Towel.png");
         doll = new Doll("Doll", "A girly play doll", "Imgs/Doll.png");
         key = new Key("Key", "Used to unlock things.", "Imgs/Key.png");
