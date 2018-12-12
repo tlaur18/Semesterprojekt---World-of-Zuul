@@ -15,12 +15,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -101,10 +101,10 @@ public class StartMenuController implements Initializable {
                             try {
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
                                 BorderPane root = loader.load();
-                                
+
                                 MainController mainController = loader.<MainController>getController();
                                 mainController.setTextUI(textUI);
-                                
+
                                 scene.setRoot(root);
                             } catch (IOException ex) {
                                 System.out.println("Nothing to be found");
@@ -132,21 +132,49 @@ public class StartMenuController implements Initializable {
 
     @FXML
     private void btnHighscoreEventHandler(ActionEvent event) {
-        TableColumn<Highscore, String> tcName = new TableColumn<>();
-        tcName.setText("Name");
-        
-        TableColumn<Highscore, Integer> tcScore = new TableColumn<>();
-        tcScore.setText("Score");
-        
-        TableView<Highscore> tvHighscore = new TableView<>();
-        tvHighscore.getColumns().add(tcName);
-        tvHighscore.getColumns().add(tcScore);
-        tvHighscore.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
-        VBox highscoreRoot = new VBox();
+        VBox vbName = new VBox();
+        vbName.setSpacing(10);
+
+        VBox vbScore = new VBox();
+        vbScore.setSpacing(10);
+
+        HBox hbCenter = new HBox();
+        hbCenter.getChildren().addAll(vbName, vbScore);
+        hbCenter.setAlignment(Pos.CENTER);
+        hbCenter.setPadding(new Insets(75, 0, 0, 0));
+        hbCenter.setSpacing(40);
 
         Button btnBack = new Button("BACK");
         btnBack.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
+        btnBack.setAlignment(Pos.CENTER);
+        
+        Label lblTop = new Label("Highscores");
+        lblTop.setFont(new Font("Calibri", 40));
+
+        BorderPane highscoreRoot = new BorderPane();
+        highscoreRoot.setPadding(new Insets(25, 25, 25, 25));
+        highscoreRoot.setCenter(hbCenter);
+        BorderPane.setAlignment(lblTop, Pos.CENTER);
+        highscoreRoot.setTop(lblTop);
+        BorderPane.setAlignment(btnBack, Pos.CENTER);
+        BorderPane.setMargin(btnBack, new Insets(12, 12, 12, 12)); // optional
+        highscoreRoot.setBottom(btnBack);
+
+        Scene scene = startMenuRoot.getScene();
+        scene.setRoot(highscoreRoot);
+
+        List<Highscore> highscores = textUI.getGame().getHighscoreDatabase().getHighscores();
+
+        for (Highscore hs : highscores) {
+            Label lblName = new Label(hs.getName());
+            lblName.setFont(new Font("Calibri", 18));
+            vbName.getChildren().add(lblName);
+            
+            Label lblScore = new Label(Integer.toString(hs.getScore()));
+            lblScore.setFont(new Font("Calibri", 18));
+            vbScore.getChildren().add(lblScore);
+        }
+
         btnBack.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -154,20 +182,6 @@ public class StartMenuController implements Initializable {
                 scene.setRoot(startMenuRoot);
             }
         });
-
-        highscoreRoot.setAlignment(Pos.CENTER);
-        highscoreRoot.setPadding(new Insets(10, 10, 10, 10));
-        highscoreRoot.setSpacing(50);
-        highscoreRoot.getChildren().addAll(tvHighscore, btnBack);
-
-        Scene scene = startMenuRoot.getScene();
-        scene.setRoot(highscoreRoot);
-        
-        List<Highscore> highscores = textUI.getGame().getHighscoreDatabase().getHighscores();
-        
-        for (Highscore hs : highscores) {
-            tvHighscore.getItems().add(hs);
-        }
     }
 
     @FXML
