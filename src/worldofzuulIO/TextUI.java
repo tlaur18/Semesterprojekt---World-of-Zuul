@@ -28,6 +28,10 @@ public class TextUI {
     public Game getGame() {
         return game;
     }
+    
+    public void setOutput(TextArea txtAreaOutput) {
+        this.txtAreaOutput = txtAreaOutput;
+    }
 
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();

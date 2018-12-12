@@ -1,3 +1,13 @@
+*N/A*,23446
+*N/A*,20978
+Kurt,12098
+*N/A*,11106
+Thomas,6164
+Mathias,3333
+Morten,3120
+Jens,1224
+Jacob,1000
+Alexander,500
 Morten,3120
 Thomas,6164
 Alexander,500
@@ -7,3 +17,6 @@ Jens,1224
 Kurt,12098
 *N/A*,11106
 *N/A*,20978
+*N/A*,23446
+YeetMaster,8638
+Mogens,1234
