@@ -47,11 +47,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnUse" disable="true" mnemonicParsing="false" onAction="#btnUseEventHandler" prefWidth="80.0" text="Use" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-            <Button fx:id="btnDrop" disable="true" mnemonicParsing="false" onAction="#btnDropEventHandler" prefWidth="80.0" text="Drop" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button fx:id="btnInspect" disable="true" mnemonicParsing="false" onAction="#btnInspectEventHandler" prefWidth="80.0" text="Inspect" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-            <Button fx:id="btnHelp" disable="true" mnemonicParsing="false" onAction="#btnHelpEventHandler" prefWidth="80.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <Label fx:id="lblInventoryHeadline" disable="true" text="Inventory" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+            <Button fx:id="btnUse" mnemonicParsing="false" onAction="#btnUseEventHandler" prefWidth="80.0" text="Use" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="btnDrop" mnemonicParsing="false" onAction="#btnDropEventHandler" prefWidth="80.0" text="Drop" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button fx:id="btnInspect" mnemonicParsing="false" onAction="#btnInspectEventHandler" prefWidth="80.0" text="Inspect" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Button fx:id="btnHelp" mnemonicParsing="false" onAction="#btnHelpEventHandler" prefWidth="80.0" text="Help" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label fx:id="lblInventoryHeadline" text="Inventory" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                <font>
                   <Font size="16.0" />
                </font>
@@ -63,7 +63,7 @@
    <center>
       <Pane fx:id="paneRoom" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imgBackground" fitHeight="498.0" fitWidth="700.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="imgBackground" fitHeight="498.0" fitWidth="700.0" pickOnBounds="true">
                <image>
                   <Image url="@../Imgs/bedroom.png" />
                </image>
@@ -73,38 +73,28 @@
                   <Image url="@../Imgs/DeadTimon.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="timon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true" visible="false">
+            <ImageView fx:id="timon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true">
                 <image>
                     <Image url="@../Imgs/Timon.png" />
                 </image>
             </ImageView>
-            <Button fx:id="btnStart" alignment="TOP_LEFT" layoutX="299.0" layoutY="217.0" mnemonicParsing="false" onAction="#btnStartEventHandler" text="Start">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnHighscore" alignment="TOP_LEFT" layoutX="266.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnHighscore" text="Highscore">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Button>
             <Button fx:id="btnNorth" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNorthEventHandler" prefWidth="80.0" text="Go north" visible="false" />
-            <Button fx:id="btnWest" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnWestEventHandler" prefWidth="80.0" text="Go west" visible="false" />
+            <Button fx:id="btnWest" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnWestEventHandler" prefWidth="80.0" text="Window" />
             <Button fx:id="btnSouth" layoutX="310.0" layoutY="459.0" mnemonicParsing="false" onAction="#btnSouthEventHandler" prefWidth="80.0" text="Go south" visible="false" />
-            <Button fx:id="btnEast" layoutX="606.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnEastEventHandler" prefWidth="80.0" text="Go east" visible="false" />
-            <Label fx:id="lblCurrentRoom" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" text="Bedroom" textAlignment="CENTER" visible="false">
+            <Button fx:id="btnEast" layoutX="606.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnEastEventHandler" prefWidth="80.0" text="Hallway" />
+            <Label fx:id="lblCurrentRoom" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" text="Bedroom" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Rectangle fx:id="redbar" arcHeight="5.0" arcWidth="5.0" fill="#f00f07" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="150.0" />
-            <Rectangle fx:id="greenbar" arcHeight="5.0" arcWidth="5.0" fill="#5ef52c" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="150.0" />
-            <Label fx:id="healthText" alignment="CENTER" layoutX="275.0" layoutY="168.0" prefHeight="30.0" prefWidth="150.0" text="100 HP" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" visible="false">
+            <Rectangle fx:id="redbar" arcHeight="5.0" arcWidth="5.0" fill="#f00f07" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+            <Rectangle fx:id="greenbar" arcHeight="5.0" arcWidth="5.0" fill="#5ef52c" height="30.0" layoutX="275.0" layoutY="168.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+            <Label fx:id="healthText" alignment="CENTER" layoutX="275.0" layoutY="168.0" prefHeight="30.0" prefWidth="150.0" text="100 HP" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="stepCounterText" layoutX="585.0" prefHeight="29.0" prefWidth="115.0" text="Step counter: 0" visible="false">
+            <Label fx:id="stepCounterText" layoutX="585.0" prefHeight="29.0" prefWidth="115.0" text="Step counter: 0">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
