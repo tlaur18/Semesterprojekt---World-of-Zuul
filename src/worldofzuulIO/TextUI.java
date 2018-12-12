@@ -170,15 +170,15 @@ public class TextUI {
         printWithPacing(highscoretxt, txtArea);
     }
 
-    public boolean validName(String str) throws NameInputException {
-        boolean valid = true;
+    public void validName(String str) throws NameInputException {
         char[] charArray = str.toCharArray();
         for (char c : charArray) {
             if (c == ',') {
-                valid = false;
                 throw new NameInputException();
             }
         }
-        return valid;
+        if (str.isEmpty()) {
+            throw new NameInputException();
+        }
     }
 }

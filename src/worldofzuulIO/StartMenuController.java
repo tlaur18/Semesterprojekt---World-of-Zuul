@@ -14,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -60,6 +61,7 @@ public class StartMenuController implements Initializable {
         lblName.setText("Before we begin.. \nWhat is your name?");
         lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 30));
         lblName.setTextAlignment(TextAlignment.CENTER);
+        lblName.setAlignment(Pos.CENTER);
 
         Button btnOk = new Button();
         btnOk.setLayoutX(360);
@@ -123,7 +125,8 @@ public class StartMenuController implements Initializable {
 
                     textUI.printWelcome(txtAreaIntro);
                 } catch (NameInputException ex) {
-                    lblName.setText("Your name cant include comma!");
+                    lblName.setText("Invalid name\nYour name cannot be\nempty or include commas");
+                    lblName.setFont(Font.font("Calibri", FontWeight.BOLD, 24));
                 }
             }
         });
