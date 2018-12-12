@@ -5,3 +5,5 @@ Jacob,1000
 Mathias,3333
 Jens,1224
 Kurt,12098
+*N/A*,11106
+*N/A*,20978

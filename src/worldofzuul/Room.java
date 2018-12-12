@@ -12,6 +12,7 @@ public class Room {
     private HashMap<String, Room> exits;
     private ArrayList<Item> items = new ArrayList();
     private Fire fire = null;
+    private Smoke smoke = null;
     private boolean isLocked;
     private boolean isGameComplete;
     private boolean isGameOver;
@@ -93,7 +94,7 @@ public class Room {
 
         return itemString;
     }
-
+    
     public void addFire(int lvl) {
         fire = new Fire(lvl);
     }
@@ -119,6 +120,14 @@ public class Room {
             return " The fire was put out.";
         }
         return " The fire was weakened.";
+    }
+    
+    public void addSmoke(int lvl) {
+        smoke = new Smoke(lvl);
+    }
+    
+    public Smoke getSmoke() {
+        return smoke;
     }
 
     public void unlockRoom() {

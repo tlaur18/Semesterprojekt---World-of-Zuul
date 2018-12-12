@@ -129,6 +129,7 @@ public class TextUI {
 
             //Sørger for at spilleren mister liv af ild.
             txtAreaOutput.appendText((game.getPlayer().checkForFireDamage() ? "\nYou have been damaged by the fire" : ""));
+            txtAreaOutput.appendText((game.getPlayer().checkForSmokeDamage() ? "\nYou are slowly being suffocated by the smoke" : ""));
         }
 
         return changedRoom.get();
