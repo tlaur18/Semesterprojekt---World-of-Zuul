@@ -78,8 +78,8 @@
                     <Image url="@../Imgs/Timon.png" />
                 </image>
             </ImageView>
-            <Button fx:id="btnNorth" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNorthEventHandler" prefWidth="80.0" text="Go north" visible="false" />
-            <Button fx:id="btnWest" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnWestEventHandler" prefWidth="80.0" text="Window" />
+            <Button fx:id="btnNorth" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNorthEventHandler" prefWidth="80.0" text="Window" />
+            <Button fx:id="btnWest" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnWestEventHandler" prefWidth="80.0" text="Go east" visible="false" />
             <Button fx:id="btnSouth" layoutX="310.0" layoutY="459.0" mnemonicParsing="false" onAction="#btnSouthEventHandler" prefWidth="80.0" text="Go south" visible="false" />
             <Button fx:id="btnEast" layoutX="606.0" layoutY="237.0" mnemonicParsing="false" onAction="#btnEastEventHandler" prefWidth="80.0" text="Hallway" />
             <Label fx:id="lblCurrentRoom" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" text="Bedroom" textAlignment="CENTER">

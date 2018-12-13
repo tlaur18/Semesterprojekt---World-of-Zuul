@@ -37,7 +37,7 @@ public class Game {
         bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", "Imgs/bedroom.png");
         hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", "Imgs/hallway.png");
         sistersRoom = new Room("Sisters Room", "in your sister's room", "Imgs/sistersRoom.png");
-        livingRoom = new Room("Living Room", "in the living room", "Imgs/Livingroom.png");
+        livingRoom = new Room("Living Room", "in the living room", "Imgs/livingroom.png");
         wc = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
         wc2 = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
         outside = new Room("Outside", "outside", "Imgs/outside.png");
@@ -51,7 +51,7 @@ public class Game {
         masterBedroom = new Room("Master Bedroom", "in the master bedroom", "Imgs/masterbedroom.png");
 
         bedroom.setExit("east", hallway);
-        bedroom.setExit("west", window);
+        bedroom.setExit("north", window);
 
         hallway.setExit("west", bedroom);
         hallway.setExit("south", sistersRoom);
