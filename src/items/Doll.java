@@ -5,8 +5,8 @@ import worldofzuul.Player;
 public class Doll extends UseableItem {
     private int itemScore;
 
-    public Doll(String name, String description, String imgURL) {
-        super(name, description, imgURL);
+    public Doll(String name, String description, String imgURL, int imgX, int imgY) {
+        super(name, description, imgURL, imgX, imgY);
         itemScore = 800;
     }
 

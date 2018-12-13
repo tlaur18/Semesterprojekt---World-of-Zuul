@@ -10,8 +10,8 @@ public class Bucket extends UseableItem {
     private int lvl;
     private int itemScore;
 
-    public Bucket(String name, String description, String imgURL) {
-        super(name, description, imgURL);
+    public Bucket(String name, String description, String imgURL, int imgX, int imgY) {
+        super(name, description, imgURL, imgX, imgY);
         isFilled = false;
         isUsed = false;
         lvl = 1;

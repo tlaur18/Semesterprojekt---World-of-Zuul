@@ -102,16 +102,16 @@ public class Game {
     }
 
     private void createItems() {
-        bucket = new Bucket("Bucket", "Holds liquid well.", "Imgs/EmptyBucket.png");
-        toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs/Toothbrush.png");
-        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png");
-        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png");
-        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", "Imgs/BigFireExtinguisher.png");
-        towel = new NonUseableItem("Towel", "Used to dry yourself", "Imgs/Towel.png");
-        doll = new Doll("Doll", "A girly play doll", "Imgs/Doll.png");
-        key = new Key("Key", "Used to unlock things.", "Imgs/Key.png");
-        football = new NonUseableItem("Football", "A round toy used to being kicked", "Imgs/Football.png");
-        yankieBar = new YankieBar("YankieBar", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!", "Imgs/YankieBar.png");
+        bucket = new Bucket("Bucket", "Holds liquid well.", "Imgs/EmptyBucket.png", 430, 340);
+        toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs/Toothbrush.png", 400, 50);
+        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png", 50, 120);
+        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png", 80, 120);
+        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", "Imgs/BigFireExtinguisher.png", 300, 300);
+        towel = new NonUseableItem("Towel", "Used to dry yourself", "Imgs/Towel.png", 150, 200);
+        doll = new Doll("Doll", "A girly play doll", "Imgs/Doll.png", 400, 400);
+        key = new Key("Key", "Used to unlock things.", "Imgs/Key.png", 200, 200);
+        football = new NonUseableItem("Football", "A round toy used to being kicked", "Imgs/Football.png", 200, 100);
+        yankieBar = new YankieBar("YankieBar", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!", "Imgs/YankieBar.png", 280, 70);
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);
