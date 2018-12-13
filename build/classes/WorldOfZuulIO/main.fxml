@@ -113,6 +113,11 @@
             </ImageView>
             <Button fx:id="isDeadBtnYes" layoutX="215.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Yes" visible="false" />
             <Button fx:id="isDeadBtnNo" layoutX="418.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="No" visible="false" />
+            <Label fx:id="lblScore" layoutX="585.0" layoutY="15.0" prefHeight="29.0" prefWidth="115.0" text="Score: 0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </center>

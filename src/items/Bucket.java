@@ -8,12 +8,14 @@ public class Bucket extends UseableItem {
     private boolean isFilled;
     private boolean isUsed;
     private int lvl;
+    private int itemScore;
 
     public Bucket(String name, String description, String imgURL) {
         super(name, description, imgURL);
         isFilled = false;
         isUsed = false;
         lvl = 1;
+        itemScore = 450;
     }
 
     @Override
@@ -28,11 +30,14 @@ public class Bucket extends UseableItem {
                     getImage().setImage(filledBucket);
                     outputText = "\nYou fill the bucket with water from the sink.";
                     isFilled = true;
+                    player.updateHighscore(itemScore);
                 } else {
                     outputText = "\nThe bucket is already full.";
                 }
             } else if (player.getCurrentRoom().getFire() == null) {
-                outputText = "\nNothing interesting happens...";
+                outputText = "\nYou  emptied the bucket in a room with no fire!";
+                isUsed = true;
+                 player.updateHighscore(-500);
             }
 
             if (player.getCurrentRoom().getFire() != null) {
@@ -42,6 +47,7 @@ public class Bucket extends UseableItem {
                     outputText += player.getCurrentRoom().lowerFireLvl(lvl);
                     isFilled = false;
                     isUsed = true;
+                     player.updateHighscore(itemScore);
                 } else {
                     outputText = "\nThe empty bucket is no match for this fire.";
                 }
@@ -52,5 +58,9 @@ public class Bucket extends UseableItem {
         }
 
         return outputText;
+    }
+
+    public int getItemScore() {
+        return itemScore;
     }
 }

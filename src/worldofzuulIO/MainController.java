@@ -24,6 +24,8 @@ import worldofzuul.Fire;
 import items.Item;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import worldofzuul.Parser;
 import worldofzuul.Room;
 import worldofzuul.Smoke;
@@ -76,6 +78,8 @@ public class MainController implements Initializable {
     private Label healthText;
     @FXML
     private Label stepCounterText;
+    @FXML
+    private Label lblScore;
     @FXML
     private ImageView hasWon;
     @FXML
@@ -143,6 +147,8 @@ public class MainController implements Initializable {
 
         updateFireImgs();
         drawHealthBar();
+        highscoreUpdater();
+        
     }
 
     @FXML
@@ -170,8 +176,10 @@ public class MainController implements Initializable {
         Command command = parser.getCommand(inputLine);
         changedRoom = textUI.processCommand(command);
         lblCurrentRoom.setText(textUI.getGame().getPlayer().getCurrentRoom().getName());
+        highscoreUpdater();
 
         if (textUI.getGame().getPlayer().isDead()) {
+            highscoreUpdater();
             highscore();
             disableGame();
             redrawRoom();
@@ -180,6 +188,7 @@ public class MainController implements Initializable {
         }
 
         if (textUI.getGame().getPlayer().hasWon()) {
+            highscoreUpdater();
             highscore();
             disableGame();
             redrawRoom();
@@ -427,6 +436,8 @@ public class MainController implements Initializable {
         hasWon.setVisible(true);
         hasWon.toFront();
 
+        
+        hasWonScore.setFont(Font.font("Calibri", FontWeight.BOLD, 13));
         hasWonScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());
         hasWonScore.setVisible(true);
         hasWonScore.toFront();
@@ -453,5 +464,10 @@ public class MainController implements Initializable {
     public void highscore() {
         textUI.getGame().getPlayer().setPlayerScore();
         textUI.getGame().saveHighscore();
+    }
+    
+    public void highscoreUpdater() {
+        textUI.getGame().highscoreUpdater(textUI.getGame().getPlayer());
+        lblScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());
     }
 }
