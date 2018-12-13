@@ -30,10 +30,17 @@ public class HighscoreDatabase {
 
     public void sortHighscores() {
         Collections.sort(highscores);
-        
+        int arraySize = highscores.size();
         List<Highscore> temp = new ArrayList<>();
+        if (arraySize > 10){
         for (int i = 0; i < 10; i++) {
             temp.add(highscores.get(i));
+        }
+        }
+        if (arraySize < 10){
+            for (Highscore highscores : highscores) {
+                temp.add(highscores);
+            }
         }
         
         highscores = temp;
@@ -54,4 +61,5 @@ public class HighscoreDatabase {
         
         da.save(playerStrings);
     }
+    
 }

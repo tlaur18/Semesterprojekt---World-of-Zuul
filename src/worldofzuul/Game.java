@@ -156,4 +156,7 @@ public class Game {
     public void saveHighscore(){
         highscoreDB.saveHighscore(player);
     }
+    public void highscoreUpdater(Player player){
+        player.getPlayerScore();
+    }
 }

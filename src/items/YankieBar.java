@@ -3,9 +3,11 @@ package items;
 import worldofzuul.Player;
 
 public class YankieBar extends UseableItem {
+    private int itemScore;
 
     public YankieBar(String name, String description, String imgURL) {
         super(name, description, imgURL);
+        itemScore = 900;
     }
 
     @Override
@@ -17,7 +19,7 @@ public class YankieBar extends UseableItem {
         
         player.removeItem();
         player.setHealth(100);
-        
+        player.updateHighscore(itemScore);
         return outputText;
     }
 }

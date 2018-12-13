@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import items.Item;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import worldofzuul.Parser;
 import worldofzuul.Room;
 import worldofzuul.Smoke;
@@ -74,6 +76,8 @@ public class MainController implements Initializable {
     private Label healthText;
     @FXML
     private Label stepCounterText;
+    @FXML
+    private Label lblScore;
     @FXML
     private ImageView hasWon;
     @FXML
@@ -137,6 +141,8 @@ public class MainController implements Initializable {
         updateFireImgs();
         updateSmokeImgs();
         drawHealthBar();
+        highscoreUpdater();
+        
     }
 
     @FXML
@@ -173,14 +179,17 @@ public class MainController implements Initializable {
         Command command = parser.getCommand(inputLine);
         changedRoom = textUI.processCommand(command);
         lblCurrentRoom.setText(textUI.getGame().getPlayer().getCurrentRoom().getName());
+        highscoreUpdater();
 
         if (textUI.getGame().getPlayer().isDead()) {
+            highscoreUpdater();
             highscore();
             disableGame();
             drawDeadStage();
         }
 
         if (textUI.getGame().getPlayer().hasWon()) {
+            highscoreUpdater();
             highscore();
             disableGame();
             drawWinStage();
@@ -424,7 +433,8 @@ public class MainController implements Initializable {
 
     private void drawWinStage() {
         hasWon.setVisible(true);
-
+        
+        hasWonScore.setFont(Font.font("Calibri", FontWeight.BOLD, 13));
         hasWonScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());
         hasWonScore.setVisible(true);
 
@@ -446,5 +456,9 @@ public class MainController implements Initializable {
     public void setTextUI(TextUI textUI) {
         this.textUI = textUI;
         textUI.setOutput(txtAreaOutput);
+    }
+    public void highscoreUpdater() {
+        textUI.getGame().highscoreUpdater(textUI.getGame().getPlayer());
+        lblScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());
     }
 }
