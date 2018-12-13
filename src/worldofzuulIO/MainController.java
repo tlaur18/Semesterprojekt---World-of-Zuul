@@ -110,6 +110,7 @@ public class MainController implements Initializable {
         this.textUI = textUI;
         textUI.setOutput(txtAreaOutput);
         textUI.setLblHelp(txtAreaNPC);
+        printItems();
     }
 
     @FXML
