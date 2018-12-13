@@ -137,7 +137,6 @@ public class MainController implements Initializable {
         }
 
         updateFireImgs();
-        updateSmokeImgs();
         drawHealthBar();
     }
 
@@ -376,20 +375,7 @@ public class MainController implements Initializable {
         paneRoom.getChildren().removeAll(nodesToRemove);
 
     }
-
-    private void updateSmokeImgs() {
-        ArrayList<Node> nodesToRemove = new ArrayList<>();
-
-        //Alle imageViews af røg registreres og gemmes i nodesToRemove
-        for (Node node : paneRoom.getChildren()) {
-            if (node instanceof ImageView) {
-                if (((ImageView) node).getImage().equals(Smoke.IMAGE_SMOKE)) {
-                    nodesToRemove.add(node);
-                }
-            }
-        }
-    }
-
+    
     private void drawDeadStage() {
         timon.setVisible(false);
         deadTimon.setVisible(true);
