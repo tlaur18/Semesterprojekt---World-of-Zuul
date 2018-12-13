@@ -1,3 +1,11 @@
+/*
+@author Alexander Nguyen, Jacob Wowk, Morten K. Jensen and Thomas S. Laursen
+* @version 2018.12.14
+
+Controller Class for creating and controlling the JavaFXML elements, 
+and running methods from the Domain layer.
+*/
+
 package worldofzuulIO;
 
 import java.net.URL;
@@ -22,8 +30,6 @@ import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import items.Item;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import worldofzuul.Parser;
@@ -32,6 +38,10 @@ import worldofzuul.Smoke;
 
 public class MainController implements Initializable {
 
+    /*
+    Important attribut for setting the TextUI wich is used to access the 
+    Domain layer.
+    */
     private TextUI textUI;
 
     @FXML
@@ -97,50 +107,76 @@ public class MainController implements Initializable {
     @FXML
     private TextArea txtAreaNPC;
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //Gør så txtAreaOutput scroller automatisk ned lige fra starten af.
+        //Makes sure the TxtAreaOutput scrolls down from the start.
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
     }
-    
+    /*
+    Sets the textUI attribut for later access to the TextUI
+    Prints the items for the rooms.
+    */
     public void setTextUI(TextUI textUI) {
         this.textUI = textUI;
         textUI.setOutput(txtAreaOutput);
         textUI.setLblHelp(txtAreaNPC);
         printItems();
     }
-
+    /*
+    Uses the buttons places north to set the proccessCommand to "go north"
+    redraws the room according to the new room.
+    */
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
         if (processCommand("go north")) {
             redrawRoom();
         }
     }
-
+    /*
+    Uses the buttons places north to set the proccessCommand to "go west"
+    redraws the room according to the new room.
+    */
     @FXML
     private void btnWestEventHandler(ActionEvent event) {
         if (processCommand("go west")) {
             redrawRoom();
         }
     }
-
+    /*
+    Uses the buttons places north to set the proccessCommand to "go south"
+    redraws the room according to the new room.
+    */
     @FXML
     private void btnSouthEventHandler(ActionEvent event) {
         if (processCommand("go south")) {
             redrawRoom();
         }
     }
-
+    /*
+    Uses the buttons places north to set the proccessCommand to "go east"
+    redraws the room according to the new room.
+    */
     @FXML
     private void btnEastEventHandler(ActionEvent event) {
         if (processCommand("go east")) {
             redrawRoom();
         }
     }
-
+    
+    /*
+    Connects the use button to the proccessCommand "use" and checks if the 
+    inventory is empty.
+    If the inventory is not empty it finds the item name and places it in the 
+    process command string.
+    if the inventory is empty after the use, the image inventory is set to null
+    else if the image is not equal to the image from the inventory, it updates
+    the image.
+    Then it updates the fire images, health bar and highscore.
+    */
     @FXML
     private void btnUseEventHandler(ActionEvent event) {
         processCommand("use " + (textUI.getGame().getPlayer().getInventory() != null ? textUI.getGame().getPlayer().getInventory().getName() : ""));
@@ -156,7 +192,14 @@ public class MainController implements Initializable {
         highscoreUpdater();
         
     }
-
+    
+    /*
+    Removes the item from the player and places it in the current room
+    using the preocessCommand "drop"
+    Prints the items in the rooms again, according to the new items dropped in 
+    the room.
+    Sets the Inventory Image to null.
+    */
     @FXML
     private void btnDropEventHandler(ActionEvent event) {
         removeItems(textUI.getGame().getPlayer().getCurrentRoom());
@@ -165,18 +208,36 @@ public class MainController implements Initializable {
         imgInventory.setImage(null);
     }
 
+    /*
+    Connects the button with the processCommand "inspect"
+    */
     @FXML
     private void btnInspectEventHandler(ActionEvent event) {
         processCommand("inspect");
     }
-
+    
+    /*
+    Shows the TextArea next to the NPC.
+    places the textArea on front.
+    Prints the help strings for the NPC
+    */
     @FXML
     private void btnHelpEventHandler(ActionEvent event) {
         txtAreaNPC.setVisible(true);
         txtAreaNPC.toFront();
         textUI.printHelp();
     }
-
+    
+    /*
+    Returns a boolean to tell whether the room changed or not.
+    Uses a parser to parse the commands to a command.
+    Changes the text of the current room label to the new room name
+    Updates Highscore everytime the room is changed.
+    if the player died, it updates and saves the highscore, disables the game,
+    redraws the room, draws the dead stage, and returns a false value
+    if the player won, it updates and saves the highscore, disavbles the game,
+    and draws the win stage, and returns false.
+    */
     private boolean processCommand(String inputLine) {
         boolean changedRoom = false;
         Parser parser = new Parser();
@@ -206,7 +267,12 @@ public class MainController implements Initializable {
 
         return changedRoom;
     }
-
+    /*
+    removes the Items, fire, and smoke, and print them all again, to get an 
+    updated view.
+    Prints the buttons, sets the background, draws the healthbar and stepcounter
+    It hides the NPC's textArea.
+    */
     private void redrawRoom() {
         removeItems(textUI.getGame().getPlayer().getPreviousRoom());
         removeFire();
@@ -220,7 +286,10 @@ public class MainController implements Initializable {
         stepCounterText();
         txtAreaNPC.setVisible(false);
     }
-
+    /*
+    Hides all direction buttons, and uses a switch case to redraw the useable
+    ones.
+    */
     private void printDirectionButtons() {
         btnNorth.setVisible(false);
         btnWest.setVisible(false);
@@ -252,7 +321,13 @@ public class MainController implements Initializable {
             }
         }
     }
-
+    /*
+    Uses an for each loop to get all the items and their images, for the current
+    room.
+    When the image is clicked and the inventory is empty, the iamge of the item
+    is places in the Inventory, and the processCommand gets the "take" command.
+    
+    */
     private void printItems() {
         for (Item item : textUI.getGame().getPlayer().getCurrentRoom().getItems()) {
             ImageView img = item.getImage();
@@ -271,13 +346,19 @@ public class MainController implements Initializable {
         }
     }
     
+    /*
+    Makes the user unable to click on the item after the game is lost or won
+    */
     private void disableItems() {
         for (Item item : textUI.getGame().getPlayer().getCurrentRoom().getItems()) {
             ImageView img = item.getImage();
             img.setDisable(true);
         }
     }
-
+    /*
+    Removes the items for a given room.
+    Used to redraw the room, when the player changes room.
+    */
     private void removeItems(Room whereToRemoveItemsFrom) {
         for (Item item : whereToRemoveItemsFrom.getItems()) {
             ImageView img = item.getImage();
@@ -285,6 +366,10 @@ public class MainController implements Initializable {
         }
     }
 
+    /*
+    Disables the images and buttons.
+    Used when the game is won or lost.
+    */
     private void disableGame() {
         btnNorth.setDisable(true);
         btnWest.setDisable(true);
@@ -301,12 +386,20 @@ public class MainController implements Initializable {
         btnEast.setVisible(false);
 
     }
-
+    
+    /*
+    Sets the background image.
+    */
     private void setBackground() {
         ImageView img = textUI.getGame().getPlayer().getCurrentRoom().getImage();
         imgBackground.setImage(img.getImage());
     }
 
+    /*
+    Checks if the current room contains fire.
+    if the room contains fire, it places fire images acoording to the lvl of 
+    the fire.
+    */
     private void printFire() {
         Fire fire = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fire != null) {
@@ -322,6 +415,9 @@ public class MainController implements Initializable {
         }
     }
 
+    /*
+    removes the nodes with the fire from the room.
+    */
     private void removeFire() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
@@ -338,11 +434,11 @@ public class MainController implements Initializable {
 
     }
 
-    //Metode til at styre hvilke imageViews der fjernes når ild slukkes
+    //Method to control wich ImageViews are removes when the fire is gone
     private void updateFireImgs() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
-
-        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        
+        //All imageViews of fire registres and saves in nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
@@ -351,7 +447,12 @@ public class MainController implements Initializable {
             }
         }
 
-        //Et antal der afhænger af ildens nuværende lvl fjernes.
+        /*
+        Removes fire according to the extinguished fire in the current room, 
+        and updates the players progress if the player manage to completely 
+        remove the fire.
+        
+        */
         Fire fireInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fireInCurrentRoom == null) {
             if (!nodesToRemove.isEmpty()) {
@@ -364,7 +465,9 @@ public class MainController implements Initializable {
             }
         }
     }
-
+    /*
+    Prints the imageViews of the smokes if the room contains smoke.
+    */
     private void printSmoke() {
         Smoke smoke = textUI.getGame().getPlayer().getCurrentRoom().getSmoke();
         if (smoke != null) {
@@ -379,7 +482,10 @@ public class MainController implements Initializable {
             }
         }
     }
-
+    /*
+    Makes an ArrayList and removes the smoke nodes.
+    This method is used to remove smoke when the room changes.
+    */
     private void removeSmoke() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
@@ -394,7 +500,12 @@ public class MainController implements Initializable {
 
         paneRoom.getChildren().removeAll(nodesToRemove);
     }
-
+    /*
+    Draws the healthbar, accordint to the players health multiplied with 1.5, 
+    to set the width of the green bar.
+    The Health text gets the players health and places it with a string.
+    places the red and green bar at the front together with the health text.
+    */
     private void drawHealthBar() {
         greenbar.setWidth(textUI.getGame().getPlayer().getHealth() * 1.5);
         healthText.setText(Integer.toString(textUI.getGame().getPlayer().getHealth()) + " " + "HP");
@@ -402,11 +513,18 @@ public class MainController implements Initializable {
         greenbar.toFront();
         healthText.toFront();
     }
-
+    /*
+    Set the label with Stepcounter text to the stepcounter value from the player.
+    */
     private void stepCounterText() {
         stepCounterText.setText("Step counter: " + Integer.toString(textUI.getGame().getPlayer().getStepCount()));
     }
-    
+    /*
+    Disables the Items, and changes the caracter to the deead caracter. 
+    Creates the button for the player to know he is dead, and asks the player
+    to try agian, with yes and no buttons.
+    if the Player clicks yes, a new stage is set, and start is runned again.
+    */
     private void drawDeadStage() {
         disableItems();
         
@@ -442,7 +560,12 @@ public class MainController implements Initializable {
             }
         });
     }
-
+    /*
+    Draws the stage when the game is won. 
+    Prints the score to show the player.
+    Makes an "ok" button for the player, and when its pressed the player is
+    redirectet to the start page.
+    */
     private void drawWinStage() {
         hasWon.setVisible(true);
         hasWon.toFront();
@@ -479,11 +602,20 @@ public class MainController implements Initializable {
                 + "\ncompleted Fire Escape");
     }
 
+    /*
+    Sets the player score and wich is calculated from the stepCount as a bonus
+    This method is only run when the player Win the game.
+    Saves the highscore from a method in game that used dataAccess
+    */
     public void highscore() {
         textUI.getGame().getPlayer().setPlayerScore();
         textUI.getGame().saveHighscore();
     }
     
+    /*
+    Updates the highscore as the game evolves, and the player uses items.
+    Updates the current score for the player to see.
+    */
     public void highscoreUpdater() {
         textUI.getGame().highscoreUpdater(textUI.getGame().getPlayer());
         lblScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());

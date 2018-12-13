@@ -5,10 +5,8 @@
  */
 package exceptions;
 
-/**
- *
- * @author Morten K. Jensen
- */
+// Custom Exception to be thrown if the user input name is invalid. 
+
 public class NameInputException extends Exception{
     
     public NameInputException() {

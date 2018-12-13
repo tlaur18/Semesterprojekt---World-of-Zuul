@@ -1,8 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+@author Alexander Nguyen, Jacob Wowk, Morten K. Jensen and Thomas S. Laursen
+* @version 2018.12.14
+
+DataAccess Creates a file at the path given in the argument
+Saves and loads the highscores in a file.
+*/
 package worldofzuul.dataaccess;
 
 import java.io.File;
@@ -19,11 +21,16 @@ import java.util.Scanner;
 public class DataAccess {
 
     private final String path;
-
+   /*
+    Construtor that creates the Dataaccess object and sets the path of the file
+    */
     public DataAccess(String path) {
         this.path = path;
     }
-
+    /*
+    loads the strings from the file with the given path
+    Plaaces the strings in an arrayList and returning it.
+    */
     public List<String> load() {
         List<String> highscore = new ArrayList<>();
         try {
@@ -38,7 +45,10 @@ public class DataAccess {
         }
         return highscore;
     }
-
+    /*
+    Uses the List of Strings from the argument and using the for each loop
+    and the printwriter to write them to the file.
+    */
     public void save(List<String> data) {
         try {
             File f = new File(path);
