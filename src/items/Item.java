@@ -8,14 +8,14 @@ public class Item {
     private String description;
     private ImageView img;
 
-    public Item(String name, String description, String imgURL) {
+    public Item(String name, String description, String imgURL, int imgX, int imgY) {
         this.name = name;
         this.description = description;
         img = new ImageView(imgURL);
         img.fitHeightProperty().set(50);
         img.fitWidthProperty().set(50);
-        img.setTranslateX(Math.random() * 400);
-        img.setTranslateY(Math.random() * 400);
+        img.setTranslateX(imgX);
+        img.setTranslateY(imgY);
     }
 
     public String getName() {

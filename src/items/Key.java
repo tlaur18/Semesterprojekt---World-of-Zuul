@@ -7,8 +7,8 @@ public class Key extends UseableItem {
 
     private int itemScore;
 
-    public Key(String name, String description, String imgURL) {
-        super(name, description, imgURL);
+    public Key(String name, String description, String imgURL, int imgX, int imgY) {
+        super(name, description, imgURL, imgX, imgY);
         itemScore = 740;
     }
 

@@ -8,8 +8,8 @@ public class BigFireExtinguisher extends UseableItem {
     private int lvl;
     private int itemScore;
 
-    public BigFireExtinguisher(String name, String description, String imgURL) {
-        super(name, description, imgURL);
+    public BigFireExtinguisher(String name, String description, String imgURL, int imgX, int imgY) {
+        super(name, description, imgURL, imgX, imgY);
         isEmpty = false;
         lvl = 3;
         itemScore = 700;
