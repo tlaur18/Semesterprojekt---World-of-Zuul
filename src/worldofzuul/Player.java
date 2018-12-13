@@ -177,6 +177,7 @@ public class Player {
     }
 
     public void setPlayerScore() {
-        this.highscore = 1234 * stepCount;
+        highscore = (int) (100.0 / ((1.0/5000.0)*stepCount + 1.0/100.0) - 5000.0);
+        
     }
 }

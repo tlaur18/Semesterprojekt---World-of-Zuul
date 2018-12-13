@@ -190,7 +190,9 @@ public class MainController implements Initializable {
         if (textUI.getGame().getPlayer().hasWon()) {
             highscore();
             disableGame();
+            redrawRoom();
             drawWinStage();
+            return false;
         }
 
         return changedRoom;
@@ -423,12 +425,15 @@ public class MainController implements Initializable {
 
     private void drawWinStage() {
         hasWon.setVisible(true);
+        hasWon.toFront();
 
         hasWonScore.setText("Score: " + textUI.getGame().getPlayer().getPlayerScore());
         hasWonScore.setVisible(true);
+        hasWonScore.toFront();
 
         hasWonBtnOk.setDisable(false);
         hasWonBtnOk.setVisible(true);
+        hasWonBtnOk.toFront();
         hasWonBtnOk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {

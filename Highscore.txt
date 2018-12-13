@@ -2,9 +2,9 @@ Mr. Bombastic,20978
 Mr. Loba Loba,13574
 Bøfmesteren,11106
 Lone,9872
+noget,7090
 Svend Andersen,6170
 Han Solo,6170
 Thomas,6164
-Ben Swolo,3702
-Det virker,3702
-Mathias,3333
+Jada,4803
+Test,4666
