@@ -14,6 +14,7 @@ public class Player {
     private Room previousRoom;
     private Room nextRoom;
     private int highscore;
+    private int progress;
 
     public Player(Room room, String playerName) {
         stepCount = 0;
@@ -21,6 +22,15 @@ public class Player {
         inventory = null;
         currentRoom = room;
         this.playerName = playerName;
+        progress = 0;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+    
+    public void raiseProgress() {
+        progress++;
     }
 
     public Player(Room room) {
@@ -86,6 +96,9 @@ public class Player {
     public boolean checkForFireDamage() {
         if(currentRoom.getFire() != null) {
             takeDamage(25 * currentRoom.getFire().getLvl());
+            if (progress == 0) {
+                progress = 1;
+            }
             return true;
         }
         return false;
@@ -152,7 +165,8 @@ public class Player {
         if (currentRoom.getFire() != null && nextRoom != previousRoom) {
             return "\nThe fire inside the room prevents you from getting to this door.";
         } else if (nextRoom.isLocked()) {
-            return "\nThe door is locked! You need a key to open the door!";
+            progress = 5;
+            return "\nThe door is locked.";
         } else {
             previousRoom = currentRoom;
             currentRoom = nextRoom;

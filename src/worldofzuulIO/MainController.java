@@ -96,6 +96,8 @@ public class MainController implements Initializable {
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
+        
+//        textUI.setLblHelp(healthText);
     }
     
     public void setTextUI(TextUI textUI) {
@@ -337,6 +339,9 @@ public class MainController implements Initializable {
         //Et antal der afhænger af ildens nuværende lvl fjernes.
         Fire fireInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fireInCurrentRoom == null) {
+            if (!nodesToRemove.isEmpty()) {
+                textUI.getGame().getPlayer().raiseProgress();
+            }
             paneRoom.getChildren().removeAll(nodesToRemove);
         } else {
             for (int i = 0; i < nodesToRemove.size() - fireInCurrentRoom.getLvl() * 3; i++) {

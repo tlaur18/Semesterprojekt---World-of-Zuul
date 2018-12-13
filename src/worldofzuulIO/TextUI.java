@@ -9,6 +9,7 @@ import worldofzuul.Parser;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 import worldofzuul.Highscore;
@@ -18,11 +19,16 @@ public class TextUI {
     private Game game;
     private Parser parser;
     private TextArea txtAreaOutput;
+    private Label lblHelp;
 
     public TextUI(Game game, TextArea txtAreaOutput) {
         this.game = game;
         this.txtAreaOutput = txtAreaOutput;
         parser = new Parser();
+    }
+    
+    public void setLblHelp(Label lblHelp) {
+        this.lblHelp = lblHelp;
     }
 
     public Game getGame() {
@@ -38,7 +44,7 @@ public class TextUI {
         boolean changedRoom = false;
 
         if (commandWord == CommandWord.HELP) {
-            printHelp();
+            printHelp(lblHelp);
         } else if (commandWord == CommandWord.GO) {
             changedRoom = processGoRoom(command);
         } else if (commandWord == CommandWord.TAKE) {
@@ -54,18 +60,35 @@ public class TextUI {
         return changedRoom;
     }
 
-    private void printHelp() {
-        txtAreaOutput.appendText("\nYou are lost. You are alone. You wander around at you own home.");
-        txtAreaOutput.appendText("\nYour options are:");
-        txtAreaOutput.appendText("\n - To change room, simply press the buttons at the top, left, right or bottom of the room.");
-        txtAreaOutput.appendText("\n - To pick up items, simply click on them.");
-        txtAreaOutput.appendText("\n - To use the item you have picket up, press the 'use' button on the right.");
-        txtAreaOutput.appendText("\n - To drop the item you have picket up, press the 'drop' button on the right.");
-        txtAreaOutput.appendText("\n - To get information about the item you have picket up, press the 'inspect' button on the right.");
-        txtAreaOutput.appendText("\n - To get help, press the 'help' button on the right.");
-        txtAreaOutput.appendText("\n - To exit the game, simply close the window.");
-
-        txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
+    private void printHelp(Label lblHelp) {
+        switch (game.getPlayer().getProgress()) {
+            case 0:
+                txtAreaOutput.appendText("\nStart by exploring the house for a way out.");
+                txtAreaOutput.appendText("\nBe careful of smoke and fire as it will hurt you.");
+                break;
+            case 1:
+                txtAreaOutput.appendText("\nThe fire in the living room blocks the way.");
+                txtAreaOutput.appendText("\nMaybe you should try finding something that holds water.");
+                break;
+            case 2:
+                txtAreaOutput.appendText("\nThe exit is still blocket by fire.");
+                txtAreaOutput.appendText("\nYou should find something to put it out.");
+                txtAreaOutput.appendText("\nBut be careful with strong fires.");
+                txtAreaOutput.appendText("\nNot all peices of fire equipment work equally well.");
+                break;
+            case 3:
+                txtAreaOutput.appendText("\nExplore further but there might still be fire somwhere inside the house.");
+                txtAreaOutput.appendText("\nBe sure to bring any unused fire equipment you find.");
+                break;
+            case 4:
+                txtAreaOutput.appendText("\nThe fire seems to be under control.");
+                txtAreaOutput.appendText("\nHowever, you still need to find your way out because of the smoke.");
+                break;
+            case 5:
+                txtAreaOutput.appendText("\nThe door to outside seems to be locked.");
+                txtAreaOutput.appendText("\nI bet a key is stored somewhere nearby.");
+                break;
+        }
     }
 
     public void printWelcome(TextArea txtArea) {
