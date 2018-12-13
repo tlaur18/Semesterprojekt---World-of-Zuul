@@ -97,6 +97,11 @@ public class MainController implements Initializable {
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
     }
+    
+    public void setTextUI(TextUI textUI) {
+        this.textUI = textUI;
+        textUI.setOutput(txtAreaOutput);
+    }
 
     @FXML
     private void btnNorthEventHandler(ActionEvent event) {
@@ -156,18 +161,6 @@ public class MainController implements Initializable {
     @FXML
     private void btnHelpEventHandler(ActionEvent event) {
         processCommand("help");
-    }
-
-    private void drawHealthBar() {
-        greenbar.setWidth(textUI.getGame().getPlayer().getHealth() * 1.5);
-        healthText.setText(Integer.toString(textUI.getGame().getPlayer().getHealth()) + " " + "HP");
-        redbar.toFront();
-        greenbar.toFront();
-        healthText.toFront();
-    }
-
-    private void stepCounterText() {
-        stepCounterText.setText("Step counter: " + Integer.toString(textUI.getGame().getPlayer().getStepCount()));
     }
 
     private boolean processCommand(String inputLine) {
@@ -257,6 +250,13 @@ public class MainController implements Initializable {
                     processCommand("take " + item.getName());
                 }
             });
+        }
+    }
+    
+    private void disableItems() {
+        for (Item item : textUI.getGame().getPlayer().getCurrentRoom().getItems()) {
+            ImageView img = item.getImage();
+            img.setDisable(true);
         }
     }
 
@@ -373,14 +373,28 @@ public class MainController implements Initializable {
         }
 
         paneRoom.getChildren().removeAll(nodesToRemove);
+    }
 
+    private void drawHealthBar() {
+        greenbar.setWidth(textUI.getGame().getPlayer().getHealth() * 1.5);
+        healthText.setText(Integer.toString(textUI.getGame().getPlayer().getHealth()) + " " + "HP");
+        redbar.toFront();
+        greenbar.toFront();
+        healthText.toFront();
+    }
+
+    private void stepCounterText() {
+        stepCounterText.setText("Step counter: " + Integer.toString(textUI.getGame().getPlayer().getStepCount()));
     }
     
     private void drawDeadStage() {
+        disableItems();
+        
         timon.setVisible(false);
         deadTimon.setVisible(true);
 
         isDead.setVisible(true);
+        isDead.toFront();
 
         isDeadBtnNo.setVisible(true);
         isDeadBtnNo.toFront();
@@ -439,10 +453,5 @@ public class MainController implements Initializable {
     public void highscore() {
         textUI.getGame().getPlayer().setPlayerScore();
         textUI.getGame().saveHighscore();
-    }
-
-    public void setTextUI(TextUI textUI) {
-        this.textUI = textUI;
-        textUI.setOutput(txtAreaOutput);
     }
 }
