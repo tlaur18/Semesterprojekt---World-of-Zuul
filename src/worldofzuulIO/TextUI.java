@@ -9,6 +9,7 @@ import worldofzuul.Parser;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 import worldofzuul.Highscore;
@@ -18,11 +19,16 @@ public class TextUI {
     private Game game;
     private Parser parser;
     private TextArea txtAreaOutput;
+    private TextArea txtAreaHelp;
 
     public TextUI(Game game, TextArea txtAreaOutput) {
         this.game = game;
         this.txtAreaOutput = txtAreaOutput;
         parser = new Parser();
+    }
+    
+    public void setLblHelp(TextArea txtAreaHelp) {
+        this.txtAreaHelp = txtAreaHelp;
     }
 
     public Game getGame() {
@@ -55,17 +61,48 @@ public class TextUI {
     }
 
     private void printHelp() {
-        txtAreaOutput.appendText("\nYou are lost. You are alone. You wander around at you own home.");
-        txtAreaOutput.appendText("\nYour options are:");
-        txtAreaOutput.appendText("\n - To change room, simply press the buttons at the top, left, right or bottom of the room.");
-        txtAreaOutput.appendText("\n - To pick up items, simply click on them.");
-        txtAreaOutput.appendText("\n - To use the item you have picket up, press the 'use' button on the right.");
-        txtAreaOutput.appendText("\n - To drop the item you have picket up, press the 'drop' button on the right.");
-        txtAreaOutput.appendText("\n - To get information about the item you have picket up, press the 'inspect' button on the right.");
-        txtAreaOutput.appendText("\n - To get help, press the 'help' button on the right.");
-        txtAreaOutput.appendText("\n - To exit the game, simply close the window.");
-
-        txtAreaOutput.appendText("\nYou have walked " + game.getPlayer().getStepCount() + " steps so far");
+        txtAreaHelp.clear();
+        switch (game.getPlayer().getProgress()) {
+            case 0:
+                txtAreaHelp.appendText("Start by exploring the house"
+                        + "\nfor a way out.");
+                txtAreaHelp.appendText("\nBe careful of smoke and fire"
+                        + "\nas it will hurt you.");
+                break;
+            case 1:
+                txtAreaHelp.appendText("The fire in the living room"
+                        + "\nblocks the way.");
+                txtAreaHelp.appendText("\nMaybe you should try finding"
+                        + "\nsomething that holds water.");
+                break;
+            case 2:
+                txtAreaHelp.appendText("The exit is still blocket by fire.");
+                txtAreaHelp.appendText("\nYou should find something"
+                        + "\nto put it out.");
+                txtAreaHelp.appendText("\nBut be careful with big fires.");
+                txtAreaHelp.appendText("\nNot all pieces of fire"
+                        + "\nequipment work equally well.");
+                break;
+            case 3:
+                txtAreaHelp.appendText("Explore further but there"
+                        + "\nmight still be fire"
+                        + "\nsomwhere inside the house.");
+                txtAreaHelp.appendText("\nBe sure to bring any unused"
+                        + "\nfire equipment you find.");
+                break;
+            case 4:
+                txtAreaHelp.appendText("The fire is under control.");
+                txtAreaHelp.appendText("\nHowever, you still need to find"
+                        + "\nyour way out because of"
+                        + "\nthe smoke.");
+                break;
+            case 5:
+                txtAreaHelp.appendText("The door to outside seems"
+                        + "\nto be locked.");
+                txtAreaHelp.appendText("\nI bet a key is stored somewhere"
+                        + "\nnearby.");
+                break;
+        }
     }
 
     public void printWelcome(TextArea txtArea) {
