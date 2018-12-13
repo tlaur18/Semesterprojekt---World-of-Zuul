@@ -35,9 +35,14 @@ public class Bucket extends UseableItem {
                     outputText = "\nThe bucket is already full.";
                 }
             } else if (player.getCurrentRoom().getFire() == null) {
-                outputText = "\nYou  emptied the bucket in a room with no fire!";
-                isUsed = true;
+                if (isFilled){
+                outputText = "\nYou emptied the bucket in a room with no fire!";
+                isFilled = false;
                  player.updateHighscore(-500);
+                }
+                else {
+                    outputText = "\nYour bucket is empty!";
+                }
             }
 
             if (player.getCurrentRoom().getFire() != null) {

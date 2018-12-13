@@ -187,7 +187,7 @@ public class MainController implements Initializable {
 
         if (textUI.getGame().getPlayer().isDead()) {
             highscoreUpdater();
-            highscore();
+            textUI.getGame().saveHighscore();
             disableGame();
             redrawRoom();
             drawDeadStage();
