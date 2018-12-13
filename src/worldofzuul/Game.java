@@ -1,3 +1,15 @@
+/**
+ *
+ * This class contains most of the other classes inside it to create the game.
+ * All of the rooms and objects are created in this class. The objects are
+ * created in this class so it can be possible to assign each object to each
+ * room. Every room also have one or multiple exits which is also defined here.
+ *
+ *
+ * @author Alexander Nguyen, Jacob Wowk, Morten K. Jensen and Thomas S. Laursen
+ * @version 2018.12.14
+ *
+ */
 package worldofzuul;
 
 import items.Key;
@@ -21,6 +33,10 @@ public class Game {
     private ArrayList<Room> rooms;
     private HighscoreDatabase highscoreDB;
 
+    /*
+    This is the constructor where all the rooms, items, fire, smoke and 
+    highscore database is created by using the methods inside the class.
+     */
     public Game() {
         createRooms();
         createItems();
@@ -33,6 +49,14 @@ public class Game {
         highscoreDB = new HighscoreDatabase();
     }
 
+    /*
+    This method creates different rooms and grants them different parameters.
+    These parameters are unique for each room.
+    
+    This method also uses other methods to give each room different functionality
+    such as granting the room water, exits, a lock in the room or a room
+    specially for game over e.g when you enter "window" which should be a dead path.
+     */
     private void createRooms() {
         bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", "Imgs/bedroom.png");
         hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", "Imgs/hallway.png");
@@ -88,7 +112,7 @@ public class Game {
         masterBedroom.setExit("east", wc2);
 
         wc2.setExit("west", masterBedroom);
-        
+
         wc.setHasWater();
         wc2.setHasWater();
 
@@ -101,6 +125,13 @@ public class Game {
         window.setGameOver();
     }
 
+    /*
+    This method creates different items and grants them different parameters.
+    These parameters are unique for each item.
+    
+    This method also adds these items to their specific room, so the rooms
+    will have these item in them.
+    */
     private void createItems() {
         bucket = new Bucket("Bucket", "Holds liquid well.", "Imgs/EmptyBucket.png", 430, 340);
         toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs/Toothbrush.png", 400, 50);
@@ -124,12 +155,14 @@ public class Game {
         conservatory.addItem(key);
     }
 
+    // This method is used to add fire to a specific room.
     private void createFire() {
         kitchen.addFire(3);
         office.addFire(1);
         livingRoom.addFire(1);
     }
-    
+
+    // This method is used to add smoke to a specific room.
     public void createSmoke() {
         hallway.addSmoke(1);
         basement.addSmoke(1);
@@ -139,6 +172,10 @@ public class Game {
         return player;
     }
 
+    /*
+    This method updates the fire in each room based on the amount of steps
+    the player have taken.
+     */
     public String updateFire() {
         if (player.getStepCount() % 5 == 0) {
             for (Room room : rooms) {
@@ -152,11 +189,14 @@ public class Game {
     public HighscoreDatabase getHighscoreDatabase() {
         return highscoreDB;
     }
-    
-    public void saveHighscore(){
+
+    // This method saves the players highscore.
+    public void saveHighscore() {
         highscoreDB.saveHighscore(player);
     }
-    public void highscoreUpdater(Player player){
+
+    // This method updates the players highscore.
+    public void highscoreUpdater(Player player) {
         player.getPlayerScore();
     }
 }
