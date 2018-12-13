@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 
-
+<!-- som jeg ser det er det, er dette FXML til highscores men er ikke sikker på om den faktisk bliver brugt?-->
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <TableView prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">

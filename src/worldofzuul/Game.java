@@ -20,7 +20,7 @@ public class Game {
             office, kitchen, entrance, conservatory, basement, garage, masterBedroom;
     private ArrayList<Room> rooms;
     private HighscoreDatabase highscoreDB;
-
+    
     public Game() {
         createRooms();
         createItems();
@@ -133,7 +133,9 @@ public class Game {
     public void createSmoke() {
         hallway.addSmoke(1);
         basement.addSmoke(1);
+        
     }
+   
 
     public Player getPlayer() {
         return player;

@@ -124,7 +124,7 @@ public class MainController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML// forstår ikke helt hvordan vores use funktion giver kommandoen til at forklare hvad den skal gøre. 
     private void btnUseEventHandler(ActionEvent event) {
         processCommand("use " + (textUI.getGame().getPlayer().getInventory() != null ? textUI.getGame().getPlayer().getInventory().getName() : ""));
 
@@ -133,9 +133,11 @@ public class MainController implements Initializable {
         } else if (!(textUI.getGame().getPlayer().getInventory().getImage().equals(imgInventory))) {
             imgInventory.setImage(textUI.getGame().getPlayer().getInventory().getImage().getImage());
         }
-
+        
         updateFireImgs();
+        // hvorfor skal updateSmoke være på useKnappen ? da man som jeg forstår det fjerner røgen ved at slukke ilden i det andet rum
         updateSmokeImgs();
+        // samme med drawHealth bar hvorfor tegne den når man trykker på use ? 
         drawHealthBar();
     }
 
@@ -158,10 +160,11 @@ public class MainController implements Initializable {
     }
 
     private void drawHealthBar() {
+        // de 1.5 er det længden ?
         greenbar.setWidth(textUI.getGame().getPlayer().getHealth() * 1.5);
         healthText.setText(Integer.toString(textUI.getGame().getPlayer().getHealth()) + " " + "HP");
     }
-
+// hvor bestemmer vi hvor vi skal placere i denne stepcounter text
     private void stepCounterText() {
         stepCounterText.setText("Step counter: " + Integer.toString(textUI.getGame().getPlayer().getStepCount()));
     }
@@ -185,7 +188,7 @@ public class MainController implements Initializable {
             disableGame();
             drawWinStage();
         }
-
+          //forstår ikke helt hvad changedRoom den retunere? 
         return changedRoom;
     }
 
@@ -370,7 +373,7 @@ public class MainController implements Initializable {
 
     private void updateSmokeImgs() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
-
+        //gætter på at den er copy/pastet og derfor står der ild istedet for røg? 
         //Alle imageViews af ild registreres og gemmes i nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
@@ -379,7 +382,9 @@ public class MainController implements Initializable {
                 }
             }
         }
-
+           // -||- røg istedet for ild ? 
+           
+           
         //Et antal der afhænger af ildens nuværende lvl fjernes.
         Smoke smokeInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getSmoke();
         if (smokeInCurrentRoom == null) {
@@ -416,6 +421,7 @@ public class MainController implements Initializable {
                 try {
                     start.start(new Stage());
                 } catch (Exception ex1) {
+                    //forstår ikke ex1 ? 
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
                 }
             }

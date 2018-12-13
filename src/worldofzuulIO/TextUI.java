@@ -111,6 +111,7 @@ public class TextUI {
     }
 
     private void printWithPacing(String textToPrint, TextArea txtArea) {
+        //hvordan bruger man new KeyFrame  ? det er noget med mængden af tid  ? 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(35), new printWithPacingEventHandler(textToPrint, txtArea)));
         timeline.setCycleCount(textToPrint.length());
         timeline.play();
@@ -118,6 +119,7 @@ public class TextUI {
 
     private boolean processGoRoom(Command command) {
         //SimpleBooleanProperty er en slags boolean der bare er en kompleks type. Andre variable der sættes lig med denne vil derfor henvise til den samme hukommelse.
+        //forstår ikke helt formålet med simpleBooleanProperty.
         SimpleBooleanProperty changedRoom = new SimpleBooleanProperty(false);
 
         //Udskriver resultatet af goRoom()-metoden.

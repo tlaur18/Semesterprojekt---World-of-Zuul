@@ -44,7 +44,7 @@ public class StartMenuController implements Initializable {
     private Button btnQuit;
     @FXML
     private ImageView logo;
-
+    //forstår ikke helt hvad der sker her ?  er det her hvor den laver unikke spil ?
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textUI = new TextUI(new Game(), new TextArea());
@@ -140,7 +140,7 @@ public class StartMenuController implements Initializable {
 
         VBox vbScore = new VBox();
         vbScore.setSpacing(10);
-
+        //forstår ikke helt vores placeringer for highscores, og kan heller ikke se hvor vi sortere dem
         HBox hbCenter = new HBox();
         hbCenter.getChildren().addAll(vbName, vbScore);
         hbCenter.setAlignment(Pos.CENTER);
@@ -165,7 +165,7 @@ public class StartMenuController implements Initializable {
 
         Scene scene = startMenuRoot.getScene();
         scene.setRoot(highscoreRoot);
-
+        
         List<Highscore> highscores = textUI.getGame().getHighscoreDatabase().getHighscores();
 
         for (Highscore hs : highscores) {

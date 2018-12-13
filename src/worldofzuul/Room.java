@@ -18,7 +18,7 @@ public class Room {
     private boolean isGameOver;
     private ImageView img;
     private boolean hasWater;
-
+    
     public Room(String name, String description, String imgURL) {
         this.name = name;
         this.description = description;
@@ -52,7 +52,7 @@ public class Room {
     public boolean getGameOver() {
         return isGameOver;
     }
-    
+    //neighbor  ?? 
     public void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
@@ -64,7 +64,7 @@ public class Room {
     public String getLongDescription() {
         return ("You are " + description + ".");
     }
-
+    // ? hvad var det nu det betød?
     public String getItemDescription() {
         return (!items.isEmpty() ? "Items: " + getItemsString() : "There are no items in this room.");
     }

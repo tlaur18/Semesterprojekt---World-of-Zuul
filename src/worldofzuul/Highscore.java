@@ -12,7 +12,7 @@ public class Highscore implements Comparable<Highscore> {
     public int getScore() {
         return score;
     }
-
+    // kan ikke lige gennemskue hvad der sker her..
     public Highscore() {
         this("*N/A*", 0);
     }
@@ -29,7 +29,8 @@ public class Highscore implements Comparable<Highscore> {
         string += score;
         return string;
     }
-
+    
+    //her sortetere vi også men hvad og hvor  ? 
     @Override
     public int compareTo(Highscore h) {
         return h.getScore() - score;

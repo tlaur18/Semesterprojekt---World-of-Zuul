@@ -48,6 +48,7 @@ public class HighscoreDatabase {
         sortHighscores();
         
         List<String> playerStrings = new ArrayList<>();
+        //forstår ikke helt hvad der bliver loopet og hvorfor
         for (Highscore highscores : highscores) {
             playerStrings.add(highscores.toString());
         }

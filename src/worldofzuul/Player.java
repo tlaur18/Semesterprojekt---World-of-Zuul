@@ -22,7 +22,7 @@ public class Player {
         currentRoom = room;
         this.playerName = playerName;
     }
-
+    // forstår jeg sku heller ikke lige..
     public Player(Room room) {
         this(room, "*N/A*");
     }
@@ -117,7 +117,7 @@ public class Player {
         }
 
         String itemName = command.getSecondWord();
-
+            //hvorfor navngiver vi det hele til uppercase, var det ikke kun relevant da vi selv skulle intaste det fra CLI?
         for (int i = 0; i < currentRoom.getItems().size(); i++) {
             if (itemName.toUpperCase().equals(currentRoom.getItems().get(i).getName().toUpperCase())) {
                 inventory = currentRoom.getItems().get(i);
@@ -125,7 +125,7 @@ public class Player {
                 return "\nYou pick up the " + itemName + ".";
             }
         }
-        return "";
+        return ""; //hvorfor returner vi "" ? 
     }
 
     public String dropItem() {
@@ -138,7 +138,7 @@ public class Player {
             return "\nYou do not carry anything to drop.";
         }
     }
-
+    //hvorfor har vi en remove item  ? yankiebar ? 
     public void removeItem() {
         if (inventory != null) {
             inventory = null;

@@ -12,11 +12,13 @@ public class Parser {
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
+    
+    //er ikke helt med hvad der sker her i tokanizeren  ? 
 
     public Command getCommand(String inputLine) {
         String word1 = null;
         String word2 = null;
-
+        
         Scanner tokenizer = new Scanner(inputLine);
         if (tokenizer.hasNext()) {
             word1 = tokenizer.next();
