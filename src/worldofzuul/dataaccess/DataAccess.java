@@ -1,10 +1,8 @@
-/**
- *
- * @author Alexander Nguyen, Jacob Wowk, Morten K. Jensen and Thomas S. Laursen
- * @version 2018.12.14
- * 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package worldofzuul.dataaccess;
 
 import java.io.File;
@@ -14,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ *
+ * @author Morten K. Jensen
+ */
 public class DataAccess {
 
     private final String path;
