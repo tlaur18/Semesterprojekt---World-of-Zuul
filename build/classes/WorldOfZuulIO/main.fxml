@@ -113,6 +113,12 @@
             </ImageView>
             <Button fx:id="isDeadBtnYes" layoutX="215.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Yes" visible="false" />
             <Button fx:id="isDeadBtnNo" layoutX="418.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="No" visible="false" />
+            <ImageView fx:id="imgBunny" fitHeight="223.0" fitWidth="128.0" layoutX="6.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imgs/brandmandKanin.png" />
+               </image>
+            </ImageView>
+            <TextArea fx:id="txtAreaNPC" editable="false" layoutX="122.0" layoutY="370.0" prefHeight="115.0" prefWidth="185.0" visible="false" />
          </children>
       </Pane>
    </center>

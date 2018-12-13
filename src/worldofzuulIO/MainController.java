@@ -88,6 +88,10 @@ public class MainController implements Initializable {
     private Button isDeadBtnYes;
     @FXML
     private Button isDeadBtnNo;
+    @FXML
+    private ImageView imgBunny;
+    @FXML
+    private TextArea txtAreaNPC;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,13 +100,12 @@ public class MainController implements Initializable {
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
         txtAreaOutput.appendText("\n");
-        
-//        textUI.setLblHelp(healthText);
     }
     
     public void setTextUI(TextUI textUI) {
         this.textUI = textUI;
         textUI.setOutput(txtAreaOutput);
+        textUI.setLblHelp(txtAreaNPC);
     }
 
     @FXML
@@ -162,6 +165,8 @@ public class MainController implements Initializable {
 
     @FXML
     private void btnHelpEventHandler(ActionEvent event) {
+        txtAreaNPC.setVisible(true);
+        txtAreaNPC.toFront();
         processCommand("help");
     }
 
@@ -203,6 +208,7 @@ public class MainController implements Initializable {
         setBackground();
         drawHealthBar();
         stepCounterText();
+        txtAreaNPC.setVisible(false);
     }
 
     private void printDirectionButtons() {
@@ -453,6 +459,13 @@ public class MainController implements Initializable {
                 }
             }
         });
+        
+        txtAreaNPC.clear();
+        txtAreaNPC.setVisible(true);
+        txtAreaNPC.setPrefWidth(150);
+        txtAreaNPC.appendText("Congratulations!");
+        txtAreaNPC.appendText("\nYou have successfully"
+                + "\ncompleted Fire Escape");
     }
 
     public void highscore() {

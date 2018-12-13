@@ -19,7 +19,7 @@ public class TextUI {
     private Game game;
     private Parser parser;
     private TextArea txtAreaOutput;
-    private Label lblHelp;
+    private TextArea txtAreaHelp;
 
     public TextUI(Game game, TextArea txtAreaOutput) {
         this.game = game;
@@ -27,8 +27,8 @@ public class TextUI {
         parser = new Parser();
     }
     
-    public void setLblHelp(Label lblHelp) {
-        this.lblHelp = lblHelp;
+    public void setLblHelp(TextArea txtAreaHelp) {
+        this.txtAreaHelp = txtAreaHelp;
     }
 
     public Game getGame() {
@@ -44,7 +44,7 @@ public class TextUI {
         boolean changedRoom = false;
 
         if (commandWord == CommandWord.HELP) {
-            printHelp(lblHelp);
+            printHelp();
         } else if (commandWord == CommandWord.GO) {
             changedRoom = processGoRoom(command);
         } else if (commandWord == CommandWord.TAKE) {
@@ -60,33 +60,47 @@ public class TextUI {
         return changedRoom;
     }
 
-    private void printHelp(Label lblHelp) {
+    private void printHelp() {
+        txtAreaHelp.clear();
         switch (game.getPlayer().getProgress()) {
             case 0:
-                txtAreaOutput.appendText("\nStart by exploring the house for a way out.");
-                txtAreaOutput.appendText("\nBe careful of smoke and fire as it will hurt you.");
+                txtAreaHelp.appendText("Start by exploring the house"
+                        + "\nfor a way out.");
+                txtAreaHelp.appendText("\nBe careful of smoke and fire"
+                        + "\nas it will hurt you.");
                 break;
             case 1:
-                txtAreaOutput.appendText("\nThe fire in the living room blocks the way.");
-                txtAreaOutput.appendText("\nMaybe you should try finding something that holds water.");
+                txtAreaHelp.appendText("The fire in the living room"
+                        + "\nblocks the way.");
+                txtAreaHelp.appendText("\nMaybe you should try finding"
+                        + "\nsomething that holds water.");
                 break;
             case 2:
-                txtAreaOutput.appendText("\nThe exit is still blocket by fire.");
-                txtAreaOutput.appendText("\nYou should find something to put it out.");
-                txtAreaOutput.appendText("\nBut be careful with strong fires.");
-                txtAreaOutput.appendText("\nNot all peices of fire equipment work equally well.");
+                txtAreaHelp.appendText("The exit is still blocket by fire.");
+                txtAreaHelp.appendText("\nYou should find something"
+                        + "\nto put it out.");
+                txtAreaHelp.appendText("\nBut be careful with big fires.");
+                txtAreaHelp.appendText("\nNot all pieces of fire"
+                        + "\nequipment work equally well.");
                 break;
             case 3:
-                txtAreaOutput.appendText("\nExplore further but there might still be fire somwhere inside the house.");
-                txtAreaOutput.appendText("\nBe sure to bring any unused fire equipment you find.");
+                txtAreaHelp.appendText("Explore further but there"
+                        + "\nmight still be fire"
+                        + "\nsomwhere inside the house.");
+                txtAreaHelp.appendText("\nBe sure to bring any unused"
+                        + "\nfire equipment you find.");
                 break;
             case 4:
-                txtAreaOutput.appendText("\nThe fire seems to be under control.");
-                txtAreaOutput.appendText("\nHowever, you still need to find your way out because of the smoke.");
+                txtAreaHelp.appendText("The fire is under control.");
+                txtAreaHelp.appendText("\nHowever, you still need to find"
+                        + "\nyour way out because of"
+                        + "\nthe smoke.");
                 break;
             case 5:
-                txtAreaOutput.appendText("\nThe door to outside seems to be locked.");
-                txtAreaOutput.appendText("\nI bet a key is stored somewhere nearby.");
+                txtAreaHelp.appendText("The door to outside seems"
+                        + "\nto be locked.");
+                txtAreaHelp.appendText("\nI bet a key is stored somewhere"
+                        + "\nnearby.");
                 break;
         }
     }
