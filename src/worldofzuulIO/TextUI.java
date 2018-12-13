@@ -43,9 +43,7 @@ public class TextUI {
         CommandWord commandWord = command.getCommandWord();
         boolean changedRoom = false;
 
-        if (commandWord == CommandWord.HELP) {
-            printHelp();
-        } else if (commandWord == CommandWord.GO) {
+        if (commandWord == CommandWord.GO) {
             changedRoom = processGoRoom(command);
         } else if (commandWord == CommandWord.TAKE) {
             processTakeItem(command);
@@ -60,7 +58,7 @@ public class TextUI {
         return changedRoom;
     }
 
-    private void printHelp() {
+    public void printHelp() {
         txtAreaHelp.clear();
         switch (game.getPlayer().getProgress()) {
             case 0:

@@ -174,7 +174,7 @@ public class MainController implements Initializable {
     private void btnHelpEventHandler(ActionEvent event) {
         txtAreaNPC.setVisible(true);
         txtAreaNPC.toFront();
-        processCommand("help");
+        textUI.printHelp();
     }
 
     private boolean processCommand(String inputLine) {
@@ -286,7 +286,6 @@ public class MainController implements Initializable {
     }
 
     private void disableGame() {
-        //root.setDisable(true);
         btnNorth.setDisable(true);
         btnWest.setDisable(true);
         btnSouth.setDisable(true);
