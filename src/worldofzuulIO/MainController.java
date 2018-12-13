@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import items.Item;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
 import worldofzuul.Parser;
 import worldofzuul.Room;
 import worldofzuul.Smoke;
@@ -160,6 +162,9 @@ public class MainController implements Initializable {
     private void drawHealthBar() {
         greenbar.setWidth(textUI.getGame().getPlayer().getHealth() * 1.5);
         healthText.setText(Integer.toString(textUI.getGame().getPlayer().getHealth()) + " " + "HP");
+        redbar.toFront();
+        greenbar.toFront();
+        healthText.toFront();
     }
 
     private void stepCounterText() {
@@ -177,7 +182,9 @@ public class MainController implements Initializable {
         if (textUI.getGame().getPlayer().isDead()) {
             highscore();
             disableGame();
+            redrawRoom();
             drawDeadStage();
+            return false;
         }
 
         if (textUI.getGame().getPlayer().hasWon()) {
@@ -193,10 +200,10 @@ public class MainController implements Initializable {
         removeItems(textUI.getGame().getPlayer().getPreviousRoom());
         removeFire();
         removeSmoke();
-        printDirectionButtons();
         printItems();
         printFire();
         printSmoke();
+        printDirectionButtons();
         setBackground();
         drawHealthBar();
         stepCounterText();
@@ -371,22 +378,12 @@ public class MainController implements Initializable {
     private void updateSmokeImgs() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
-        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        //Alle imageViews af røg registreres og gemmes i nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 if (((ImageView) node).getImage().equals(Smoke.IMAGE_SMOKE)) {
                     nodesToRemove.add(node);
                 }
-            }
-        }
-
-        //Et antal der afhænger af ildens nuværende lvl fjernes.
-        Smoke smokeInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getSmoke();
-        if (smokeInCurrentRoom == null) {
-            paneRoom.getChildren().removeAll(nodesToRemove);
-        } else {
-            for (int i = 0; i < nodesToRemove.size() - smokeInCurrentRoom.getLvl() * 3; i++) {
-                paneRoom.getChildren().remove(nodesToRemove.get(i));
             }
         }
     }
@@ -398,6 +395,7 @@ public class MainController implements Initializable {
         isDead.setVisible(true);
 
         isDeadBtnNo.setVisible(true);
+        isDeadBtnNo.toFront();
         isDeadBtnNo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -406,6 +404,7 @@ public class MainController implements Initializable {
         });
 
         isDeadBtnYes.setVisible(true);
+        isDeadBtnYes.toFront();
         isDeadBtnYes.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -433,7 +432,15 @@ public class MainController implements Initializable {
         hasWonBtnOk.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                System.exit(0);
+                Stage primaryStage = (Stage) root.getScene().getWindow();
+                primaryStage.close();
+
+                Start start = new Start();
+                try {
+                    start.start(new Stage());
+                } catch (Exception ex1) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }
         });
     }
