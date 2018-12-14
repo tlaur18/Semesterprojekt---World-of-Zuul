@@ -24,8 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
-
-    private Parser parser;
+    
     private Player player;
     private Item bucket, toothbrush, smallFireExtinguisher, bigFireExtinguisher, towel, doll, key, football, yankieBar, smallFireExtinguisher2;
     private Room bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
@@ -43,7 +42,6 @@ public class Game {
         createFire();
         createSmoke();
         player = new Player(bedroom);
-        parser = new Parser();
         rooms = new ArrayList(Arrays.asList(bedroom, hallway, sistersRoom, livingRoom, wc, wc2, outside, window,
                 office, kitchen, entrance, conservatory, basement, garage, masterBedroom));
         highscoreDB = new HighscoreDatabase();
@@ -163,7 +161,7 @@ public class Game {
     }
 
     // This method is used to add smoke to a specific room.
-    public void createSmoke() {
+    private void createSmoke() {
         hallway.addSmoke(1);
         basement.addSmoke(1);
     }
