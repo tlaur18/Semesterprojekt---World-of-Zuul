@@ -1,7 +1,5 @@
-asd,6352
-Nånå,6352
-asd,6352
-asd,0
-Jojo,0
-asd,0
-sadd,0
+﻿Alexander,6352
+Jacob,6352
+Morten,6352
+Thomas,6352
+Søren Ryge,5556

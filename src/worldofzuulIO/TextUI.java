@@ -195,7 +195,7 @@ public class TextUI {
     */
     private void printWithPacing(String textToPrint, TextArea txtArea) {
         //Timeline is created. Contains a KeyFrame with a delay of 35 ms (Delay between each character) and an eventhandler.
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(35), new printWithPacingEventHandler(textToPrint, txtArea)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(35), new PrintWithPacingEventHandler(textToPrint, txtArea)));
         
         //Sets the amount of cycles of the eventhandler's 'handle'-method. In this case, the length of the message.
         timeline.setCycleCount(textToPrint.length());
