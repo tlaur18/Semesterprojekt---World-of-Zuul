@@ -127,7 +127,7 @@ public class MainController implements Initializable {
         printItems();
     }
     /*
-    Uses the buttons places north to set the proccessCommand to "go north"
+    Uses the button placed north to set the proccessCommand to "go north"
     redraws the room according to the new room.
     */
     @FXML
@@ -137,7 +137,7 @@ public class MainController implements Initializable {
         }
     }
     /*
-    Uses the buttons places north to set the proccessCommand to "go west"
+    Uses the button placed west to set the proccessCommand to "go west"
     redraws the room according to the new room.
     */
     @FXML
@@ -147,7 +147,7 @@ public class MainController implements Initializable {
         }
     }
     /*
-    Uses the buttons places north to set the proccessCommand to "go south"
+    Uses the button placed south to set the proccessCommand to "go south"
     redraws the room according to the new room.
     */
     @FXML
@@ -157,7 +157,7 @@ public class MainController implements Initializable {
         }
     }
     /*
-    Uses the buttons places north to set the proccessCommand to "go east"
+    Uses the button placed east to set the proccessCommand to "go east"
     redraws the room according to the new room.
     */
     @FXML
@@ -218,7 +218,7 @@ public class MainController implements Initializable {
     
     /*
     Shows the TextArea next to the NPC.
-    places the textArea on front.
+    places the textArea to front.
     Prints the help strings for the NPC
     */
     @FXML
@@ -230,13 +230,13 @@ public class MainController implements Initializable {
     
     /*
     Returns a boolean to tell whether the room changed or not.
-    Uses a parser to parse the commands to a command.
+    Uses a parser to parse the String to a Command.
     Changes the text of the current room label to the new room name
     Updates Highscore everytime the room is changed.
     if the player died, it updates and saves the highscore, disables the game,
-    redraws the room, draws the dead stage, and returns a false value
-    if the player won, it updates and saves the highscore, disavbles the game,
-    and draws the win stage, and returns false.
+    redraws the room, draws the deadStage, and returns a false value
+    if the player won, it updates and saves the highscore, disables the game,
+    and draws the winStage, and returns false.
     */
     private boolean processCommand(String inputLine) {
         boolean changedRoom = false;
@@ -268,7 +268,7 @@ public class MainController implements Initializable {
         return changedRoom;
     }
     /*
-    removes the Items, fire, and smoke, and print them all again, to get an 
+    Removes the Items, fire, and smoke, and prints them all again, to get an 
     updated view.
     Prints the buttons, sets the background, draws the healthbar and stepcounter
     It hides the NPC's textArea.
@@ -324,8 +324,8 @@ public class MainController implements Initializable {
     /*
     Uses an for each loop to get all the items and their images, for the current
     room.
-    When the image is clicked and the inventory is empty, the iamge of the item
-    is places in the Inventory, and the processCommand gets the "take" command.
+    When the image is clicked and the inventory is empty, the image of the item
+    is places in the inventory, and the processCommand gets the "take" command.
     
     */
     private void printItems() {
@@ -421,7 +421,7 @@ public class MainController implements Initializable {
     private void removeFire() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
-        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        ///Every ImageView of Fire is stored in nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
@@ -434,11 +434,11 @@ public class MainController implements Initializable {
 
     }
 
-    //Method to control wich ImageViews are removes when the fire is gone
+    //Method to control which ImageViews are removes when the fire is gone
     private void updateFireImgs() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
         
-        //All imageViews of fire registres and saves in nodesToRemove
+        ///Every ImageView of Fire is stored in nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 if (((ImageView) node).getImage().equals(Fire.IMAGE_FIRE)) {
@@ -449,9 +449,8 @@ public class MainController implements Initializable {
 
         /*
         Removes fire according to the extinguished fire in the current room, 
-        and updates the players progress if the player manage to completely 
+        and updates the players progress if the player manages to completely 
         remove the fire.
-        
         */
         Fire fireInCurrentRoom = textUI.getGame().getPlayer().getCurrentRoom().getFire();
         if (fireInCurrentRoom == null) {
@@ -466,7 +465,7 @@ public class MainController implements Initializable {
         }
     }
     /*
-    Prints the imageViews of the smokes if the room contains smoke.
+    Prints the imageViews of the smoke if the room contains smoke.
     */
     private void printSmoke() {
         Smoke smoke = textUI.getGame().getPlayer().getCurrentRoom().getSmoke();
@@ -489,7 +488,7 @@ public class MainController implements Initializable {
     private void removeSmoke() {
         ArrayList<Node> nodesToRemove = new ArrayList<>();
 
-        //Alle imageViews af ild registreres og gemmes i nodesToRemove
+        ///Every ImageView of Smoke is stored in nodesToRemove
         for (Node node : paneRoom.getChildren()) {
             if (node instanceof ImageView) {
                 if (((ImageView) node).getImage().equals(Smoke.IMAGE_SMOKE)) {
@@ -501,7 +500,7 @@ public class MainController implements Initializable {
         paneRoom.getChildren().removeAll(nodesToRemove);
     }
     /*
-    Draws the healthbar, accordint to the players health multiplied with 1.5, 
+    Draws the healthbar, according to the player's health multiplied with 1.5, 
     to set the width of the green bar.
     The Health text gets the players health and places it with a string.
     places the red and green bar at the front together with the health text.
@@ -520,7 +519,7 @@ public class MainController implements Initializable {
         stepCounterText.setText("Step counter: " + Integer.toString(textUI.getGame().getPlayer().getStepCount()));
     }
     /*
-    Disables the Items, and changes the caracter to the deead caracter. 
+    Disables the Items, and changes the caracter to the dead character. 
     Creates the button for the player to know he is dead, and asks the player
     to try agian, with yes and no buttons.
     if the Player clicks yes, a new stage is set, and start is runned again.
