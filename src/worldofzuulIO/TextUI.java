@@ -12,7 +12,6 @@
 package worldofzuulIO;
 
 import exceptions.NameInputException;
-import java.util.List;
 import worldofzuul.Command;
 import worldofzuul.CommandWord;
 import worldofzuul.Game;
@@ -21,7 +20,6 @@ import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
-import worldofzuul.Highscore;
 
 public class TextUI {
 
@@ -33,9 +31,8 @@ public class TextUI {
     * The constructor receives a TextArea. It gets this from the controller when instantiated.
     * 'textAreaOutput' is where the primary text output to the user will happen.
     */
-    public TextUI(Game game, TextArea txtAreaOutput) {
-        this.game = game;
-        this.txtAreaOutput = txtAreaOutput;
+    public TextUI() {
+        this.game = new Game();
     }
     
     /*
