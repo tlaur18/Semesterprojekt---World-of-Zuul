@@ -1,3 +1,19 @@
+/**
+ * 
+ * This class is the controller for the Start Menu. Everything in the StartMenu.fxml
+ * is drawn in this class. This class also contains the scene where you get
+ * the players name and the scene where it prints the welcome text.
+ * The Start Menu contains three different buttons: Start, Highscore and Quit.
+ * Start changes the scenes, but not actually starting the game yet. The game
+ * starts after you click 'Continue' at the welcome text scene.
+ * Highscore shows the highscore list.
+ * Quit quits the game.
+ * 
+ * @author Alexander Nguyen, Jacob Wowk, Morten K. Jensen and Thomas S. Laursen
+ * @version 2018.12.14
+ * 
+ */
+
 package worldofzuulIO;
 
 import exceptions.NameInputException;
@@ -14,9 +30,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -49,7 +63,16 @@ public class StartMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         textUI = new TextUI(new Game(), new TextArea());
     }
-
+    
+    /*
+    This is a onAction method for the 'Start' button in the start menu.
+    This onAction method contains two different scenes. One of them is the
+    scene where you get the players name and the other one is the welcome text.
+    The method also contains two other button onActions inside. The first is the
+    'Ok' button that changes scene to the welcome text scene. The second is
+    the 'Continue' button in the welcome text scene that loads another FXML file
+    and changes the scenes root to the main.fxml file.
+    */
     @FXML
     private void btnStartEventHandler(ActionEvent e) {
         Label lblName = new Label();
@@ -133,6 +156,11 @@ public class StartMenuController implements Initializable {
 
     }
 
+    /*
+    This is a onAction method for the 'Highscore' button that creates another
+    scene and changes from the start menu root to the highscore root, so the
+    scene changes.
+    */
     @FXML
     private void btnHighscoreEventHandler(ActionEvent event) {
         VBox vbName = new VBox();
@@ -187,6 +215,7 @@ public class StartMenuController implements Initializable {
         });
     }
 
+    // OnAction method for the 'Quit' button in the start menu that quits the game.
     @FXML
     public void btnQuitEventHandler(ActionEvent event) {
         System.exit(0);
