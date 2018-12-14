@@ -9,7 +9,6 @@ import worldofzuul.Parser;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 import worldofzuul.Highscore;

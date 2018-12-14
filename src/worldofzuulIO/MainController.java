@@ -22,8 +22,6 @@ import javafx.stage.Stage;
 import worldofzuul.Command;
 import worldofzuul.Fire;
 import items.Item;
-import java.io.IOException;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import worldofzuul.Parser;

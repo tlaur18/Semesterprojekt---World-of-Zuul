@@ -13,7 +13,6 @@
  * 
  */
  
-
 package worldofzuul;
 
 import javafx.scene.image.Image;

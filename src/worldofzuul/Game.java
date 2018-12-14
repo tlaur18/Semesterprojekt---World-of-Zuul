@@ -63,12 +63,12 @@ public class Game {
         sistersRoom = new Room("Sisters Room", "in your sister's room", "Imgs/sistersRoom.png");
         livingRoom = new Room("Living Room", "in the living room", "Imgs/livingroom.png");
         wc = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
-        wc2 = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
+        wc2 = new Room("Toilet", "on the toilet", "Imgs/bathroom2.png");
         outside = new Room("Outside", "outside", "Imgs/outside.png");
         window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", "Imgs/bedroom.png");
         office = new Room("Office", "in the office", "Imgs/office.png");
         kitchen = new Room("Kitchen", "in the kitchen", "Imgs/kitchen.png");
-        entrance = new Room("Entrance", "in the entrace", "Imgs/basement.png");
+        entrance = new Room("Entrance", "in the entrace", "Imgs/entrance.png");
         conservatory = new Room("Conservatory", "in the conservatory", "Imgs/conservatory.png");
         basement = new Room("Basement", "in the basement", "Imgs/basement.png");
         garage = new Room("Garage", "in the garage", "Imgs/garage.png");
