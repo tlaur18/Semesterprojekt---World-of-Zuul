@@ -1,6 +1,6 @@
 /**
  *
- * The Start class contains the main method which is run when the programme is launched.
+ * The Start class contains the main method which will run when the program is launched.
  *
  * @author Alexander Nguyen, Jacob Wowk, Morten K. Jensen, Thomas S. Laursen
  * @version 2018.12.14

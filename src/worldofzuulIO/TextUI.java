@@ -145,7 +145,7 @@ public class TextUI {
 
         welcomeText += "\n";
         welcomeText += "\n\tBEEEP! BEEEP! BEEEP!... A loud noise woke you up.";
-        welcomeText += "\n\tYou notice the smell and see a thin layer of smoke in you room.";
+        welcomeText += "\n\tYou notice the smell and see a thin layer of smoke in your room.";
         welcomeText += "\n\tThe first thing you do is to take your cellphone and call for emergency.";
         welcomeText += "\n\tThe number is 1-1-2.";
 
@@ -155,12 +155,12 @@ public class TextUI {
 
         welcomeText += "\n";
         welcomeText += "\nYou:";
-        welcomeText += "\n- There is smoke in the room and I am all alone in the house.";
+        welcomeText += "\n- There is smoke in my room and I am all alone in the house.";
 
         welcomeText += "\n";
         welcomeText += "\n112:";
-        welcomeText += "\n- Okay, just stay calm and lets get you to safety.";
-        welcomeText += "\n- It doesn't help to panic.";
+        welcomeText += "\n- Okay, just stay calm and let us get you to safety.";
+        welcomeText += "\n- It does not help to panic.";
         welcomeText += "\n- What is your name?";
 
         welcomeText += "\n";
@@ -169,9 +169,9 @@ public class TextUI {
 
         welcomeText += "\n";
         welcomeText += "\n112:";
-        welcomeText += "\n- You need to get to safety and thats your primary objective.";
+        welcomeText += "\n- You need to get to safety and that is your primary objective.";
 
-        welcomeText += "\n- You will most likely encoutner some obstacles on your way out.";
+        welcomeText += "\n- You will most likely encounter some obstacles on your way out.";
 
         welcomeText += "\n- If you have any questions just ask for '" + CommandWord.HELP + "'.";
 

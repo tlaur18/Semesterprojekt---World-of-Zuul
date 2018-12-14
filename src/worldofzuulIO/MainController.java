@@ -39,7 +39,7 @@ import worldofzuul.Smoke;
 public class MainController implements Initializable {
 
     /*
-    Important attribut for setting the TextUI wich is used to access the 
+    Important attribute for setting the TextUI which is used to access the 
     Domain layer.
     */
     private TextUI textUI;
