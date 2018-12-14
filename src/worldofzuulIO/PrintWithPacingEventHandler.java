@@ -17,7 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextArea;
 
-public class printWithPacingEventHandler implements EventHandler<ActionEvent> {
+public class PrintWithPacingEventHandler implements EventHandler<ActionEvent> {
 
     private TextArea txtAreaOutput;
     private char[] charsToPrint;
@@ -29,7 +29,7 @@ public class printWithPacingEventHandler implements EventHandler<ActionEvent> {
     * 'index' is initialized. Used to keep track of amount of executed cycles.
     * TextArea is where the text is to be printed.
     */
-    public printWithPacingEventHandler(String textToPrint, TextArea txtAreaOutput) {
+    public PrintWithPacingEventHandler(String textToPrint, TextArea txtAreaOutput) {
         charsToPrint = textToPrint.toCharArray();
         index = 0;
         this.txtAreaOutput = txtAreaOutput;
