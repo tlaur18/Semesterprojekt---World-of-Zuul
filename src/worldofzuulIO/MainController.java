@@ -123,7 +123,7 @@ public class MainController implements Initializable {
     public void setTextUI(TextUI textUI) {
         this.textUI = textUI;
         textUI.setOutput(txtAreaOutput);
-        textUI.setLblHelp(txtAreaNPC);
+        textUI.setTextAreaHelp(txtAreaNPC);
         printItems();
     }
     /*

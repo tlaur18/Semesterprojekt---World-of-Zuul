@@ -39,7 +39,7 @@ public class TextUI {
     * Recieves a TextArea from a controller and assigns the variable 'txtAreaHelp' to it.
     * This is where the helping text is printed to the user.
     */
-    public void setLblHelp(TextArea txtAreaHelp) {
+    public void setTextAreaHelp(TextArea txtAreaHelp) {
         this.txtAreaHelp = txtAreaHelp;
     }
 
