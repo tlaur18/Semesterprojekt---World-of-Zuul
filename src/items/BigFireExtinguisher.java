@@ -1,9 +1,9 @@
 /*
- * this class is a specific item and is a sub-class of useable item.
-
+ * This class is a specific Item and is a sub-class of UseableItem.
+ * 
  * @author Alexander Nguyen, Jacob Wowk, Morten K. Jensen and Thomas S. Laursen
  * @version 2018.12.14
-
+ * 
  */
 package items;
 
@@ -16,8 +16,10 @@ public class BigFireExtinguisher extends UseableItem {
     private int lvl;
     private int itemScore;
     /* 
-        the contructor is a extend of useableItems and has been given addional attributes
-        isEmpty is set to not be empty and there for i can be used.
+        The contructor takes the regular Item attributes, its additional attributes
+        are initialized.
+        isEmpty is set to false. It is used to determine if the FireExtinguisher
+        can be used by the player.
         lvl is set to 3 so it can handle the bigger fire in the kitchen.
         itemScore is the point given to your score if used in the right situration
     
@@ -29,21 +31,19 @@ public class BigFireExtinguisher extends UseableItem {
         itemScore = 700;
     }
     /*
-        here we override the abstract method in useableItem, at give it the functions that is needed. 
-        we initialize the OutputText, and make a if statement and another if statemanet inside it. 
+        Overrriding the abstract method in UseableItem. 
+        Returns the string describing the outcome of the if statements. 
     */
     @Override
     public String use(Player player) {
         String outputText;
         /*
-            if the BigFireExtinguisher's isEmpty is false, it calls for another if statement that 
-            checks if the player is inside a room where there is a fire. 
-            if there is it will put the fire out and set your isEmpty to true.
-            if you aint in a room with fire, you will set your isEmpty to true and you will get 
-            negative itemScore for wasting it.
-            if you know use it printout is is empty.
+            If the BigFireExtinguisher's attribute isEmpty is false, it calls for another if statement that 
+            checks if the player is inside a room containing fire. 
+            If there is, it will put the out fire and set isEmpty to true.
+            If the player is not in a room with fire, isEmpty is set to true 
+            and the player will get negative itemScore for wasting it.
             
-        
         */
         if (!isEmpty) {
             if (player.getCurrentRoom().getFire() != null) {
