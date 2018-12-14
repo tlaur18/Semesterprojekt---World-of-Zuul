@@ -43,6 +43,7 @@ public class Bucket extends UseableItem {
     @Override
     public String use(Player player) {
         String outputText = "";
+        Image emptyBucket = new Image("Imgs/EmptyBucket.png");
         Image filledBucket = new Image("Imgs/FilledBucket.png");
         Image meltedBucket = new Image("Imgs/MeltedBucket.png");
 
@@ -61,6 +62,7 @@ public class Bucket extends UseableItem {
             } else if (player.getCurrentRoom().getFire() == null) {  // This else-if-statement is entered when the player uses a bucket in a room withot water or fire.
                 if (isFilled) {
                     outputText = "\nYou emptied the bucket in a room with no fire!";
+                    getImage().setImage(emptyBucket);
                     isFilled = false;
                     player.updateHighscore(-500);
                 } else {
