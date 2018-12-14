@@ -1,3 +1,14 @@
+/**
+ *
+ * TextUI handles every piece of text printet to the user.
+ * Commands from the user are also processed here.
+ * TextUI is the basis of the application. The instans of Game is contained here.
+ * The TextUI is instantiated as the StartMenuController controller initializes.
+ *
+ * @author Alexander Nguyen, Jacob Wowk, Morten K. Jensen, Thomas S. Laursen
+ * @version 2018.12.14
+ *
+ */
 package worldofzuulIO;
 
 import exceptions.NameInputException;
@@ -5,11 +16,9 @@ import java.util.List;
 import worldofzuul.Command;
 import worldofzuul.CommandWord;
 import worldofzuul.Game;
-import worldofzuul.Parser;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
 import worldofzuul.Highscore;
@@ -17,16 +26,22 @@ import worldofzuul.Highscore;
 public class TextUI {
 
     private Game game;
-    private Parser parser;
     private TextArea txtAreaOutput;
     private TextArea txtAreaHelp;
 
+    /*
+    * The constructor receives a TextArea. It gets this from the controller when instantiated.
+    * 'textAreaOutput' is where the primary text output to the user will happen.
+    */
     public TextUI(Game game, TextArea txtAreaOutput) {
         this.game = game;
         this.txtAreaOutput = txtAreaOutput;
-        parser = new Parser();
     }
     
+    /*
+    * Recieves a TextArea from a controller and assigns the variable 'txtAreaHelp' to it.
+    * This is where the helping text is printed to the user.
+    */
     public void setLblHelp(TextArea txtAreaHelp) {
         this.txtAreaHelp = txtAreaHelp;
     }
@@ -35,14 +50,26 @@ public class TextUI {
         return game;
     }
     
+    /*
+    * Sets the main TextArea for printing messages to the user.
+    * Called from the main controller that contains this TextArea.
+    */
     public void setOutput(TextArea txtAreaOutput) {
         this.txtAreaOutput = txtAreaOutput;
     }
 
+    /*
+    * Processes the incoming user commands.
+    * The Controller calls this methods with different commands depending on the buttons pressed by the user.
+    * Returns a boolean value that states if the command caused the player to change room.
+    */
     public boolean processCommand(Command command) {
         CommandWord commandWord = command.getCommandWord();
         boolean changedRoom = false;
-
+        
+        /*
+        * Calls the appropriate methods according to the the recived command.
+        */
         if (commandWord == CommandWord.GO) {
             changedRoom = processGoRoom(command);
         } else if (commandWord == CommandWord.TAKE) {
@@ -58,6 +85,11 @@ public class TextUI {
         return changedRoom;
     }
 
+    /*
+    * Decides what help-text to print to the user according to the players progress in the game.
+    * The progress is determined by how far into the game the player is (e.g. how much fire the player has put out).
+    * Called when 'processCommand' receives the command 'help' (When pressing the button 'help').
+    */
     public void printHelp() {
         txtAreaHelp.clear();
         switch (game.getPlayer().getProgress()) {
@@ -103,7 +135,13 @@ public class TextUI {
         }
     }
 
+    /*
+    * Prints the welcoming text in a TextArea given in the parametres.
+    * Called in StartMenuController after the player enters a username.
+    * TextArea is not the main output TextArea as this intro has an entire scene for itself.
+    */
     public void printWelcome(TextArea txtArea) {
+        //Starts by constructing the entire text as one string; 'welcomeText'.
         String welcomeText = "";
 
         welcomeText += "Welcome to Fire Escape!";
@@ -141,47 +179,107 @@ public class TextUI {
         welcomeText += "\n- If you have any questions just ask for '" + CommandWord.HELP + "'.";
 
         welcomeText += "\n";
-
+        
+        /*
+        * Calls the method 'printWithPacing' and gives the String and the TextArea as arguments.
+        * Prints 'welcomeText' with small delays after each character.
+        */
         printWithPacing(welcomeText, txtArea);
     }
 
+    /*
+    * This method takes a String and a TextArea as arguments.
+    * The String is the text to be printed.
+    * The TextArea is where it should be printed.
+    * The text is printed with delays between every character.
+    * Makes the text appear flowing and easier to read.
+    * Inspiration drawn from following site:
+    * https://stackoverflow.com/questions/9966136/javafx-periodic-background-task/9966213#9966213
+    */
     private void printWithPacing(String textToPrint, TextArea txtArea) {
+        //Timeline is created. Contains a KeyFrame with a delay of 35 ms (Delay between each character) and an eventhandler.
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(35), new printWithPacingEventHandler(textToPrint, txtArea)));
+        
+        //Sets the amount of cycles of the eventhandler's 'handle'-method. In this case, the length of the message.
         timeline.setCycleCount(textToPrint.length());
+        
+        //Begins the printing of the message ('handle'-method in event-handler).
         timeline.play();
     }
 
+    /*
+    * Decides how the game behaves when the Player tries to change Room.
+    * Called when 'processCommand' receives the command 'go ####' (When pressing any of the direction buttons).
+    * Returns a boolean value that indicates whether the player changed Room or not.
+    */
     private boolean processGoRoom(Command command) {
-        //SimpleBooleanProperty er en slags boolean der bare er en kompleks type. Andre variable der sættes lig med denne vil derfor henvise til den samme hukommelse.
+        /*
+        * A SimpleBooleanProperty is created. This acts as a complex type
+        * And allows the game to pass it through a method where it can be changed.
+        */
         SimpleBooleanProperty changedRoom = new SimpleBooleanProperty(false);
-
-        //Udskriver resultatet af goRoom()-metoden.
+        
+        /*
+        * The 'goRoom'-method in the 'Player'-class is called with the
+        * input Command and the SimpleBooleanProperty passed with it.
+        * This method returns a String describing the outcome of the method.
+        * This String is printed in the main TextAreaOutput.
+        * The SimpleBooleanProperty might be changed inside this method
+        * depending on whether the player changed room or not.
+        */
         txtAreaOutput.appendText(game.getPlayer().goRoom(command, changedRoom));
-
+        
+        /*
+        * Only if the player chanegd Room shall the method 'updateFire' in the Game be called.
+        * This method returns a String describing the outcome. This is printed.
+        */
         if (changedRoom.get()) {
             txtAreaOutput.appendText(game.updateFire());
-
-            //Tjekker om spilleren går ind i et rum der forsager øjeblikkelig nederlag
+            
+            /*
+            * Kills the Player if he entered a Room that caused him to lose instantly.
+            */
             if (game.getPlayer().getCurrentRoom().getGameOver()) {
                 game.getPlayer().setHealth(0);
             }
-
-            //Sørger for at spilleren mister liv af ild.
+            
+            /*
+            * Makes sure the Player gets damaged by Smoke and Fire.
+            * These methods returns a boolean value depending on the outcome.
+            * Text is printed to the user depending on the outcome.
+            */
             txtAreaOutput.appendText((game.getPlayer().checkForFireDamage() ? "\nYou have been damaged by the fire" : ""));
             txtAreaOutput.appendText((game.getPlayer().checkForSmokeDamage() ? "\nYou are slowly being suffocated by the smoke" : ""));
         }
 
+        /*
+        * Returns the value of the SimpleBooleanProperty 'changedRoom' to 'processCommand'.
+        */
         return changedRoom.get();
     }
 
+    /*
+    * Calls the method 'takeItem' on the Player.
+    * Called when 'processCommand' receives the command 'take ####' (When clicking on Items).
+    * 'takeItem' returns a String describing the outcome. This is printed.
+    */
     private void processTakeItem(Command command) {
         txtAreaOutput.appendText(game.getPlayer().takeItem(command));
     }
 
+    /*
+    * Calls the method 'dropItem' on the Player.
+    * Called when 'processCommand' receives the command 'drop' (When pressing the 'drop' button).
+    * 'dropItem' returns a String describing the outcome. This is printed.
+    */
     private void processDropItem(Command command) {
         txtAreaOutput.appendText(game.getPlayer().dropItem());
     }
 
+    /*
+    * Tells the player what Item he is carrying and prints its description.
+    * Called when 'processCommand' receives the command 'inspect' (When pressing the 'inspect' button).
+    */
     private void processInspectInventory() {
         if (game.getPlayer().getInventory() != null) {
             txtAreaOutput.appendText("\nYou are carrying a " + game.getPlayer().getInventory().getName() + ".");
@@ -191,20 +289,20 @@ public class TextUI {
         }
     }
 
+    /*
+    * Calls the method 'useItems' on the Player.
+    * Called when 'processCommand' receives the command 'use' (When pressing the 'use' button).
+    * 'useItem' returns a String describing the outcome. This is printed.
+    */
     private void processUseItem() {
         txtAreaOutput.appendText(game.getPlayer().useItem());
     }
     
-    public void printHighscore(TextArea txtArea) {
-        String highscoretxt = "";
-        List<Highscore> highscores = game.getHighscoreDatabase().getHighscores();
-        for (Highscore highscore : highscores) {
-            highscoretxt += "Name: " + highscore.getName() + "\t\t";
-            highscoretxt += " Score: " + highscore.getScore() + "\n";
-        }
-        printWithPacing(highscoretxt, txtArea);
-    }
-
+    /*
+    * Used to determine if the username inputted from the user is valid.
+    * Throws the custom NameInputException when username contains commas or is empty.
+    * Called in StartMenuController when the user types a username.
+    */
     public void validName(String str) throws NameInputException {
         char[] charArray = str.toCharArray();
         for (char c : charArray) {
