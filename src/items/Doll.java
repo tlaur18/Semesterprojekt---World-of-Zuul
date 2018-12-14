@@ -11,6 +11,7 @@ import worldofzuul.Player;
 
 public class Doll extends UseableItem {
     private int itemScore;
+    private boolean isUsed;
 
     /** The contructor takes the regular Item attributes, its additional attributes
      *  are initialized.
@@ -19,19 +20,28 @@ public class Doll extends UseableItem {
     public Doll(String name, String description, String imgURL, int imgX, int imgY) {
         super(name, description, imgURL, imgX, imgY);
         itemScore = 800;
+        isUsed = false;
     }
      /*
         Overrriding the abstract method in UseableItem. 
-        Returns the string, when the item is used. 
+        Returns the string, when the item is used.
+        isUsed makes sure the item can only be used once
     */
     @Override
     public String use(Player player) {
-        String outputText = "";
         
-        outputText = "\nYou play with the doll, but quickly get bored.";
+        String outputText = "";
+        if (!(isUsed)){
+            
+        outputText = "\nYou play with the doll, and its head fell of.";
         outputText += "\nYou realize that you probably should focus on getting to safety.";
         player.updateHighscore(itemScore);
+        isUsed = true;
         
+        }
+        else {
+            outputText = "The doll is worth nothing now";
+        }
         return outputText;
     }
     public int getItemScore(){
