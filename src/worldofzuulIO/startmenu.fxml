@@ -36,7 +36,7 @@
    <top>
       <ImageView fitHeight="250.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@../Imgs/Logo.png" />
+            <Image url="@../worldofzuul/res/Logo.png" />
          </image>
          <BorderPane.margin>
             <Insets top="25.0" />

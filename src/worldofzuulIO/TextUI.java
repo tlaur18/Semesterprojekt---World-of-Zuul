@@ -12,6 +12,8 @@
 package worldofzuulIO;
 
 import exceptions.NameInputException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import worldofzuul.Command;
 import worldofzuul.CommandWord;
 import worldofzuul.Game;
@@ -31,7 +33,7 @@ public class TextUI {
     * The constructor receives a TextArea. It gets this from the controller when instantiated.
     * 'textAreaOutput' is where the primary text output to the user will happen.
     */
-    public TextUI() {
+    public TextUI() throws URISyntaxException, MalformedURLException {
         this.game = new Game();
     }
     

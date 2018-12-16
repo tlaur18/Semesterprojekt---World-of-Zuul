@@ -33,6 +33,10 @@ public class Item {
     public String getName() {
         return name;
     }
+//    public final ImageView createIMG(String path) {
+//        ImageView temp = new ImageView(getClass().getResource(path).toExternalForm());
+//        return temp;
+//    }
 
     public void setName(String name) {
         this.name = name;

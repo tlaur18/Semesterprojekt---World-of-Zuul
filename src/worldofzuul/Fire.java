@@ -13,7 +13,7 @@ public class Fire {
 
     private int lvl;
     //Fire image URL
-    public static final Image IMAGE_FIRE = new Image("imgs/Fire.png");
+    public static final Image IMAGE_FIRE = new Image("/worldofzuul/res/Fire.png");
     /*
     Constructor for Fire wich set the fire level.
     */

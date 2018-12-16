@@ -21,7 +21,7 @@
          <children>
             <ImageView fx:id="imgPhone" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Imgs/mobile-circle-logo-png-30.png" />
+                  <Image url="@../worldofzuul/res/mobile-circle-logo-png-30.png" />
                </image>
             </ImageView>
             <TextArea fx:id="txtAreaOutput" editable="false" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
@@ -65,17 +65,17 @@
          <children>
             <ImageView fx:id="imgBackground" fitHeight="498.0" fitWidth="700.0" pickOnBounds="true">
                <image>
-                  <Image url="@../Imgs/bedroom.png" />
+                  <Image url="@../worldofzuul/res/bedroom.png" />
                </image>
             </ImageView>
             <ImageView fx:id="deadTimon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true" visible="false">
                <image>
-                  <Image url="@../Imgs/DeadTimon.png" />
+                  <Image url="@../worldofzuul/res/DeadTimon.png" />
                </image>
             </ImageView>
             <ImageView fx:id="timon" fitHeight="75.0" fitWidth="75.0" layoutX="313.0" layoutY="210.0" pickOnBounds="true">
                 <image>
-                    <Image url="@../Imgs/Timon.png" />
+                    <Image url="@../worldofzuul/res/Timon.png" />
                 </image>
             </ImageView>
             <Button fx:id="btnNorth" layoutX="310.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnNorthEventHandler" prefWidth="80.0" text="Window" />
@@ -101,14 +101,14 @@
             </Label>
             <ImageView fx:id="hasWon" fitHeight="419.0" fitWidth="439.0" layoutX="215.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../Imgs/Win.png" />
+                  <Image url="@../worldofzuul/res/Win.png" />
                </image>
             </ImageView>
             <Button fx:id="hasWonBtnOk" layoutX="319.0" layoutY="303.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" text="OK" visible="false" />
             <Label fx:id="hasWonScore" layoutX="318.0" layoutY="380.0" prefHeight="38.0" prefWidth="72.0" text="Score: 99999" visible="false" />
             <ImageView fx:id="isDead" fitHeight="148.0" fitWidth="339.0" layoutX="207.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
-                  <Image url="@../Imgs/Lose.png" />
+                  <Image url="@../worldofzuul/res/Lose.png" />
                </image>
             </ImageView>
             <Button fx:id="isDeadBtnYes" layoutX="215.0" layoutY="228.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" text="Yes" visible="false" />
@@ -120,7 +120,7 @@
             </Label>
             <ImageView fx:id="imgBunny" fitHeight="223.0" fitWidth="128.0" layoutX="6.0" layoutY="360.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Imgs/brandmandKanin.png" />
+                  <Image url="@../worldofzuul/res/brandmandKanin.png" />
                </image>
             </ImageView>
             <TextArea fx:id="txtAreaNPC" editable="false" layoutX="122.0" layoutY="370.0" prefHeight="115.0" prefWidth="185.0" visible="false" />

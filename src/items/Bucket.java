@@ -43,9 +43,9 @@ public class Bucket extends UseableItem {
     @Override
     public String use(Player player) {
         String outputText = "";
-        Image emptyBucket = new Image("Imgs/EmptyBucket.png");
-        Image filledBucket = new Image("Imgs/FilledBucket.png");
-        Image meltedBucket = new Image("Imgs/MeltedBucket.png");
+        Image emptyBucket = new Image("/worldofzuul/res/EmptyBucket.png");
+        Image filledBucket = new Image("/worldofzuul/res/FilledBucket.png");
+        Image meltedBucket = new Image("/worldofzuul/res/MeltedBucket.png");
 
         //This if-statement makes sure that you are only able to use the bucket once.
         if (!isUsed) {

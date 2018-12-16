@@ -18,9 +18,13 @@ package worldofzuulIO;
 
 import exceptions.NameInputException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -61,7 +65,13 @@ public class StartMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        textUI = new TextUI();
+        try {
+            textUI = new TextUI();
+        } catch (URISyntaxException ex) {
+            Logger.getLogger(StartMenuController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(StartMenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /*

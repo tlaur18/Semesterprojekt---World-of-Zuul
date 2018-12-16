@@ -56,21 +56,21 @@ public class Game {
     specially for game over e.g when you enter "window" which should be a dead path.
      */
     private void createRooms() {
-        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", "Imgs/bedroom.png");
-        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", "Imgs/hallway.png");
-        sistersRoom = new Room("Sisters Room", "in your sister's room", "Imgs/sistersRoom.png");
-        livingRoom = new Room("Living Room", "in the living room", "Imgs/livingroom.png");
-        wc = new Room("Toilet", "on the toilet", "Imgs/bathroom.png");
-        wc2 = new Room("Toilet", "on the toilet", "Imgs/bathroom2.png");
-        outside = new Room("Outside", "outside", "Imgs/outside.png");
-        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", "Imgs/bedroom.png");
-        office = new Room("Office", "in the office", "Imgs/office.png");
-        kitchen = new Room("Kitchen", "in the kitchen", "Imgs/kitchen.png");
-        entrance = new Room("Entrance", "in the entrace", "Imgs/entrance.png");
-        conservatory = new Room("Conservatory", "in the conservatory", "Imgs/conservatory.png");
-        basement = new Room("Basement", "in the basement", "Imgs/basement.png");
-        garage = new Room("Garage", "in the garage", "Imgs/garage.png");
-        masterBedroom = new Room("Master Bedroom", "in the master bedroom", "Imgs/masterbedroom.png");
+        bedroom = new Room("Bedroom", "in your smokefilled bedroom and you hear the fire cracking", "res/bedroom.png");
+        hallway = new Room("Hallway", "in the hallway with doors to your sisters room, the toilet and downstairs.", "res/hallway.png");
+        sistersRoom = new Room("Sisters Room", "in your sister's room", "res/sistersRoom.png");
+        livingRoom = new Room("Living Room", "in the living room", "res/Livingroom.png");
+        wc = new Room("Toilet", "on the toilet", "res/bathroom.png");
+        wc2 = new Room("Toilet", "on the toilet", "res/bathroom2.png");
+        outside = new Room("Outside", "outside", "res/outside.png");
+        window = new Room("Window", "jumping out of the window! \nYou took a fatal hit to your head", "res/bedroom.png");
+        office = new Room("Office", "in the office", "res/office.png");
+        kitchen = new Room("Kitchen", "in the kitchen", "res/kitchen.png");
+        entrance = new Room("Entrance", "in the entrace", "res/entrance.png");
+        conservatory = new Room("Conservatory", "in the conservatory", "res/conservatory.png");
+        basement = new Room("Basement", "in the basement", "res/basement.png");
+        garage = new Room("Garage", "in the garage", "res/garage.png");
+        masterBedroom = new Room("Master Bedroom", "in the master bedroom", "res/masterbedroom.png");
 
         bedroom.setExit("east", hallway);
         bedroom.setExit("north", window);
@@ -131,16 +131,16 @@ public class Game {
     will have these item in them.
     */
     private void createItems() {
-        bucket = new Bucket("Bucket", "Holds liquid well.", "Imgs/EmptyBucket.png", 430, 340);
-        toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "Imgs/Toothbrush.png", 400, 50);
-        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png", 50, 120);
-        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", "Imgs/SmallFireExtinguisher.png", 120, 120);
-        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", "Imgs/BigFireExtinguisher.png", 300, 300);
-        towel = new NonUseableItem("Towel", "Used to dry yourself", "Imgs/Towel.png", 150, 200);
-        doll = new Doll("Doll", "A girly play doll", "Imgs/Doll.png", 400, 400);
-        key = new Key("Key", "Used to unlock things.", "Imgs/Key.png", 200, 200);
-        football = new NonUseableItem("Football", "A round toy used to being kicked", "Imgs/Football.png", 200, 100);
-        yankieBar = new YankieBar("YankieBar", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!", "Imgs/YankieBar.png", 280, 70);
+        bucket = new Bucket("Bucket", "Holds liquid well.", "/worldofzuul/res/EmptyBucket.png", 430, 340);
+        toothbrush = new NonUseableItem("Toothbrush", "Makes your teeth shiny.", "/worldofzuul/res/Toothbrush.png", 400, 50);
+        smallFireExtinguisher = new SmallFireExtinguisher("SmallFireExtinguisher1", "Used to extinguish small fire.", "/worldofzuul/res/SmallFireExtinguisher.png", 50, 120);
+        smallFireExtinguisher2 = new SmallFireExtinguisher("SmallFireExtinguisher2", "Used to extinguish small fire.", "/worldofzuul/res/SmallFireExtinguisher.png", 120, 120);
+        bigFireExtinguisher = new BigFireExtinguisher("BigFireExtinguisher", "Used to extinguish big fire.", "/worldofzuul/res/BigFireExtinguisher.png", 300, 300);
+        towel = new NonUseableItem("Towel", "Used to dry yourself", "/worldofzuul/res/Towel.png", 150, 200);
+        doll = new Doll("Doll", "A girly play doll", "/worldofzuul/res/Doll.png", 400, 400);
+        key = new Key("Key", "Used to unlock things.", "/worldofzuul/res/Key.png", 200, 200);
+        football = new NonUseableItem("Football", "A round toy used to being kicked", "/worldofzuul/res/Football.png", 200, 100);
+        yankieBar = new YankieBar("YankieBar", "This delicious caramel, nougat, and milk chocolate bar is a great way to restore your Health!", "/worldofzuul/res/YankieBar.png", 280, 70);
         wc.addItem(bucket);
         wc.addItem(toothbrush);
         wc2.addItem(towel);

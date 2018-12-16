@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 
-public class Room {
+public final class Room {
 
     private String name;
     private String description;
@@ -48,12 +48,16 @@ public class Room {
         exits = new HashMap<String, Room>();
         this.isGameComplete = false;
         this.isGameOver = false;
-        img = new ImageView(imgURL);
+        img = createIMG(imgURL);
         hasWater = false;
     }
 
     public String getName() {
         return name;
+    }
+    public ImageView createIMG(String path) {
+        ImageView temp = new ImageView(getClass().getResource(path).toExternalForm());
+        return temp;
     }
 
     public void setName(String name) {
