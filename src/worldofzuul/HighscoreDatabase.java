@@ -60,7 +60,7 @@ public class HighscoreDatabase {
             temp.add(highscores.get(i));
         }
         }
-        if (arraySize < 10){
+        if (arraySize <= 10){
             for (Highscore highscores : highscores) {
                 temp.add(highscores);
             }
